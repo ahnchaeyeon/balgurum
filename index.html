@@ -448,7 +448,7 @@ html[data-route="contents"].at-top body::before{background:#0b1f45}
 .sg-flow{list-style:none;margin:32px 0 0;padding:0 0 12px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;counter-reset:flow}
 .sg-flow li{scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;counter-increment:flow;position:relative}
 .sg-flow li img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px;border:4px solid var(--white);box-shadow:var(--shadow);margin-bottom:6px;transition:transform .3s}
-.sg-flow li:hover img{transform:translateY(-4px) rotate(-1deg)}
+.sg-flow-band .sg-flow li img{transition:none}
 .sg-flow li b{font-size:17px;display:flex;align-items:center;gap:8px}
 .sg-flow li b::before{content:counter(flow);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--blue);color:var(--white);font-family:var(--f-latin);font-size:14px;flex:none}
 .sg-flow li span{color:var(--muted);font-size:14px}
