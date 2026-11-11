@@ -710,7 +710,7 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .pk-stats b{font-family:var(--f-display);font-size:clamp(26px,2.8vw,36px);font-weight:900;line-height:1.1}
 .pk-stats span{font-size:15px;font-weight:700;color:#33425a;display:grid}
 .pk-stats small{font-size:12px;font-weight:600}
-.pk-island{position:absolute;right:-4%;top:20px;width:min(34vw,440px);opacity:.9;z-index:1;-webkit-mask-image:radial-gradient(ellipse 60% 60% at 60% 45%,#000 55%,transparent 75%);mask-image:radial-gradient(ellipse 60% 60% at 60% 45%,#000 55%,transparent 75%)}
+.pk-island{position:absolute;right:-6%;top:-10px;width:min(24vw,320px);opacity:.75;z-index:1;-webkit-mask-image:radial-gradient(ellipse 60% 60% at 60% 45%,#000 55%,transparent 75%);mask-image:radial-gradient(ellipse 60% 60% at 60% 45%,#000 55%,transparent 75%)}
 @media (max-width:860px){.pk-stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}.pk-island{opacity:.35;width:60vw}.pk-stats li{min-height:170px}}
 
 
@@ -820,6 +820,12 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .sg-flow-band .sg-flow li b::before{width:32px;height:32px;font-size:16px}
 .sg-flow-band .sg-flow li span{font-size:16px}
 @media (max-width:640px){.sg-flow-band .sg-flow li{grid-template-columns:1fr;grid-template-rows:auto}.sg-flow-band .sg-flow li img,.sg-flow-band .sg-flow li b,.sg-flow-band .sg-flow li span{grid-row:auto;grid-column:1}.sg-flow-band .sg-flow li b{padding-top:6px}}
+
+
+/* Center the two navy section headings */
+.pk-title,.pk-lead{text-align:center}
+.pk-lead{margin-inline:auto}
+.sg-flow-band .wrap>.eyebrow,.sg-flow-band .wrap>.sec-title,.sg-flow-band .wrap>.sec-sub{text-align:center}
 
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
