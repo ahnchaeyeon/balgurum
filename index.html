@@ -490,7 +490,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .mosaic.play .mosaic-copy p{animation:popUp .7s both;animation-delay:calc(1s + var(--n,0) * .18s)}
 .mosaic-copy p:nth-child(2){--n:1}.mosaic-copy p:nth-child(3){--n:2}
 .mosaic-crew{position:absolute;right:max(12px,2vw);bottom:0;z-index:2;display:flex;align-items:flex-end;width:min(56vw,820px)}
-.mosaic-crew img{width:calc(var(--a) / 3.7 * 100%);height:auto;min-width:0;margin-left:-5%;filter:drop-shadow(0 12px 18px rgba(0,0,0,.4));transform-origin:50% 100%;animation:crewHop 2.4s ease-in-out infinite;animation-delay:calc(var(--i) * .22s)}
+.mosaic-crew img{width:calc(var(--a) / 3.7 * 100%);height:auto;min-width:0;margin-left:-5%;filter:drop-shadow(0 12px 18px rgba(0,0,0,.4))}
 .mosaic-crew img:first-child{margin-left:0}
 @keyframes crewHop{0%,60%,100%{transform:none}70%{transform:translateY(-10%) scale(.97,1.04)}80%{transform:translateY(0) scale(1.05,.95)}88%{transform:translateY(-3%)}}
 @media (max-width:760px){
@@ -799,45 +799,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
   </section>
 
-  <!-- ===== 캐릭터 ===== -->
-  <section class="band sg-chars-band" aria-labelledby="sg-chars-title">
-    <div class="wrap">
-      <p class="eyebrow">Characters</p>
-      <h2 class="sec-title" id="sg-chars-title" style="margin-top:6px">사고뭉치 특공대를 소개합니다<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-      <p class="sec-sub">플레이어가 직접 움직이는 다섯 친구예요. 게임을 시작하면 인원수에 맞춰 랜덤으로 한 명씩 배정돼요.</p>
-      <div class="sg-chars" data-chars>
-        <div class="sg-char-stage" data-char-stage style="--c:#ffd84a;--c2:#fff4c4">
-          <span class="sg-char-ring" aria-hidden="true"></span>
-          <img class="sg-char-img" src="assets/char-puding.png" alt="푸딩" data-char-img>
-          <span class="sg-char-floor" aria-hidden="true"></span>
-        </div>
-        <div class="sg-char-info">
-          <p class="sg-char-tag" data-char-tag>사고뭉치 특공대 · Player 카드 노랑</p>
-          <h3 class="sg-char-name"><span data-char-name>푸딩</span><small data-char-en>Puding</small></h3>
-          <p class="sg-char-desc" data-char-desc>머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.</p>
-          <div class="sg-char-pick" role="group" aria-label="캐릭터 고르기">
-            <button type="button" aria-pressed="true" data-char="puding" style="--c:#ffd84a"><img src="assets/char-puding.png" alt=""><span>푸딩</span></button>
-            <button type="button" aria-pressed="false" data-char="alto" style="--c:#5cc8f2"><img src="assets/char-alto.png" alt=""><span>알토</span></button>
-            <button type="button" aria-pressed="false" data-char="edis" style="--c:#8fd94a"><img src="assets/char-edis.png" alt=""><span>에디스</span></button>
-            <button type="button" aria-pressed="false" data-char="pimpi" style="--c:#ff7f9b"><img src="assets/char-pimpi.png" alt=""><span>핌피</span></button>
-            <button type="button" aria-pressed="false" data-char="tonitoni" style="--c:#c99af0"><img src="assets/char-tonitoni.png" alt=""><span>토니토니</span></button>
-          </div>
-        </div>
-      </div>
-      <h3 class="sg-sub-title">함께하는 친구들</h3>
-      <div class="sg-friends">
-        <article class="sg-friend">
-          <img src="assets/char-kiri.jpg" alt="튜토리얼 화면 속 가이드 키리" class="photo">
-          <div><p class="sg-char-tag">가이드 캐릭터</p><h4>키리</h4><p>게임 시작 전 오늘의 운동 동작을 먼저 보여줘요. 모두가 세 번 따라 하면 튜토리얼이 끝나요.</p></div>
-        </article>
-        <article class="sg-friend">
-          <img src="assets/char-ello.png" alt="빨간 새 모양의 엘로">
-          <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== 게임팩 8종 (가로 스크롤) ===== -->
   <section class="hs" aria-labelledby="hs-title" data-hs>
     <div class="hs-pin">
@@ -902,6 +863,45 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </div>
       <div class="hs-progress wrap" aria-hidden="true"><span class="hs-count" data-hs-count>01 / 08</span><span class="hs-bar"><i data-hs-bar></i></span></div>
+    </div>
+  </section>
+
+  <!-- ===== 캐릭터 ===== -->
+  <section class="band sg-chars-band" aria-labelledby="sg-chars-title">
+    <div class="wrap">
+      <p class="eyebrow">Characters</p>
+      <h2 class="sec-title" id="sg-chars-title" style="margin-top:6px">사고뭉치 특공대를 소개합니다<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">플레이어가 직접 움직이는 다섯 친구예요. 게임을 시작하면 인원수에 맞춰 랜덤으로 한 명씩 배정돼요.</p>
+      <div class="sg-chars" data-chars>
+        <div class="sg-char-stage" data-char-stage style="--c:#ffd84a;--c2:#fff4c4">
+          <span class="sg-char-ring" aria-hidden="true"></span>
+          <img class="sg-char-img" src="assets/char-puding.png" alt="푸딩" data-char-img>
+          <span class="sg-char-floor" aria-hidden="true"></span>
+        </div>
+        <div class="sg-char-info">
+          <p class="sg-char-tag" data-char-tag>사고뭉치 특공대 · Player 카드 노랑</p>
+          <h3 class="sg-char-name"><span data-char-name>푸딩</span><small data-char-en>Puding</small></h3>
+          <p class="sg-char-desc" data-char-desc>머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.</p>
+          <div class="sg-char-pick" role="group" aria-label="캐릭터 고르기">
+            <button type="button" aria-pressed="true" data-char="puding" style="--c:#ffd84a"><img src="assets/char-puding.png" alt=""><span>푸딩</span></button>
+            <button type="button" aria-pressed="false" data-char="alto" style="--c:#5cc8f2"><img src="assets/char-alto.png" alt=""><span>알토</span></button>
+            <button type="button" aria-pressed="false" data-char="edis" style="--c:#8fd94a"><img src="assets/char-edis.png" alt=""><span>에디스</span></button>
+            <button type="button" aria-pressed="false" data-char="pimpi" style="--c:#ff7f9b"><img src="assets/char-pimpi.png" alt=""><span>핌피</span></button>
+            <button type="button" aria-pressed="false" data-char="tonitoni" style="--c:#c99af0"><img src="assets/char-tonitoni.png" alt=""><span>토니토니</span></button>
+          </div>
+        </div>
+      </div>
+      <h3 class="sg-sub-title">함께하는 친구들</h3>
+      <div class="sg-friends">
+        <article class="sg-friend">
+          <img src="assets/char-kiri.jpg" alt="튜토리얼 화면 속 가이드 키리" class="photo">
+          <div><p class="sg-char-tag">가이드 캐릭터</p><h4>키리</h4><p>게임 시작 전 오늘의 운동 동작을 먼저 보여줘요. 모두가 세 번 따라 하면 튜토리얼이 끝나요.</p></div>
+        </article>
+        <article class="sg-friend">
+          <img src="assets/char-ello.png" alt="빨간 새 모양의 엘로">
+          <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p></div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -1370,7 +1370,6 @@ window.BALGURUM_SUPABASE = {
     const tag=q('tag'); tag.textContent=g.coop?'협동':'개인전'; tag.className='tag'+(g.coop?' coop':'');
     q('name').textContent=g.name; q('story').textContent=g.story; q('genre').textContent=g.genre; q('goal').textContent=g.goal; q('win').textContent=g.win;
     [['moves',g.moves],['time',g.time]].forEach(([k,arr])=>{ const box=q(k); box.replaceChildren(...arr.map(t=>{ const sp=document.createElement('span'); sp.textContent=t; return sp; })); });
-    const gd=gdlg.querySelector('[data-gd]'); if(!reduce){ gd.classList.remove('pop'); void gd.offsetWidth; gd.classList.add('pop'); }
   }
   document.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>{ fillGame(+b.dataset.game); if(gdlg.showModal) gdlg.showModal(); }));
   gdlg.querySelector('[data-gd-prev]').addEventListener('click',()=>fillGame(gi-1));
