@@ -502,13 +502,12 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .mosaic-copy p{color:#fff;font-size:clamp(16px,1.7vw,23px);font-weight:800;text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .mosaic.play .mosaic-copy p{animation:popUp .7s both;animation-delay:calc(1s + var(--n,0) * .18s)}
 .mosaic-copy p:nth-child(2){--n:1}.mosaic-copy p:nth-child(3){--n:2}
-.mosaic-crew{position:absolute;right:max(12px,2vw);bottom:0;z-index:2;display:flex;align-items:flex-end;width:min(56vw,820px)}
-.mosaic-crew img{width:calc(var(--a) / 3.7 * 100%);height:auto;min-width:0;margin-left:-5%;filter:drop-shadow(0 12px 18px rgba(0,0,0,.4))}
-.mosaic-crew img:first-child{margin-left:0}
+.mosaic-crew{position:absolute;right:max(8px,1.5vw);bottom:0;z-index:2;width:min(56vw,960px)}
+.mosaic-crew img{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 22px rgba(0,0,0,.4))}
 @keyframes crewHop{0%,60%,100%{transform:none}70%{transform:translateY(-10%) scale(.97,1.04)}80%{transform:translateY(0) scale(1.05,.95)}88%{transform:translateY(-3%)}}
 @media (max-width:760px){
-  .mosaic-copy{right:24px;bottom:calc(25vw + 28px)}
-  .mosaic-crew{left:4vw;right:auto;width:92vw;justify-content:center}
+  .mosaic-copy{right:24px;bottom:calc(38vw + 20px)}
+  .mosaic-crew{left:3vw;right:3vw;width:auto}
   .mosaic-copy{max-width:none}
   .mosaic-shade{background:linear-gradient(180deg,rgba(11,31,69,0) 25%,rgba(11,31,69,.88) 60%,#0b1f45 100%)}
 }
@@ -677,7 +676,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
   .kv-news li{grid-template-columns:1fr;gap:0}
 }
 
-.kv-art .kv-movie{position:absolute;right:2%;bottom:9%;width:min(19%,380px);padding:46px 10px 10px;animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
+.kv-art .kv-movie{position:absolute;right:2%;bottom:16%;width:min(19%,380px);padding:46px 10px 10px;animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
 .kv-art .kv-movie:hover{transform:translateY(-4px)}
 @media (max-width:860px){
   .kv{padding-bottom:40px;padding-top:var(--hdr,108px)}
@@ -924,15 +923,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     <div class="mosaic-copy">
       <p>샌드위치 공장, 낚시터, 눈 터널, 그리고 피겨 무대…</p>
       <p>여덟 개의 섬마다 특공대의 사고가 기다리고 있어요.</p>
-      <p>다섯 친구와 함께, 몸으로 해결하러 가볼까요?</p>
+      <p>특공대 친구들과 함께, 몸으로 해결하러 가볼까요?</p>
     </div>
-    <div class="mosaic-crew" aria-hidden="true">
-      <img src="assets/char-tonitoni.png" alt="" style="--a:0.511;--i:0">
-      <img src="assets/char-pimpi.png" alt="" style="--a:0.733;--i:1">
-      <img src="assets/char-alto.png" alt="" style="--a:1.035;--i:2">
-      <img src="assets/char-edis.png" alt="" style="--a:1.048;--i:3">
-      <img src="assets/char-puding.png" alt="" style="--a:0.713;--i:4">
-    </div>
+    <div class="mosaic-crew"><img src="assets/crew.webp" alt="에디스, 푸딩, 키리, 알토, 핌피, 토니토니, 엘로가 나란히 서 있는 모습" width="1500" height="604"></div>
   </section>
 
   <!-- ===== 게임팩 8종 (가로 스크롤) ===== -->
