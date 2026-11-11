@@ -810,6 +810,17 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .sg-flow-band .sg-flow li img{border-color:rgba(255,255,255,.9)}
 .sg-flow-band .sg-flow{scrollbar-color:rgba(255,255,255,.35) transparent}
 
+
+/* Play-flow: one column */
+.sg-flow-band .sg-flow{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:1fr;overflow:visible;scroll-snap-type:none;gap:18px;max-width:900px;margin-inline:auto}
+.sg-flow-band .sg-flow li{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);grid-template-rows:1fr auto auto 1fr;column-gap:28px;row-gap:6px;align-items:start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:16px}
+.sg-flow-band .sg-flow li img{grid-row:1 / span 4;grid-column:1;margin:0}
+.sg-flow-band .sg-flow li b{grid-column:2;grid-row:2;font-size:clamp(18px,2vw,22px)}
+.sg-flow-band .sg-flow li span{grid-column:2;grid-row:3}
+.sg-flow-band .sg-flow li b::before{width:32px;height:32px;font-size:16px}
+.sg-flow-band .sg-flow li span{font-size:16px}
+@media (max-width:640px){.sg-flow-band .sg-flow li{grid-template-columns:1fr;grid-template-rows:auto}.sg-flow-band .sg-flow li img,.sg-flow-band .sg-flow li b,.sg-flow-band .sg-flow li span{grid-row:auto;grid-column:1}.sg-flow-band .sg-flow li b{padding-top:6px}}
+
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
