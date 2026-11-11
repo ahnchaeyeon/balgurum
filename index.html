@@ -532,7 +532,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 
 /* Horizontal scroll games */
 .hs{position:relative;background:linear-gradient(180deg,#0b1f45,#14366f);color:#fff}
-.hs-pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:22px;padding-top:var(--hdr,72px);padding-bottom:28px;overflow:hidden}
+.hs-pin{position:relative;display:flex;flex-direction:column;gap:26px;min-width:0;overflow:hidden;padding-top:calc(var(--hdr,72px) + 40px);padding-bottom:36px}
 .hs-head{text-align:center}
 .hs-en{font-family:var(--f-latin);font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#ffd864;font-size:clamp(12px,1.2vw,15px)}
 .hs-head h2{color:#fff;font-size:clamp(26px,4vw,50px);font-weight:900;margin-top:6px;display:flex;justify-content:center;align-items:center;gap:10px}
@@ -553,13 +553,23 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .hs-cap p{color:rgba(255,255,255,.92);font-size:clamp(14px,1.4vw,17px);font-weight:500}
 .hs-more{border:0;background:#ffd864;color:#3a2a00;font-weight:800;font-size:15px;border-radius:999px;padding:10px 18px;min-height:44px;margin-top:4px;transition:transform .2s}
 .hs-more:hover{animation:jelly .5s}
-.hs-progress{display:flex;align-items:center;gap:14px}
-.hs-count{font-family:var(--f-latin);font-weight:700;font-variant-numeric:tabular-nums;color:#ffd864;min-width:64px}
-.hs-bar{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden}
-.hs-bar i{display:block;height:100%;width:12.5%;background:#ffd864;border-radius:4px;transition:width .15s}
-.hs.native .hs-view{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:6px}
-.hs.native .hs-card{scroll-snap-align:center}
-.hs.native .hs-pin{position:relative;height:auto;min-height:0;padding-block:72px 40px}
+.hs-view{min-width:0;max-width:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab;overscroll-behavior-x:contain}
+.hs-view::-webkit-scrollbar{display:none}
+.hs-view.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.hs-view.dragging img{pointer-events:none}
+.hs-track{width:max-content}
+.hs-card{scroll-snap-align:center}
+.hs-progress{display:flex;align-items:center;gap:14px;width:100%}
+.hs-nav{flex:none;width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.08);display:grid;place-items:center;transition:background .2s,border-color .2s}
+.hs-nav:hover{background:#ffd864;border-color:#ffd864}
+.hs-nav svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.hs-nav:hover svg{stroke:#3a2a00}
+.hs-nav:disabled{opacity:.35;pointer-events:none}
+.hs-sb{position:relative;flex:1;min-width:0;overflow:hidden;height:14px;border-radius:14px;background:rgba(255,255,255,.16);cursor:pointer;touch-action:none}
+.hs-thumb{position:absolute;top:2px;bottom:2px;left:0;min-width:40px;border-radius:12px;background:#ffd864;box-shadow:0 0 10px rgba(255,216,100,.5);cursor:grab;transition:background .2s}
+.hs-thumb:hover,.hs-sb.dragging .hs-thumb{background:#ffe9a8}
+.hs-sb.dragging .hs-thumb{cursor:grabbing}
+.hs-count{font-family:var(--f-latin);font-weight:700;font-variant-numeric:tabular-nums;color:#ffd864;min-width:64px;text-align:right}
 @media (max-width:760px){
   .hs-card{width:84vw;height:min(64vh,520px)}
   .hs-intro{display:none}
@@ -934,7 +944,12 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           </article>
         </div>
       </div>
-      <div class="hs-progress wrap" aria-hidden="true"><span class="hs-count" data-hs-count>01 / 08</span><span class="hs-bar"><i data-hs-bar></i></span></div>
+      <div class="hs-progress wrap">
+        <button type="button" class="hs-nav" data-hs-prev aria-label="이전 게임"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <div class="hs-sb" data-hs-sb aria-hidden="true"><span class="hs-thumb" data-hs-thumb></span></div>
+        <button type="button" class="hs-nav" data-hs-next aria-label="다음 게임"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        <span class="hs-count" data-hs-count aria-live="polite">01 / 08</span>
+      </div>
     </div>
   </section>
 
@@ -1474,36 +1489,50 @@ window.BALGURUM_SUPABASE = {
     }
   }
 
-  /* ---------- Horizontal game scroll ---------- */
+  /* ---------- Horizontal game scroll (own scrollbar) ---------- */
   const hs=document.querySelector('[data-hs]');
   if(hs){
-    const track=hs.querySelector('[data-hs-track]'), cards=[...hs.querySelectorAll('.hs-card')];
-    const cnt=hs.querySelector('[data-hs-count]'), bar=hs.querySelector('[data-hs-bar]');
-    let dist=0, native=false, ticking=false;
+    const view=hs.querySelector('.hs-view'), cards=[...hs.querySelectorAll('.hs-card')];
+    const cnt=hs.querySelector('[data-hs-count]'), sb=hs.querySelector('[data-hs-sb]'), thumb=hs.querySelector('[data-hs-thumb]');
+    const prev=hs.querySelector('[data-hs-prev]'), next=hs.querySelector('[data-hs-next]');
     const pad=n=>String(n).padStart(2,'0');
-    function setIdx(i){ cnt.textContent=pad(i+1)+' / '+pad(cards.length); bar.style.width=((i+1)/cards.length*100)+'%'; }
-    function layout(){
-      native = innerWidth<760 || reduce;
-      hs.classList.toggle('native',native);
-      if(native){ hs.style.height=''; track.style.transform=''; return; }
-      dist=Math.max(0, track.scrollWidth - innerWidth);
-      hs.style.height=(dist+innerHeight)+'px'; update();
+    let cur=0;
+    function sync(){
+      const max=view.scrollWidth-view.clientWidth, w=sb.clientWidth;
+      const tw=Math.max(40, w*view.clientWidth/(view.scrollWidth||1));
+      thumb.style.width=tw+'px';
+      thumb.style.transform='translateX('+(max>0? (view.scrollLeft/max)*(w-tw) : 0)+'px)';
+      const mid=view.scrollLeft+view.clientWidth/2; let best=0,bd=1e9;
+      cards.forEach((c,i)=>{ const d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid); if(d<bd){bd=d;best=i;} });
+      cur=best; cnt.textContent=pad(best+1)+' / '+pad(cards.length);
+      prev.disabled=view.scrollLeft<=2; next.disabled=view.scrollLeft>=max-2;
     }
-    function update(){
-      ticking=false; if(native) return;
-      const r=hs.getBoundingClientRect(), total=hs.offsetHeight-innerHeight;
-      const p=Math.min(1,Math.max(0,-r.top/(total||1)));
-      track.style.transform='translate3d('+(-p*dist)+'px,0,0)';
-      const mid=p*dist+innerWidth/2; let best=0,bd=1e9;
-      cards.forEach((c,i)=>{ const cc=c.offsetLeft+c.offsetWidth/2; const dd=Math.abs(cc-mid); if(dd<bd){bd=dd;best=i;} });
-      setIdx(best);
-    }
-    addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
-    addEventListener('resize',layout);
-    hs.querySelector('.hs-view').addEventListener('scroll',()=>{ if(!native) return; const v=hs.querySelector('.hs-view'); const mid=v.scrollLeft+v.clientWidth/2; let best=0,bd=1e9; cards.forEach((c,i)=>{ const dd=Math.abs(c.offsetLeft+c.offsetWidth/2-mid); if(dd<bd){bd=dd;best=i;} }); setIdx(best); },{passive:true});
-    cards.forEach(c=>c.addEventListener('focusin',()=>{ if(native) return; const top=hs.getBoundingClientRect().top+scrollY; const target=Math.min(dist,Math.max(0,c.offsetLeft+c.offsetWidth/2-innerWidth/2)); scrollTo({top:top+target}); }));
-    layout(); window.addEventListener('hashchange',()=>setTimeout(layout,50)); window.addEventListener('load',layout);
-    if(window.ResizeObserver) new ResizeObserver(()=>layout()).observe(track);
+    const go=i=>{ const c=cards[Math.max(0,Math.min(cards.length-1,i))]; view.scrollTo({left:c.offsetLeft+c.offsetWidth/2-view.clientWidth/2, behavior: reduce?'auto':'smooth'}); };
+    prev.addEventListener('click',()=>go(cur-1)); next.addEventListener('click',()=>go(cur+1));
+    view.addEventListener('scroll',sync,{passive:true}); addEventListener('resize',sync);
+    if(window.ResizeObserver) new ResizeObserver(sync).observe(view);
+    addEventListener('hashchange',()=>setTimeout(sync,60));
+    /* drag the custom scrollbar */
+    function fromPointer(x,grabOffset){ const r=sb.getBoundingClientRect(), tw=thumb.offsetWidth, max=view.scrollWidth-view.clientWidth;
+      const pos=Math.max(0,Math.min(r.width-tw, x-r.left-grabOffset)); view.scrollLeft=(r.width-tw>0? pos/(r.width-tw):0)*max; }
+    sb.addEventListener('pointerdown',e=>{
+      e.preventDefault(); sb.setPointerCapture(e.pointerId); sb.classList.add('dragging'); view.style.scrollSnapType='none';
+      const tr=thumb.getBoundingClientRect(); const onThumb=e.clientX>=tr.left&&e.clientX<=tr.right;
+      const off=onThumb? e.clientX-tr.left : thumb.offsetWidth/2; fromPointer(e.clientX,off);
+      const move=ev=>fromPointer(ev.clientX,off);
+      const up=()=>{ sb.classList.remove('dragging'); view.style.scrollSnapType=''; sb.removeEventListener('pointermove',move); sb.removeEventListener('pointerup',up); sb.removeEventListener('pointercancel',up); };
+      sb.addEventListener('pointermove',move); sb.addEventListener('pointerup',up); sb.addEventListener('pointercancel',up);
+    });
+    /* drag the cards with a mouse */
+    view.addEventListener('pointerdown',e=>{
+      if(e.pointerType!=='mouse'||e.button!==0) return;
+      const sx=e.clientX, sl=view.scrollLeft; let moved=false;
+      const move=ev=>{ const dx=ev.clientX-sx; if(Math.abs(dx)>4){ moved=true; view.classList.add('dragging'); } view.scrollLeft=sl-dx; };
+      const up=()=>{ view.classList.remove('dragging'); removeEventListener('pointermove',move); removeEventListener('pointerup',up); if(moved){ const block=ev=>{ ev.stopPropagation(); ev.preventDefault(); }; view.addEventListener('click',block,{capture:true,once:true}); setTimeout(()=>view.removeEventListener('click',block,{capture:true}),0); } };
+      addEventListener('pointermove',move); addEventListener('pointerup',up);
+    });
+    view.addEventListener('dragstart',e=>e.preventDefault());
+    sync();
   }
 
 
