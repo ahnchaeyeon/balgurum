@@ -794,8 +794,8 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 
 
 /* Play-flow on navy, matching the game-pack section */
-.sg-flow-band{background:#0b1f45;color:#fff;padding-bottom:16px}
-.sg-flow-band + .hs .hs-pin{padding-top:56px}
+.sg-flow-band{background:#0b1f45;color:#fff}
+
 .sg-flow-band .eyebrow{color:#ffd864}
 .sg-flow-band .sec-title{color:#fff}
 .sg-flow-band .sec-sub{color:rgba(255,255,255,.85)}
@@ -864,6 +864,20 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .cover-end .cover-text{padding-block:24px 56px}
 html[data-route="contents"] footer,html[data-route="games"] footer{background:#0b1f45;color:rgba(255,255,255,.78)}
 html[data-route="contents"] footer p,html[data-route="games"] footer p{color:rgba(255,255,255,.78)}
+
+
+/* Each contents section fills the screen on its own */
+@media (min-width:861px){
+  .kv-art>img{height:100vh;height:100svh;aspect-ratio:auto;object-fit:cover}
+}
+.pk{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:140px}
+.pk-inner{width:100%}
+.sg-flow-band{padding-block:160px}
+.hs{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:80px 40px}
+.hs-pin{padding-top:60px}
+.hero-cover.cover-end{min-height:100vh;min-height:100svh;display:flex;align-items:center}
+.hero-cover.cover-end .cover-grid{width:100%}
+.hs-cta{padding-bottom:200px}
 
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
