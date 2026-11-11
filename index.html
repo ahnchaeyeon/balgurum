@@ -717,7 +717,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         <p class="eyebrow">Balgurum Contents</p>
         <h1>움직일수록 즐거워지는<br>발구름의 놀이 세상</h1>
         <p class="lead">몸으로 참여하고 함께 즐기는 XR 콘텐츠를 만나보세요.</p>
-        <p><button class="btn outline" type="button" data-scroll="contents-feature">콘텐츠 만나보기 <svg aria-hidden="true"><use href="#arrow"/></svg></button></p>
+        <p><button class="btn outline" type="button" data-scroll="contents-story">콘텐츠 만나보기 <svg aria-hidden="true"><use href="#arrow"/></svg></button></p>
       </div>
       <button class="cover-art" type="button" aria-label="아이를 눌러 높이 점프시키기">
         <img class="cover-base" src="assets/hero-kids.png" alt="바닥 센서 키오스크 앞에서 신나게 뛰노는 아이들" width="1205" height="793">
@@ -726,28 +726,8 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
   </section>
 
-  <!-- ===== 사고뭉치 특공대 소개 ===== -->
-  <section class="band sg-intro" id="contents-feature">
-    <div class="wrap">
-      <div class="sg-intro-grid">
-        <div class="sg-intro-copy">
-          <span class="badge">발구름의 첫 번째 콘텐츠</span>
-          <h2 class="sg-title">사고뭉치 특공대<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-          <p class="sg-lead">특공대가 가는 곳마다 사고가 터져요. 태엽새의 태엽을 풀어버리고, 낚시터를 물고기 난장판으로 만들고, 잠든 거대한 새까지 깨워버리죠.</p>
-          <p class="sg-lead"><b>수습은 아이들의 몸으로!</b> 바닥 센서 위에서 운동 동작을 하면 그 움직임이 그대로 게임이 되어 사고를 해결해요.</p>
-        </div>
-        <dl class="sg-stats">
-          <div><dt>게임팩</dt><dd>8<small>개</small></dd></div>
-          <div><dt>운동 동작</dt><dd>18<small>가지</small></dd></div>
-          <div><dt>함께 플레이</dt><dd>1~5<small>명</small></dd></div>
-          <div><dt>협동 · 개인전</dt><dd>2<small>·</small>6</dd></div>
-        </dl>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== 스토리 (전체 화면) ===== -->
-  <section class="fs-story" aria-label="사고뭉치 특공대 이야기" data-fs-story>
+  <section class="fs-story" id="contents-story" aria-label="사고뭉치 특공대 이야기" data-fs-story>
     <div class="fs-bg" aria-hidden="true">
       <img class="on" src="assets/flow-lobby.jpg" alt="" data-fs-img>
       <img src="assets/play-1.jpg" alt="" data-fs-img>
@@ -866,6 +846,67 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
   </section>
 
+  <!-- ===== 게임 한눈에 보기 ===== -->
+  <section class="band sg-games-band" aria-labelledby="sg-grid-title">
+    <div class="wrap">
+      <p class="eyebrow">All Games</p>
+      <h2 class="sec-title" id="sg-grid-title" style="margin-top:6px">하나의 세계, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">여덟 게임을 한눈에 보고, 카드를 눌러 자세히 확인해 보세요.</p>
+      <div class="filter" role="group" aria-label="게임 방식 필터">
+        <button type="button" data-filter="all" aria-pressed="true">전체 <span data-count="all"></span></button>
+        <button type="button" data-filter="coop" aria-pressed="false">협동 <span data-count="coop"></span></button>
+        <button type="button" data-filter="solo" aria-pressed="false">개인전 <span data-count="solo"></span></button>
+      </div>
+      <div class="games" data-games>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="0"><span class="g-no">GAME 01</span><div class="thumb"><img src="assets/game-duck.png" alt=""></div><h3>태엽새 레이스</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="1"><span class="g-no">GAME 02</span><div class="thumb"><img src="assets/game-sandwich.png" alt=""></div><h3>샌드위치 공장</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="2"><span class="g-no">GAME 03</span><div class="thumb"><img src="assets/game-coin.png" alt=""></div><h3>알쏭달쏭 코인볼</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="3"><span class="g-no">GAME 04</span><div class="thumb"><img src="assets/game-fishing.png" alt=""></div><h3>운동 낚시왕</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="4"><span class="g-no">GAME 05</span><div class="thumb"><img src="assets/game-rice.png" alt=""></div><h3>쿵쿵 떡방아</h3><span class="tag coop">협동</span></button></article>
+        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="5"><span class="g-no">GAME 06</span><div class="thumb"><img src="assets/game-escape.png" alt=""></div><h3>탈출 대추격전</h3><span class="tag coop">협동</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="6"><span class="g-no">GAME 07</span><div class="thumb"><img src="assets/game-skate.png" alt=""></div><h3>리듬 피겨 점프!</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="7"><span class="g-no">GAME 08</span><div class="thumb"><img src="assets/game-snowman.png" alt=""></div><h3>눈사람 탈출 작전</h3><span class="tag">개인전</span></button></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 플레이 흐름 ===== -->
+  <section class="band sg-flow-band" aria-labelledby="sg-flow-title">
+    <div class="wrap">
+      <p class="eyebrow">How to Play</p>
+      <h2 class="sec-title" id="sg-flow-title" style="margin-top:6px">이렇게 놀아요<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">앞에는 게임 화면이, 발밑에는 바닥 센서 화면이 있어요. 컨트롤러 없이 움직임만으로 플레이해요.</p>
+      <ol class="sg-flow">
+        <li><img src="assets/flow-lobby.jpg" alt="하늘섬 로비 화면"><b>섬 고르기</b><span>로비에서 놀고 싶은 게임 섬을 눌러요.</span></li>
+        <li><img src="assets/flow-setup.jpg" alt="게임 설정 화면"><b>운동 · 시간 · 인원 정하기</b><span>세 가지 운동 중 하나와 플레이 시간, 인원(1~5명)을 골라요.</span></li>
+        <li><img src="assets/flow-select.jpg" alt="플레이어별 캐릭터 배정 화면"><b>캐릭터 랜덤 배정</b><span>Player 1부터 차례로 특공대 친구가 한 명씩 정해져요.</span></li>
+        <li><img src="assets/flow-tutorial.jpg" alt="키리 튜토리얼 화면"><b>키리와 연습하기</b><span>키리의 동작을 모두가 세 번 따라 하면 게임이 시작돼요.</span></li>
+        <li><img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면"><b>본 라운드</b><span>정해진 시간 동안 운동 동작으로 게임을 진행해요.</span></li>
+        <li><img src="assets/flow-result.jpg" alt="별 등급이 나오는 결과 화면"><b>결과 확인</b><span>개인전은 순위와 점수, 협동은 팀 별 등급으로 결과가 나와요.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== 사고뭉치 특공대 소개 ===== -->
+  <section class="band sg-intro" id="contents-feature">
+    <div class="wrap">
+      <div class="sg-intro-grid">
+        <div class="sg-intro-copy">
+          <span class="badge">발구름의 첫 번째 콘텐츠</span>
+          <h2 class="sg-title">사고뭉치 특공대<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+          <p class="sg-lead">특공대가 가는 곳마다 사고가 터져요. 태엽새의 태엽을 풀어버리고, 낚시터를 물고기 난장판으로 만들고, 잠든 거대한 새까지 깨워버리죠.</p>
+          <p class="sg-lead"><b>수습은 아이들의 몸으로!</b> 바닥 센서 위에서 운동 동작을 하면 그 움직임이 그대로 게임이 되어 사고를 해결해요.</p>
+        </div>
+        <dl class="sg-stats">
+          <div><dt>게임팩</dt><dd>8<small>개</small></dd></div>
+          <div><dt>운동 동작</dt><dd>18<small>가지</small></dd></div>
+          <div><dt>함께 플레이</dt><dd>1~5<small>명</small></dd></div>
+          <div><dt>협동 · 개인전</dt><dd>2<small>·</small>6</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== 캐릭터 ===== -->
   <section class="band sg-chars-band" aria-labelledby="sg-chars-title">
     <div class="wrap">
@@ -902,23 +943,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p></div>
         </article>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== 플레이 흐름 ===== -->
-  <section class="band sg-flow-band" aria-labelledby="sg-flow-title">
-    <div class="wrap">
-      <p class="eyebrow">How to Play</p>
-      <h2 class="sec-title" id="sg-flow-title" style="margin-top:6px">이렇게 놀아요<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-      <p class="sec-sub">앞에는 게임 화면이, 발밑에는 바닥 센서 화면이 있어요. 컨트롤러 없이 움직임만으로 플레이해요.</p>
-      <ol class="sg-flow">
-        <li><img src="assets/flow-lobby.jpg" alt="하늘섬 로비 화면"><b>섬 고르기</b><span>로비에서 놀고 싶은 게임 섬을 눌러요.</span></li>
-        <li><img src="assets/flow-setup.jpg" alt="게임 설정 화면"><b>운동 · 시간 · 인원 정하기</b><span>세 가지 운동 중 하나와 플레이 시간, 인원(1~5명)을 골라요.</span></li>
-        <li><img src="assets/flow-select.jpg" alt="플레이어별 캐릭터 배정 화면"><b>캐릭터 랜덤 배정</b><span>Player 1부터 차례로 특공대 친구가 한 명씩 정해져요.</span></li>
-        <li><img src="assets/flow-tutorial.jpg" alt="키리 튜토리얼 화면"><b>키리와 연습하기</b><span>키리의 동작을 모두가 세 번 따라 하면 게임이 시작돼요.</span></li>
-        <li><img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면"><b>본 라운드</b><span>정해진 시간 동안 운동 동작으로 게임을 진행해요.</span></li>
-        <li><img src="assets/flow-result.jpg" alt="별 등급이 나오는 결과 화면"><b>결과 확인</b><span>개인전은 순위와 점수, 협동은 팀 별 등급으로 결과가 나와요.</span></li>
-      </ol>
     </div>
   </section>
 
