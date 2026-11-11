@@ -771,6 +771,21 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
   </section>
 
+  <!-- ===== 영상 (전체 화면) ===== -->
+  <section class="fv" aria-label="사고뭉치 특공대 영상" data-fv data-src="">
+    <video class="fv-video" data-fv-video muted loop playsinline preload="none" poster="assets/play-6.jpg"></video>
+    <div class="fv-shade" aria-hidden="true"></div>
+    <div class="fv-empty" data-fv-empty>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M10 8l6 4-6 4z"/></svg>
+      <p>[사고뭉치 특공대 영상이 들어갈 자리]</p>
+    </div>
+    <div class="fv-ctrl" data-fv-ctrl hidden>
+      <button type="button" data-fv-play aria-label="일시정지">❚❚</button>
+      <button type="button" data-fv-sound aria-label="소리 켜기">소리 켜기</button>
+      <button type="button" data-fv-full aria-label="전체 화면으로 보기">전체 화면</button>
+    </div>
+  </section>
+
   <!-- ===== 세계 모자이크 ===== -->
   <section class="mosaic" aria-label="여덟 섬의 세계" data-mosaic>
     <div class="mosaic-tiles" aria-hidden="true" data-mosaic-tiles></div>
@@ -786,21 +801,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <img src="assets/char-alto.png" alt="" style="--a:1.030;--i:2">
       <img src="assets/char-edis.png" alt="" style="--a:1.045;--i:3">
       <img src="assets/char-puding.png" alt="" style="--a:0.710;--i:4">
-    </div>
-  </section>
-
-  <!-- ===== 영상 (전체 화면) ===== -->
-  <section class="fv" aria-label="사고뭉치 특공대 영상" data-fv data-src="">
-    <video class="fv-video" data-fv-video muted loop playsinline preload="none" poster="assets/play-6.jpg"></video>
-    <div class="fv-shade" aria-hidden="true"></div>
-    <div class="fv-empty" data-fv-empty>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M10 8l6 4-6 4z"/></svg>
-      <p>[사고뭉치 특공대 영상이 들어갈 자리]</p>
-    </div>
-    <div class="fv-ctrl" data-fv-ctrl hidden>
-      <button type="button" data-fv-play aria-label="일시정지">❚❚</button>
-      <button type="button" data-fv-sound aria-label="소리 켜기">소리 켜기</button>
-      <button type="button" data-fv-full aria-label="전체 화면으로 보기">전체 화면</button>
     </div>
   </section>
 
