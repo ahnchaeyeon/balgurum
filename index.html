@@ -398,6 +398,111 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .wall-card .priv{font-size:12px;font-weight:700;color:#7a5200;background:#fff1cc;border-radius:999px;padding:2px 8px;justify-self:start}
 .wall-empty{border:1.5px dashed var(--cheer-line);border-radius:18px;padding:28px;text-align:center;color:rgba(255,255,255,.9)}
 
+
+/* ---------- 사고뭉치 특공대 상세 ---------- */
+.sg-intro{padding-top:72px}
+.sg-intro-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px 56px;align-items:center}
+@media (max-width:860px){.sg-intro-grid{grid-template-columns:1fr}}
+.sg-title{font-size:clamp(34px,5vw,56px);font-weight:900;margin:14px 0 18px;line-height:1.15}
+.sg-lead{color:var(--muted);font-size:18px;max-width:34em}
+.sg-lead+.sg-lead{margin-top:12px}
+.sg-lead b{color:var(--blue-deep)}
+.sg-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0}
+.sg-stats>div{background:var(--sky-50);border-radius:var(--r-md);padding:22px 22px 18px;border:2px solid var(--sky-100);transition:transform .25s}
+.sg-stats>div:hover{transform:translateY(-4px) rotate(-1deg)}
+.sg-stats dt{font-size:14px;font-weight:700;color:var(--muted)}
+.sg-stats dd{margin:4px 0 0;font-family:var(--f-latin);font-weight:800;font-size:clamp(36px,4.4vw,52px);line-height:1;color:var(--blue);font-variant-numeric:tabular-nums}
+.sg-stats dd small{font-family:var(--f-body);font-size:18px;font-weight:700;margin-left:3px;color:var(--ink)}
+
+.sg-story-band{background:linear-gradient(180deg,var(--white),var(--sky-50) 18%,var(--sky-50) 82%,var(--white));padding-block:88px}
+.sg-story{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;margin-top:36px}
+.sg-stage{position:sticky;top:calc(var(--hdr,72px) + 32px);align-self:start;aspect-ratio:16/9;border-radius:28px;overflow:hidden;box-shadow:0 24px 50px rgba(23,63,130,.22);border:6px solid var(--white);background:var(--sky-100)}
+.sg-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .6s ease, transform 1.2s ease}
+.sg-stage img.on{opacity:1;transform:none}
+.sg-dots{position:absolute;right:14px;top:50%;transform:translateY(-50%);list-style:none;margin:0;padding:8px 6px;display:grid;gap:10px;background:rgba(255,255,255,.75);border-radius:999px}
+.sg-dots li{width:10px;height:10px;border-radius:50%;background:var(--sky-300);transition:transform .3s,background .3s}
+.sg-dots li.on{background:var(--blue);transform:scale(1.5)}
+.sg-steps{display:grid;gap:0}
+.sg-step{min-height:62vh;display:flex;flex-direction:column;justify-content:center;gap:10px;padding-block:24px;opacity:.55;transition:opacity .4s}
+.sg-step.on{opacity:1}
+.sg-step img{display:none}
+.sg-step-no{font-family:var(--f-latin);font-weight:700;font-size:14px;color:var(--blue);letter-spacing:.04em}
+.sg-step h3{font-size:clamp(24px,2.8vw,34px);font-weight:900;line-height:1.3}
+.sg-step p{color:var(--muted);font-size:17px;max-width:26em}
+@media (max-width:860px){
+  .sg-story{grid-template-columns:1fr;gap:0}
+  .sg-stage{display:none}
+  .sg-step{min-height:0;opacity:1;padding-block:20px 28px}
+  .sg-step img{display:block;width:100%;border-radius:20px;border:4px solid var(--white);box-shadow:var(--shadow);margin-bottom:8px}
+}
+
+.sg-chars{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:32px 56px;align-items:center;margin-top:36px}
+@media (max-width:860px){.sg-chars{grid-template-columns:1fr}}
+.sg-char-stage{position:relative;aspect-ratio:1/1;max-width:460px;width:100%;margin:0 auto;display:grid;place-items:end center;padding-bottom:13%;border-radius:40% 40% 36px 36px;background:radial-gradient(circle at 50% 42%,var(--c2) 0 38%,transparent 39%),linear-gradient(180deg,var(--c2),var(--white));transition:background .5s}
+.sg-char-ring{position:absolute;left:50%;top:42%;width:76%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:3px dashed var(--c);opacity:.7;animation:spin 30s linear infinite}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.sg-char-img{position:relative;z-index:1;width:auto;height:66%;max-width:80%;object-fit:contain;filter:drop-shadow(0 14px 14px rgba(19,35,63,.18));transform-origin:50% 100%}
+.sg-char-img.pop{animation:dropBounce .8s both}
+.sg-char-floor{position:absolute;left:50%;bottom:11%;width:52%;height:7%;transform:translateX(-50%);border-radius:50%;background:var(--c);opacity:.35}
+.sg-char-tag{font-size:14px;font-weight:700;color:var(--blue)}
+.sg-char-name{font-size:clamp(40px,5.6vw,64px);font-weight:900;line-height:1.1;margin:6px 0 14px;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px}
+.sg-char-name small{font-family:var(--f-latin);font-size:22px;font-weight:700;color:var(--muted)}
+.sg-char-desc{font-size:18px;color:var(--muted);max-width:28em;min-height:3.4em}
+.sg-char-pick{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.sg-char-pick button{display:flex;flex-direction:column;align-items:center;gap:4px;width:84px;padding:10px 6px 8px;border:3px solid transparent;border-radius:20px;background:var(--sky-50);font-weight:700;font-size:13px;color:var(--ink);transition:transform .2s,border-color .2s,background .2s}
+.sg-char-pick button img{width:52px;height:52px;object-fit:contain}
+.sg-char-pick button:hover{transform:translateY(-4px)}
+.sg-char-pick button[aria-pressed="true"]{border-color:var(--c);background:var(--white);box-shadow:var(--shadow)}
+.sg-sub-title{font-size:22px;font-weight:800;margin:56px 0 16px}
+.sg-friends{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:760px){.sg-friends{grid-template-columns:1fr}}
+.sg-friend{display:flex;gap:20px;align-items:center;background:var(--sky-50);border-radius:var(--r-lg);padding:20px 24px}
+.sg-friend img{width:110px;height:110px;object-fit:contain;flex:none}
+.sg-friend img.photo{object-fit:cover;border-radius:22px;border:4px solid var(--white);box-shadow:var(--shadow)}
+.sg-friend h4{font-size:22px;font-weight:900;margin:2px 0 6px}
+.sg-friend h4 small{font-family:var(--f-latin);font-size:15px;color:var(--muted);font-weight:700}
+.sg-friend p:last-child{color:var(--muted);font-size:15px}
+
+.sg-games-band{background:var(--sky-50)}
+.game{position:relative}
+.game-btn{display:block;width:100%;border:0;background:none;padding:0 0 4px;text-align:center;color:inherit;cursor:pointer}
+.g-no{position:absolute;left:12px;top:12px;z-index:2;font-family:var(--f-latin);font-weight:800;font-size:12px;letter-spacing:.06em;background:var(--white);color:var(--blue-deep);padding:4px 10px;border-radius:999px;box-shadow:0 4px 10px rgba(19,35,63,.12)}
+.game .g-one{font-size:14px;color:var(--muted);margin:-4px 12px 10px}
+.game-btn:focus-visible{outline:none}
+.game:has(.game-btn:focus-visible){outline:3px solid var(--star-deep);outline-offset:3px}
+
+.sg-flow{list-style:none;margin:32px 0 0;padding:0 0 12px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;counter-reset:flow}
+.sg-flow li{scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;counter-increment:flow;position:relative}
+.sg-flow li img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px;border:4px solid var(--white);box-shadow:var(--shadow);margin-bottom:6px;transition:transform .3s}
+.sg-flow li:hover img{transform:translateY(-4px) rotate(-1deg)}
+.sg-flow li b{font-size:17px;display:flex;align-items:center;gap:8px}
+.sg-flow li b::before{content:counter(flow);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--blue);color:var(--white);font-family:var(--f-latin);font-size:14px;flex:none}
+.sg-flow li span{color:var(--muted);font-size:14px}
+
+/* Game detail dialog */
+dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
+.gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
+@media (max-width:820px){.gd{grid-template-columns:1fr}}
+.gd-media{position:relative;background:linear-gradient(160deg,var(--sky-100),var(--sky-200));display:flex;align-items:center;padding:56px 18px 18px}
+.gd-media img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:18px;border:4px solid var(--white);box-shadow:var(--shadow)}
+.gd-media .g-no{left:16px;top:16px}
+.gd-body{padding:30px 30px 26px;display:grid;gap:14px;align-content:start}
+.gd-body h2{font-size:clamp(26px,3vw,34px);font-weight:900}
+.gd-story{font-size:16px;color:var(--ink);background:var(--sky-50);border-radius:16px;padding:14px 16px;position:relative}
+.gd-story::before{content:"무슨 사고가 났나요?";display:block;font-size:12px;font-weight:800;color:var(--blue);margin-bottom:4px}
+.gd-info{display:grid;gap:10px;margin:0}
+.gd-info>div{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:start}
+.gd-info dt{font-size:13px;font-weight:800;color:var(--muted);padding-top:3px}
+.gd-info dd{margin:0;font-size:15px}
+.gd-chips{display:flex;flex-wrap:wrap;gap:6px}
+.gd-chips span{background:var(--white);border:1.5px solid var(--sky-200);border-radius:999px;padding:3px 12px;font-size:14px;font-weight:700;color:var(--blue-deep);font-family:var(--f-latin)}
+.gd-nav{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
+.gd-nav button{border:0;background:var(--sky-100);color:var(--blue-deep);font-weight:700;border-radius:999px;padding:10px 18px;min-height:44px}
+.gd-nav button:hover{background:var(--sky-200)}
+dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:var(--white);color:var(--ink);font-size:22px;box-shadow:var(--shadow)}
+.gd.pop .gd-body>*{animation:popUp .45s both}
+.gd.pop .gd-body>*:nth-child(2){animation-delay:.04s}.gd.pop .gd-body>*:nth-child(3){animation-delay:.08s}.gd.pop .gd-body>*:nth-child(4){animation-delay:.12s}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -564,59 +669,153 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
     </div>
   </section>
 
-  <section class="band tight" id="contents-feature" style="padding-top:56px">
+  <!-- ===== 사고뭉치 특공대 소개 ===== -->
+  <section class="band sg-intro" id="contents-feature">
     <div class="wrap">
-      <div class="feature">
-        <div>
-          <span class="badge">첫 번째 콘텐츠</span>
-          <h3>사고뭉치 특공대<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h3>
-          <p style="color:var(--muted)">하늘섬에서 시작되는 우리들의 움직임 모험</p>
-          <div class="chips">
-            <span class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="9" r="4"/><circle cx="6" cy="11" r="3"/><circle cx="22" cy="11" r="3"/><path d="M7 24c0-4 3-7 7-7s7 3 7 7M1 22c0-3 2-5 5-5M27 22c0-3-2-5-5-5"/></svg>유치원 아동</span>
-            <span class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 4l11 6-11 6L3 10z"/><path d="M3 15l11 6 11-6"/></svg>바닥 센서 XR</span>
-            <span class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="9" cy="9" r="3.5"/><circle cx="19" cy="9" r="3.5"/><path d="M2 23c0-4 3-7 7-7s7 3 7 7M12 23c0-4 3-7 7-7s7 3 7 7"/></svg>최대 5명</span>
-          </div>
-          <p style="color:var(--muted)">아이들의 움직임으로 즐기는 8가지 게임.<br>때로는 함께 힘을 모으고, 때로는 신나게 겨루며 놀이를 이어갑니다.</p>
-          <p style="margin-top:20px"><button class="btn" type="button" data-open="video">콘텐츠 영상 보기 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l8 5-8 5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></p>
+      <div class="sg-intro-grid">
+        <div class="sg-intro-copy">
+          <span class="badge">발구름의 첫 번째 콘텐츠</span>
+          <h2 class="sg-title">사고뭉치 특공대<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+          <p class="sg-lead">특공대가 가는 곳마다 사고가 터져요. 태엽새의 태엽을 풀어버리고, 낚시터를 물고기 난장판으로 만들고, 잠든 거대한 새까지 깨워버리죠.</p>
+          <p class="sg-lead"><b>수습은 아이들의 몸으로!</b> 바닥 센서 위에서 운동 동작을 하면 그 움직임이 그대로 게임이 되어 사고를 해결해요.</p>
         </div>
-        <div class="img"><img src="assets/world.png" alt="사고뭉치 특공대의 하늘섬 세계"></div>
+        <dl class="sg-stats">
+          <div><dt>게임팩</dt><dd>8<small>개</small></dd></div>
+          <div><dt>운동 동작</dt><dd>18<small>가지</small></dd></div>
+          <div><dt>함께 플레이</dt><dd>1~5<small>명</small></dd></div>
+          <div><dt>협동 · 개인전</dt><dd>2<small>·</small>6</dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
-  <section class="band tight">
+  <!-- ===== 스토리 (스크롤) ===== -->
+  <section class="sg-story-band" aria-labelledby="sg-story-title">
     <div class="wrap">
-      <p class="eyebrow">Mini Games</p>
-      <h2 class="sec-title" style="margin-top:6px">하나의 세계, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-      <p class="sec-sub">사고뭉치 특공대 안에서 만나는 다양한 움직임 경험</p>
+      <p class="eyebrow">Story</p>
+      <h2 class="sec-title" id="sg-story-title" style="margin-top:6px">우당탕! 특공대가 또 사고를 쳤다<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <div class="sg-story" data-story>
+        <div class="sg-stage" aria-hidden="true">
+          <img class="on" src="assets/flow-lobby.jpg" alt="" data-stage="0">
+          <img src="assets/play-1.jpg" alt="" data-stage="1">
+          <img src="assets/play-4.jpg" alt="" data-stage="2">
+          <img src="assets/play-6.jpg" alt="" data-stage="3">
+          <img src="assets/flow-tutorial.jpg" alt="" data-stage="4">
+          <ol class="sg-dots"></ol>
+        </div>
+        <div class="sg-steps">
+          <article class="sg-step on" data-step="0">
+            <img src="assets/flow-lobby.jpg" alt="여덟 개의 게임 섬이 떠 있는 하늘섬 로비 화면">
+            <span class="sg-step-no">01 · 하늘섬 로비</span>
+            <h3>“특공대 친구들과 함께<br>문제를 해결해보자!”</h3>
+            <p>하늘 위에 여덟 개의 섬이 떠 있어요. 섬 하나하나가 서로 다른 놀이예요. 오늘은 어느 섬에서 사고가 났을까요?</p>
+          </article>
+          <article class="sg-step" data-step="1">
+            <img src="assets/play-1.jpg" alt="태엽새 레이스 플레이 화면">
+            <span class="sg-step-no">02 · 태엽새 레이스</span>
+            <h3>태엽을 너무 느슨하게<br>풀어버렸다!</h3>
+            <p>축 늘어진 태엽새들. 운동으로 에너지를 채워서 태엽새가 다시 날아갈 수 있게 도와줘요.</p>
+          </article>
+          <article class="sg-step" data-step="2">
+            <img src="assets/play-4.jpg" alt="운동 낚시왕 플레이 화면">
+            <span class="sg-step-no">03 · 운동 낚시왕</span>
+            <h3>먹이통을 잘못 건드려서<br>낚시터가 난장판!</h3>
+            <p>몰려든 물고기를 잡을 차례예요. 빠르게 움직일수록 낚시 게이지가 차올라요.</p>
+          </article>
+          <article class="sg-step" data-step="3">
+            <img src="assets/play-6.jpg" alt="탈출 대추격전 플레이 화면">
+            <span class="sg-step-no">04 · 탈출 대추격전</span>
+            <h3>잠들어 있던 거대한 새를<br>깨워버렸다!</h3>
+            <p>화가 난 새가 쫓아와요. 다 함께 움직여 팀 에너지를 모으고, 잡히기 전에 눈 터널을 빠져나가요.</p>
+          </article>
+          <article class="sg-step" data-step="4">
+            <img src="assets/flow-tutorial.jpg" alt="키리를 따라 몸을 움직여보자 튜토리얼 화면">
+            <span class="sg-step-no">05 · 수습은 우리 몸으로</span>
+            <h3>키리를 따라<br>몸을 움직여보자!</h3>
+            <p>가이드 키리가 오늘의 운동 동작을 먼저 보여줘요. 세 번 따라 하면 진짜 모험이 시작돼요.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 캐릭터 ===== -->
+  <section class="band sg-chars-band" aria-labelledby="sg-chars-title">
+    <div class="wrap">
+      <p class="eyebrow">Characters</p>
+      <h2 class="sec-title" id="sg-chars-title" style="margin-top:6px">사고뭉치 특공대를 소개합니다<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">플레이어가 직접 움직이는 다섯 친구예요. 게임을 시작하면 인원수에 맞춰 랜덤으로 한 명씩 배정돼요.</p>
+      <div class="sg-chars" data-chars>
+        <div class="sg-char-stage" data-char-stage style="--c:#ffd84a;--c2:#fff4c4">
+          <span class="sg-char-ring" aria-hidden="true"></span>
+          <img class="sg-char-img" src="assets/char-puding.png" alt="푸딩" data-char-img>
+          <span class="sg-char-floor" aria-hidden="true"></span>
+        </div>
+        <div class="sg-char-info">
+          <p class="sg-char-tag" data-char-tag>사고뭉치 특공대 · Player 카드 노랑</p>
+          <h3 class="sg-char-name"><span data-char-name>푸딩</span><small data-char-en>Puding</small></h3>
+          <p class="sg-char-desc" data-char-desc>머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.</p>
+          <div class="sg-char-pick" role="group" aria-label="캐릭터 고르기">
+            <button type="button" aria-pressed="true" data-char="puding" style="--c:#ffd84a"><img src="assets/char-puding.png" alt=""><span>푸딩</span></button>
+            <button type="button" aria-pressed="false" data-char="alto" style="--c:#5cc8f2"><img src="assets/char-alto.png" alt=""><span>알토</span></button>
+            <button type="button" aria-pressed="false" data-char="edis" style="--c:#8fd94a"><img src="assets/char-edis.png" alt=""><span>에디스</span></button>
+            <button type="button" aria-pressed="false" data-char="pimpi" style="--c:#ff7f9b"><img src="assets/char-pimpi.png" alt=""><span>핌피</span></button>
+            <button type="button" aria-pressed="false" data-char="tonitoni" style="--c:#c99af0"><img src="assets/char-tonitoni.png" alt=""><span>토니토니</span></button>
+          </div>
+        </div>
+      </div>
+      <h3 class="sg-sub-title">함께하는 친구들</h3>
+      <div class="sg-friends">
+        <article class="sg-friend">
+          <img src="assets/char-kiri.jpg" alt="튜토리얼 화면 속 가이드 키리" class="photo">
+          <div><p class="sg-char-tag">가이드 캐릭터</p><h4>키리</h4><p>게임 시작 전 오늘의 운동 동작을 먼저 보여줘요. 모두가 세 번 따라 하면 튜토리얼이 끝나요.</p></div>
+        </article>
+        <article class="sg-friend">
+          <img src="assets/char-ello.png" alt="빨간 새 모양의 엘로">
+          <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 게임팩 8종 ===== -->
+  <section class="band sg-games-band" aria-labelledby="sg-games-title">
+    <div class="wrap">
+      <p class="eyebrow">8 Game Packs</p>
+      <h2 class="sec-title" id="sg-games-title" style="margin-top:6px">여덟 개의 섬, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">섬을 눌러 어떤 사고가 났는지, 어떤 운동으로 해결하는지 확인해 보세요.</p>
       <div class="filter" role="group" aria-label="게임 방식 필터">
         <button type="button" data-filter="all" aria-pressed="true">전체 <span data-count="all"></span></button>
         <button type="button" data-filter="coop" aria-pressed="false">협동 <span data-count="coop"></span></button>
-        <button type="button" data-filter="solo" aria-pressed="false">개인 <span data-count="solo"></span></button>
+        <button type="button" data-filter="solo" aria-pressed="false">개인전 <span data-count="solo"></span></button>
       </div>
       <div class="games" data-games>
-        <article class="game" data-type="coop"><div class="thumb"><img src="assets/game-sandwich.png" alt="컨베이어 벨트 위 샌드위치"></div><h3>샌드위치 공장</h3><span class="tag coop">협동</span></article>
-        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-duck.png" alt="태엽 달린 노란 새"></div><h3>태엽새 레이스</h3><span class="tag">개인</span></article>
-        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-fishing.png" alt="연못 위 낚싯대와 물고기"></div><h3>운동 낚시왕</h3><span class="tag">개인</span></article>
-        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-escape.png" alt="무지개 아치와 알록달록 블록 길"></div><h3>탈출 대추격전</h3><span class="tag">개인</span></article>
-        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-skate.png" alt="별이 빛나는 아이스링크"></div><h3>리듬 피겨 점프</h3><span class="tag">개인</span></article>
-        <article class="game" data-type="coop"><div class="thumb"><img src="assets/game-rice.png" alt="절구와 떡메, 알록달록 떡"></div><h3>리듬 떡 만들기</h3><span class="tag coop">협동</span></article>
-        <article class="game" data-type="coop"><div class="thumb"><img src="assets/game-coin.png" alt="숫자 공과 동전"></div><h3>코인볼</h3><span class="tag coop">협동</span></article>
-        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-snowman.png" alt="얼음 블록 사이의 눈사람"></div><h3>눈사람 탈출 작전</h3><span class="tag">개인</span></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="0"><span class="g-no">GAME 01</span><div class="thumb"><img src="assets/game-duck.png" alt=""></div><h3>태엽새 레이스</h3><p class="g-one">태엽새를 가장 멀리 날려라</p><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="1"><span class="g-no">GAME 02</span><div class="thumb"><img src="assets/game-sandwich.png" alt=""></div><h3>샌드위치 공장</h3><p class="g-one">박자 맞춰 깃발 꽂고 포장하기</p><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="2"><span class="g-no">GAME 03</span><div class="thumb"><img src="assets/game-coin.png" alt=""></div><h3>알쏭달쏭 코인볼</h3><p class="g-one">정답 숫자만큼 움직여요</p><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="3"><span class="g-no">GAME 04</span><div class="thumb"><img src="assets/game-fishing.png" alt=""></div><h3>운동 낚시왕</h3><p class="g-one">빠를수록 많이 낚아요</p><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="4"><span class="g-no">GAME 05</span><div class="thumb"><img src="assets/game-rice.png" alt=""></div><h3>쿵쿵 떡방아</h3><p class="g-one">엘로의 박자에 맞춰 다 함께</p><span class="tag coop">협동</span></button></article>
+        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="5"><span class="g-no">GAME 06</span><div class="thumb"><img src="assets/game-escape.png" alt=""></div><h3>탈출 대추격전</h3><p class="g-one">거대한 새에게서 탈출!</p><span class="tag coop">협동</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="6"><span class="g-no">GAME 07</span><div class="thumb"><img src="assets/game-skate.png" alt=""></div><h3>리듬 피겨 점프!</h3><p class="g-one">리듬 노트에 맞춰 공연 완성</p><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="7"><span class="g-no">GAME 08</span><div class="thumb"><img src="assets/game-snowman.png" alt=""></div><h3>눈사람 탈출 작전</h3><p class="g-one">눈을 깨고 탈출하기</p><span class="tag">개인전</span></button></article>
       </div>
     </div>
   </section>
 
-  <section class="wrap">
-    <div class="blob">
-      <div class="wrap center">
-        <h2 class="sec-title">우리에게 맞는 방식으로 즐겨요<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-        <div class="ways">
-          <article class="value"><div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="20" r="8"/><circle cx="14" cy="24" r="6"/><circle cx="50" cy="24" r="6"/><path d="M16 54c0-9 7-16 16-16s16 7 16 16M2 50c0-7 5-12 12-12M62 50c0-7-5-12-12-12"/></svg></div><h3>함께 또는 각자</h3><p>협동과 경쟁으로<br>다양하게 즐기는 놀이</p></article>
-          <article class="value"><div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 40c0-6 4-8 8-9l10-3 6-10c2-3 6-3 8 0l4 8c2 3 6 5 10 6 4 1 6 4 6 8v4H8z"/><path d="M8 44h56v4a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/></svg></div><h3>운동을 선택하고</h3><p>게임별 세 가지 운동 중<br>한 가지를 골라 참여</p></article>
-          <article class="value"><div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 40l8-18h17l-3 18z"/><path d="M33 22h17l8 18H36z"/><path d="M6 40v6h22v-6M36 40v6h22v-6"/></svg></div><h3>움직임으로 플레이</h3><p>별도 컨트롤러 없이<br>바닥 센서로 직접 참여</p></article>
-        </div>
-      </div>
+  <!-- ===== 플레이 흐름 ===== -->
+  <section class="band sg-flow-band" aria-labelledby="sg-flow-title">
+    <div class="wrap">
+      <p class="eyebrow">How to Play</p>
+      <h2 class="sec-title" id="sg-flow-title" style="margin-top:6px">이렇게 놀아요<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">앞에는 게임 화면이, 발밑에는 바닥 센서 화면이 있어요. 컨트롤러 없이 움직임만으로 플레이해요.</p>
+      <ol class="sg-flow">
+        <li><img src="assets/flow-lobby.jpg" alt="하늘섬 로비 화면"><b>섬 고르기</b><span>로비에서 놀고 싶은 게임 섬을 눌러요.</span></li>
+        <li><img src="assets/flow-setup.jpg" alt="게임 설정 화면"><b>운동 · 시간 · 인원 정하기</b><span>세 가지 운동 중 하나와 플레이 시간, 인원(1~5명)을 골라요.</span></li>
+        <li><img src="assets/flow-select.jpg" alt="플레이어별 캐릭터 배정 화면"><b>캐릭터 랜덤 배정</b><span>Player 1부터 차례로 특공대 친구가 한 명씩 정해져요.</span></li>
+        <li><img src="assets/flow-tutorial.jpg" alt="키리 튜토리얼 화면"><b>키리와 연습하기</b><span>키리의 동작을 모두가 세 번 따라 하면 게임이 시작돼요.</span></li>
+        <li><img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면"><b>본 라운드</b><span>정해진 시간 동안 운동 동작으로 게임을 진행해요.</span></li>
+        <li><img src="assets/flow-result.jpg" alt="별 등급이 나오는 결과 화면"><b>결과 확인</b><span>개인전은 순위와 점수, 협동은 팀 별 등급으로 결과가 나와요.</span></li>
+      </ol>
     </div>
   </section>
 
@@ -787,6 +986,26 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 
 
 
+
+<dialog id="dlg-game" class="gdlg" aria-labelledby="gd-title">
+  <button class="close" type="button" data-close aria-label="닫기">×</button>
+  <div class="gd" data-gd>
+    <div class="gd-media"><span class="g-no" data-gd-no></span><img data-gd-img src="assets/play-1.jpg" alt=""></div>
+    <div class="gd-body">
+      <span class="tag" data-gd-tag style="justify-self:start;margin:0"></span>
+      <h2 id="gd-title" data-gd-name></h2>
+      <p class="gd-story" data-gd-story></p>
+      <dl class="gd-info">
+        <div><dt>게임 방식</dt><dd data-gd-genre></dd></div>
+        <div><dt>목표</dt><dd data-gd-goal></dd></div>
+        <div><dt>운동</dt><dd><div class="gd-chips" data-gd-moves></div></dd></div>
+        <div><dt>플레이 시간</dt><dd><div class="gd-chips" data-gd-time></div></dd></div>
+        <div><dt>결과</dt><dd data-gd-win></dd></div>
+      </dl>
+      <div class="gd-nav"><button type="button" data-gd-prev>← 이전 섬</button><button type="button" data-gd-next>다음 섬 →</button></div>
+    </div>
+  </div>
+</dialog>
 <dialog id="dlg-video" aria-labelledby="video-title">
   <div class="dlg">
     <button class="close" type="button" data-close aria-label="닫기">×</button>
@@ -898,6 +1117,70 @@ window.BALGURUM_SUPABASE = {
   function stop(){ clearInterval(timer); }
   function restart(){ stop(); if(!reduce) timer = setInterval(()=>setStep((cur+1)%steps.length), 2200); }
   restart();
+
+
+  /* ---------- 사고뭉치 특공대: story ---------- */
+  const story = document.querySelector('[data-story]');
+  if(story){
+    const steps=[...story.querySelectorAll('[data-step]')], stages=[...story.querySelectorAll('[data-stage]')], dots=story.querySelector('.sg-dots');
+    steps.forEach((st,i)=>{ const li=document.createElement('li'); if(!i) li.className='on'; dots.append(li); });
+    const dl=[...dots.children];
+    const setStep=i=>{ steps.forEach((s2,j)=>s2.classList.toggle('on',j===i)); stages.forEach((s2,j)=>s2.classList.toggle('on',j===i)); dl.forEach((d,j)=>d.classList.toggle('on',j===i)); };
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting) setStep(steps.indexOf(e.target)); }); },{rootMargin:'-45% 0px -45% 0px'});
+      steps.forEach(s2=>io.observe(s2));
+    }
+  }
+
+  /* ---------- 사고뭉치 특공대: characters ---------- */
+  const CHARS = {
+    puding:{name:'푸딩',en:'Puding',c:'#ffd84a',c2:'#fff4c4',color:'노랑',desc:'머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.'},
+    alto:{name:'알토',en:'Alto',c:'#5cc8f2',c2:'#dff4fd',color:'하늘',desc:'머리에 몽글몽글 흰 구름과 파란 뿔이 달린 하늘색 친구. 졸린 듯한 눈과 콧수염이 매력이에요.'},
+    edis:{name:'에디스',en:'Edis',c:'#8fd94a',c2:'#ebf8dc',color:'초록',desc:'안경 쓴 화면 얼굴과 안테나를 가진 초록 네모 로봇. 하얀 장갑을 끼고 있어요.'},
+    pimpi:{name:'핌피',en:'Pimpi',c:'#ff7f9b',c2:'#ffe6ec',color:'분홍',desc:'머리 위에 하트 더듬이가 달린 분홍 곰. 파란 나비넥타이가 포인트예요.'},
+    tonitoni:{name:'토니토니',en:'Tonitoni',c:'#c99af0',c2:'#f3e8fc',color:'보라',desc:'헤드폰과 선글라스를 쓴 길쭉한 연보라 친구. 노란 조끼를 입고 있어요.'}
+  };
+  const cStage=document.querySelector('[data-char-stage]');
+  if(cStage){
+    const cImg=document.querySelector('[data-char-img]');
+    document.querySelectorAll('[data-char]').forEach(b=>b.addEventListener('click',()=>{
+      const k=b.dataset.char, c=CHARS[k];
+      document.querySelectorAll('[data-char]').forEach(x=>x.setAttribute('aria-pressed', x===b));
+      cStage.style.setProperty('--c',c.c); cStage.style.setProperty('--c2',c.c2);
+      cImg.src='assets/char-'+k+'.png'; cImg.alt=c.name;
+      document.querySelector('[data-char-name]').textContent=c.name;
+      document.querySelector('[data-char-en]').textContent=c.en;
+      document.querySelector('[data-char-desc]').textContent=c.desc;
+      document.querySelector('[data-char-tag]').textContent='사고뭉치 특공대 · Player 카드 '+c.color;
+      if(!reduce){ cImg.classList.remove('pop'); void cImg.offsetWidth; cImg.classList.add('pop'); }
+    }));
+  }
+
+  /* ---------- 사고뭉치 특공대: game details ---------- */
+  const GAMES = [
+    {name:'태엽새 레이스',coop:false,story:'우당탕! 사고뭉치 특공대가 태엽새의 태엽을 너무 느슨하게 풀어버렸어요. 운동으로 에너지를 채워 태엽새가 다시 잘 날아갈 수 있도록 도와줘요.',genre:'5인 개인전 · 운동 횟수만큼 날아가는 비행 거리 경쟁',goal:'제한 시간 동안 운동을 가장 많이 해서 태엽새를 가장 멀리 날리기',moves:['In And Out','Standing Jacks','Jumping Jack Variation'],time:['20초','30초','40초'],win:'운동 1회 = 3m. 비행 거리가 가장 긴 플레이어가 우승해요.'},
+    {name:'샌드위치 공장',coop:false,story:'특공대의 실수로 샌드위치 공장이 멈춰버렸어요. 박자에 맞춰 샌드위치에 깃발을 꽂고 배달 준비를 도와줘요.',genre:'5인 개인전 · 박자(BPM)에 맞추는 타이밍 운동',goal:'레일 위 샌드위치가 판정 구간에 도착하는 순간 정확히 움직여 깃발을 꽂고 포장하기',moves:['In And Out','Side to Side','Jump Lunge'],time:['25초','30초','35초'],win:'샌드위치를 가장 많이 포장한 플레이어가 우승해요.'},
+    {name:'알쏭달쏭 코인볼',coop:false,story:'특공대의 장난으로 코인볼 가챠 기계의 목표 숫자가 뒤섞여 보석 캡슐이 열리지 않아요. 숫자 힌트를 보고 운동 횟수를 조절해 코인을 넣어요.',genre:'5인 개인전 · 정답 숫자만큼 움직이는 수학 퀴즈 운동',goal:'전광판의 문제를 풀고, 정답 숫자만큼 운동해서 코인 넣기. 문제는 8초마다 바뀌어요.',moves:['ButtKick','Forward·Backward Quick Step','잔발치기'],time:['40초','50초','60초'],win:'가장 많은 문제를 맞힌 플레이어가 우승해요. 덧셈·뺄셈 모드와 사칙연산 모드 중 고를 수 있어요.'},
+    {name:'운동 낚시왕',coop:false,story:'특공대가 먹이통을 잘못 작동시켜 낚시터에 먹이가 쏟아졌어요. 몰려든 물고기로 난장판이 된 낚시터, 운동으로 낚시 게이지를 채워 물고기를 잡아요.',genre:'5인 개인전 · 스피드형 운동 낚시',goal:'물고기마다 정해진 운동 횟수를 시간 안에 채워 최대한 많이 낚기',moves:['Side to Side','Side Quick Step','Single Leg Side Hop'],time:['60초','70초','80초'],win:'한 마리에 100점, 빨리 잡으면 최대 50점 보너스. 점수가 가장 높은 플레이어가 우승해요.'},
+    {name:'쿵쿵 떡방아',coop:true,story:'마을 잔치를 돕기 위해 떡 만들기에 나선 특공대. 서로 먼저 하겠다고 다투다 떡방아가 엉망이 됐어요. 엘로의 박자 안내에 맞춰 함께 떡을 완성해요.',genre:'협동 · 박자에 맞추는 리듬 운동',goal:'엘로의 박자 패턴에 맞춰 다 함께 움직여 시간 안에 떡을 최대한 많이 완성하기',moves:['Ski Jacks','Step Touch','Pogo Jump'],time:['45초'],win:'개인 순위 없이, 팀이 완성한 떡 개수에 따라 별 1~3개를 받아요.'},
+    {name:'탈출 대추격전',coop:true,story:'눈 터널을 지나던 특공대가 깊이 잠들어 있던 거대한 새를 깨워버렸어요. 화가 난 새가 쫓아와요. 다 함께 움직여 잡히기 전에 눈 터널을 탈출해요.',genre:'협동 · 추격 탈출 러닝',goal:'모두의 운동으로 팀 속도 게이지를 유지해 눈블록 33개를 부수고 목적지까지 도착하기. 중간에 커다란 얼음 장애물도 함께 깨요.',moves:['Jumping Rope','잔발치기','Running Man'],time:['30초','40초','50초'],win:'탈출 실패 별 1개, 탈출 성공 별 2개, 10초 이상 남기고 탈출하면 별 3개예요.'},
+    {name:'리듬 피겨 점프!',coop:false,story:'특공대의 장난으로 피겨 공연에 필요한 방향과 점프 표시가 뒤섞였어요. 리듬 노트에 맞춰 움직여 공연을 끝까지 완성해요.',genre:'5인 개인전 · 리듬 운동',goal:'왼쪽에서 오른쪽으로 흐르는 리듬 노트가 판정존에 닿는 순간 운동해서 점수 얻기. 피버 타임도 있어요.',moves:['Star Jump','Leg Raise','In And Out'],time:['50초','55초','60초'],win:'타이밍에 맞춰 성공할 때마다 점수를 얻어요.'},
+    {name:'눈사람 탈출 작전',coop:false,story:'특공대의 장난으로 눈밭이 뒤집혀 모두 눈더미 속에 파묻혔어요. 운동을 빠르게 반복해 나를 덮은 눈을 깨고 눈사람에서 탈출해요.',genre:'5인 개인전 · 반복 운동 탈출',goal:'세 단계 동안 최대한 빠르게 운동해서 눈사람을 한 단계씩 깨고 탈출하기',moves:['Hand Claps','Step Touch','Jump Lunge'],time:['25초','30초','35초'],win:'단계마다 순위에 따라 500~100점. 누적 점수 순서대로 탈출하고, 모두 탈출에 성공해요.'}
+  ];
+  const gdlg=document.getElementById('dlg-game'); let gi=0;
+  function fillGame(i){
+    gi=(i+GAMES.length)%GAMES.length; const g=GAMES[gi], q=k=>gdlg.querySelector('[data-gd-'+k+']');
+    q('no').textContent='GAME 0'+(gi+1);
+    q('img').src='assets/play-'+(gi+1)+'.jpg'; q('img').alt=g.name+' 플레이 화면';
+    const tag=q('tag'); tag.textContent=g.coop?'협동':'개인전'; tag.className='tag'+(g.coop?' coop':'');
+    q('name').textContent=g.name; q('story').textContent=g.story; q('genre').textContent=g.genre; q('goal').textContent=g.goal; q('win').textContent=g.win;
+    [['moves',g.moves],['time',g.time]].forEach(([k,arr])=>{ const box=q(k); box.replaceChildren(...arr.map(t=>{ const sp=document.createElement('span'); sp.textContent=t; return sp; })); });
+    const gd=gdlg.querySelector('[data-gd]'); if(!reduce){ gd.classList.remove('pop'); void gd.offsetWidth; gd.classList.add('pop'); }
+  }
+  document.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>{ fillGame(+b.dataset.game); if(gdlg.showModal) gdlg.showModal(); }));
+  gdlg.querySelector('[data-gd-prev]').addEventListener('click',()=>fillGame(gi-1));
+  gdlg.querySelector('[data-gd-next]').addEventListener('click',()=>fillGame(gi+1));
+  gdlg.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft') fillGame(gi-1); if(e.key==='ArrowRight') fillGame(gi+1); });
 
   /* ---------- Game filter ---------- */
   const games = [...document.querySelectorAll('[data-games] .game')];
