@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>발구름 Balgurum</title>
+<meta name="description" content="움직임이 놀이가 되고, 놀이가 성장이 된다. XR 어린이 콘텐츠 브랜드 발구름">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Outfit:wght@600;700;800&display=swap">
+<style>
+/* Layout: airy sky world. Each page = soft hero with playable illustration, then alternating white / sky bands with rounded blobs. Single light look by design. */
+:root{
+  color-scheme: light;
+  --sky-50:#f4f8fe; --sky-100:#e8f1fd; --sky-200:#d3e4fa; --sky-300:#a9c8f2;
+  --blue:#285eab; --blue-600:#2f6fc9; --blue-deep:#173f82;
+  --ink:#13233f; --muted:#4f5e78; --line:#dbe6f5;
+  --logo:#1461e1; --star:#ffc531; --star-deep:#f0a400; --white:#ffffff;
+  --f-display:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-latin:"Outfit","Noto Sans KR",system-ui,sans-serif;
+  --r-lg:28px; --r-md:20px;
+  --shadow: 0 10px 30px rgba(40,94,171,.10);
+  --wrap: 1160px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:rgba(255,255,255,.96)}
+h1,h2,h3,h4{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.02em;color:var(--ink)}
+p{margin:0}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--star-deep);outline-offset:3px;border-radius:8px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--f-latin);font-weight:700;font-size:15px;letter-spacing:.06em;color:var(--blue);text-transform:uppercase}
+.sparks{display:inline-block;width:34px;height:30px;vertical-align:top;margin-left:4px}
+.sparks{fill:none;stroke:var(--star-deep);stroke-width:3;stroke-linecap:round}
+
+/* Header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-block:12px}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+.brand svg{width:34px;height:34px;color:var(--logo);fill:currentColor}
+.brand b{font-family:var(--f-latin);font-weight:800;font-size:24px;letter-spacing:-.02em}
+.menu{display:flex;align-items:center;gap:4px 28px;flex-wrap:wrap}
+.menu a{position:relative;text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;padding:10px 0}
+.menu a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:3px;border-radius:2px;background:var(--blue);transform:scaleX(0);transition:transform .25s}
+.menu a:hover::after{transform:scaleX(.5)}
+.menu a[aria-current="page"]{color:var(--blue)}
+.menu a[aria-current="page"]::after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;background:var(--blue);color:var(--white);font-weight:700;font-size:16px;padding:12px 24px;min-height:46px;text-decoration:none;transition:background .2s, transform .2s}
+.btn:hover{background:var(--blue-deep);transform:translateY(-2px)}
+.btn.ghost{background:var(--white);color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)}
+.btn.ghost:hover{background:var(--sky-100)}
+.btn svg{width:16px;height:16px}
+.text-link{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--blue);text-decoration:none;border:0;background:none;padding:6px 0;border-bottom:2px solid currentColor}
+.text-link:hover{color:var(--blue-deep)}
+@media (max-width:720px){
+  .nav{justify-content:center}
+  .brand{margin-right:auto}
+  .menu{order:3;width:100%;justify-content:space-around;gap:0}
+  .menu a{font-size:15px}
+  .nav .btn{padding:8px 16px;min-height:40px;font-size:14px}
+}
+
+/* Pages */
+
+
+/* Hero */
+.hero{position:relative;background:linear-gradient(180deg,var(--sky-100),var(--sky-50));overflow:hidden}
+.hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-70px;height:140px;background:var(--white);border-radius:50% 50% 0 0}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:24px;padding-block:40px 96px}
+.crumb{font-size:14px;color:var(--muted);margin-bottom:24px}
+.hero h1{font-size:clamp(32px,4.6vw,52px);font-weight:900;line-height:1.25;margin:10px 0 18px}
+.hero p.lead{font-size:18px;color:var(--muted);max-width:30em}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr;padding-block:32px 88px}}
+
+/* Hero art */
+.art{position:relative;width:100%;max-width:520px;aspect-ratio:5/4;margin-left:auto;cursor:pointer;border:0;background:none;padding:0}
+.art-hint{position:absolute;left:0;bottom:2%;font-size:13px;font-weight:700;color:var(--blue);background:var(--white);padding:6px 12px;border-radius:999px;box-shadow:var(--shadow);z-index:5}
+.cloud{position:absolute;background:var(--white);border-radius:999px;box-shadow:0 12px 24px rgba(40,94,171,.12);animation:drift 7s ease-in-out infinite}
+.cloud::before,.cloud::after{content:"";position:absolute;background:var(--white);border-radius:50%}
+.cloud::before{width:55%;aspect-ratio:1;left:14%;bottom:30%}
+.cloud::after{width:40%;aspect-ratio:1;right:12%;bottom:35%}
+@keyframes drift{50%{transform:translateX(10px)}}
+.stone{position:absolute;aspect-ratio:3/1;border-radius:50%;background:radial-gradient(ellipse at 50% 35%,#8ebaf4,#4b8ae0 70%);box-shadow:0 9px 0 #2d67bd,0 20px 26px rgba(23,63,130,.22);transition:transform .2s}
+.stone.hit{animation:press .35s ease}
+@keyframes press{40%{transform:translateY(5px)}}
+.star{position:absolute;width:16%;aspect-ratio:100/96;height:auto;filter:drop-shadow(0 8px 10px rgba(240,164,0,.35));animation:twinkle 2.6s ease-in-out infinite}
+@keyframes twinkle{50%{transform:rotate(8deg) scale(1.06)}}
+.star.burst{animation:burst .7s ease}
+@keyframes burst{30%{transform:scale(1.45) rotate(-12deg)}100%{transform:scale(1)}}
+.jumper{position:absolute;left:0;top:0;width:9%;aspect-ratio:40/52;height:auto;z-index:4;pointer-events:none;opacity:0}
+.score{position:absolute;right:0;top:0;font-family:var(--f-latin);font-weight:700;font-size:14px;color:var(--blue-deep);background:var(--white);padding:6px 12px;border-radius:999px;box-shadow:var(--shadow);z-index:5}
+.foot{position:absolute;width:13%;transition:transform .3s}
+.foot svg{width:100%;height:auto;filter:drop-shadow(0 8px 8px rgba(23,63,130,.2))}
+.foot.step{animation:stepIn .5s ease both}
+@keyframes stepIn{0%{transform:translateY(-14px) scale(.85)}60%{transform:translateY(2px) scale(1.05)}100%{transform:none}}
+
+/* Sections */
+section.band{padding-block:88px}
+section.band.tight{padding-block:64px}
+.sky{background:var(--sky-50);position:relative}
+.blob{background:var(--sky-100);border-radius:64px;padding-block:64px}
+.center{text-align:center}
+.sec-title{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.3}
+.sec-sub{color:var(--muted);font-size:17px;margin-top:10px}
+
+.brand-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:32px 56px;align-items:center}
+.brand-intro h2{font-size:clamp(28px,3.6vw,40px);font-weight:900;line-height:1.3;margin-top:10px}
+.brand-intro .copy{border-left:2px solid var(--line);padding-left:32px;display:grid;gap:14px;color:var(--muted);font-size:17px}
+@media (max-width:760px){.brand-intro{grid-template-columns:1fr}.brand-intro .copy{border-left:0;padding-left:0}}
+
+.values{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:40px}
+@media (max-width:900px){.values{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.values{grid-template-columns:1fr}}
+.value{background:var(--white);border-radius:var(--r-md);padding:30px 22px;text-align:center;box-shadow:var(--shadow);transition:transform .25s}
+.value:hover{transform:translateY(-6px)}
+.value .ico{width:72px;height:72px;margin:0 auto 14px;display:grid;place-items:center}
+.value .ico svg{width:60px;height:60px;stroke:var(--blue-600);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s}
+.value:hover .ico svg{transform:rotate(-8deg) scale(1.08)}
+.value h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.value p{font-size:15px;color:var(--muted)}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:44px}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.stepcard{border:0;background:none;text-align:center;padding:12px;border-radius:var(--r-lg);transition:background .3s, transform .3s}
+.stepcard img{width:100%;max-width:300px;margin:0 auto 14px;border-radius:16px}
+.stepcard .lbl{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--ink)}
+.stepcard .num{font-family:var(--f-latin);font-weight:800;color:var(--blue);background:var(--sky-100);border-radius:999px;padding:2px 12px;font-size:16px}
+.stepcard.on{background:var(--sky-50);transform:translateY(-4px)}
+.stepcard.on .num{background:var(--blue);color:var(--white)}
+.steps-note{color:var(--muted);margin-top:22px;text-align:center}
+
+.feature{display:grid;grid-template-columns:1fr 1.15fr;gap:28px;align-items:center;background:var(--sky-50);border-radius:var(--r-lg);padding:32px;margin-top:36px}
+.feature .img{border-radius:22px;overflow:hidden;aspect-ratio:16/10}
+.feature .img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.feature:hover .img img{transform:scale(1.04)}
+.feature h3{font-size:clamp(26px,3vw,34px);font-weight:900;margin:12px 0 6px}
+.badge{display:inline-block;background:var(--sky-200);color:var(--blue-deep);font-weight:700;font-size:14px;padding:4px 14px;border-radius:999px}
+@media (max-width:760px){.feature{grid-template-columns:1fr;padding:20px}}
+
+.cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg,var(--sky-100),var(--sky-50));border-radius:var(--r-lg);padding:32px 36px}
+.cta h3{font-size:clamp(20px,2.4vw,26px);font-weight:900}
+.cta p{color:var(--muted);font-size:15px;margin-top:4px}
+.cta-feet{display:flex;gap:10px;margin-left:auto;margin-right:12px}
+.cta-feet svg{width:44px;height:auto;fill:var(--blue-600)}
+.cta-feet svg:nth-child(2){transform:translateY(-14px) rotate(12deg)}
+@media (max-width:640px){.cta-feet{display:none}}
+
+footer{padding-block:40px 48px;text-align:center;color:var(--muted);font-size:14px}
+footer .brand{justify-content:center;margin-bottom:6px}
+
+/* Contents page */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.chip{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--white);border-radius:14px;padding:12px 16px;min-width:96px;box-shadow:var(--shadow);font-size:14px;font-weight:700}
+.chip svg{width:28px;height:28px;stroke:var(--blue-600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.filter button{border:0;background:var(--sky-100);color:var(--blue-deep);font-weight:700;padding:10px 20px;border-radius:999px;min-height:44px}
+.filter button[aria-pressed="true"]{background:var(--blue);color:var(--white)}
+.games{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:24px}
+@media (max-width:900px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.game{background:var(--white);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow);text-align:center;transition:transform .25s, box-shadow .25s}
+.game:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(40,94,171,.18)}
+.game .thumb{aspect-ratio:4/3;overflow:hidden}
+.game img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.game:hover img{transform:scale(1.08)}
+.game h3{font-size:17px;font-weight:800;margin:14px 8px 8px}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:3px 14px;border-radius:999px;margin-bottom:16px;background:var(--sky-100);color:var(--blue-deep)}
+.tag.coop{background:#fff1cc;color:#7a5200}
+.game[hidden]{display:none}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px}
+@media (max-width:760px){.ways{grid-template-columns:1fr}}
+
+/* Story page */
+.chapter{display:grid;grid-template-columns:1fr 1.1fr;gap:32px 56px;align-items:center;padding-block:56px}
+.chapter.flip .ch-text{order:2}
+.chapter h2{font-size:clamp(24px,3vw,34px);font-weight:900;line-height:1.35;margin:10px 0 16px}
+.chapter p+p{margin-top:12px}
+.chapter .ch-text p{color:var(--muted);font-size:17px}
+.ch-img{border-radius:40px 40px 40px 120px;overflow:hidden;box-shadow:var(--shadow)}
+.ch-img img{width:100%}
+.chapter.flip .ch-img{border-radius:40px 120px 40px 40px}
+@media (max-width:760px){.chapter{grid-template-columns:1fr;padding-block:36px}.chapter.flip .ch-text{order:0}}
+.trail{display:flex;justify-content:center;gap:18px}
+.trail svg{width:22px;fill:var(--sky-300)}
+.trail svg:nth-child(odd){transform:translateY(8px) rotate(-10deg)}
+.bi{background:var(--sky-50);border-radius:48px;padding:36px 24px;text-align:center}
+.bi-row{display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,22px);min-height:130px}
+.bi-row .b{font-family:var(--f-latin);font-weight:800;font-size:clamp(72px,9vw,108px);line-height:1;color:var(--blue);transition:transform .5s, opacity .4s}
+.bi-row .op{font-family:var(--f-latin);font-weight:700;font-size:36px;color:var(--muted);transition:opacity .4s}
+.bi-row .ft{width:clamp(56px,7vw,80px);transition:transform .5s, opacity .4s}
+.bi-row .logo{width:clamp(96px,12vw,130px);height:auto;color:var(--logo);fill:currentColor;transition:transform .5s}
+.bi.merged .b{transform:translateX(60%) scale(.6);opacity:0}
+.bi.merged .ft{transform:translateX(-60%) scale(.6);opacity:0}
+.bi.merged .op{opacity:0}
+.bi.merged .logo{transform:scale(1.25)}
+.bi h3{font-family:var(--f-latin);font-size:20px;font-weight:800;color:var(--blue-deep);margin-top:14px}
+.bi p{display:inline-block;margin-top:10px;background:var(--white);border-radius:999px;padding:6px 18px;font-size:14px;color:var(--muted)}
+.bi .text-link{margin-top:14px}
+.finale{text-align:center;background:linear-gradient(180deg,var(--white),var(--sky-100));padding-block:96px 72px}
+.finale h2{font-size:clamp(30px,4.4vw,48px);font-weight:900;line-height:1.3}
+.finale p{color:var(--muted);font-size:18px;margin:14px 0 26px}
+
+/* Dialog */
+dialog{border:0;border-radius:var(--r-lg);padding:0;width:min(520px,calc(100% - 32px));color:var(--ink);background:var(--white);box-shadow:0 30px 80px rgba(19,35,63,.3)}
+dialog::backdrop{background:rgba(19,35,63,.45)}
+.dlg{padding:32px;display:grid;gap:14px}
+.dlg h2{font-size:24px;font-weight:900}
+.dlg .close{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:var(--sky-100);color:var(--ink);font-size:20px}
+.dlg dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0}
+.dlg dt{color:var(--muted)}
+.dlg dd{margin:0;font-weight:700}
+.copyrow{display:flex;gap:8px;align-items:center;background:var(--sky-50);border-radius:14px;padding:10px 10px 10px 16px}
+.copyrow code{flex:1;min-width:0;font-family:var(--f-latin);font-size:15px;user-select:all;overflow-wrap:anywhere}
+.copyrow button{border:0;background:var(--blue);color:var(--white);font-weight:700;border-radius:10px;padding:8px 14px;min-height:40px}
+.video-ph{aspect-ratio:16/9;border-radius:16px;background:var(--sky-100);display:grid;place-items:center;text-align:center;color:var(--muted);font-size:15px;padding:16px}
+.video-ph svg{width:56px;height:56px;margin:0 auto 8px;fill:var(--blue)}
+.note{font-size:13px;color:var(--muted)}
+
+
+/* ---------- Bouncy intro ---------- */
+:root{--intro-delay:2.9s}
+.no-intro{--intro-delay:0s}
+.no-intro .intro{display:none}
+.intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 60%,var(--white),var(--sky-100) 70%);animation:introOut .7s cubic-bezier(.7,0,.3,1) 2.5s forwards;padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(16px,env(safe-area-inset-left,0px))}
+@keyframes introOut{to{transform:translateY(-100%);visibility:hidden}}
+.intro-stage{display:flex;flex-direction:column;align-items:center;gap:18px}
+.intro-logo{width:min(150px,34vw);height:auto;overflow:visible}
+.intro-logo{transform-origin:50% 100%;animation:dropBounce .95s both .1s}
+.intro-logo .toe{transform-box:fill-box;transform-origin:50% 50%;animation:toePop .45s both;animation-delay:calc(.8s + var(--i) * .09s)}
+@keyframes toePop{0%{transform:scale(0)}60%{transform:scale(1.35)}80%{transform:scale(.9)}100%{transform:scale(1)}}
+@keyframes dropBounce{
+  0%{transform:translateY(-320px) scale(.9,1.15);opacity:0}
+  12%{opacity:1}
+  42%{transform:translateY(0) scale(1.25,.72)}
+  58%{transform:translateY(-46px) scale(.92,1.08)}
+  72%{transform:translateY(0) scale(1.1,.9)}
+  84%{transform:translateY(-12px) scale(.98,1.02)}
+  100%{transform:none;opacity:1}}
+@keyframes popUp{
+  0%{transform:translateY(30px) scale(0);opacity:0}
+  55%{transform:translateY(-10px) scale(1.2);opacity:1}
+  75%{transform:translateY(3px) scale(.94)}
+  100%{transform:none;opacity:1}}
+.intro-word{display:flex;font-family:var(--f-latin);font-weight:800;font-size:clamp(36px,8vw,56px);letter-spacing:-.02em;color:var(--ink)}
+.intro-word span{display:inline-block;animation:popUp .55s both;animation-delay:calc(1.4s + var(--i) * .06s)}
+.intro-skip{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));border:0;background:var(--white);color:var(--blue-deep);font-weight:700;border-radius:999px;padding:10px 18px;min-height:44px;box-shadow:var(--shadow)}
+.intro-ground{width:min(220px,50vw);height:14px;border-radius:50%;background:rgba(20,97,225,.14);margin-top:-14px;animation:ground .95s both .1s}
+@keyframes ground{0%{transform:scaleX(.3);opacity:0}42%{transform:scaleX(1.15);opacity:1}100%{transform:none;opacity:1}}
+
+/* Hero entrance, replays whenever a page is shown */
+.hero .crumb,.hero .eyebrow{animation:popUp .55s both calc(var(--intro-delay) + .05s)}
+.hero h1{animation:popUp .7s both calc(var(--intro-delay) + .15s)}
+.hero p.lead{animation:popUp .6s both calc(var(--intro-delay) + .3s)}
+.jump-art .stone{animation:dropBounce .85s both}
+.jump-art .stone:nth-child(3){animation-delay:calc(var(--intro-delay) + .2s)}
+.jump-art .stone:nth-child(4){animation-delay:calc(var(--intro-delay) + .32s)}
+.jump-art .stone:nth-child(5){animation-delay:calc(var(--intro-delay) + .44s)}
+.jump-art .stone:nth-child(6){animation-delay:calc(var(--intro-delay) + .56s)}
+.jump-art .stone:nth-child(7){animation-delay:calc(var(--intro-delay) + .68s)}
+.jump-art .stone.hit{animation:press .35s ease}
+.star{animation:popUp .6s both calc(var(--intro-delay) + .9s), twinkle 2.6s ease-in-out infinite calc(var(--intro-delay) + 1.5s)}
+.star.burst{animation:burst .7s ease}
+.art-hint,.score{animation:popUp .5s both calc(var(--intro-delay) + 1.1s)}
+.walk-art .foot{animation:dropBounce .8s both}
+.walk-art .foot:nth-child(3){animation-delay:calc(var(--intro-delay) + .2s)}
+.walk-art .foot:nth-child(4){animation-delay:calc(var(--intro-delay) + .35s)}
+.walk-art .foot:nth-child(5){animation-delay:calc(var(--intro-delay) + .5s)}
+.walk-art .foot:nth-child(6){animation-delay:calc(var(--intro-delay) + .65s)}
+.walk-art .foot:nth-child(7){animation-delay:calc(var(--intro-delay) + .8s)}
+.walk-art .foot.step{animation:stepIn .5s ease both}
+
+/* Jelly hovers */
+@keyframes jelly{30%{transform:scale(1.12,.88)}45%{transform:scale(.92,1.08)}60%{transform:scale(1.04,.96)}100%{transform:none}}
+.btn:hover{animation:jelly .5s}
+.brand:hover svg{animation:dropBounce .7s}
+.value:hover .ico{animation:jelly .55s}
+
+@media (prefers-reduced-motion:reduce){.intro{display:none}}
+
+
+/* ---------- Contents cover ---------- */
+.hero-cover{--cover:#1e67e4;background:radial-gradient(ellipse 60% 70% at 62% 85%,#2c78f3,transparent 70%),var(--cover);color:var(--white);margin-top:calc(-1 * var(--hdr,72px));padding-top:var(--hdr,72px)}
+.hero-cover::after{display:none}
+.cover-grid{position:relative;z-index:1;max-width:1440px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr);align-items:center;gap:8px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px));padding-block:24px 0}
+.cover-text{padding-block:40px 64px;padding-left:clamp(0px,4vw,72px)}
+.hero-cover .eyebrow{color:rgba(255,255,255,.85);letter-spacing:.3em;font-weight:500;font-size:14px}
+.hero-cover h1{color:var(--white);font-weight:800;font-size:clamp(32px,4.4vw,60px);line-height:1.25;margin:18px 0 18px}
+.hero-cover p.lead{color:rgba(255,255,255,.92);font-size:clamp(16px,1.6vw,21px)}
+.hero-cover .cover-text>p:last-child{margin-top:36px;animation:popUp .6s both calc(var(--intro-delay) + .45s)}
+.btn.outline{background:transparent;color:var(--white);box-shadow:inset 0 0 0 2px var(--white);border-radius:14px;padding:14px 28px;min-height:56px;font-size:18px}
+.btn.outline:hover{background:var(--white);color:var(--cover)}
+.cover-art{position:relative;display:block;width:100%;border:0;padding:0;background:none;cursor:pointer;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%);mask-image:linear-gradient(90deg,transparent,#000 4%);animation:popUp .8s both calc(var(--intro-delay) + .2s)}
+.cover-art img{width:100%;height:auto}
+.cover-boy{position:absolute;left:28.22%;top:15.13%;width:19.42%;animation:hop 1.3s cubic-bezier(.4,0,.6,1) infinite calc(var(--intro-delay) + 1s);transform-origin:50% 100%}
+.cover-boy img{width:100%;height:auto}
+@keyframes hop{
+  0%,100%{transform:translateY(8%) scale(1.06,.94)}
+  15%{transform:translateY(6%) scale(.97,1.04)}
+  50%{transform:translateY(-9%) scale(1,1)}
+  85%{transform:translateY(6%) scale(.98,1.02)}}
+.cover-boy.big{animation:bigHop .9s cubic-bezier(.3,0,.5,1)}
+@keyframes bigHop{0%{transform:translateY(8%) scale(1.12,.86)}45%{transform:translateY(-38%) rotate(-6deg)}75%{transform:translateY(6%) scale(1.08,.9)}100%{transform:none}}
+@media (max-width:820px){
+  .cover-grid{grid-template-columns:1fr;padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .cover-text{padding-block:24px 8px;padding-left:0}
+  .cover-art{-webkit-mask-image:none;mask-image:none}
+}
+/* Transparent header over the blue cover */
+.site-header{transition:background .3s,border-color .3s}
+html[data-route="contents"].at-top .site-header{background:transparent;border-color:transparent;backdrop-filter:none}
+html[data-route="contents"].at-top .site-header .brand,html[data-route="contents"].at-top .menu a{color:var(--white)}
+html[data-route="contents"].at-top .menu a::after{background:var(--white)}
+html[data-route="contents"].at-top .site-header .brand svg{color:var(--white)}
+html[data-route="contents"].at-top .site-header .btn{background:var(--white);color:var(--cover,#1e67e4)}
+html[data-route="contents"].at-top body::before{background:#1e67e4}
+
+
+/* ---------- Cheer page (easter egg) ---------- */
+:root{--cheer-1:#1f6cf0;--cheer-2:#1450c8;--cheer-line:rgba(255,255,255,.55);--cheer-soft:rgba(255,255,255,.12);--cheer-pick:#3d8dff;--cheer-mint:#7fe3ff}
+html[data-route="cheer"].at-top .site-header{background:transparent;border-color:transparent;backdrop-filter:none}
+html[data-route="cheer"].at-top .site-header .brand,html[data-route="cheer"].at-top .menu a{color:var(--white)}
+html[data-route="cheer"].at-top .site-header .brand svg{color:var(--white)}
+html[data-route="cheer"].at-top .site-header .btn{background:var(--white);color:var(--cheer-2)}
+html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
+.cheer{background:linear-gradient(170deg,var(--cheer-1),var(--cheer-2) 70%);color:var(--white);margin-top:calc(-1 * var(--hdr,72px));padding-top:var(--hdr,72px)}
+.cheer-wrap{display:grid;gap:20px;padding-block:40px 80px;max-width:1080px}
+.cheer-head{text-align:center;display:grid;gap:12px;margin-bottom:10px}
+.cheer-head h1{color:var(--white);font-size:clamp(28px,4.2vw,44px);font-weight:900;animation:popUp .6s both .05s}
+.cheer-head h1 em{font-style:normal;color:var(--cheer-mint);display:inline-block;animation:cheerWiggle 2.4s ease-in-out infinite 1s}
+@keyframes cheerWiggle{0%,70%,100%{transform:none}78%{transform:translateY(-6px) rotate(-4deg)}86%{transform:translateY(0) rotate(3deg)}92%{transform:translateY(-2px)}}
+.cheer-head p{color:rgba(255,255,255,.9);font-size:clamp(15px,1.6vw,18px);animation:popUp .6s both .15s}
+.cheer-card{position:relative;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:0;border:1px solid var(--cheer-line);border-radius:22px;background:rgba(255,255,255,.05);animation:popUp .7s both .25s}
+.cheer-col{border:0;margin:0;padding:28px clamp(18px,3vw,28px);min-width:0;display:flex;flex-direction:column;gap:12px}
+.cheer-col+.cheer-col{border-left:1px solid var(--cheer-line)}
+@media (max-width:760px){.cheer-card{grid-template-columns:1fr}.cheer-col+.cheer-col{border-left:0;border-top:1px solid var(--cheer-line)}}
+.cheer-col legend,.cheer-col h2{float:left;width:100%;padding:0;margin-bottom:8px;color:var(--white);font-family:var(--f-display);font-size:20px;font-weight:800;line-height:1.4}
+.cheer-col .no{display:block;font-family:var(--f-latin);font-size:20px;font-weight:700}
+.pick{position:relative;display:flex;align-items:center;gap:16px;border:1.5px solid var(--cheer-line);border-radius:14px;padding:18px 20px;min-height:76px;cursor:pointer;font-weight:800;font-size:18px;transition:background .2s,transform .2s,border-color .2s}
+.pick:hover{background:var(--cheer-soft);transform:translateY(-2px)}
+.pick input{position:absolute;opacity:0;pointer-events:none}
+.pick-ico{width:52px;height:40px;flex:none;display:grid;place-items:center}
+.pick-ico svg{width:46px;height:40px;fill:none;stroke:var(--white);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.pick-check{margin-left:auto;width:28px;height:28px;border-radius:50%;background:var(--white);display:grid;place-items:center;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.pick-check svg{width:16px;height:16px;fill:none;stroke:var(--cheer-pick);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.pick:has(input:checked){background:var(--cheer-pick);border-color:rgba(255,255,255,.8)}
+.pick:has(input:checked) .pick-check{transform:scale(1)}
+.pick:has(input:checked) .pick-ico{animation:jelly .5s}
+.pick:has(input:focus-visible){outline:3px solid var(--star);outline-offset:3px}
+.cheer .hint,.cheer .status,.cheer small{font-size:14px;color:rgba(255,255,255,.85)}
+.cheer label.f{font-weight:700;font-size:15px;margin-top:4px}
+.cheer label.f small{font-weight:500}
+.cheer input[type=text],.cheer textarea{width:100%;font:inherit;font-size:15px;color:var(--white);background:rgba(255,255,255,.04);border:1.5px solid var(--cheer-line);border-radius:12px;padding:12px 14px;transition:border-color .2s,background .2s}
+.cheer textarea{min-height:130px;resize:vertical}
+.cheer input::placeholder,.cheer textarea::placeholder{color:rgba(255,255,255,.75)}
+.cheer input[type=text]:focus,.cheer textarea:focus{outline:none;border-color:var(--white);background:rgba(255,255,255,.1)}
+.cheer textarea.bad{border-color:var(--star);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+.count{text-align:right;font-size:13px;color:rgba(255,255,255,.8);font-variant-numeric:tabular-nums;margin-top:-6px}
+.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.check input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--white);flex:none}
+.check span{display:grid;gap:2px;font-size:15px}
+.send{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:54px;border:1.5px solid rgba(255,255,255,.6);border-radius:12px;background:var(--cheer-pick);color:var(--white);font-weight:800;font-size:18px;margin-top:4px;transition:background .2s,transform .2s}
+.send:hover{background:#4f9bff;animation:jelly .5s}
+.send:disabled{opacity:.7;cursor:progress;animation:none}
+.send svg{width:26px;height:26px;fill:currentColor;transform:rotate(-20deg)}
+.cheer .status{text-align:center}
+.cheer .status.err{color:#ffe08a;font-weight:700}
+.cheer-done{position:absolute;inset:0;border-radius:22px;background:linear-gradient(170deg,var(--cheer-1),var(--cheer-2));display:grid;place-items:center;text-align:center;padding:24px;overflow:hidden}
+.cheer-done[hidden]{display:none}
+.done-inner{display:grid;justify-items:center;gap:12px;position:relative;z-index:1}
+.done-logo{width:110px;height:110px;color:var(--white);fill:currentColor;transform-origin:50% 100%;animation:dropBounce .95s both}
+.cheer-done h2{color:var(--white);font-size:clamp(24px,3vw,32px);font-weight:900;animation:popUp .5s both .7s}
+.cheer-done p{color:rgba(255,255,255,.9);animation:popUp .5s both .8s}
+.cheer-done .btn{margin-top:8px;animation:popUp .5s both .9s}
+.confetti{position:absolute;left:50%;top:45%;width:26px;height:34px;fill:var(--white);opacity:0;animation:fly 1.3s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes fly{0%{opacity:1;transform:translate(-50%,-50%) scale(.3)}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--r)) scale(1)}}
+.cheer-banner{display:flex;align-items:center;justify-content:center;gap:12px;border:1px solid var(--cheer-line);border-radius:14px;padding:16px;font-weight:800;font-size:clamp(15px,1.8vw,18px);text-align:center;animation:popUp .6s both .35s}
+.cheer-banner svg{width:26px;height:30px;fill:var(--white);transform:rotate(-20deg);flex:none}
+.wall{margin-top:36px;display:grid;gap:14px}
+.wall-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+.wall h2{color:var(--white);font-size:24px;font-weight:900}
+.wall-note{font-size:14px;color:rgba(255,255,255,.85)}
+.wall-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.wall-card{background:var(--white);color:var(--ink);border-radius:18px;padding:18px 18px 16px;display:grid;gap:10px;align-content:start;animation:popUp .5s both;box-shadow:0 12px 28px rgba(10,40,110,.25)}
+.wall-card:nth-child(3n+2){transform:rotate(.6deg)}.wall-card:nth-child(3n){transform:rotate(-.6deg)}
+.wall-card .k{display:inline-flex;align-items:center;gap:6px;justify-self:start;background:var(--sky-100);color:var(--blue-deep);font-weight:800;font-size:13px;padding:4px 10px;border-radius:999px}
+.wall-card .k svg{width:18px;height:16px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.wall-card .m{white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}
+.wall-card .by{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.wall-card .priv{font-size:12px;font-weight:700;color:#7a5200;background:#fff1cc;border-radius:999px;padding:2px 8px;justify-self:start}
+.wall-empty{border:1.5px dashed var(--cheer-line);border-radius:18px;padding:28px;text-align:center;color:rgba(255,255,255,.9)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="232 206 572 576"><path fill-rule="evenodd" d="M715.8 251.2C709.0 245.8 697.0 237.1 688.8 232.2C680.5 227.4 673.0 224.5 666.2 222.0C659.5 219.5 658.2 218.7 648.2 217.0C638.2 215.3 618.4 212.8 606.2 212.0C594.1 211.2 587.6 211.2 575.5 212.0C563.4 212.8 545.7 215.0 533.5 217.0C521.3 219.0 514.0 220.8 502.5 224.0C491.0 227.2 475.7 232.2 464.5 236.0C453.3 239.8 446.0 242.7 435.5 247.0C425.0 251.3 419.4 253.3 401.5 262.0C383.6 270.7 343.4 290.9 328.0 299.2C312.6 307.6 314.6 307.8 309.0 312.2C303.4 316.7 297.9 322.0 294.2 326.0C290.6 330.0 288.7 333.1 287.0 336.5C285.3 339.9 284.5 343.5 284.0 346.5C283.5 349.5 283.5 350.5 284.0 354.2C284.5 358.0 284.3 361.5 287.0 369.2C289.7 377.0 296.3 390.1 300.0 400.5C303.7 410.9 307.2 424.0 309.0 431.5C310.8 439.0 310.8 436.4 311.0 445.5C311.2 454.6 311.0 475.6 310.0 486.2C309.0 496.9 307.5 501.1 305.0 509.2C302.5 517.4 300.2 523.7 295.0 535.2C289.8 546.8 279.4 568.1 273.8 578.8C268.1 589.4 265.0 592.0 261.2 599.0C257.5 606.0 254.2 612.2 251.0 620.5C247.8 628.8 244.0 641.2 242.0 648.5C240.0 655.8 239.5 658.9 239.0 664.5C238.5 670.1 238.2 676.1 239.0 682.2C239.8 688.4 241.3 694.8 244.0 701.2C246.7 707.7 251.2 715.2 255.2 720.8C259.2 726.3 262.2 729.5 268.0 734.5C273.8 739.5 283.2 746.3 290.0 750.5C296.8 754.7 301.8 756.9 308.5 759.8C315.2 762.6 322.7 765.4 330.5 767.8C338.3 770.1 347.8 772.2 355.5 773.8C363.2 775.2 369.0 776.3 376.5 776.8C384.0 777.2 396.9 776.7 400.8 776.2C404.6 775.8 402.4 775.7 399.8 774.2C397.1 772.8 389.5 770.2 385.0 767.8C380.5 765.3 377.3 763.4 373.0 759.8C368.7 756.1 362.3 749.4 359.0 745.8C355.7 742.1 356.2 743.3 353.0 737.8C349.8 732.2 343.3 721.3 339.8 712.2C336.2 703.2 333.4 690.4 331.8 683.2C330.1 676.1 329.9 679.7 329.8 669.2C329.6 658.8 329.8 633.0 330.8 620.5C331.8 608.0 332.1 610.0 335.8 594.5C339.4 579.0 348.9 541.8 352.8 527.5C356.6 513.2 355.9 515.8 358.8 508.5C361.6 501.2 367.0 489.8 370.0 484.0C373.0 478.2 373.2 478.2 377.0 474.0C380.8 469.8 387.7 463.2 393.0 459.0C398.3 454.8 398.8 454.2 409.0 449.0C419.2 443.8 442.4 432.8 454.5 427.8C466.6 422.7 472.3 421.2 481.5 418.8C490.7 416.2 501.7 414.1 509.5 412.8C517.3 411.4 521.5 411.1 528.5 410.8C535.5 410.4 544.3 410.4 551.2 410.8C558.2 411.1 561.9 411.2 570.2 412.8C578.6 414.2 593.3 417.4 601.2 419.8C609.2 422.1 612.5 423.8 617.8 427.0C623.0 430.2 628.6 434.7 632.8 439.0C636.9 443.3 640.4 449.2 642.8 453.0C645.1 456.8 645.3 456.6 647.0 461.5C648.7 466.4 652.0 476.4 653.0 482.5C654.0 488.6 653.7 493.1 653.0 498.2C652.3 503.4 650.9 508.5 649.0 513.2C647.1 518.0 645.1 522.0 641.8 526.8C638.4 531.5 634.1 536.6 628.8 541.8C623.4 546.9 615.6 553.4 609.8 557.8C603.9 562.1 599.7 564.5 593.8 567.8C587.8 571.0 587.6 572.1 574.2 577.0C560.9 581.9 527.5 591.5 513.5 597.0C499.5 602.5 496.2 606.1 490.0 610.2C483.8 614.4 481.4 616.2 476.2 622.0C471.1 627.8 463.0 639.4 459.2 645.0C455.5 650.6 455.5 651.2 454.0 655.5C452.5 659.8 450.7 666.2 450.0 670.5C449.3 674.8 449.5 677.5 450.0 681.2C450.5 685.0 451.8 689.8 453.0 693.2C454.2 696.7 454.9 698.2 457.2 701.8C459.6 705.3 463.5 710.8 467.2 714.8C471.0 718.7 475.5 722.2 480.0 725.5C484.5 728.8 488.6 731.6 494.0 734.5C499.4 737.4 506.1 740.5 512.5 742.8C518.9 745.0 521.4 746.8 532.5 747.8C543.6 748.8 565.5 749.4 579.2 748.8C593.0 748.1 604.9 745.6 615.2 743.8C625.6 741.9 633.4 739.9 641.2 737.8C649.1 735.6 652.7 734.8 662.2 730.8C671.8 726.7 687.3 720.0 698.8 713.5C710.2 707.0 720.5 699.8 730.8 691.5C741.0 683.2 753.4 670.9 760.5 663.8C767.6 656.6 769.7 653.8 773.5 648.8C777.3 643.8 780.8 638.3 783.5 633.8C786.2 629.2 787.7 626.3 789.8 621.2C791.8 616.2 794.2 609.1 795.8 603.2C797.2 597.4 798.2 593.5 798.8 586.2C799.2 579.0 799.1 566.1 798.8 559.5C798.4 552.9 798.2 552.7 796.8 546.5C795.2 540.3 792.3 529.4 789.8 522.5C787.2 515.6 784.5 510.4 781.5 505.0C778.5 499.6 777.3 496.6 771.5 490.0C765.7 483.4 753.5 471.2 746.8 465.2C740.0 459.3 736.7 457.8 730.8 454.2C724.8 450.7 717.7 446.9 711.2 444.0C704.8 441.1 697.2 438.5 692.2 437.0C687.3 435.5 683.6 435.6 681.5 435.0C679.4 434.4 680.0 434.0 679.8 433.2C679.5 432.5 679.4 431.4 679.8 430.5C680.1 429.6 679.5 429.3 682.0 428.0C684.5 426.7 690.6 424.8 694.8 422.5C698.9 420.2 700.8 419.5 706.8 414.5C712.7 409.5 724.7 399.3 730.5 392.8C736.3 386.2 738.9 380.7 741.8 375.2C744.6 369.8 746.1 365.4 747.8 360.2C749.4 355.1 750.9 352.0 751.8 344.2C752.6 336.5 753.4 321.8 752.8 313.5C752.1 305.2 750.5 301.1 747.8 294.5C745.0 287.9 739.5 278.9 736.5 274.0C733.5 269.1 733.0 268.8 729.5 265.0C726.0 261.2 722.5 256.7 715.8 251.2ZM378.5 447.0A24.5 24.6 18 1 0 331.7 432.2A24.5 24.6 18 1 0 378.5 447.0ZM388.0 412.7A26.4 26.5 142 1 0 429.9 380.5A26.4 26.5 142 1 0 388.0 412.7ZM442.6 374.7A27.5 27.6 164 1 0 495.5 360.0A27.5 27.6 164 1 0 442.6 374.7ZM507.7 359.2A29.4 33.1 166 1 0 564.8 345.0A29.4 33.1 166 1 0 507.7 359.2ZM589.2 368.2A36.4 42.8 166 1 0 659.9 350.7A36.4 42.8 166 1 0 589.2 368.2Z"/></symbol>
+    <symbol id="footprint" viewBox="0 0 40 52"><circle cx="9" cy="9" r="5"/><circle cx="18.5" cy="5.5" r="4.3"/><circle cx="27" cy="6.5" r="3.6"/><circle cx="33.5" cy="10.5" r="3"/><circle cx="37" cy="16.5" r="2.4"/><path d="M8 18c11-4 30 0 30 15 0 12-9 18-19 18C10 51 4 45 4 35c0-9-1.5-14 4-17z"/></symbol>
+    <symbol id="starshape" viewBox="0 0 100 96"><path d="M50 4c3 0 5 2 6.5 5l10 21 23 3.5c6 1 8 8 3.5 12L76 62l4 23c1 6-5 10-10.5 7.5L50 81 29.5 92.5C24 95 18 91 19 85l4-23L6 45.5C1.5 41 4 34 10 33l23-3.5 10-21C44.5 6 47 4 50 4z" fill="#ffc531"/><path d="M50 14l8.5 18 20 3-14.5 14 3.5 20L50 59.5 32.5 69l3.5-20L21.5 35l20-3z" fill="#ffd864"/></symbol>
+    <symbol id="arrow" viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="sparks" viewBox="0 0 34 30"><path d="M6 14 2 6M15 10l2-9M24 14l8-6" fill="none"/></symbol>
+    <symbol id="i-clap" viewBox="0 0 48 40"><path d="M14 30 6 22a3 3 0 0 1 4-4l6 6M12 20 7 15a3 3 0 0 1 4-4l8 8M15 13l-2-2a3 3 0 0 1 4-4l9 9M22 10a3 3 0 0 1 4-1l8 10c3 5 2 11-3 15s-11 3-15-1l-2-3"/><path d="M33 5l2-4M39 9l4-2M38 16h4"/></symbol>
+    <symbol id="i-game" viewBox="0 0 48 40"><path d="M14 12h20c6 0 10 6 11 14 1 5-4 8-8 4l-4-4H15l-4 4c-4 4-9 1-8-4 1-8 5-14 11-14z"/><path d="M14 18v8M10 22h8"/><circle cx="31" cy="20" r="1"/><circle cx="35" cy="24" r="1"/><path d="M24 7l-1-4M29 8l2-4M19 8l-2-4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 48 40"><path d="M24 36S6 25 6 14a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 11-18 22-18 22z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></symbol>
+  </defs>
+</svg>
+
+
+<script>
+(function(){var h=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches||sessionStorage.getItem('balgurum-intro')){h.classList.add('no-intro')}else{sessionStorage.setItem('balgurum-intro','1')}}catch(e){}})();
+</script>
+<div class="intro" id="intro">
+  <div class="intro-stage">
+    <svg class="intro-logo" viewBox="232 206 572 576" role="img" aria-label="발구름 로고"><path class="sole" d="M715.8 251.2C709.0 245.8 697.0 237.1 688.8 232.2C680.5 227.4 673.0 224.5 666.2 222.0C659.5 219.5 658.2 218.7 648.2 217.0C638.2 215.3 618.4 212.8 606.2 212.0C594.1 211.2 587.6 211.2 575.5 212.0C563.4 212.8 545.7 215.0 533.5 217.0C521.3 219.0 514.0 220.8 502.5 224.0C491.0 227.2 475.7 232.2 464.5 236.0C453.3 239.8 446.0 242.7 435.5 247.0C425.0 251.3 419.4 253.3 401.5 262.0C383.6 270.7 343.4 290.9 328.0 299.2C312.6 307.6 314.6 307.8 309.0 312.2C303.4 316.7 297.9 322.0 294.2 326.0C290.6 330.0 288.7 333.1 287.0 336.5C285.3 339.9 284.5 343.5 284.0 346.5C283.5 349.5 283.5 350.5 284.0 354.2C284.5 358.0 284.3 361.5 287.0 369.2C289.7 377.0 296.3 390.1 300.0 400.5C303.7 410.9 307.2 424.0 309.0 431.5C310.8 439.0 310.8 436.4 311.0 445.5C311.2 454.6 311.0 475.6 310.0 486.2C309.0 496.9 307.5 501.1 305.0 509.2C302.5 517.4 300.2 523.7 295.0 535.2C289.8 546.8 279.4 568.1 273.8 578.8C268.1 589.4 265.0 592.0 261.2 599.0C257.5 606.0 254.2 612.2 251.0 620.5C247.8 628.8 244.0 641.2 242.0 648.5C240.0 655.8 239.5 658.9 239.0 664.5C238.5 670.1 238.2 676.1 239.0 682.2C239.8 688.4 241.3 694.8 244.0 701.2C246.7 707.7 251.2 715.2 255.2 720.8C259.2 726.3 262.2 729.5 268.0 734.5C273.8 739.5 283.2 746.3 290.0 750.5C296.8 754.7 301.8 756.9 308.5 759.8C315.2 762.6 322.7 765.4 330.5 767.8C338.3 770.1 347.8 772.2 355.5 773.8C363.2 775.2 369.0 776.3 376.5 776.8C384.0 777.2 396.9 776.7 400.8 776.2C404.6 775.8 402.4 775.7 399.8 774.2C397.1 772.8 389.5 770.2 385.0 767.8C380.5 765.3 377.3 763.4 373.0 759.8C368.7 756.1 362.3 749.4 359.0 745.8C355.7 742.1 356.2 743.3 353.0 737.8C349.8 732.2 343.3 721.3 339.8 712.2C336.2 703.2 333.4 690.4 331.8 683.2C330.1 676.1 329.9 679.7 329.8 669.2C329.6 658.8 329.8 633.0 330.8 620.5C331.8 608.0 332.1 610.0 335.8 594.5C339.4 579.0 348.9 541.8 352.8 527.5C356.6 513.2 355.9 515.8 358.8 508.5C361.6 501.2 367.0 489.8 370.0 484.0C373.0 478.2 373.2 478.2 377.0 474.0C380.8 469.8 387.7 463.2 393.0 459.0C398.3 454.8 398.8 454.2 409.0 449.0C419.2 443.8 442.4 432.8 454.5 427.8C466.6 422.7 472.3 421.2 481.5 418.8C490.7 416.2 501.7 414.1 509.5 412.8C517.3 411.4 521.5 411.1 528.5 410.8C535.5 410.4 544.3 410.4 551.2 410.8C558.2 411.1 561.9 411.2 570.2 412.8C578.6 414.2 593.3 417.4 601.2 419.8C609.2 422.1 612.5 423.8 617.8 427.0C623.0 430.2 628.6 434.7 632.8 439.0C636.9 443.3 640.4 449.2 642.8 453.0C645.1 456.8 645.3 456.6 647.0 461.5C648.7 466.4 652.0 476.4 653.0 482.5C654.0 488.6 653.7 493.1 653.0 498.2C652.3 503.4 650.9 508.5 649.0 513.2C647.1 518.0 645.1 522.0 641.8 526.8C638.4 531.5 634.1 536.6 628.8 541.8C623.4 546.9 615.6 553.4 609.8 557.8C603.9 562.1 599.7 564.5 593.8 567.8C587.8 571.0 587.6 572.1 574.2 577.0C560.9 581.9 527.5 591.5 513.5 597.0C499.5 602.5 496.2 606.1 490.0 610.2C483.8 614.4 481.4 616.2 476.2 622.0C471.1 627.8 463.0 639.4 459.2 645.0C455.5 650.6 455.5 651.2 454.0 655.5C452.5 659.8 450.7 666.2 450.0 670.5C449.3 674.8 449.5 677.5 450.0 681.2C450.5 685.0 451.8 689.8 453.0 693.2C454.2 696.7 454.9 698.2 457.2 701.8C459.6 705.3 463.5 710.8 467.2 714.8C471.0 718.7 475.5 722.2 480.0 725.5C484.5 728.8 488.6 731.6 494.0 734.5C499.4 737.4 506.1 740.5 512.5 742.8C518.9 745.0 521.4 746.8 532.5 747.8C543.6 748.8 565.5 749.4 579.2 748.8C593.0 748.1 604.9 745.6 615.2 743.8C625.6 741.9 633.4 739.9 641.2 737.8C649.1 735.6 652.7 734.8 662.2 730.8C671.8 726.7 687.3 720.0 698.8 713.5C710.2 707.0 720.5 699.8 730.8 691.5C741.0 683.2 753.4 670.9 760.5 663.8C767.6 656.6 769.7 653.8 773.5 648.8C777.3 643.8 780.8 638.3 783.5 633.8C786.2 629.2 787.7 626.3 789.8 621.2C791.8 616.2 794.2 609.1 795.8 603.2C797.2 597.4 798.2 593.5 798.8 586.2C799.2 579.0 799.1 566.1 798.8 559.5C798.4 552.9 798.2 552.7 796.8 546.5C795.2 540.3 792.3 529.4 789.8 522.5C787.2 515.6 784.5 510.4 781.5 505.0C778.5 499.6 777.3 496.6 771.5 490.0C765.7 483.4 753.5 471.2 746.8 465.2C740.0 459.3 736.7 457.8 730.8 454.2C724.8 450.7 717.7 446.9 711.2 444.0C704.8 441.1 697.2 438.5 692.2 437.0C687.3 435.5 683.6 435.6 681.5 435.0C679.4 434.4 680.0 434.0 679.8 433.2C679.5 432.5 679.4 431.4 679.8 430.5C680.1 429.6 679.5 429.3 682.0 428.0C684.5 426.7 690.6 424.8 694.8 422.5C698.9 420.2 700.8 419.5 706.8 414.5C712.7 409.5 724.7 399.3 730.5 392.8C736.3 386.2 738.9 380.7 741.8 375.2C744.6 369.8 746.1 365.4 747.8 360.2C749.4 355.1 750.9 352.0 751.8 344.2C752.6 336.5 753.4 321.8 752.8 313.5C752.1 305.2 750.5 301.1 747.8 294.5C745.0 287.9 739.5 278.9 736.5 274.0C733.5 269.1 733.0 268.8 729.5 265.0C726.0 261.2 722.5 256.7 715.8 251.2Z" fill="var(--logo)"/><g fill="#fff"><ellipse class="toe" style="--i:0" cx="355.1" cy="439.6" rx="24.5" ry="24.6" transform="rotate(18 355.1 439.6)"/><ellipse class="toe" style="--i:1" cx="408.9" cy="396.6" rx="26.4" ry="26.5" transform="rotate(142 408.9 396.6)"/><ellipse class="toe" style="--i:2" cx="469.1" cy="367.3" rx="27.5" ry="27.6" transform="rotate(164 469.1 367.3)"/><ellipse class="toe" style="--i:3" cx="536.2" cy="352.1" rx="29.4" ry="33.1" transform="rotate(166 536.2 352.1)"/><ellipse class="toe" style="--i:4" cx="624.5" cy="359.5" rx="36.4" ry="42.8" transform="rotate(166 624.5 359.5)"/></g></svg>
+    <div class="intro-ground" aria-hidden="true"></div>
+    <div class="intro-word" aria-label="Balgurum"><span style="--i:0" aria-hidden="true">B</span><span style="--i:1" aria-hidden="true">a</span><span style="--i:2" aria-hidden="true">l</span><span style="--i:3" aria-hidden="true">g</span><span style="--i:4" aria-hidden="true">u</span><span style="--i:5" aria-hidden="true">r</span><span style="--i:6" aria-hidden="true">u</span><span style="--i:7" aria-hidden="true">m</span></div>
+  </div>
+  <button class="intro-skip" type="button" id="intro-skip">건너뛰기</button>
+</div>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#about" aria-label="발구름 홈"><svg aria-hidden="true"><use href="#logo"/></svg><b>Balgurum</b></a>
+    <nav class="menu" aria-label="주요 메뉴">
+      <a href="#about" data-route="about">발구름 소개</a>
+      <a href="#contents" data-route="contents">콘텐츠</a>
+      <a href="#story" data-route="story">브랜드 스토리</a>
+    </nav>
+    <a class="btn" href="#cheer">문의하기</a>
+  </div>
+</header>
+
+<main>
+<!-- ============ ABOUT ============ -->
+<div class="page" id="page-about" data-page="about">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="crumb">HOME / 발구름 소개</p>
+        <p class="eyebrow">About Balgurum</p>
+        <h1>움직임이 놀이가 되고,<br>놀이가 성장이 된다.</h1>
+        <p class="lead">아이들의 자발적인 움직임에서 시작되는 즐거운 성장의 경험을 만듭니다.</p>
+      </div>
+      <button class="art jump-art" type="button" aria-label="발판을 눌러 별까지 점프하기">
+        <span class="cloud" style="width:30%;height:13%;left:4%;top:44%"></span>
+        <span class="cloud" style="width:34%;height:15%;right:-2%;bottom:6%;animation-delay:-3s"></span>
+        <span class="stone" data-stone style="width:30%;left:4%;bottom:12%"></span>
+        <span class="stone" data-stone style="width:24%;left:38%;bottom:30%"></span>
+        <span class="stone" data-stone style="width:21%;left:52%;bottom:46%"></span>
+        <span class="stone" data-stone style="width:18%;left:46%;bottom:61%"></span>
+        <span class="stone" data-stone style="width:15%;left:58%;bottom:74%"></span>
+        <svg class="star" data-star style="left:72%;top:2%" aria-hidden="true"><use href="#starshape"/></svg>
+        <svg class="jumper" data-jumper viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#173f82"/></svg>
+        <span class="score" data-score>별 0개</span>
+        <span class="art-hint">눌러서 점프!</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap brand-intro">
+      <div>
+        <p class="eyebrow">Our Brand</p>
+        <h2>작은 발걸음에서<br>새로운 놀이가 시작됩니다.<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      </div>
+      <div class="copy">
+        <p>발구름은 아이들의 움직임을 즐거운 놀이로 연결하는 XR 어린이 콘텐츠 브랜드입니다.</p>
+        <p>스스로 참여하고, 즐겁게 반복하며, 함께 발견하는 경험을 다양한 콘텐츠로 만들어갑니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="blob">
+      <div class="wrap center">
+        <h2 class="sec-title">발구름이 만드는 네 가지 가치<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+        <div class="values">
+          <article class="value">
+            <div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 40c0-6 4-8 8-9l10-3 6-10c2-3 6-3 8 0l4 8c2 3 6 5 10 6 4 1 6 4 6 8v4H8z"/><path d="M8 44h56v4a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/><path d="M28 30l4 4M33 26l4 4"/></svg></div>
+            <h3>즐거운 움직임</h3><p>움직이는 즐거움이<br>놀이의 시작이 됩니다.</p>
+          </article>
+          <article class="value">
+            <div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 54V30"/><path d="M32 32c0-10-8-16-20-16 0 10 8 16 20 16z"/><path d="M32 28c0-10 8-16 20-16 0 10-8 16-20 16z"/><path d="M18 54h28c0-6-6-10-14-10s-14 4-14 10z"/></svg></div>
+            <h3>건강한 성장</h3><p>놀이 속에서 몸을 움직이며<br>작은 성취를 쌓아갑니다.</p>
+          </article>
+          <article class="value">
+            <div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 40l8-18h17l-3 18z"/><path d="M33 22h17l8 18H36z"/><path d="M6 40v6h22v-6M36 40v6h22v-6"/></svg></div>
+            <h3>몰입형 XR</h3><p>내 움직임이 콘텐츠에 반영되어<br>놀이에 몰입하게 됩니다.</p>
+          </article>
+          <article class="value">
+            <div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M50 26A20 20 0 0 0 16 18"/><path d="M14 38a20 20 0 0 0 34 8"/><path d="M16 8v10h10M48 56V46H38"/></svg></div>
+            <h3>지속 가능한 가치</h3><p>다시 하고 싶은 놀이가<br>꾸준한 참여로 이어집니다.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap center">
+      <h2 class="sec-title"><svg class="sparks" aria-hidden="true" style="transform:scaleX(-1);margin:0 4px 0 0"><use href="#sparks"/></svg>움직이고, 반응하고, 다시 도전해요.</h2>
+      <div class="steps" data-steps>
+        <button type="button" class="stepcard on"><img src="assets/step-1.png" alt="바닥 센서 위에 찍힌 두 발자국"><span class="lbl"><span class="num">01</span>움직임이 입력이 되고</span></button>
+        <button type="button" class="stepcard"><img src="assets/step-2.png" alt="화면 속에서 반짝이는 별"><span class="lbl"><span class="num">02</span>반응이 재미가 되고</span></button>
+        <button type="button" class="stepcard"><img src="assets/step-3.png" alt="별을 향해 이어지는 발자국"><span class="lbl"><span class="num">03</span>반복이 경험으로 쌓입니다</span></button>
+      </div>
+      <p class="steps-note">아이의 행동과 콘텐츠의 반응이 이어지는 놀이 경험을 설계합니다.</p>
+    </div>
+  </section>
+
+  <section class="band tight sky">
+    <div class="wrap">
+      <h2 class="sec-title center">하나의 브랜드, 더 넓어질 놀이 세상<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <div class="feature" style="background:var(--white)">
+        <div>
+          <span class="badge">발구름의 첫 번째 콘텐츠</span>
+          <h3>사고뭉치 특공대</h3>
+          <p style="color:var(--muted)">하늘섬에서 펼쳐지는 신나는 움직임 모험</p>
+          <p style="margin-top:18px"><a class="text-link" href="#contents">콘텐츠 만나보기 <svg width="14" height="14" aria-hidden="true"><use href="#arrow"/></svg></a></p>
+        </div>
+        <div class="img"><img src="assets/world.png" alt="무지개와 폭포가 있는 하늘섬 세계"></div>
+      </div>
+      <p class="center" style="color:var(--muted);margin-top:22px">앞으로 다양한 콘텐츠를 통해 새로운 놀이 경험을 선보입니다.</p>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div class="cta">
+        <div><h3>아이들의 다음 발걸음을 함께 만듭니다.</h3><p>제작 팀 코끼리 · 협력기관 코드리치</p></div>
+        <div class="cta-feet" aria-hidden="true"><svg viewBox="0 0 40 52"><use href="#footprint"/></svg><svg viewBox="0 0 40 52"><use href="#footprint"/></svg></div>
+        <a class="btn" href="#cheer">문의하기 <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CONTENTS ============ -->
+<div class="page" id="page-contents" data-page="contents" hidden>
+  <section class="hero hero-cover">
+    <div class="cover-grid">
+      <div class="cover-text">
+        <p class="eyebrow">Balgurum Contents</p>
+        <h1>움직일수록 즐거워지는<br>발구름의 놀이 세상</h1>
+        <p class="lead">몸으로 참여하고 함께 즐기는 XR 콘텐츠를 만나보세요.</p>
+        <p><button class="btn outline" type="button" data-scroll="contents-feature">콘텐츠 만나보기 <svg aria-hidden="true"><use href="#arrow"/></svg></button></p>
+      </div>
+      <button class="cover-art" type="button" aria-label="아이를 눌러 높이 점프시키기">
+        <img class="cover-base" src="assets/hero-kids.png" alt="바닥 센서 키오스크 앞에서 신나게 뛰노는 아이들" width="1205" height="793">
+        <span class="cover-boy"><img src="assets/hero-boy.png" alt="" width="234" height="492"></span>
+      </button>
+    </div>
+  </section>
+
+  <section class="band tight" id="contents-feature" style="padding-top:56px">
+    <div class="wrap">
+      <div class="feature">
+        <div>
+          <span class="badge">첫 번째 콘텐츠</span>
+          <h3>사고뭉치 특공대<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h3>
+          <p style="color:var(--muted)">하늘섬에서 시작되는 우리들의 움직임 모험</p>
+          <div class="chips">
+            <span class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="9" r="4"/><circle cx="6" cy="11" r="3"/><circle cx="22" cy="11" r="3"/><path d="M7 24c0-4 3-7 7-7s7 3 7 7M1 22c0-3 2-5 5-5M27 22c0-3-2-5-5-5"/></svg>유치원 아동</span>
+            <span class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 4l11 6-11 6L3 10z"/><path d="M3 15l11 6 11-6"/></svg>바닥 센서 XR</span>
+            <span class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="9" cy="9" r="3.5"/><circle cx="19" cy="9" r="3.5"/><path d="M2 23c0-4 3-7 7-7s7 3 7 7M12 23c0-4 3-7 7-7s7 3 7 7"/></svg>최대 5명</span>
+          </div>
+          <p style="color:var(--muted)">아이들의 움직임으로 즐기는 8가지 게임.<br>때로는 함께 힘을 모으고, 때로는 신나게 겨루며 놀이를 이어갑니다.</p>
+          <p style="margin-top:20px"><button class="btn" type="button" data-open="video">콘텐츠 영상 보기 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l8 5-8 5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></p>
+        </div>
+        <div class="img"><img src="assets/world.png" alt="사고뭉치 특공대의 하늘섬 세계"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <p class="eyebrow">Mini Games</p>
+      <h2 class="sec-title" style="margin-top:6px">하나의 세계, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">사고뭉치 특공대 안에서 만나는 다양한 움직임 경험</p>
+      <div class="filter" role="group" aria-label="게임 방식 필터">
+        <button type="button" data-filter="all" aria-pressed="true">전체 <span data-count="all"></span></button>
+        <button type="button" data-filter="coop" aria-pressed="false">협동 <span data-count="coop"></span></button>
+        <button type="button" data-filter="solo" aria-pressed="false">개인 <span data-count="solo"></span></button>
+      </div>
+      <div class="games" data-games>
+        <article class="game" data-type="coop"><div class="thumb"><img src="assets/game-sandwich.png" alt="컨베이어 벨트 위 샌드위치"></div><h3>샌드위치 공장</h3><span class="tag coop">협동</span></article>
+        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-duck.png" alt="태엽 달린 노란 새"></div><h3>태엽새 레이스</h3><span class="tag">개인</span></article>
+        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-fishing.png" alt="연못 위 낚싯대와 물고기"></div><h3>운동 낚시왕</h3><span class="tag">개인</span></article>
+        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-escape.png" alt="무지개 아치와 알록달록 블록 길"></div><h3>탈출 대추격전</h3><span class="tag">개인</span></article>
+        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-skate.png" alt="별이 빛나는 아이스링크"></div><h3>리듬 피겨 점프</h3><span class="tag">개인</span></article>
+        <article class="game" data-type="coop"><div class="thumb"><img src="assets/game-rice.png" alt="절구와 떡메, 알록달록 떡"></div><h3>리듬 떡 만들기</h3><span class="tag coop">협동</span></article>
+        <article class="game" data-type="coop"><div class="thumb"><img src="assets/game-coin.png" alt="숫자 공과 동전"></div><h3>코인볼</h3><span class="tag coop">협동</span></article>
+        <article class="game" data-type="solo"><div class="thumb"><img src="assets/game-snowman.png" alt="얼음 블록 사이의 눈사람"></div><h3>눈사람 탈출 작전</h3><span class="tag">개인</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="blob">
+      <div class="wrap center">
+        <h2 class="sec-title">우리에게 맞는 방식으로 즐겨요<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+        <div class="ways">
+          <article class="value"><div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="20" r="8"/><circle cx="14" cy="24" r="6"/><circle cx="50" cy="24" r="6"/><path d="M16 54c0-9 7-16 16-16s16 7 16 16M2 50c0-7 5-12 12-12M62 50c0-7-5-12-12-12"/></svg></div><h3>함께 또는 각자</h3><p>협동과 경쟁으로<br>다양하게 즐기는 놀이</p></article>
+          <article class="value"><div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 40c0-6 4-8 8-9l10-3 6-10c2-3 6-3 8 0l4 8c2 3 6 5 10 6 4 1 6 4 6 8v4H8z"/><path d="M8 44h56v4a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/></svg></div><h3>운동을 선택하고</h3><p>게임별 세 가지 운동 중<br>한 가지를 골라 참여</p></article>
+          <article class="value"><div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 40l8-18h17l-3 18z"/><path d="M33 22h17l8 18H36z"/><path d="M6 40v6h22v-6M36 40v6h22v-6"/></svg></div><h3>움직임으로 플레이</h3><p>별도 컨트롤러 없이<br>바닥 센서로 직접 참여</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
+      <div>
+        <p class="eyebrow">Next Contents</p>
+        <h2 class="sec-title" style="margin-top:6px">발구름의 다음 이야기도 기대해 주세요.</h2>
+        <p class="sec-sub">새로운 콘텐츠로 놀이의 가능성을 넓혀갑니다.</p>
+      </div>
+      <div class="cta-feet" aria-hidden="true" style="margin:0"><svg viewBox="0 0 40 52"><use href="#footprint"/></svg><svg viewBox="0 0 40 52"><use href="#footprint"/></svg><svg viewBox="0 0 100 96" style="width:52px;transform:translateY(-30px)"><use href="#starshape"/></svg></div>
+    </div>
+    <div class="wrap" style="margin-top:32px">
+      <div class="cta">
+        <h3>아이들과 함께할 새로운 놀이를 찾고 있나요?</h3>
+        <a class="btn" href="#cheer">문의하기 <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ STORY ============ -->
+<div class="page" id="page-story" data-page="story" hidden>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="crumb">HOME / 브랜드 스토리</p>
+        <p class="eyebrow">Brand Story</p>
+        <h1>작은 발걸음이 모여,<br>더 큰 놀이가 되도록.</h1>
+        <p class="lead">아이들의 움직임에서 시작된 발구름의 이야기.</p>
+      </div>
+      <button class="art walk-art" type="button" aria-label="발걸음 다시 걷기">
+        <span class="cloud" style="width:34%;height:15%;left:6%;top:24%"></span>
+        <span class="cloud" style="width:36%;height:16%;right:-2%;bottom:8%;animation-delay:-4s"></span>
+        <span class="foot" style="left:6%;bottom:8%;width:18%"><svg style="transform:rotate(-30deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#3f7fd9"/></svg></span>
+        <span class="foot" style="left:30%;bottom:28%;width:15%"><svg style="transform:rotate(-34deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#4b8ae0"/></svg></span>
+        <span class="foot" style="left:48%;bottom:44%;width:12%"><svg style="transform:rotate(-36deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#5b97e6"/></svg></span>
+        <span class="foot" style="left:62%;bottom:58%;width:10%"><svg style="transform:rotate(-38deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#6aa2ea"/></svg></span>
+        <span class="foot" style="left:72%;bottom:70%;width:8%"><svg style="transform:rotate(-40deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#7aaeee"/></svg></span>
+        <svg class="star" style="left:82%;top:4%;width:14%" aria-hidden="true"><use href="#starshape"/></svg>
+        <span class="art-hint">눌러서 다시 걷기</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <article class="chapter">
+      <div class="ch-text">
+        <p class="eyebrow">01 Our Beginning</p>
+        <h2>아이들이 스스로 움직이고<br>싶어지는 놀이를 생각했습니다.</h2>
+        <p>마음껏 뛰어놀기 어려운 환경에서도 아이들의 움직임은 계속될 수 없을까요?</p>
+        <p>발구름은 실내에서도 즐겁게 몸을 움직이는 놀이 경험을 만들고자 시작했습니다.</p>
+      </div>
+      <div class="ch-img"><img src="assets/story-room.png" alt="바닥 발판과 화면이 있는 밝은 실내 놀이 공간"></div>
+    </article>
+    <div class="trail" aria-hidden="true"><svg viewBox="0 0 40 52"><use href="#footprint"/></svg><svg viewBox="0 0 40 52"><use href="#footprint"/></svg></div>
+  </div>
+
+  <section class="sky" style="margin-top:24px">
+    <div class="wrap">
+      <article class="chapter flip">
+        <div class="ch-text">
+          <p class="eyebrow">02 Our Idea</p>
+          <h2>운동을 시키는 것보다,<br>다시 놀고 싶게 만드는 것.</h2>
+          <p>움직임에 반응하는 콘텐츠와 작은 성취의 즐거움.</p>
+          <p>아이들이 스스로 참여하고 반복하고 싶은 놀이를 고민합니다.</p>
+        </div>
+        <div class="ch-img"><img src="assets/story-idea.png" alt="발자국 발판과 연결된 화면 속 별"></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="trail" aria-hidden="true" style="margin-top:32px"><svg viewBox="0 0 40 52"><use href="#footprint"/></svg><svg viewBox="0 0 40 52"><use href="#footprint"/></svg></div>
+    <article class="chapter">
+      <div class="ch-text">
+        <p class="eyebrow">03 Our Name</p>
+        <h2>발을 구르는 순간,<br>놀이가 시작됩니다.</h2>
+        <p>발구름은 도약을 위해 발을 힘껏 구르는 동작에서 출발한 이름입니다.</p>
+        <p>아이의 작은 움직임이 새로운 경험으로 이어지기를 바라는 마음을 담았습니다.</p>
+      </div>
+      <div class="bi" data-bi>
+        <div class="bi-row">
+          <span class="b" aria-hidden="true">B</span>
+          <span class="op" aria-hidden="true">+</span>
+          <svg class="ft" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#3f7fd9"/></svg>
+          <span class="op" aria-hidden="true">=</span>
+          <svg class="logo" role="img" aria-label="발구름 로고"><use href="#logo"/></svg>
+        </div>
+        <h3>Balgurum의 B + 발자국</h3>
+        <p>아이의 발걸음이 모여 성장을 만들어가는 여정</p><br>
+        <button type="button" class="text-link" data-bi-toggle>로고 합쳐 보기</button>
+      </div>
+    </article>
+    <div class="trail" aria-hidden="true"><svg viewBox="0 0 40 52"><use href="#footprint"/></svg><svg viewBox="0 0 40 52"><use href="#footprint"/></svg></div>
+    <article class="chapter flip">
+      <div class="ch-text">
+        <p class="eyebrow">04 Our Next Step</p>
+        <h2>첫 번째 모험을 넘어,<br>더 다양한 놀이의 세계로.</h2>
+        <p>사고뭉치 특공대는 발구름의 첫 번째 이야기입니다. 앞으로 다양한 콘텐츠를 통해 아이들의 움직임을 새로운 놀이 경험으로 이어갑니다.</p>
+        <p style="margin-top:18px"><a class="text-link" href="#contents">첫 번째 콘텐츠 만나보기 <svg width="14" height="14" aria-hidden="true"><use href="#arrow"/></svg></a></p>
+      </div>
+      <div class="ch-img"><img src="assets/world.png" alt="발판이 이어진 하늘섬 세계"></div>
+    </article>
+  </div>
+
+  <section class="finale">
+    <div class="wrap">
+      <h2>움직임이 놀이가 되고,<br>놀이가 성장이 된다.</h2>
+      <p>아이들의 다음 발걸음에도, 발구름이 함께합니다.</p>
+      <a class="btn" href="#contents">콘텐츠 둘러보기 <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CHEER (easter egg) ============ -->
+<div class="page" id="page-cheer" data-page="cheer" hidden>
+  <section class="cheer">
+    <div class="wrap cheer-wrap">
+      <div class="cheer-head">
+        <h1>구매 대신, <em>응원</em> 한마디 어떠세요?</h1>
+        <p>발구름은 팀 코끼리가 코드리치와 함께 만든 산학 연계 졸업 프로젝트입니다.<br>여러분의 응원이 발구름의 다음 발걸음에 힘이 됩니다.</p>
+      </div>
+      <form class="cheer-card" id="cheer-form" novalidate>
+        <fieldset class="cheer-col">
+          <legend><span class="no">01</span>어떤 응원을 보내고 싶나요?</legend>
+          <label class="pick"><input type="radio" name="cheer-kind" id="kind-cool" value="cool" checked><span class="pick-ico"><svg aria-hidden="true"><use href="#i-clap"/></svg></span><span>멋져요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
+          <label class="pick"><input type="radio" name="cheer-kind" id="kind-play" value="play"><span class="pick-ico"><svg aria-hidden="true"><use href="#i-game"/></svg></span><span>해보고 싶어요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
+          <label class="pick"><input type="radio" name="cheer-kind" id="kind-next" value="next"><span class="pick-ico"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><span>다음 이야기도 기대돼요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
+          <p class="hint">마음을 담아 하나를 골라주세요.</p>
+        </fieldset>
+        <div class="cheer-col">
+          <h2><span class="no">02</span>발구름에게 한마디 남겨주세요.</h2>
+          <label class="f" for="cheer-name">닉네임 <small>(선택)</small></label>
+          <input type="text" id="cheer-name" maxlength="20" autocomplete="nickname" placeholder="비워두면 ‘익명의 응원단’으로 남겨져요.">
+          <label class="f" for="cheer-msg">응원 메시지 <span aria-hidden="true">*</span></label>
+          <textarea id="cheer-msg" maxlength="300" required placeholder="발구름에게 전하고 싶은 응원을 적어주세요."></textarea>
+          <div class="count"><span id="cheer-count">0</span> / 300</div>
+          <label class="check" for="cheer-public"><input type="checkbox" id="cheer-public"><span><b>내 응원을 다른 방문자에게도 공개할게요. (선택)</b><small>체크하지 않으면 제작팀만 볼 수 있어요.</small></span></label>
+          <button class="send" type="submit" id="cheer-send"><svg viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint"/></svg>응원 보내기</button>
+          <p class="status" id="cheer-status" aria-live="polite">남겨주신 응원은 프로젝트 제작팀이 확인합니다.</p>
+        </div>
+        <div class="cheer-done" id="cheer-done" hidden>
+          <div class="done-inner">
+            <svg class="done-logo" aria-hidden="true"><use href="#logo"/></svg>
+            <h2>응원이 도착했어요!</h2>
+            <p id="cheer-done-msg">발구름이 한 걸음 더 힘을 얻었어요.</p>
+            <button class="btn ghost" type="button" id="cheer-again">한 번 더 응원하기</button>
+          </div>
+        </div>
+      </form>
+      <p class="cheer-banner"><svg viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint"/></svg>응원 한마디가 발구름의 다음 한 걸음이 됩니다.</p>
+      <section class="wall" aria-labelledby="wall-title">
+        <div class="wall-head"><h2 id="wall-title">응원 보드</h2><p class="wall-note" id="wall-note">공개로 남겨진 응원이 여기에 모여요.</p></div>
+        <div class="wall-list" id="wall-list" aria-live="polite"><p class="wall-empty">응원을 불러오는 중이에요…</p></div>
+      </section>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>제작 팀 코끼리 · 협력기관 코드리치</p>
+    <p style="margin-top:4px">© 2026 CODEREACH-KOKKIRI. All Rights Reserved.</p>
+  </div>
+</footer>
+
+
+
+<dialog id="dlg-video" aria-labelledby="video-title">
+  <div class="dlg">
+    <button class="close" type="button" data-close aria-label="닫기">×</button>
+    <h2 id="video-title">사고뭉치 특공대 오프닝 영상</h2>
+    <div class="video-ph"><div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l12 7-12 7z"/></svg>[영상 링크를 연결할 자리]</div></div>
+    <p class="note">영상 주소를 알려주시면 이 버튼이 바로 영상으로 연결되도록 바꿀 수 있어요.</p>
+  </div>
+</dialog>
+
+<script>
+/* ===== 응원 저장 설정 (GitHub Pages 등 claude.ai 밖에서 쓸 때) =====
+   Supabase 프로젝트의 Project URL과 anon public key를 넣으면 응원이 저장됩니다.
+   설정 방법은 README.md의 "응원 저장 켜기"를 보세요. 비워두면 저장 기능이 꺼집니다. */
+window.BALGURUM_SUPABASE = {
+  url: 'https://cmkbfuqavwsgvikfptfm.supabase.co',
+  anonKey: 'sb_publishable_MV8AEqJ1xbHRdy-VBgo1zw_aFdzBFMV'   // 공개해도 되는 publishable 키 (secret/service_role 키는 절대 넣지 마세요)
+};
+</script>
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const routes = ['about','contents','story','cheer'];
+
+  /* ---------- Router ---------- */
+  function show(){
+    const r = location.hash.replace('#','');
+    const route = routes.includes(r) ? r : 'about';
+    document.querySelectorAll('[data-page]').forEach(p=>{ p.hidden = p.dataset.page !== route; });
+    document.querySelectorAll('[data-route]').forEach(a=>{
+      if(a.dataset.route===route) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    document.documentElement.dataset.route = route;
+    const titles = {about:'발구름 소개',contents:'콘텐츠',story:'브랜드 스토리',cheer:'응원 남기기'};
+    document.title = '발구름 Balgurum · ' + titles[route];
+    window.scrollTo({top:0, behavior:'auto'});
+    if(route==='story') walk(document.querySelector('.walk-art'));
+  }
+  addEventListener('hashchange', show);
+
+  /* ---------- Dialogs ---------- */
+  document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
+    const d = document.getElementById('dlg-'+b.dataset.open); if(d && d.showModal) d.showModal();
+  }));
+  document.querySelectorAll('dialog').forEach(d=>{
+    d.addEventListener('click',e=>{ if(e.target===d) d.close(); });
+    d.querySelectorAll('[data-close]').forEach(c=>c.addEventListener('click',()=>d.close()));
+  });
+  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+    const el = document.getElementById(b.dataset.copy);
+    const msg = b.closest('.dlg').querySelector('[data-copy-msg]');
+    const done = t=>{ msg.textContent = t; };
+    try{
+      navigator.clipboard.writeText(el.textContent).then(()=>done('복사했어요.'),()=>{ selectText(el); done('주소를 선택해 두었어요. 직접 복사해 주세요.'); });
+    }catch(e){ selectText(el); done('주소를 선택해 두었어요. 직접 복사해 주세요.'); }
+  }));
+  function selectText(el){ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  /* ---------- Hero jump game ---------- */
+  document.querySelectorAll('.jump-art').forEach(art=>{
+    const stones = [...art.querySelectorAll('[data-stone]')];
+    const star = art.querySelector('[data-star]');
+    const jumper = art.querySelector('[data-jumper]');
+    const score = art.querySelector('[data-score]');
+    let busy = false, stars = 0;
+    function pos(el){
+      const a = art.getBoundingClientRect(), b = el.getBoundingClientRect();
+      return { x: b.left - a.left + b.width/2, y: b.top - a.top + b.height*0.3 };
+    }
+    art.addEventListener('click', async ()=>{
+      if(busy) return; busy = true;
+      const w = jumper.getBoundingClientRect().width || art.clientWidth*0.09;
+      const pts = stones.map(pos).concat([pos(star)]);
+      jumper.style.opacity = 1;
+      for(let i=0;i<pts.length;i++){
+        const from = i ? pts[i-1] : {x:pts[0].x, y:pts[0].y-60};
+        const to = pts[i];
+        const mid = {x:(from.x+to.x)/2, y:Math.min(from.y,to.y)-50};
+        const t = p=>`translate(${p.x-w/2}px, ${p.y-w*1.2}px)`;
+        if(reduce){ jumper.style.transform = t(to); }
+        else { await jumper.animate([{transform:t(from)},{transform:t(mid)},{transform:t(to)}],{duration:320,easing:'ease-in-out',fill:'forwards'}).finished; }
+        jumper.style.transform = t(to);
+        if(i < stones.length){ stones[i].classList.remove('hit'); void stones[i].offsetWidth; stones[i].classList.add('hit'); }
+      }
+      star.classList.remove('burst'); void star.getBoundingClientRect(); star.classList.add('burst');
+      stars++; score.textContent = '별 ' + stars + '개';
+      setTimeout(()=>{ jumper.style.opacity = 0; busy = false; }, 500);
+    });
+  });
+
+  /* ---------- Story footprints ---------- */
+  function walk(art){
+    if(!art || reduce) return;
+    art.querySelectorAll('.foot').forEach((f,i)=>{
+      f.classList.remove('step'); void f.offsetWidth;
+      f.style.animationDelay = (i*0.18)+'s'; f.classList.add('step');
+    });
+  }
+  document.querySelectorAll('.walk-art').forEach(a=>a.addEventListener('click',()=>walk(a)));
+
+  /* ---------- Steps highlight ---------- */
+  const steps = [...document.querySelectorAll('[data-steps] .stepcard')];
+  let cur = 0, timer = null;
+  function setStep(i){ cur = i; steps.forEach((s,j)=>s.classList.toggle('on', j===i)); }
+  steps.forEach((s,i)=>{
+    s.addEventListener('click',()=>{ setStep(i); restart(); });
+    s.addEventListener('mouseenter',()=>{ setStep(i); stop(); });
+    s.addEventListener('mouseleave',restart);
+  });
+  function stop(){ clearInterval(timer); }
+  function restart(){ stop(); if(!reduce) timer = setInterval(()=>setStep((cur+1)%steps.length), 2200); }
+  restart();
+
+  /* ---------- Game filter ---------- */
+  const games = [...document.querySelectorAll('[data-games] .game')];
+  const counts = {all:games.length, coop:games.filter(g=>g.dataset.type==='coop').length, solo:games.filter(g=>g.dataset.type==='solo').length};
+  document.querySelectorAll('[data-count]').forEach(c=>c.textContent = counts[c.dataset.count]);
+  document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-filter]').forEach(x=>x.setAttribute('aria-pressed', x===b));
+    const f = b.dataset.filter;
+    games.forEach(g=>{ g.hidden = !(f==='all' || g.dataset.type===f); });
+  }));
+
+  /* ---------- BI merge ---------- */
+  const bi = document.querySelector('[data-bi]');
+  const biBtn = document.querySelector('[data-bi-toggle]');
+  biBtn.addEventListener('click',()=>{
+    const on = bi.classList.toggle('merged');
+    biBtn.textContent = on ? '다시 나눠 보기' : '로고 합쳐 보기';
+  });
+
+
+  /* ---------- Intro ---------- */
+  const root = document.documentElement;
+  const intro = document.getElementById('intro');
+  function replayHero(){ document.querySelectorAll('.page:not([hidden])').forEach(p=>{ p.hidden=true; void p.offsetWidth; p.hidden=false; }); }
+  function endIntro(skip){
+    if(root.classList.contains('no-intro')) return;
+    root.classList.add('no-intro');
+    if(skip) replayHero();
+  }
+  document.getElementById('intro-skip').addEventListener('click',()=>endIntro(true));
+  intro.addEventListener('animationend',e=>{ if(e.target===intro) setTimeout(()=>endIntro(false),1600); });
+
+
+  /* ---------- Contents cover ---------- */
+  document.querySelectorAll('[data-scroll]').forEach(b=>b.addEventListener('click',()=>{
+    const t=document.getElementById(b.dataset.scroll); if(t) t.scrollIntoView({behavior: reduce?'auto':'smooth'});
+  }));
+  const boy=document.querySelector('.cover-boy');
+  document.querySelector('.cover-art').addEventListener('click',()=>{
+    if(reduce) return;
+    boy.classList.remove('big'); void boy.offsetWidth; boy.classList.add('big');
+  });
+  boy.addEventListener('animationend',e=>{ if(e.animationName==='bigHop') boy.classList.remove('big'); });
+  function topState(){ root.classList.toggle('at-top', scrollY < 40); }
+  addEventListener('scroll', topState, {passive:true}); topState();
+
+
+  /* ---------- Logo click replays the intro ---------- */
+  let keepIntro = false;
+  function playIntro(){
+    if(reduce) return;
+    root.classList.remove('no-intro');
+    replayHero();
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+  document.querySelectorAll('a.brand').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault();
+    const onAbout = !location.hash || location.hash==='#about';
+    if(!onAbout){ keepIntro = true; location.hash = 'about'; }
+    playIntro();
+  }));
+
+  /* ---------- Cheer page ---------- */
+  const KINDS = {cool:{label:'멋져요!',icon:'i-clap'}, play:{label:'해보고 싶어요!',icon:'i-game'}, next:{label:'다음 이야기도 기대돼요!',icon:'i-heart'}};
+  const form = document.getElementById('cheer-form');
+  const msg = document.getElementById('cheer-msg');
+  const nameIn = document.getElementById('cheer-name');
+  const pub = document.getElementById('cheer-public');
+  const sendBtn = document.getElementById('cheer-send');
+  const status = document.getElementById('cheer-status');
+  const done = document.getElementById('cheer-done');
+  const count = document.getElementById('cheer-count');
+  const wallList = document.getElementById('wall-list');
+  const wallNote = document.getElementById('wall-note');
+  const defaultStatus = status.textContent;
+  msg.addEventListener('input',()=>{ count.textContent = msg.value.length; msg.classList.remove('bad'); });
+
+  let db = null, me = null, canTeam = false, sending = false;
+  const pools = {wall:[], cheers:[]};
+  const SB = window.BALGURUM_SUPABASE || {};
+  const sbReady = ()=> /^https:\/\/[^/]+$/.test(String(SB.url||'').replace(/\/+$/,'')) && !!SB.anonKey;
+  const sbBase = ()=> String(SB.url).replace(/\/+$/,'') + '/rest/v1/cheers';
+  const sbHeaders = ()=>{ const h = { apikey: SB.anonKey, 'Content-Type': 'application/json' }; if(!/^sb_/.test(SB.anonKey)) h.Authorization = 'Bearer ' + SB.anonKey; return h; };
+  async function sbInsert(item, isPublic){
+    const r = await fetch(sbBase(), { method:'POST', headers:{...sbHeaders(), Prefer:'return=minimal'},
+      body: JSON.stringify({ kind:item.kind, name:item.name || null, msg:item.msg, is_public:!!isPublic }) });
+    if(!r.ok) throw new Error('supabase ' + r.status);
+  }
+  let sbLoaded = false;
+  async function sbLoad(){
+    try{
+      const r = await fetch(sbBase() + '?select=kind,name,msg,created_at&is_public=eq.true&order=created_at.desc&limit=60', { headers: sbHeaders() });
+      if(!r.ok) throw new Error('supabase ' + r.status);
+      const rows = await r.json();
+      pools.wall = (Array.isArray(rows)?rows:[]).map(x=>({ kind:x.kind, name:x.name||'', msg:x.msg, at:Date.parse(x.created_at)||0 }));
+      sbLoaded = true; wallNote.textContent = '공개로 남겨진 응원이 여기에 모여요.';
+      renderWall();
+    }catch(e){
+      if(!sbLoaded){ wallList.replaceChildren(); const el=document.createElement('p'); el.className='wall-empty'; el.textContent='응원 보드를 불러오지 못했어요. 잠시 후 다시 열어 주세요.'; wallList.append(el); }
+    }
+  }
+  function sbWatch(){
+    sbLoad();
+    setInterval(()=>{ if(document.visibilityState==='visible' && root.dataset.route==='cheer') sbLoad(); }, 30000);
+    addEventListener('hashchange',()=>{ if(location.hash==='#cheer') sbLoad(); });
+  }
+  function setStatus(t, err){ status.textContent = t; status.classList.toggle('err', !!err); }
+
+  function card(it){
+    const k = KINDS[it.kind] || KINDS.cool;
+    const el = document.createElement('article'); el.className = 'wall-card';
+    const badge = document.createElement('span'); badge.className = 'k';
+    badge.innerHTML = '<svg viewBox="0 0 48 40" aria-hidden="true"><use href="#'+k.icon+'"/></svg>';
+    badge.append(k.label); el.append(badge);
+    if(it.private){ const pv=document.createElement('span'); pv.className='priv'; pv.textContent='제작팀만 보기'; el.append(pv); }
+    const m = document.createElement('p'); m.className='m'; m.textContent = String(it.msg||''); el.append(m);
+    const by = document.createElement('p'); by.className='by';
+    const n = document.createElement('span'); n.textContent = String(it.name||'').trim() || '익명의 응원단';
+    const d = document.createElement('span'); const dt = new Date(it.at||0);
+    d.textContent = isNaN(dt) ? '' : (dt.getMonth()+1)+'월 '+dt.getDate()+'일';
+    by.append(n,d); el.append(by);
+    return el;
+  }
+  function renderWall(){
+    const items = pools.wall.map(x=>({...x,private:false})).concat(pools.cheers.map(x=>({...x,private:true})))
+      .filter(x=>x && typeof x.msg==='string').sort((a,b)=>(b.at||0)-(a.at||0)).slice(0,60);
+    wallList.replaceChildren();
+    if(!items.length){ const e=document.createElement('p'); e.className='wall-empty'; e.textContent='아직 공개된 응원이 없어요. 첫 번째 응원을 남겨주세요!'; wallList.append(e); return; }
+    items.forEach((it,i)=>{ const c=card(it); c.style.animationDelay=Math.min(i,12)*0.05+'s'; wallList.append(c); });
+  }
+  function flatten(snap){ const out=[]; snap.docs.forEach(d=>{ const v=d.data()||{}; (Array.isArray(v.items)?v.items:[]).forEach(x=>out.push(x)); }); return out; }
+  function watch(coll){
+    let first = true;
+    const timer = setTimeout(()=>{ if(first) wallNote.textContent='응원 보드를 아직 불러오지 못했어요. 잠시 후 다시 열어 주세요.'; }, 10000);
+    db.collection(coll).onSnapshot(snap=>{
+      pools[coll] = flatten(snap);
+      if(!snap.metadata || !snap.metadata.fromCache){ clearTimeout(timer); first=false; }
+      renderWall();
+    }, ()=>{ clearTimeout(timer); wallNote.textContent='응원 보드를 불러오지 못했어요.'; });
+  }
+
+  (async ()=>{
+    try{ db = window.claude && window.claude.use ? await window.claude.use('db') : null; }catch(e){ db = null; }
+    let user = null;
+    try{ user = window.claude && window.claude.use ? await window.claude.use('user') : null; }catch(e){ user = null; }
+    if(!db && sbReady()){ sbWatch(); return; }
+    if(!db){
+      wallList.replaceChildren(); const e=document.createElement('p'); e.className='wall-empty';
+      e.textContent='지금은 응원 보드를 열 수 없어요. 응원 저장이 아직 설정되지 않았어요.'; wallList.append(e);
+      return;
+    }
+    try{ me = user ? await user.id() : null; }catch(e){ me = null; }
+    try{ canTeam = !!(user && await user.canEdit()); }catch(e){ canTeam = false; }
+    if(canTeam) wallNote.textContent = '제작팀 보기: 공개 응원과 제작팀에게만 보낸 응원이 모두 보여요.';
+    watch('wall');
+    if(canTeam) watch('cheers');
+  })();
+
+  function burst(){
+    if(reduce) return;
+    for(let i=0;i<14;i++){
+      const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      s.setAttribute('viewBox','0 0 40 52'); s.setAttribute('class','confetti'); s.setAttribute('aria-hidden','true');
+      s.innerHTML='<use href="#footprint"/>';
+      const a = (i/14)*Math.PI*2, r = 140+Math.random()*120;
+      s.style.setProperty('--x', Math.cos(a)*r+'px'); s.style.setProperty('--y', Math.sin(a)*r+'px');
+      s.style.setProperty('--r', (Math.random()*120-60)+'deg'); s.style.animationDelay = (0.5+Math.random()*0.15)+'s';
+      done.append(s); setTimeout(()=>s.remove(), 2200);
+    }
+  }
+
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    if(sending) return;
+    const text = msg.value.trim();
+    if(!text){ msg.classList.remove('bad'); void msg.offsetWidth; msg.classList.add('bad'); setStatus('응원 메시지를 한 줄 적어주세요.', true); msg.focus(); return; }
+    const useClaude = !!(db && me);
+    if(!useClaude && !sbReady()){ setStatus('지금은 응원을 보낼 수 없어요. 응원 저장이 아직 설정되지 않았어요.', true); return; }
+    const kind = (form.querySelector('input[name="cheer-kind"]:checked')||{}).value || 'cool';
+    const item = { id: Date.now().toString(36)+Math.random().toString(36).slice(2,7), kind, name: nameIn.value.trim().slice(0,20), msg: text.slice(0,300), at: Date.now() };
+    const coll = pub.checked ? 'wall' : 'cheers';
+    sending = true; sendBtn.disabled = true; setStatus('응원을 보내는 중이에요…');
+    try{
+      if(useClaude){
+        const ref = db.doc(coll+'/'+me);
+        const snap = await ref.get();
+        const prev = snap.exists && Array.isArray((snap.data()||{}).items) ? snap.data().items : [];
+        await ref.set({ items: prev.concat([item]).slice(-30) });
+      }else{
+        await sbInsert(item, pub.checked);
+        if(pub.checked) sbLoad();
+      }
+      document.getElementById('cheer-done-msg').textContent = pub.checked ? '응원 보드에 함께 걸어둘게요.' : '제작팀에게 살짝 전해드릴게요.';
+      done.hidden = false; burst();
+      msg.value=''; count.textContent='0'; setStatus(defaultStatus);
+    }catch(err){
+      setStatus('응원을 보내지 못했어요. 연결이 불안정하거나 응원을 남길 권한이 없어요. 잠시 후 다시 시도해 주세요.', true);
+    }finally{ sending = false; sendBtn.disabled = false; }
+  });
+  document.getElementById('cheer-again').addEventListener('click',()=>{ done.hidden = true; msg.focus(); });
+
+
+  /* ---------- Keep covers flush under the header ---------- */
+  const hdr = document.querySelector('.site-header');
+  function setHdr(){ root.style.setProperty('--hdr', Math.ceil(hdr.getBoundingClientRect().height) + 'px'); }
+  setHdr();
+  if(window.ResizeObserver) new ResizeObserver(setHdr).observe(hdr); else addEventListener('resize', setHdr);
+  show();
+  window.addEventListener('hashchange',()=>{ if(keepIntro){ keepIntro=false; return; } endIntro(false); });
+})();
+</script>
+
+</body>
+</html>
