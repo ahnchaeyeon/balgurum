@@ -856,6 +856,15 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .wall-card{border:1px solid var(--line);box-shadow:var(--shadow)}
 .wall-empty{border-color:var(--sky-200);color:var(--muted)}
 
+
+/* Bottom banner + footer on the banner navy */
+.hero-cover.cover-end{background:#0b3071}
+.cover-end .end-art{cursor:default;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%);mask-image:linear-gradient(90deg,transparent,#000 10%)}
+.cover-end .end-art img{width:100%;height:auto;display:block}
+.cover-end .cover-text{padding-block:56px}
+footer{background:#0b3071;color:rgba(255,255,255,.78)}
+footer p{color:rgba(255,255,255,.78)}
+
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1249,10 +1258,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         <p class="lead">새로운 콘텐츠로 놀이의 가능성을 넓혀갑니다.</p>
         <p><a class="btn outline" href="#cheer">문의하기 <svg aria-hidden="true"><use href="#arrow"/></svg></a></p>
       </div>
-      <button class="cover-art" type="button" aria-label="아이를 눌러 높이 점프시키기">
-        <img class="cover-base" src="assets/hero-kids.png" alt="바닥 센서 키오스크 앞에서 신나게 뛰노는 아이들" width="1205" height="793">
-        <span class="cover-boy"><img src="assets/hero-boy.png" alt="" width="234" height="492"></span>
-      </button>
+      <div class="cover-art end-art"><img src="assets/banner-kids.jpg" alt="발구름 키오스크 앞에서 신나게 뛰고 점프하는 아이들" width="1382" height="941"></div>
     </div>
   </section>
 </div>
@@ -2060,11 +2066,13 @@ window.BALGURUM_SUPABASE = {
     const t=document.getElementById(b.dataset.scroll); if(t) t.scrollIntoView({behavior: reduce?'auto':'smooth'});
   }));
   const boy=document.querySelector('.cover-boy');
-  document.querySelector('.cover-art').addEventListener('click',()=>{
-    if(reduce) return;
-    boy.classList.remove('big'); void boy.offsetWidth; boy.classList.add('big');
-  });
-  boy.addEventListener('animationend',e=>{ if(e.animationName==='bigHop') boy.classList.remove('big'); });
+  if(boy){
+    boy.closest('.cover-art').addEventListener('click',()=>{
+      if(reduce) return;
+      boy.classList.remove('big'); void boy.offsetWidth; boy.classList.add('big');
+    });
+    boy.addEventListener('animationend',e=>{ if(e.animationName==='bigHop') boy.classList.remove('big'); });
+  }
   function topState(){ root.classList.toggle('at-top', scrollY < 40); }
   addEventListener('scroll', topState, {passive:true}); topState();
 
