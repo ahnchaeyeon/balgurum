@@ -641,10 +641,10 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .kv{position:relative;background:#2f8ee8}
 .kv-art{position:relative;line-height:0}
 .kv-art img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
-.kv-band{position:relative;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.07) 0 14px,transparent 14px 28px),linear-gradient(180deg,#3096f3,#2a82e0);padding-bottom:56px}
-.kv-info{position:relative;max-width:1240px;margin:-150px auto 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,400px);gap:24px;align-items:end;padding-left:max(20px,4vw,env(safe-area-inset-left,0px));padding-right:max(20px,4vw,env(safe-area-inset-right,0px));z-index:2}
+.kv-band{position:relative;background:linear-gradient(180deg,#3096f3,#2a82e0);padding-bottom:56px}
+.kv-info{position:relative;max-width:1240px;margin:-150px auto 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,400px);gap:24px;align-items:center;padding-left:max(20px,4vw,env(safe-area-inset-left,0px));padding-right:max(20px,4vw,env(safe-area-inset-right,0px));z-index:2}
 .kv-left{display:grid;gap:14px;justify-items:start}
-.kv-ribbon{position:relative;display:flex;align-items:center;gap:10px;margin:0;padding:10px 54px 10px 28px;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.14) 0 8px,transparent 8px 16px),#ffc93c;color:#0b1f45;clip-path:polygon(0 0,100% 0,calc(100% - 26px) 50%,100% 100%,0 100%);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+.kv-ribbon{position:relative;display:flex;align-items:center;gap:10px;margin:0;padding:10px 54px 10px 28px;background:#ffc93c;color:#0b1f45;clip-path:polygon(0 0,100% 0,calc(100% - 26px) 50%,100% 100%,0 100%);box-shadow:0 10px 24px rgba(0,0,0,.2)}
 .kv-ribbon b{font-family:var(--f-latin);font-weight:800;font-size:clamp(36px,5vw,64px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .kv-day{display:grid;place-items:center;width:clamp(36px,4vw,50px);aspect-ratio:1;border-radius:50%;background:#0b1f45;color:#ffc93c;font-weight:900;font-size:clamp(16px,1.8vw,22px)}
 .kv-open{font-weight:900;font-size:clamp(20px,2.4vw,32px)}
@@ -872,13 +872,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <div class="kv-info">
         <div class="kv-left">
           <p class="kv-ribbon"><b>2026.11.17</b><span class="kv-day" aria-label="화요일">화</span><span class="kv-open">오픈</span></p>
-          <div class="kv-news">
-            <h2>NEWS</h2>
-            <ul>
-              <li><time datetime="2026-11-11">2026.11.11</time><span>「게임팩 8종」, 「캐릭터 삼면도」, 「응원 남기기」를 공개했습니다.</span></li>
-              <li><time datetime="2026-11-10">2026.11.10</time><span>사고뭉치 특공대 사이트를 공개했습니다.</span></li>
-            </ul>
-          </div>
         </div>
         <button type="button" class="kv-movie" data-kv-movie data-src="" aria-label="게임 감상하기 영상 크게 보기">
           <span class="kv-tab" aria-hidden="true"><i>✦</i><em></em>게임 감상하기<em></em><i>✦</i></span>
