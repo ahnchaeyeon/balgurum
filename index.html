@@ -476,11 +476,17 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .fs-step.on>*{opacity:1;transform:none}
 .fs-kicker{font-family:var(--f-latin);font-weight:700;letter-spacing:.14em;font-size:14px;color:#ffd864}
 .fs-line{font-size:clamp(22px,2.9vw,38px);font-weight:800;line-height:1.6;text-shadow:0 2px 18px rgba(0,0,0,.55);max-width:22em;color:#fff}
-.fs-dots{position:absolute;top:0;right:max(18px,env(safe-area-inset-right,0px));height:100%;z-index:3;pointer-events:none}
-.fs-dots-in{position:sticky;top:calc(50vh - 90px);display:grid;gap:22px;padding:12px 6px;pointer-events:auto}
-.fs-dots button{width:22px;height:22px;border:0;padding:0;background:transparent;display:grid;place-items:center;cursor:pointer}
-.fs-dots button::before{content:"";width:12px;height:12px;transform:rotate(45deg);background:rgba(255,255,255,.55);border:2px solid transparent;transition:all .3s}
-.fs-dots button[aria-current="true"]::before{width:16px;height:16px;background:#ffd864;border-color:#fff;box-shadow:0 0 0 4px rgba(255,216,100,.35)}
+.fs-dots{position:absolute;top:0;right:max(14px,env(safe-area-inset-right,0px));height:100%;z-index:3;pointer-events:none}
+.fs-dots-in{position:sticky;top:calc(50vh - 110px);display:grid;gap:26px;padding:12px 8px;pointer-events:auto}
+.fs-track,.fs-fill{position:absolute;left:50%;width:6px;margin-left:-3px;border-radius:6px;pointer-events:none}
+.fs-track{background:rgba(255,255,255,.3);box-shadow:0 0 4px rgba(0,0,0,.35)}
+.fs-fill{background:linear-gradient(180deg,#ffe8a3,#ffd864);box-shadow:0 0 10px rgba(255,216,100,.6);height:0}
+.fs-dots button{position:relative;z-index:1;width:30px;height:30px;border:0;padding:0;background:transparent;display:grid;place-items:center;cursor:pointer;transition:filter .3s;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+.fs-dots button::before{content:"";width:20px;height:20px;background:#b39a5e;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);transition:width .3s,height .3s,background .3s,transform .3s}
+.fs-dots button.past::before{background:#ffd864}
+.fs-dots button[aria-current="true"]{filter:drop-shadow(0 0 6px rgba(255,216,100,.9)) drop-shadow(0 0 2px #fff)}
+.fs-dots button[aria-current="true"]::before{width:30px;height:30px;background:#ffe27a;transform:rotate(-8deg)}
+.fs-dots button:hover::before{background:#ffe9a8}
 
 /* Triangle mosaic */
 .mosaic{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#0b1f45}
@@ -1370,13 +1376,28 @@ window.BALGURUM_SUPABASE = {
   if(fs){
     const fsSteps=[...fs.querySelectorAll('[data-fs-step]')], fsImgs=[...fs.querySelectorAll('[data-fs-img]')];
     const nav=fs.querySelector('.fs-dots'); const inner=document.createElement('div'); inner.className='fs-dots-in'; nav.append(inner);
+    const track=document.createElement('span'); track.className='fs-track'; const fill=document.createElement('span'); fill.className='fs-fill'; inner.append(track,fill);
     const btns=fsSteps.map((st,i)=>{ const b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label',(i+1)+'번째 장면: '+st.dataset.label); if(!i) b.setAttribute('aria-current','true');
       b.addEventListener('click',()=>{ const y=st.getBoundingClientRect().top+scrollY; scrollTo({top:y, behavior: reduce?'auto':'smooth'}); }); inner.append(b); return b; });
-    const setFs=i=>{ fsSteps.forEach((x,j)=>x.classList.toggle('on',j===i)); fsImgs.forEach((x,j)=>x.classList.toggle('on',j===i)); btns.forEach((x,j)=>j===i?x.setAttribute('aria-current','true'):x.removeAttribute('aria-current')); };
+    const setFs=i=>{ fsSteps.forEach((x,j)=>x.classList.toggle('on',j===i)); fsImgs.forEach((x,j)=>x.classList.toggle('on',j===i)); btns.forEach((x,j)=>{ j===i?x.setAttribute('aria-current','true'):x.removeAttribute('aria-current'); x.classList.toggle('past',j<i); }); };
     if('IntersectionObserver' in window){
       const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) setFs(fsSteps.indexOf(e.target)); }),{rootMargin:'-48% 0px -48% 0px'});
       fsSteps.forEach(x=>io.observe(x));
     }
+    /* live progress line between the stars */
+    let fsTick=false;
+    function fsProgress(){
+      fsTick=false;
+      const first=btns[0], last=btns[btns.length-1]; if(!first.offsetHeight) return;
+      const y0=first.offsetTop+first.offsetHeight/2, y1=last.offsetTop+last.offsetHeight/2;
+      track.style.top=y0+'px'; track.style.height=(y1-y0)+'px'; fill.style.top=y0+'px';
+      const r=fs.getBoundingClientRect(), total=fs.offsetHeight-innerHeight;
+      const p=Math.min(1,Math.max(0,-r.top/(total||1)));
+      fill.style.height=(p*(y1-y0))+'px';
+    }
+    addEventListener('scroll',()=>{ if(!fsTick){ fsTick=true; requestAnimationFrame(fsProgress); } },{passive:true});
+    addEventListener('resize',fsProgress); addEventListener('hashchange',()=>setTimeout(fsProgress,60));
+    fsProgress();
   }
 
   /* ---------- Triangle mosaic ---------- */
