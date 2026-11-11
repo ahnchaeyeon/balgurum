@@ -28,6 +28,7 @@
   --wrap: 1160px;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--white);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;word-break:keep-all;overflow-wrap:break-word}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:rgba(255,255,255,.96)}
@@ -505,6 +506,23 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
   .mosaic-shade{background:linear-gradient(180deg,rgba(11,31,69,0) 25%,rgba(11,31,69,.88) 60%,#0b1f45 100%)}
 }
 
+
+/* Full-screen video */
+.fv{position:relative;height:100vh;height:100svh;min-height:420px;background:#0b1f45;overflow:hidden;display:grid;place-items:center}
+.fv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0b1f45}
+.fv:fullscreen .fv-video,.fv:-webkit-full-screen .fv-video{object-fit:contain;background:#000}
+.fv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,69,.55),rgba(11,31,69,.15) 30%,rgba(11,31,69,.15) 70%,rgba(11,31,69,.7));pointer-events:none}
+.fv.has-video .fv-shade{background:linear-gradient(180deg,rgba(11,31,69,.4),transparent 18%,transparent 80%,rgba(11,31,69,.5))}
+.fv-empty{position:relative;z-index:2;display:grid;justify-items:center;gap:12px;color:#fff;text-align:center;padding:24px}
+.fv-empty svg{width:92px;height:92px}
+.fv-empty svg circle{fill:rgba(255,255,255,.18);stroke:#fff;stroke-width:1.2}
+.fv-empty svg path{fill:#fff}
+.fv-empty p{font-size:clamp(16px,1.8vw,22px);font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.5);color:#fff}
+.fv-ctrl{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:3;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.fv-ctrl[hidden]{display:none}
+.fv-ctrl button{border:0;border-radius:999px;background:rgba(255,255,255,.92);color:var(--blue-deep);font-weight:800;font-size:14px;padding:10px 16px;min-height:44px;min-width:44px;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.fv-ctrl button:hover{background:#fff}
+
 /* Horizontal scroll games */
 .hs{position:relative;background:linear-gradient(180deg,#0b1f45,#14366f);color:#fff}
 .hs-pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:22px;padding-top:var(--hdr,72px);padding-bottom:28px;overflow:hidden}
@@ -771,6 +789,21 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
   </section>
 
+  <!-- ===== 영상 (전체 화면) ===== -->
+  <section class="fv" aria-label="사고뭉치 특공대 영상" data-fv data-src="">
+    <video class="fv-video" data-fv-video muted loop playsinline preload="none" poster="assets/play-6.jpg"></video>
+    <div class="fv-shade" aria-hidden="true"></div>
+    <div class="fv-empty" data-fv-empty>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M10 8l6 4-6 4z"/></svg>
+      <p>[사고뭉치 특공대 영상이 들어갈 자리]</p>
+    </div>
+    <div class="fv-ctrl" data-fv-ctrl hidden>
+      <button type="button" data-fv-play aria-label="일시정지">❚❚</button>
+      <button type="button" data-fv-sound aria-label="소리 켜기">소리 켜기</button>
+      <button type="button" data-fv-full aria-label="전체 화면으로 보기">전체 화면</button>
+    </div>
+  </section>
+
   <!-- ===== 게임팩 8종 (가로 스크롤) ===== -->
   <section class="hs" aria-labelledby="hs-title" data-hs>
     <div class="hs-pin">
@@ -788,49 +821,49 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
             <img src="assets/play-1.jpg" alt="태엽새 레이스 플레이 화면">
             <span class="hs-key" aria-hidden="true">날려라</span>
             <div class="hs-top"><span class="g-no">GAME 01</span><span class="tag">개인전</span></div>
-            <div class="hs-cap"><h3>태엽새 레이스</h3><p>풀려버린 태엽, 운동으로 다시 감아라.<br>운동 1회에 3m, 가장 멀리 날린 사람이 우승!</p><button type="button" class="hs-more" data-game="0">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>태엽새 레이스</h3><p>풀려버린 태엽, 운동으로 다시 감아라.<br>운동 1회에 3m, 가장 멀리 날린 사람이 우승!</p></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-2.jpg" alt="샌드위치 공장 플레이 화면">
             <span class="hs-key" aria-hidden="true">포장</span>
             <div class="hs-top"><span class="g-no">GAME 02</span><span class="tag">개인전</span></div>
-            <div class="hs-cap"><h3>샌드위치 공장</h3><p>멈춰버린 공장, 박자에 맞춰 깃발을 꽂아라.<br>판정 구간에 딱 맞게 움직이면 포장 성공!</p><button type="button" class="hs-more" data-game="1">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>샌드위치 공장</h3><p>멈춰버린 공장, 박자에 맞춰 깃발을 꽂아라.<br>판정 구간에 딱 맞게 움직이면 포장 성공!</p></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-3.jpg" alt="알쏭달쏭 코인볼 플레이 화면">
             <span class="hs-key" aria-hidden="true">정답</span>
             <div class="hs-top"><span class="g-no">GAME 03</span><span class="tag">개인전</span></div>
-            <div class="hs-cap"><h3>알쏭달쏭 코인볼</h3><p>뒤섞인 가챠 숫자, 정답만큼 움직여 코인을 넣어라.<br>덧셈·뺄셈부터 사칙연산까지 골라서!</p><button type="button" class="hs-more" data-game="2">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>알쏭달쏭 코인볼</h3><p>뒤섞인 가챠 숫자, 정답만큼 움직여 코인을 넣어라.<br>덧셈·뺄셈부터 사칙연산까지 골라서!</p></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-4.jpg" alt="운동 낚시왕 플레이 화면">
             <span class="hs-key" aria-hidden="true">낚시</span>
             <div class="hs-top"><span class="g-no">GAME 04</span><span class="tag">개인전</span></div>
-            <div class="hs-cap"><h3>운동 낚시왕</h3><p>난장판이 된 낚시터, 빠르게 움직여 물고기를 낚아라.<br>빨리 잡을수록 보너스 점수까지!</p><button type="button" class="hs-more" data-game="3">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>운동 낚시왕</h3><p>난장판이 된 낚시터, 빠르게 움직여 물고기를 낚아라.<br>빨리 잡을수록 보너스 점수까지!</p></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-5.jpg" alt="쿵쿵 떡방아 플레이 화면">
             <span class="hs-key" aria-hidden="true">쿵쿵</span>
             <div class="hs-top"><span class="g-no">GAME 05</span><span class="tag coop">협동</span></div>
-            <div class="hs-cap"><h3>쿵쿵 떡방아</h3><p>엉망이 된 잔치 떡방아, 엘로의 박자에 맞춰 다 함께.<br>완성한 떡 개수만큼 팀 별을 모아요.</p><button type="button" class="hs-more" data-game="4">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>쿵쿵 떡방아</h3><p>엉망이 된 잔치 떡방아, 엘로의 박자에 맞춰 다 함께.<br>완성한 떡 개수만큼 팀 별을 모아요.</p></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-6.jpg" alt="탈출 대추격전 플레이 화면">
             <span class="hs-key" aria-hidden="true">탈출</span>
             <div class="hs-top"><span class="g-no">GAME 06</span><span class="tag coop">협동</span></div>
-            <div class="hs-cap"><h3>탈출 대추격전</h3><p>깨어난 거대한 새, 모두의 힘으로 눈 터널을 빠져나가라.<br>얼음 장애물도 함께 부숴요.</p><button type="button" class="hs-more" data-game="5">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>탈출 대추격전</h3><p>깨어난 거대한 새, 모두의 힘으로 눈 터널을 빠져나가라.<br>얼음 장애물도 함께 부숴요.</p></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-7.jpg" alt="리듬 피겨 점프 플레이 화면">
             <span class="hs-key" aria-hidden="true">점프</span>
             <div class="hs-top"><span class="g-no">GAME 07</span><span class="tag">개인전</span></div>
-            <div class="hs-cap"><h3>리듬 피겨 점프!</h3><p>뒤섞인 공연 표시, 리듬 노트에 맞춰 뛰어라.<br>피버 타임까지 끝까지 완성!</p><button type="button" class="hs-more" data-game="6">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>리듬 피겨 점프!</h3><p>뒤섞인 공연 표시, 리듬 노트에 맞춰 뛰어라.<br>피버 타임까지 끝까지 완성!</p></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면">
             <span class="hs-key" aria-hidden="true">깨기</span>
             <div class="hs-top"><span class="g-no">GAME 08</span><span class="tag">개인전</span></div>
-            <div class="hs-cap"><h3>눈사람 탈출 작전</h3><p>눈더미에 갇힌 특공대, 빠르게 움직여 눈을 깨라.<br>세 단계를 부수면 탈출 성공!</p><button type="button" class="hs-more" data-game="7">자세히 보기 →</button></div>
+            <div class="hs-cap"><h3>눈사람 탈출 작전</h3><p>눈더미에 갇힌 특공대, 빠르게 움직여 눈을 깨라.<br>세 단계를 부수면 탈출 성공!</p></div>
           </article>
         </div>
       </div>
@@ -1306,6 +1339,34 @@ window.BALGURUM_SUPABASE = {
         if(e.isIntersecting){ if(!tris.length) build(); mo.classList.remove('play'); void mo.offsetWidth; mo.classList.add('play'); clearInterval(timer); timer=setInterval(swap,2600); }
         else { clearInterval(timer); }
       }),{threshold:.35}).observe(mo);
+    }
+  }
+
+
+  /* ---------- Full-screen video ---------- */
+  const fv=document.querySelector('[data-fv]');
+  if(fv){
+    const v=fv.querySelector('[data-fv-video]'), src=(fv.dataset.src||'').trim();
+    if(src){
+      v.src=src; v.preload='metadata'; fv.classList.add('has-video');
+      fv.querySelector('[data-fv-empty]').hidden=true; fv.querySelector('[data-fv-ctrl]').hidden=false;
+      const pb=fv.querySelector('[data-fv-play]'), sb=fv.querySelector('[data-fv-sound]'), fb=fv.querySelector('[data-fv-full]');
+      let userPaused=false;
+      const sync=()=>{ pb.textContent=v.paused?'▶':'❚❚'; pb.setAttribute('aria-label',v.paused?'재생':'일시정지'); sb.textContent=v.muted?'소리 켜기':'소리 끄기'; sb.setAttribute('aria-label',sb.textContent); };
+      v.addEventListener('play',sync); v.addEventListener('pause',sync); v.addEventListener('volumechange',sync);
+      pb.addEventListener('click',()=>{ if(v.paused){ userPaused=false; v.play().catch(()=>{}); } else { userPaused=true; v.pause(); } });
+      sb.addEventListener('click',()=>{ v.muted=!v.muted; if(!v.muted && v.paused) v.play().catch(()=>{}); });
+      fb.addEventListener('click',()=>{
+        const el=fv;
+        if(document.fullscreenElement){ document.exitFullscreen().catch(()=>{}); return; }
+        if(el.requestFullscreen) el.requestFullscreen().catch(()=>{ if(v.webkitEnterFullscreen) v.webkitEnterFullscreen(); });
+        else if(v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+      });
+      document.addEventListener('fullscreenchange',()=>{ fb.textContent=document.fullscreenElement?'전체 화면 닫기':'전체 화면'; });
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ if(!userPaused && !reduce) v.play().catch(()=>{}); } else v.pause(); }),{threshold:.4}).observe(fv);
+      }
+      sync();
     }
   }
 
