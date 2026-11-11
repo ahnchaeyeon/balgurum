@@ -671,7 +671,7 @@ html[data-route="contents"].at-top body::before{background:#0b1f45}
   .kv-news li{grid-template-columns:1fr;gap:0}
 }
 
-.kv-art .kv-movie{position:absolute;right:max(2%,28px);bottom:16%;width:min(20%,380px);min-width:250px;padding:46px 10px 10px;animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
+.kv-art .kv-movie{position:absolute;right:max(6%,40px);bottom:6%;width:min(20%,380px);min-width:250px;padding:46px 10px 10px;animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
 .kv-art .kv-movie:hover{transform:translateY(-4px)}
 @media (max-width:860px){
   .kv{padding-bottom:40px;padding-top:var(--hdr,108px)}
@@ -875,7 +875,9 @@ html[data-route="contents"] footer p,html[data-route="games"] footer p{color:rgb
 .sg-flow-band{padding-block:160px}
 .hs{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:80px 40px}
 .hs-pin{padding-top:60px}
-.hero-cover.cover-end{min-height:100vh;min-height:100svh;display:flex;align-items:center}
+.hero-cover.cover-end{display:flex;align-items:center}
+.cover-end .cover-text{padding-block:24px 8px}
+html[data-route="contents"] footer,html[data-route="games"] footer{padding-top:8px}
 .hero-cover.cover-end .cover-grid{width:100%}
 .hs-cta{padding-bottom:200px}
 
