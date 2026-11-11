@@ -694,6 +694,25 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .mdlg-empty p{color:#fff;font-size:20px;font-weight:800}
 .mdlg-close{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));z-index:2;width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#0b1f45;font-size:28px;line-height:1}
 
+
+/* Package intro (on the same navy as the game packs) */
+.pk{position:relative;overflow:hidden;background:#0b1f45;color:#fff;padding-block:96px 40px}
+.pk-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.pk-title{color:#fff;font-size:clamp(28px,4vw,50px);font-weight:900;line-height:1.3;letter-spacing:-.02em}
+.pk-title em{font-style:normal;color:#8ff07a}
+.pk-lead{color:rgba(255,255,255,.88);font-size:clamp(15px,1.5vw,18px);margin-top:18px}
+.pk-stats{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.pk-stats li{position:relative;display:grid;justify-items:center;align-content:center;gap:2px;text-align:center;min-height:200px;padding:42px 14px 26px;color:#0b1f45;background:radial-gradient(circle at 30% 30%,#fff,#dfeafc 70%);border-radius:44% 56% 48% 52%/60% 54% 46% 40%;box-shadow:0 18px 30px rgba(0,0,0,.25)}
+.pk-stats li::before,.pk-stats li::after{content:"";position:absolute;background:#eaf1fd;border-radius:50%;z-index:-1}
+.pk-stats li::before{width:46%;aspect-ratio:1;left:10%;top:-12%}
+.pk-stats li::after{width:36%;aspect-ratio:1;right:14%;top:-6%}
+.pk-stats svg{width:46px;height:46px;fill:none;stroke:var(--blue-600);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:8px}
+.pk-stats b{font-family:var(--f-display);font-size:clamp(26px,2.8vw,36px);font-weight:900;line-height:1.1}
+.pk-stats span{font-size:15px;font-weight:700;color:#33425a;display:grid}
+.pk-stats small{font-size:12px;font-weight:600}
+.pk-island{position:absolute;right:-4%;top:20px;width:min(34vw,440px);opacity:.9;z-index:1;-webkit-mask-image:radial-gradient(ellipse 60% 60% at 60% 45%,#000 55%,transparent 75%);mask-image:radial-gradient(ellipse 60% 60% at 60% 45%,#000 55%,transparent 75%)}
+@media (max-width:860px){.pk-stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}.pk-island{opacity:.35;width:60vw}.pk-stats li{min-height:170px}}
+
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -928,6 +947,21 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     <div class="mosaic-crew"><img src="assets/crew.webp" alt="에디스, 푸딩, 키리, 알토, 핌피, 토니토니, 엘로가 나란히 서 있는 모습" width="1500" height="604"></div>
   </section>
 
+  <!-- ===== 사고뭉치 특공대 소개 ===== -->
+  <section class="pk" id="contents-feature" aria-labelledby="pk-title">
+    <div class="pk-inner">
+      <h2 class="pk-title" id="pk-title">하늘섬의 사고를<br><em>움직임</em>으로 해결하는 XR 게임 패키지</h2>
+      <p class="pk-lead">사고뭉치 특공대가 벌인 다양한 소동을<br>아이들의 움직임으로 해결하는 실내 XR 체험·놀이 콘텐츠입니다.</p>
+      <ul class="pk-stats">
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 16h20c6 0 9 6 10 14 1 5-4 7-7 4l-4-4H15l-4 4c-3 3-8 1-7-4 1-8 4-14 10-14z"/><path d="M15 21v8M11 25h8"/><circle cx="31" cy="23" r="1.8"/><circle cx="35" cy="27" r="1.8"/></svg><b>8개</b><span>미니게임</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="29" cy="8" r="4"/><path d="M18 44l6-12 6 4v8"/><path d="M12 24l6-8 8 2 6 8 6 2"/><path d="M4 30h8"/></svg><b>18가지</b><span>운동 동작</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="14" r="6"/><circle cx="10" cy="18" r="4.5"/><circle cx="38" cy="18" r="4.5"/><path d="M12 40c0-7 5-12 12-12s12 5 12 12M2 37c0-5 3-9 8-9M46 37c0-5-3-9-8-9"/></svg><b>1–5명</b><span>동시 플레이</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l18 9-18 9L6 15z"/><path d="M6 24l18 9 18-9"/><path d="M6 33l18 9 18-9"/></svg><b>2가지</b><span>플레이 모드<small>(개인전 · 협동전)</small></span></li>
+      </ul>
+    </div>
+    <img class="pk-island" src="assets/world.png" alt="" aria-hidden="true">
+  </section>
+
   <!-- ===== 게임팩 8종 (가로 스크롤) ===== -->
   <section class="hs" aria-labelledby="hs-title" data-hs>
     <div class="hs-pin">
@@ -1003,26 +1037,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
   <div class="hs-cta">
     <button type="button" class="pill-cta" data-scroll="all-games">「미니게임」 안내로<span class="pill-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></button>
   </div>
-
-  <!-- ===== 사고뭉치 특공대 소개 ===== -->
-  <section class="band sg-intro" id="contents-feature">
-    <div class="wrap">
-      <div class="sg-intro-grid">
-        <div class="sg-intro-copy">
-          <span class="badge">발구름의 첫 번째 콘텐츠</span>
-          <h2 class="sg-title">사고뭉치 특공대<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-          <p class="sg-lead">특공대가 가는 곳마다 사고가 터져요. 태엽새의 태엽을 풀어버리고, 낚시터를 물고기 난장판으로 만들고, 잠든 거대한 새까지 깨워버리죠.</p>
-          <p class="sg-lead"><b>수습은 아이들의 몸으로!</b> 바닥 센서 위에서 운동 동작을 하면 그 움직임이 그대로 게임이 되어 사고를 해결해요.</p>
-        </div>
-        <dl class="sg-stats">
-          <div><dt>게임팩</dt><dd>8<small>개</small></dd></div>
-          <div><dt>운동 동작</dt><dd>18<small>가지</small></dd></div>
-          <div><dt>함께 플레이</dt><dd>1~5<small>명</small></dd></div>
-          <div><dt>협동 · 개인전</dt><dd>2<small>·</small>6</dd></div>
-        </dl>
-      </div>
-    </div>
-  </section>
 
   <!-- ===== 플레이 흐름 ===== -->
   <section class="band sg-flow-band" aria-labelledby="sg-flow-title">
