@@ -578,7 +578,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 
 #all-games{scroll-margin-top:var(--hdr,72px)}
 .hs-cta{background:#14366f;display:flex;justify-content:center;padding-block:8px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.pill-cta{position:relative;display:flex;align-items:center;justify-content:center;gap:24px;width:min(620px,100%);min-height:96px;padding:18px 104px 18px 48px;border:0;border-radius:999px;background:var(--blue-600);color:#fff;font-family:var(--f-display);font-weight:900;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.01em;box-shadow:0 0 0 6px rgba(47,111,201,.25),0 14px 34px rgba(0,0,0,.35);transition:transform .2s,background .2s}
+.pill-cta{text-decoration:none;position:relative;display:flex;align-items:center;justify-content:center;gap:24px;width:min(620px,100%);min-height:96px;padding:18px 104px 18px 48px;border:0;border-radius:999px;background:var(--blue-600);color:#fff;font-family:var(--f-display);font-weight:900;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.01em;box-shadow:0 0 0 6px rgba(47,111,201,.25),0 14px 34px rgba(0,0,0,.35);transition:transform .2s,background .2s}
 .pill-cta:hover{background:#3b7fe0;transform:translateY(-3px)}
 .pill-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:60px;height:60px;border-radius:50%;background:var(--star);display:grid;place-items:center;transition:transform .2s}
 .pill-arrow svg{width:30px;height:30px;fill:none;stroke:var(--blue-deep);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
@@ -734,6 +734,68 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .gx-body h3{font-size:clamp(24px,2.6vw,32px);font-weight:900}
 .gx[hidden]{display:none!important}
 @media (max-width:860px){.gx{grid-template-columns:1fr}.gx.flip .gx-media{order:0}.gx-body{padding:22px 20px}}
+
+
+/* Mini-game guide (Jamboree-style) */
+.mg-wrap{max-width:1100px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mg-hero{position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 110%,#fff 0 30%,transparent 60%),linear-gradient(180deg,#5fb4f6,#a9dafc 70%,#e6f5ff);text-align:center;padding-top:28px}
+.mg-hero-in{position:relative;z-index:2;padding-inline:20px}
+.mg-hero .gp-back{color:#0b1f45;opacity:.75;display:block;text-align:left;max-width:1100px;margin:0 auto 6px}
+.mg-hero h1{font-size:clamp(40px,7vw,92px);font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.1;text-shadow:0 5px 0 #1d6fc4,0 10px 24px rgba(11,31,69,.25)}
+.mg-num{font-family:var(--f-latin);font-size:1.25em;color:#ffd84a;text-shadow:0 5px 0 #c98a00,0 10px 24px rgba(11,31,69,.25)}
+.mg-hero h1 em{font-style:normal}
+.mg-ribbon{display:inline-block;margin-top:16px;background:#fff;color:#1d6fc4;font-weight:800;font-size:clamp(15px,1.8vw,20px);padding:10px 36px;border-radius:999px;box-shadow:0 6px 0 #c9e2f8}
+.mg-crew{position:relative;z-index:1;display:block;width:min(820px,92%);margin:18px auto -6px;height:auto}
+.mg-find{background:#fff6d6}
+.mg-band{background:#ffd84a;text-align:center;padding:22px 16px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.06)}
+.mg-band h2{font-size:clamp(22px,3vw,34px);font-weight:900;color:#0b1f45}
+.mg-filter{justify-content:center;margin:28px 0 8px}
+.mg-list{display:grid;gap:28px;padding-block:20px 72px}
+.mg-card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 26px rgba(11,31,69,.12);scroll-margin-top:calc(var(--hdr,72px) + 16px);border:3px solid var(--t)}
+.mg-card[hidden]{display:none!important}
+.mg-hook{margin:0;background:var(--t);color:var(--c);font-weight:800;font-size:15px;padding:10px 22px;display:flex;align-items:center;gap:12px}
+.mg-hook span{font-family:var(--f-latin);font-size:12px;letter-spacing:.08em;background:var(--c);color:#fff;border-radius:999px;padding:3px 10px}
+.mg-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;padding:22px}
+.mg-shot img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;display:block}
+.mg-text{display:grid;gap:12px;align-content:start}
+.mg-text h3{font-size:clamp(28px,3.4vw,42px);font-weight:900;color:var(--c);line-height:1.15}
+.mg-desc{color:#33425a;font-size:15px}
+.mg-goal{font-size:15px;color:#0b1f45;background:var(--t);border-radius:12px;padding:10px 14px}
+.mg-goal b{color:var(--c);margin-right:8px}
+.mg-meta{display:grid;gap:8px;margin:0}
+.mg-meta>div{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start;font-size:14px}
+.mg-meta dt{font-weight:800;color:#5b6880;padding-top:2px}
+.mg-meta dd{margin:0;color:#0b1f45}
+.mg-meta .tag{margin:0}
+.mg-moves{display:flex;flex-wrap:wrap;gap:6px}
+.mg-moves span{font-family:var(--f-latin);font-weight:700;font-size:13px;border:1.5px solid var(--c);color:var(--c);border-radius:999px;padding:2px 10px}
+@media (max-width:820px){.mg-body{grid-template-columns:1fr}}
+.mg-gallery{background:linear-gradient(180deg,#2a7fe0,#1c5fbf);color:#fff;padding-block:72px;text-align:center}
+.mg-kick{display:inline-block;color:#0b1f45;background:#ffd84a;font-weight:800;border-radius:999px;padding:6px 18px;font-size:14px}
+.mg-gallery h2{color:#fff;font-size:clamp(28px,4vw,46px);font-weight:900;margin:12px 0 30px}
+.mg-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.mg-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mg-tile{position:relative;border:0;padding:0;border-radius:14px;overflow:hidden;background:#0b1f45;aspect-ratio:16/10;cursor:pointer}
+.mg-tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.mg-tile:hover img{transform:scale(1.08)}
+.mg-tile span{position:absolute;left:8px;bottom:8px;background:#fff;color:var(--c);font-weight:800;font-size:13px;border-radius:999px;padding:3px 10px}
+.mg-moves-sec{background:#1c5fbf;color:#fff;text-align:center;padding-block:8px 80px}
+.mg-plus{font-size:56px;font-weight:300;line-height:1;margin:0;color:#fff}
+.mg-moves-sec h2{color:#fff;font-size:clamp(28px,4vw,46px);font-weight:900;margin-top:6px}
+.mg-mv-lead{color:rgba(255,255,255,.9);margin:12px auto 30px;max-width:34em}
+.mg-mv-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;text-align:left}
+@media (max-width:860px){.mg-mv-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.mg-mv-list{grid-template-columns:1fr}}
+.mg-mv-list li{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:12px 16px;display:grid;gap:2px}
+.mg-mv-list b{font-family:var(--f-latin);font-size:17px;color:#ffd84a}
+.mg-mv-list span{font-size:13px;color:rgba(255,255,255,.88)}
+.mg-islands{background:linear-gradient(180deg,#bfe3ff,#e8f6ff);padding-block:48px 64px}
+.mg-isl-row{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
+@media (max-width:860px){.mg-isl-row{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.mg-isl{border:0;background:#fff;border-radius:18px;padding:8px 6px 10px;display:grid;gap:6px;justify-items:center;box-shadow:0 8px 18px rgba(11,31,69,.12);border-bottom:5px solid var(--c);transition:transform .2s;cursor:pointer}
+.mg-isl:hover{transform:translateY(-5px)}
+.mg-isl img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
+.mg-isl span{font-size:13px;font-weight:800;color:var(--c);line-height:1.25}
 
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
@@ -1138,163 +1200,224 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
 <!-- ============ GAMES (미니게임 안내) ============ -->
 <div class="page" id="page-games" data-page="games" hidden>
-  <section class="gp-hero">
-    <div class="wrap">
+  <section class="mg-hero" aria-labelledby="mg-title">
+    <div class="mg-hero-in">
       <a class="gp-back" href="#contents">← 콘텐츠로 돌아가기</a>
-      <p class="eyebrow" style="color:#ffd864">Mini Games</p>
-      <h1>미니게임 안내</h1>
-      <p class="gp-lead">하늘섬 여덟 곳에서 벌어진 특공대의 사고, 어떤 놀이로 해결하는지 하나씩 살펴보세요.</p>
+      <h1 id="mg-title"><span class="mg-num">8</span>가지 <em>미니게임</em></h1>
+      <p class="mg-ribbon">하늘섬 여덟 곳에서 펼쳐지는 움직임 놀이</p>
     </div>
+    <img class="mg-crew" src="assets/crew.webp" alt="사고뭉치 특공대 친구들" width="1500" height="604">
   </section>
-  <section class="band sg-games-band" id="all-games" aria-labelledby="sg-grid-title">
-    <div class="wrap">
-      <p class="eyebrow">All Games</p>
-      <h2 class="sec-title" id="sg-grid-title" style="margin-top:6px">하나의 세계, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-      <p class="sec-sub">카드를 누르면 아래 게임 설명으로 바로 이동해요.</p>
-      <div class="filter" role="group" aria-label="게임 방식 필터">
+
+  <section class="mg-find" aria-labelledby="mg-find-title">
+    <div class="mg-band"><h2 id="mg-find-title">어떤 모험을 찾고 계신가요?</h2></div>
+    <div class="mg-wrap">
+      <div class="filter mg-filter" role="group" aria-label="게임 방식 필터">
         <button type="button" data-filter="all" aria-pressed="true">전체 <span data-count="all"></span></button>
         <button type="button" data-filter="coop" aria-pressed="false">협동 <span data-count="coop"></span></button>
         <button type="button" data-filter="solo" aria-pressed="false">개인전 <span data-count="solo"></span></button>
       </div>
-      <div class="games" data-games>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-scroll="g-1"><span class="g-no">GAME 01</span><div class="thumb"><img src="assets/game-duck.png" alt=""></div><h3>태엽새 레이스</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-scroll="g-2"><span class="g-no">GAME 02</span><div class="thumb"><img src="assets/game-sandwich.png" alt=""></div><h3>샌드위치 공장</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-scroll="g-3"><span class="g-no">GAME 03</span><div class="thumb"><img src="assets/game-coin.png" alt=""></div><h3>알쏭달쏭 코인볼</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-scroll="g-4"><span class="g-no">GAME 04</span><div class="thumb"><img src="assets/game-fishing.png" alt=""></div><h3>운동 낚시왕</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="coop"><button type="button" class="game-btn" data-scroll="g-5"><span class="g-no">GAME 05</span><div class="thumb"><img src="assets/game-rice.png" alt=""></div><h3>쿵쿵 떡방아</h3><span class="tag coop">협동</span></button></article>
-        <article class="game" data-type="coop"><button type="button" class="game-btn" data-scroll="g-6"><span class="g-no">GAME 06</span><div class="thumb"><img src="assets/game-escape.png" alt=""></div><h3>탈출 대추격전</h3><span class="tag coop">협동</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-scroll="g-7"><span class="g-no">GAME 07</span><div class="thumb"><img src="assets/game-skate.png" alt=""></div><h3>리듬 피겨 점프!</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-scroll="g-8"><span class="g-no">GAME 08</span><div class="thumb"><img src="assets/game-snowman.png" alt=""></div><h3>눈사람 탈출 작전</h3><span class="tag">개인전</span></button></article>
+      <div class="mg-list">
+        <article class="mg-card" id="g-1" data-type="solo" style="--c:#c97800;--t:#fff3d6" aria-labelledby="g-1-t">
+          <p class="mg-hook"><span>GAME 01</span>풀려버린 태엽을 다시 감아라</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-1.jpg" alt="태엽새 레이스 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-1-t">태엽새 레이스</h3>
+              <p class="mg-desc">우당탕! 사고뭉치 특공대가 태엽새의 태엽을 너무 느슨하게 풀어버렸어요. 운동으로 에너지를 채워 태엽새가 다시 잘 날아갈 수 있도록 도와줘요.</p>
+              <p class="mg-goal"><b>목표</b>제한 시간 동안 운동을 가장 많이 해서 태엽새를 가장 멀리 날리기</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag">개인전</span></dd></div>
+                <div><dt>시간</dt><dd>20초 / 30초 / 40초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>In And Out</span><span>Standing Jacks</span><span>Jumping Jack Variation</span></dd></div>
+                <div><dt>결과</dt><dd>운동 1회 = 3m. 비행 거리가 가장 긴 플레이어가 우승해요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <article class="mg-card" id="g-2" data-type="solo" style="--c:#e0582f;--t:#ffe6dc" aria-labelledby="g-2-t">
+          <p class="mg-hook"><span>GAME 02</span>멈춰버린 공장을 다시 돌려라</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-2.jpg" alt="샌드위치 공장 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-2-t">샌드위치 공장</h3>
+              <p class="mg-desc">특공대의 실수로 샌드위치 공장이 멈춰버렸어요. 박자에 맞춰 샌드위치에 깃발을 꽂고 배달 준비를 도와줘요.</p>
+              <p class="mg-goal"><b>목표</b>레일 위 샌드위치가 판정 구간에 도착하는 순간 정확히 움직여 깃발을 꽂고 포장하기</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag">개인전</span></dd></div>
+                <div><dt>시간</dt><dd>25초 / 30초 / 35초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>In And Out</span><span>Side to Side</span><span>Jump Lunge</span></dd></div>
+                <div><dt>결과</dt><dd>샌드위치를 가장 많이 포장한 플레이어가 우승해요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <article class="mg-card" id="g-3" data-type="solo" style="--c:#8a4fe0;--t:#efe4ff" aria-labelledby="g-3-t">
+          <p class="mg-hook"><span>GAME 03</span>뒤섞인 숫자의 정답을 찾아라</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-3.jpg" alt="알쏭달쏭 코인볼 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-3-t">알쏭달쏭 코인볼</h3>
+              <p class="mg-desc">특공대의 장난으로 코인볼 가챠 기계의 목표 숫자가 뒤섞여 보석 캡슐이 열리지 않아요. 숫자 힌트를 보고 운동 횟수를 조절해 코인을 넣어요.</p>
+              <p class="mg-goal"><b>목표</b>전광판의 문제를 풀고, 정답 숫자만큼 운동해서 코인 넣기. 문제는 8초마다 바뀌어요.</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag">개인전</span></dd></div>
+                <div><dt>시간</dt><dd>40초 / 50초 / 60초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>ButtKick</span><span>Forward·Backward Quick Step</span><span>잔발치기</span></dd></div>
+                <div><dt>결과</dt><dd>가장 많은 문제를 맞힌 플레이어가 우승해요. 덧셈·뺄셈 모드와 사칙연산 모드 중 고를 수 있어요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <article class="mg-card" id="g-4" data-type="solo" style="--c:#1286c4;--t:#ddf0fb" aria-labelledby="g-4-t">
+          <p class="mg-hook"><span>GAME 04</span>난장판 낚시터를 수습하라</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-4.jpg" alt="운동 낚시왕 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-4-t">운동 낚시왕</h3>
+              <p class="mg-desc">특공대가 먹이통을 잘못 작동시켜 낚시터에 먹이가 쏟아졌어요. 몰려든 물고기로 난장판이 된 낚시터, 운동으로 낚시 게이지를 채워 물고기를 잡아요.</p>
+              <p class="mg-goal"><b>목표</b>물고기마다 정해진 운동 횟수를 시간 안에 채워 최대한 많이 낚기</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag">개인전</span></dd></div>
+                <div><dt>시간</dt><dd>60초 / 70초 / 80초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>Side to Side</span><span>Side Quick Step</span><span>Single Leg Side Hop</span></dd></div>
+                <div><dt>결과</dt><dd>한 마리에 100점, 빨리 잡으면 최대 50점 보너스. 점수가 가장 높은 플레이어가 우승해요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <article class="mg-card" id="g-5" data-type="coop" style="--c:#e24b85;--t:#ffe3ee" aria-labelledby="g-5-t">
+          <p class="mg-hook"><span>GAME 05</span>엉망이 된 잔치 떡방아</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-5.jpg" alt="쿵쿵 떡방아 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-5-t">쿵쿵 떡방아</h3>
+              <p class="mg-desc">마을 잔치를 돕기 위해 떡 만들기에 나선 특공대. 서로 먼저 하겠다고 다투다 떡방아가 엉망이 됐어요. 엘로의 박자 안내에 맞춰 함께 떡을 완성해요.</p>
+              <p class="mg-goal"><b>목표</b>엘로의 박자 패턴에 맞춰 다 함께 움직여 시간 안에 떡을 최대한 많이 완성하기</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag coop">협동</span></dd></div>
+                <div><dt>시간</dt><dd>45초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>Ski Jacks</span><span>Step Touch</span><span>Pogo Jump</span></dd></div>
+                <div><dt>결과</dt><dd>개인 순위 없이, 팀이 완성한 떡 개수에 따라 별 1~3개를 받아요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <article class="mg-card" id="g-6" data-type="coop" style="--c:#1f9a5c;--t:#dcf5e7" aria-labelledby="g-6-t">
+          <p class="mg-hook"><span>GAME 06</span>깨어난 거대한 새에게서 탈출</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-6.jpg" alt="탈출 대추격전 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-6-t">탈출 대추격전</h3>
+              <p class="mg-desc">눈 터널을 지나던 특공대가 깊이 잠들어 있던 거대한 새를 깨워버렸어요. 화가 난 새가 쫓아와요. 다 함께 움직여 잡히기 전에 눈 터널을 탈출해요.</p>
+              <p class="mg-goal"><b>목표</b>모두의 운동으로 팀 속도 게이지를 유지해 눈블록 33개를 부수고 목적지까지 도착하기. 중간에 커다란 얼음 장애물도 함께 깨요.</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag coop">협동</span></dd></div>
+                <div><dt>시간</dt><dd>30초 / 40초 / 50초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>Jumping Rope</span><span>잔발치기</span><span>Running Man</span></dd></div>
+                <div><dt>결과</dt><dd>탈출 실패 별 1개, 탈출 성공 별 2개, 10초 이상 남기고 탈출하면 별 3개예요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <article class="mg-card" id="g-7" data-type="solo" style="--c:#3d63e0;--t:#e2e9ff" aria-labelledby="g-7-t">
+          <p class="mg-hook"><span>GAME 07</span>뒤섞인 공연 표시를 바로잡아라</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-7.jpg" alt="리듬 피겨 점프! 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-7-t">리듬 피겨 점프!</h3>
+              <p class="mg-desc">특공대의 장난으로 피겨 공연에 필요한 방향과 점프 표시가 뒤섞였어요. 리듬 노트에 맞춰 움직여 공연을 끝까지 완성해요.</p>
+              <p class="mg-goal"><b>목표</b>왼쪽에서 오른쪽으로 흐르는 리듬 노트가 판정존에 닿는 순간 운동해서 점수 얻기. 피버 타임도 있어요.</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag">개인전</span></dd></div>
+                <div><dt>시간</dt><dd>50초 / 55초 / 60초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>Star Jump</span><span>Leg Raise</span><span>In And Out</span></dd></div>
+                <div><dt>결과</dt><dd>타이밍에 맞춰 성공할 때마다 점수를 얻어요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <article class="mg-card" id="g-8" data-type="solo" style="--c:#1795b8;--t:#dbf3fa" aria-labelledby="g-8-t">
+          <p class="mg-hook"><span>GAME 08</span>눈더미에 갇힌 특공대를 구하라</p>
+          <div class="mg-body">
+            <div class="mg-shot"><img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면" loading="lazy"></div>
+            <div class="mg-text">
+              <h3 id="g-8-t">눈사람 탈출 작전</h3>
+              <p class="mg-desc">특공대의 장난으로 눈밭이 뒤집혀 모두 눈더미 속에 파묻혔어요. 운동을 빠르게 반복해 나를 덮은 눈을 깨고 눈사람에서 탈출해요.</p>
+              <p class="mg-goal"><b>목표</b>세 단계 동안 최대한 빠르게 운동해서 눈사람을 한 단계씩 깨고 탈출하기</p>
+              <dl class="mg-meta">
+                <div><dt>모드</dt><dd><span class="tag">개인전</span></dd></div>
+                <div><dt>시간</dt><dd>25초 / 30초 / 35초</dd></div>
+                <div><dt>운동</dt><dd class="mg-moves"><span>Hand Claps</span><span>Step Touch</span><span>Jump Lunge</span></dd></div>
+                <div><dt>결과</dt><dd>단계마다 순위에 따라 500~100점. 누적 점수 순서대로 탈출하고, 모두 탈출에 성공해요.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
-  <section class="gx-list wrap" aria-label="게임별 설명">
-      <article class="gx" id="g-1" data-type="solo" aria-labelledby="g-1-t">
-        <div class="gx-media"><img src="assets/play-1.jpg" alt="태엽새 레이스 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-duck.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 01</span><span class="tag">개인전</span></p>
-          <h3 id="g-1-t">태엽새 레이스</h3>
-          <p class="gd-story">우당탕! 사고뭉치 특공대가 태엽새의 태엽을 너무 느슨하게 풀어버렸어요. 운동으로 에너지를 채워 태엽새가 다시 잘 날아갈 수 있도록 도와줘요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>5인 개인전 · 운동 횟수만큼 날아가는 비행 거리 경쟁</dd></div>
-            <div><dt>목표</dt><dd>제한 시간 동안 운동을 가장 많이 해서 태엽새를 가장 멀리 날리기</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>In And Out</span><span>Standing Jacks</span><span>Jumping Jack Variation</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>20초</span><span>30초</span><span>40초</span></div></dd></div>
-            <div><dt>결과</dt><dd>운동 1회 = 3m. 비행 거리가 가장 긴 플레이어가 우승해요.</dd></div>
-          </dl>
-        </div>
-      </article>
-      <article class="gx flip" id="g-2" data-type="solo" aria-labelledby="g-2-t">
-        <div class="gx-media"><img src="assets/play-2.jpg" alt="샌드위치 공장 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-sandwich.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 02</span><span class="tag">개인전</span></p>
-          <h3 id="g-2-t">샌드위치 공장</h3>
-          <p class="gd-story">특공대의 실수로 샌드위치 공장이 멈춰버렸어요. 박자에 맞춰 샌드위치에 깃발을 꽂고 배달 준비를 도와줘요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>5인 개인전 · 박자(BPM)에 맞추는 타이밍 운동</dd></div>
-            <div><dt>목표</dt><dd>레일 위 샌드위치가 판정 구간에 도착하는 순간 정확히 움직여 깃발을 꽂고 포장하기</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>In And Out</span><span>Side to Side</span><span>Jump Lunge</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>25초</span><span>30초</span><span>35초</span></div></dd></div>
-            <div><dt>결과</dt><dd>샌드위치를 가장 많이 포장한 플레이어가 우승해요.</dd></div>
-          </dl>
-        </div>
-      </article>
-      <article class="gx" id="g-3" data-type="solo" aria-labelledby="g-3-t">
-        <div class="gx-media"><img src="assets/play-3.jpg" alt="알쏭달쏭 코인볼 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-coin.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 03</span><span class="tag">개인전</span></p>
-          <h3 id="g-3-t">알쏭달쏭 코인볼</h3>
-          <p class="gd-story">특공대의 장난으로 코인볼 가챠 기계의 목표 숫자가 뒤섞여 보석 캡슐이 열리지 않아요. 숫자 힌트를 보고 운동 횟수를 조절해 코인을 넣어요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>5인 개인전 · 정답 숫자만큼 움직이는 수학 퀴즈 운동</dd></div>
-            <div><dt>목표</dt><dd>전광판의 문제를 풀고, 정답 숫자만큼 운동해서 코인 넣기. 문제는 8초마다 바뀌어요.</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>ButtKick</span><span>Forward·Backward Quick Step</span><span>잔발치기</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>40초</span><span>50초</span><span>60초</span></div></dd></div>
-            <div><dt>결과</dt><dd>가장 많은 문제를 맞힌 플레이어가 우승해요. 덧셈·뺄셈 모드와 사칙연산 모드 중 고를 수 있어요.</dd></div>
-          </dl>
-        </div>
-      </article>
-      <article class="gx flip" id="g-4" data-type="solo" aria-labelledby="g-4-t">
-        <div class="gx-media"><img src="assets/play-4.jpg" alt="운동 낚시왕 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-fishing.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 04</span><span class="tag">개인전</span></p>
-          <h3 id="g-4-t">운동 낚시왕</h3>
-          <p class="gd-story">특공대가 먹이통을 잘못 작동시켜 낚시터에 먹이가 쏟아졌어요. 몰려든 물고기로 난장판이 된 낚시터, 운동으로 낚시 게이지를 채워 물고기를 잡아요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>5인 개인전 · 스피드형 운동 낚시</dd></div>
-            <div><dt>목표</dt><dd>물고기마다 정해진 운동 횟수를 시간 안에 채워 최대한 많이 낚기</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>Side to Side</span><span>Side Quick Step</span><span>Single Leg Side Hop</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>60초</span><span>70초</span><span>80초</span></div></dd></div>
-            <div><dt>결과</dt><dd>한 마리에 100점, 빨리 잡으면 최대 50점 보너스. 점수가 가장 높은 플레이어가 우승해요.</dd></div>
-          </dl>
-        </div>
-      </article>
-      <article class="gx" id="g-5" data-type="coop" aria-labelledby="g-5-t">
-        <div class="gx-media"><img src="assets/play-5.jpg" alt="쿵쿵 떡방아 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-rice.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 05</span><span class="tag coop">협동</span></p>
-          <h3 id="g-5-t">쿵쿵 떡방아</h3>
-          <p class="gd-story">마을 잔치를 돕기 위해 떡 만들기에 나선 특공대. 서로 먼저 하겠다고 다투다 떡방아가 엉망이 됐어요. 엘로의 박자 안내에 맞춰 함께 떡을 완성해요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>협동 · 박자에 맞추는 리듬 운동</dd></div>
-            <div><dt>목표</dt><dd>엘로의 박자 패턴에 맞춰 다 함께 움직여 시간 안에 떡을 최대한 많이 완성하기</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>Ski Jacks</span><span>Step Touch</span><span>Pogo Jump</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>45초</span></div></dd></div>
-            <div><dt>결과</dt><dd>개인 순위 없이, 팀이 완성한 떡 개수에 따라 별 1~3개를 받아요.</dd></div>
-          </dl>
-        </div>
-      </article>
-      <article class="gx flip" id="g-6" data-type="coop" aria-labelledby="g-6-t">
-        <div class="gx-media"><img src="assets/play-6.jpg" alt="탈출 대추격전 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-escape.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 06</span><span class="tag coop">협동</span></p>
-          <h3 id="g-6-t">탈출 대추격전</h3>
-          <p class="gd-story">눈 터널을 지나던 특공대가 깊이 잠들어 있던 거대한 새를 깨워버렸어요. 화가 난 새가 쫓아와요. 다 함께 움직여 잡히기 전에 눈 터널을 탈출해요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>협동 · 추격 탈출 러닝</dd></div>
-            <div><dt>목표</dt><dd>모두의 운동으로 팀 속도 게이지를 유지해 눈블록 33개를 부수고 목적지까지 도착하기. 중간에 커다란 얼음 장애물도 함께 깨요.</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>Jumping Rope</span><span>잔발치기</span><span>Running Man</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>30초</span><span>40초</span><span>50초</span></div></dd></div>
-            <div><dt>결과</dt><dd>탈출 실패 별 1개, 탈출 성공 별 2개, 10초 이상 남기고 탈출하면 별 3개예요.</dd></div>
-          </dl>
-        </div>
-      </article>
-      <article class="gx" id="g-7" data-type="solo" aria-labelledby="g-7-t">
-        <div class="gx-media"><img src="assets/play-7.jpg" alt="리듬 피겨 점프! 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-skate.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 07</span><span class="tag">개인전</span></p>
-          <h3 id="g-7-t">리듬 피겨 점프!</h3>
-          <p class="gd-story">특공대의 장난으로 피겨 공연에 필요한 방향과 점프 표시가 뒤섞였어요. 리듬 노트에 맞춰 움직여 공연을 끝까지 완성해요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>5인 개인전 · 리듬 운동</dd></div>
-            <div><dt>목표</dt><dd>왼쪽에서 오른쪽으로 흐르는 리듬 노트가 판정존에 닿는 순간 운동해서 점수 얻기. 피버 타임도 있어요.</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>Star Jump</span><span>Leg Raise</span><span>In And Out</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>50초</span><span>55초</span><span>60초</span></div></dd></div>
-            <div><dt>결과</dt><dd>타이밍에 맞춰 성공할 때마다 점수를 얻어요.</dd></div>
-          </dl>
-        </div>
-      </article>
-      <article class="gx flip" id="g-8" data-type="solo" aria-labelledby="g-8-t">
-        <div class="gx-media"><img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면" loading="lazy"><img class="gx-ill" src="assets/game-snowman.png" alt="" aria-hidden="true" loading="lazy"></div>
-        <div class="gx-body">
-          <p class="gx-top"><span class="g-no">GAME 08</span><span class="tag">개인전</span></p>
-          <h3 id="g-8-t">눈사람 탈출 작전</h3>
-          <p class="gd-story">특공대의 장난으로 눈밭이 뒤집혀 모두 눈더미 속에 파묻혔어요. 운동을 빠르게 반복해 나를 덮은 눈을 깨고 눈사람에서 탈출해요.</p>
-          <dl class="gd-info">
-            <div><dt>게임 방식</dt><dd>5인 개인전 · 반복 운동 탈출</dd></div>
-            <div><dt>목표</dt><dd>세 단계 동안 최대한 빠르게 운동해서 눈사람을 한 단계씩 깨고 탈출하기</dd></div>
-            <div><dt>운동</dt><dd><div class="gd-chips"><span>Hand Claps</span><span>Step Touch</span><span>Jump Lunge</span></div></dd></div>
-            <div><dt>플레이 시간</dt><dd><div class="gd-chips"><span>25초</span><span>30초</span><span>35초</span></div></dd></div>
-            <div><dt>결과</dt><dd>단계마다 순위에 따라 500~100점. 누적 점수 순서대로 탈출하고, 모두 탈출에 성공해요.</dd></div>
-          </dl>
-        </div>
-      </article>
-  </section>
-  <section class="band tight">
-    <div class="wrap" style="display:flex;justify-content:center">
-      <a class="pill-cta" href="#contents">콘텐츠로 돌아가기<span class="pill-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></a>
+
+  <section class="mg-gallery" aria-labelledby="mg-gal-title">
+    <div class="mg-wrap">
+      <p class="mg-kick">달리고, 뛰고, 박자를 맞추고… 다양한 방식으로 즐기는</p>
+      <h2 id="mg-gal-title">게임 장면 모아보기</h2>
+      <div class="mg-tiles">
+        <button type="button" class="mg-tile" data-scroll="g-1" style="--c:#c97800"><img src="assets/play-1.jpg" alt="" loading="lazy"><span>태엽새 레이스</span></button>
+        <button type="button" class="mg-tile" data-scroll="g-2" style="--c:#e0582f"><img src="assets/play-2.jpg" alt="" loading="lazy"><span>샌드위치 공장</span></button>
+        <button type="button" class="mg-tile" data-scroll="g-3" style="--c:#8a4fe0"><img src="assets/play-3.jpg" alt="" loading="lazy"><span>알쏭달쏭 코인볼</span></button>
+        <button type="button" class="mg-tile" data-scroll="g-4" style="--c:#1286c4"><img src="assets/play-4.jpg" alt="" loading="lazy"><span>운동 낚시왕</span></button>
+        <button type="button" class="mg-tile" data-scroll="g-5" style="--c:#e24b85"><img src="assets/play-5.jpg" alt="" loading="lazy"><span>쿵쿵 떡방아</span></button>
+        <button type="button" class="mg-tile" data-scroll="g-6" style="--c:#1f9a5c"><img src="assets/play-6.jpg" alt="" loading="lazy"><span>탈출 대추격전</span></button>
+        <button type="button" class="mg-tile" data-scroll="g-7" style="--c:#3d63e0"><img src="assets/play-7.jpg" alt="" loading="lazy"><span>리듬 피겨 점프!</span></button>
+        <button type="button" class="mg-tile" data-scroll="g-8" style="--c:#1795b8"><img src="assets/play-8.jpg" alt="" loading="lazy"><span>눈사람 탈출 작전</span></button>
+      </div>
     </div>
   </section>
+
+  <section class="mg-moves-sec" aria-labelledby="mg-mv-title">
+    <div class="mg-wrap">
+      <p class="mg-plus" aria-hidden="true">+</p>
+      <h2 id="mg-mv-title">운동 동작은 18가지</h2>
+      <p class="mg-mv-lead">게임마다 세 가지 운동 중 하나를 골라 플레이해요. 같은 게임도 고른 운동에 따라 전혀 다른 놀이가 돼요.</p>
+      <ul class="mg-mv-list">
+          <li><b>In And Out</b><span>태엽새 레이스, 샌드위치 공장, 리듬 피겨 점프!</span></li>
+          <li><b>Standing Jacks</b><span>태엽새 레이스</span></li>
+          <li><b>Jumping Jack Variation</b><span>태엽새 레이스</span></li>
+          <li><b>Side to Side</b><span>샌드위치 공장, 운동 낚시왕</span></li>
+          <li><b>Jump Lunge</b><span>샌드위치 공장, 눈사람 탈출 작전</span></li>
+          <li><b>ButtKick</b><span>알쏭달쏭 코인볼</span></li>
+          <li><b>Forward·Backward Quick Step</b><span>알쏭달쏭 코인볼</span></li>
+          <li><b>잔발치기</b><span>알쏭달쏭 코인볼, 탈출 대추격전</span></li>
+          <li><b>Side Quick Step</b><span>운동 낚시왕</span></li>
+          <li><b>Single Leg Side Hop</b><span>운동 낚시왕</span></li>
+          <li><b>Ski Jacks</b><span>쿵쿵 떡방아</span></li>
+          <li><b>Step Touch</b><span>쿵쿵 떡방아, 눈사람 탈출 작전</span></li>
+          <li><b>Pogo Jump</b><span>쿵쿵 떡방아</span></li>
+          <li><b>Jumping Rope</b><span>탈출 대추격전</span></li>
+          <li><b>Running Man</b><span>탈출 대추격전</span></li>
+          <li><b>Star Jump</b><span>리듬 피겨 점프!</span></li>
+          <li><b>Leg Raise</b><span>리듬 피겨 점프!</span></li>
+          <li><b>Hand Claps</b><span>눈사람 탈출 작전</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <nav class="mg-islands" aria-label="게임 바로가기">
+    <div class="mg-wrap">
+      <div class="mg-isl-row">
+        <button type="button" class="mg-isl" data-scroll="g-1" style="--c:#c97800"><img src="assets/game-duck.png" alt="" loading="lazy"><span>태엽새 레이스</span></button>
+        <button type="button" class="mg-isl" data-scroll="g-2" style="--c:#e0582f"><img src="assets/game-sandwich.png" alt="" loading="lazy"><span>샌드위치 공장</span></button>
+        <button type="button" class="mg-isl" data-scroll="g-3" style="--c:#8a4fe0"><img src="assets/game-coin.png" alt="" loading="lazy"><span>알쏭달쏭 코인볼</span></button>
+        <button type="button" class="mg-isl" data-scroll="g-4" style="--c:#1286c4"><img src="assets/game-fishing.png" alt="" loading="lazy"><span>운동 낚시왕</span></button>
+        <button type="button" class="mg-isl" data-scroll="g-5" style="--c:#e24b85"><img src="assets/game-rice.png" alt="" loading="lazy"><span>쿵쿵 떡방아</span></button>
+        <button type="button" class="mg-isl" data-scroll="g-6" style="--c:#1f9a5c"><img src="assets/game-escape.png" alt="" loading="lazy"><span>탈출 대추격전</span></button>
+        <button type="button" class="mg-isl" data-scroll="g-7" style="--c:#3d63e0"><img src="assets/game-skate.png" alt="" loading="lazy"><span>리듬 피겨 점프!</span></button>
+        <button type="button" class="mg-isl" data-scroll="g-8" style="--c:#1795b8"><img src="assets/game-snowman.png" alt="" loading="lazy"><span>눈사람 탈출 작전</span></button>
+      </div>
+      <p style="text-align:center;margin-top:28px"><a class="pill-cta" href="#contents" style="margin:0 auto">콘텐츠로 돌아가기<span class="pill-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></a></p>
+    </div>
+  </nav>
 </div>
 
 <!-- ============ STORY ============ -->
@@ -1842,14 +1965,13 @@ window.BALGURUM_SUPABASE = {
   gdlg.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft') fillGame(gi-1); if(e.key==='ArrowRight') fillGame(gi+1); });
 
   /* ---------- Game filter ---------- */
-  const games = [...document.querySelectorAll('[data-games] .game')];
+  const games = [...document.querySelectorAll('.mg-card')];
   const counts = {all:games.length, coop:games.filter(g=>g.dataset.type==='coop').length, solo:games.filter(g=>g.dataset.type==='solo').length};
   document.querySelectorAll('[data-count]').forEach(c=>c.textContent = counts[c.dataset.count]);
   document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('[data-filter]').forEach(x=>x.setAttribute('aria-pressed', x===b));
     const f = b.dataset.filter;
     games.forEach(g=>{ g.hidden = !(f==='all' || g.dataset.type===f); });
-    document.querySelectorAll('.gx[data-type]').forEach(g=>{ g.hidden = !(f==='all' || g.dataset.type===f); });
   }));
 
   /* ---------- BI merge ---------- */
