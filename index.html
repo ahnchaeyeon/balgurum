@@ -477,16 +477,17 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .fs-kicker{font-family:var(--f-latin);font-weight:700;letter-spacing:.14em;font-size:14px;color:#ffd864}
 .fs-line{font-size:clamp(22px,2.9vw,38px);font-weight:800;line-height:1.6;text-shadow:0 2px 18px rgba(0,0,0,.55);max-width:22em;color:#fff}
 .fs-dots{position:absolute;top:0;right:max(14px,env(safe-area-inset-right,0px));height:100%;z-index:3;pointer-events:none}
-.fs-dots-in{position:sticky;top:calc(50vh - 110px);display:grid;gap:26px;padding:12px 8px;pointer-events:auto}
+.fs-dots-in{position:sticky;top:calc(50vh - 150px);display:grid;gap:14px;padding:12px 8px;pointer-events:auto}
 .fs-track,.fs-fill{position:absolute;left:50%;width:6px;margin-left:-3px;border-radius:6px;pointer-events:none}
 .fs-track{background:rgba(255,255,255,.3);box-shadow:0 0 4px rgba(0,0,0,.35)}
 .fs-fill{background:linear-gradient(180deg,#ffe8a3,#ffd864);box-shadow:0 0 10px rgba(255,216,100,.6);height:0}
-.fs-dots button{position:relative;z-index:1;width:30px;height:30px;border:0;padding:0;background:transparent;display:grid;place-items:center;cursor:pointer;transition:filter .3s;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
-.fs-dots button::before{content:"";width:20px;height:20px;background:#b39a5e;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);transition:width .3s,height .3s,background .3s,transform .3s}
-.fs-dots button.past::before{background:#ffd864}
-.fs-dots button[aria-current="true"]{filter:drop-shadow(0 0 6px rgba(255,216,100,.9)) drop-shadow(0 0 2px #fff)}
-.fs-dots button[aria-current="true"]::before{width:30px;height:30px;background:#ffe27a;transform:rotate(-8deg)}
-.fs-dots button:hover::before{background:#ffe9a8}
+.fs-dots button{position:relative;z-index:1;width:44px;height:44px;border:0;padding:0;background:transparent;display:grid;place-items:center;cursor:pointer;transition:filter .3s;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+.fs-dots button::before{content:"";width:22px;height:22px;background:url(assets/star.png) center/contain no-repeat;filter:saturate(.35) brightness(.85);opacity:.75;transition:width .3s,height .3s,filter .3s,opacity .3s,transform .3s}
+.fs-dots button.past::before{filter:none;opacity:1}
+.fs-dots button[aria-current="true"]{filter:drop-shadow(0 0 10px rgba(255,214,70,.95)) drop-shadow(0 0 22px rgba(255,200,40,.6))}
+.fs-dots button[aria-current="true"]::before{width:44px;height:44px;filter:none;opacity:1;animation:starPulse 1.8s ease-in-out infinite}
+@keyframes starPulse{50%{transform:scale(1.08) rotate(-6deg)}}
+.fs-dots button:hover::before{filter:none;opacity:1}
 
 /* Triangle mosaic */
 .mosaic{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#0b1f45}
