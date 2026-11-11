@@ -588,7 +588,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .cx-facts dd{margin:0;font-size:15px;font-weight:600;color:#0b1f45}
 .cx-stage{position:relative;height:min(64vh,620px);display:grid;place-items:end center}
 .cx-blob{position:absolute;left:50%;bottom:6%;width:min(88%,560px);aspect-ratio:1;transform:translateX(-50%);border-radius:46% 54% 50% 50%/52% 46% 54% 48%;background:var(--blob);transition:background .6s ease}
-.cx-img{position:relative;z-index:1;height:86%;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 22px 22px rgba(11,31,69,.22));transition:opacity .35s ease,transform .45s ease}
+.cx-img{position:absolute;z-index:1;left:0;right:0;bottom:4%;margin:0 auto;height:86%;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 22px 22px rgba(11,31,69,.22));transition:opacity .35s ease,transform .45s ease}
 .cx-img.out{opacity:0;transform:translateY(24px) scale(.96)}
 .cx-spark{position:absolute;z-index:2;fill:#fff;opacity:.9}
 .cx-spark.s1{width:44px;left:8%;top:14%}.cx-spark.s2{width:26px;right:10%;top:8%}.cx-spark.s3{width:20px;right:4%;bottom:34%}
@@ -603,12 +603,21 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .cx-arrow svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 @media (max-width:860px){
   .cx-body{grid-template-columns:1fr;gap:0}
-  .cx-stage{order:-1;height:min(40vh,340px)}
+  .cx-stage{order:-1;height:min(38vh,320px);overflow:hidden;margin-bottom:12px}
+  .cx-img{height:90%;bottom:2%}
   .cx-word{font-size:clamp(52px,16vw,96px)}
-  .cx-facts{display:none}
+  .cx-views{max-width:none}
   .cx-arrow{display:none}
   .cx-pick button{width:60px}.cx-pick button img{width:36px;height:36px}
 }
+
+
+.ello-views{display:flex;gap:8px;margin-top:10px}.ello-views img{width:56px;height:56px;object-fit:contain;background:var(--white);border-radius:12px;padding:6px}
+.cx-views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:400px;margin-top:6px}
+.cx-views figure{margin:0;display:grid;gap:6px;justify-items:center}
+.cx-v{position:relative;width:100%;aspect-ratio:1/1;border-radius:16px;background-color:rgba(255,255,255,.45);background-image:linear-gradient(rgba(11,31,69,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(11,31,69,.07) 1px,transparent 1px);background-size:14px 14px;display:grid;place-items:center;padding:10%}
+.cx-v img{position:absolute;left:10%;top:10%;width:80%;height:80%;object-fit:contain}
+.cx-views figcaption{font-family:var(--f-latin);font-weight:700;font-size:12px;letter-spacing:.14em;color:#0b1f45}
 
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
@@ -976,11 +985,11 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           <p class="cx-word" aria-hidden="true" data-cx-word>PUDING</p>
           <h3 class="cx-name" data-cx-name>푸딩</h3>
           <p class="cx-desc" data-cx-desc>머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.</p>
-          <dl class="cx-facts">
-            <div><dt>역할</dt><dd>플레이어 캐릭터</dd></div>
-            <div><dt>카드 색</dt><dd data-cx-color>노랑</dd></div>
-            <div><dt>등장</dt><dd>여덟 게임 모두, 랜덤 배정</dd></div>
-          </dl>
+          <div class="cx-views" data-cx-views aria-label="푸딩 삼면도">
+            <figure><div class="cx-v"><img src="assets/tv-puding-front.png" alt="푸딩 앞모습" data-v="front"></div><figcaption>FRONT</figcaption></figure>
+            <figure><div class="cx-v"><img src="assets/tv-puding-side.png" alt="푸딩 옆모습" data-v="side"></div><figcaption>SIDE</figcaption></figure>
+            <figure><div class="cx-v"><img src="assets/tv-puding-back.png" alt="푸딩 뒷모습" data-v="back"></div><figcaption>BACK</figcaption></figure>
+          </div>
         </div>
         <div class="cx-stage" aria-hidden="true">
           <span class="cx-blob"></span>
@@ -1014,7 +1023,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="sg-friend">
           <img src="assets/char-ello.png" alt="빨간 새 모양의 엘로">
-          <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p></div>
+          <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p><div class="ello-views"><img src="assets/tv-ello-front.png" alt="엘로 앞모습"><img src="assets/tv-ello-side.png" alt="엘로 옆모습"><img src="assets/tv-ello-back.png" alt="엘로 뒷모습"></div></div>
         </article>
       </div>
     </div>
@@ -1487,11 +1496,13 @@ window.BALGURUM_SUPABASE = {
       {k:'tonitoni',name:'토니토니',en:'TONITONI',bg:'#c9a0f5',blob:'#e2cbfa',color:'보라',desc:'헤드폰과 선글라스를 쓴 길쭉한 연보라 친구. 노란 조끼를 입고 있어요.'}
     ];
     let ci=0; const img=cx.querySelector('[data-cx-img]'), picks=[...cx.querySelectorAll('[data-cx-pick]')], q=k=>cx.querySelector('[data-cx-'+k+']');
-    CX.forEach(c=>{ const pre=new Image(); pre.src='assets/char-'+c.k+'.png'; });
+    CX.forEach(c=>{ ['char-'+c.k,'tv-'+c.k+'-front','tv-'+c.k+'-side','tv-'+c.k+'-back'].forEach(n=>{ const pre=new Image(); pre.src='assets/'+n+'.png'; }); });
     function setCx(i){
       ci=(i+CX.length)%CX.length; const c=CX[ci];
       cx.style.setProperty('--bg',c.bg); cx.style.setProperty('--blob',c.blob);
-      q('no').textContent='No.0'+(ci+1)+' · Player 카드 '+c.color; q('word').textContent=c.en; q('name').textContent=c.name; q('desc').textContent=c.desc; q('color').textContent=c.color;
+      q('no').textContent='No.0'+(ci+1)+' · Player 카드 '+c.color; q('word').textContent=c.en; q('name').textContent=c.name; q('desc').textContent=c.desc;
+      const vw=q('views'); vw.setAttribute('aria-label',c.name+' 삼면도');
+      vw.querySelectorAll('img[data-v]').forEach(im=>{ const v=im.dataset.v; im.src='assets/tv-'+c.k+'-'+v+'.png'; im.alt=c.name+' '+({front:'앞모습',side:'옆모습',back:'뒷모습'})[v]; });
       picks.forEach((b,j)=>b.setAttribute('aria-pressed', j===ci));
       if(reduce){ img.src='assets/char-'+c.k+'.png'; return; }
       img.classList.add('out'); setTimeout(()=>{ img.src='assets/char-'+c.k+'.png'; img.classList.remove('out'); },260);
