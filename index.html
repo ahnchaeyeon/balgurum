@@ -639,7 +639,8 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 
 /* Key visual */
 .kv{position:relative;background:#2f8ee8}
-.kv-art{position:relative;line-height:0}
+.kv-art{position:relative}
+.kv-art>img{display:block}
 .kv-art img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
 .kv-band{position:relative;background:linear-gradient(180deg,#3096f3,#2a82e0);padding-bottom:56px}
 .kv-info{position:relative;max-width:1240px;margin:-150px auto 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,400px);gap:24px;align-items:center;padding-left:max(20px,4vw,env(safe-area-inset-left,0px));padding-right:max(20px,4vw,env(safe-area-inset-right,0px));z-index:2}
@@ -666,7 +667,6 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .kv-play svg{width:32px;height:32px;fill:var(--blue-600);margin-left:4px}
 .kv-ribbon{animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.2s)}
 .kv-news{animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
-.kv-movie{animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.8s)}
 @keyframes kvIn{0%{opacity:0;transform:translateY(30px) scale(.94)}100%{opacity:1;transform:none}}
 @media (max-width:860px){
   .kv-info{grid-template-columns:minmax(0,1fr);margin-top:-40px;gap:36px}
@@ -675,6 +675,13 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
   .kv-left{min-width:0}
   .kv-news{grid-template-columns:1fr;padding:18px 20px}
   .kv-news li{grid-template-columns:1fr;gap:0}
+}
+
+.kv-art .kv-movie{position:absolute;right:2%;bottom:9%;width:min(19%,380px);padding:46px 10px 10px;animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
+.kv-art .kv-movie:hover{transform:translateY(-4px)}
+@media (max-width:860px){
+  .kv{padding-bottom:40px;padding-top:var(--hdr,108px)}
+  .kv-art .kv-movie{position:relative;right:auto;bottom:auto;width:calc(100% - 40px);max-width:420px;margin:44px auto 0;line-height:normal}
 }
 /* Movie dialog */
 dialog.mdlg{width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:#000}
@@ -867,17 +874,11 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
   <h1 class="sr-only">발구름 콘텐츠: 사고뭉치 특공대</h1>
   <!-- ===== 키 비주얼 ===== -->
   <section class="kv" aria-label="사고뭉치 특공대">
-    <div class="kv-art"><img src="assets/keyart.jpg" alt="사고뭉치 특공대 로고 방패를 둘러싼 알토, 푸딩, 핌피, 키리, 에디스, 엘로, 토니토니" width="1920" height="1080"></div>
-    <div class="kv-band">
-      <div class="kv-info">
-        <div class="kv-left">
-          <p class="kv-ribbon"><b>2026.11.17</b><span class="kv-day" aria-label="화요일">화</span><span class="kv-open">오픈</span></p>
-        </div>
-        <button type="button" class="kv-movie" data-kv-movie data-src="" aria-label="게임 감상하기 영상 크게 보기">
+    <div class="kv-art"><img src="assets/keyart.jpg" alt="사고뭉치 특공대 로고 방패를 둘러싼 알토, 푸딩, 핌피, 키리, 에디스, 엘로, 토니토니" width="1920" height="1080">
+      <button type="button" class="kv-movie" data-kv-movie data-src="" aria-label="게임 감상하기 영상 크게 보기">
           <span class="kv-tab" aria-hidden="true"><i>✦</i><em></em>게임 감상하기<em></em><i>✦</i></span>
           <span class="kv-thumb"><img src="assets/play-6.jpg" alt=""><span class="kv-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5l12 7-12 7z"/></svg></span></span>
         </button>
-      </div>
     </div>
   </section>
 
