@@ -609,7 +609,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .cx-spark{position:absolute;z-index:2;fill:#fff;opacity:.9}
 .cx-spark.s1{width:44px;left:8%;top:14%}.cx-spark.s2{width:26px;right:10%;top:8%}.cx-spark.s3{width:20px;right:4%;bottom:34%}
 .cx-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px}
-.cx-pick{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.cx-pick{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .cx-pick button{display:flex;flex-direction:column;align-items:center;gap:2px;width:78px;padding:8px 4px 6px;border:3px solid transparent;border-radius:20px;background:rgba(255,255,255,.5);color:#0b1f45;font-weight:800;font-size:12px;transition:transform .2s,background .2s,border-color .2s}
 .cx-pick button img{width:46px;height:46px;object-fit:contain}
 .cx-pick button:hover{transform:translateY(-3px);background:rgba(255,255,255,.8)}
@@ -637,7 +637,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 
 
 /* Key visual */
-.kv{position:relative;background:#2f8ee8}
+.kv{position:relative;background:#2f8ee8;overflow:hidden;overflow:clip}
 .kv-art{position:relative}
 .kv-art>img{display:block}
 .kv-art img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
@@ -676,7 +676,7 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
   .kv-news li{grid-template-columns:1fr;gap:0}
 }
 
-.kv-art .kv-movie{position:absolute;right:2%;bottom:16%;width:min(19%,380px);padding:46px 10px 10px;animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
+.kv-art .kv-movie{position:absolute;right:max(2%,28px);bottom:16%;width:min(20%,380px);min-width:250px;padding:46px 10px 10px;animation:kvIn .7s cubic-bezier(.2,.9,.3,1.25) both calc(var(--intro-delay) + 1.5s)}
 .kv-art .kv-movie:hover{transform:translateY(-4px)}
 @media (max-width:860px){
   .kv{padding-bottom:40px;padding-top:var(--hdr,108px)}
@@ -997,24 +997,10 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           <button type="button" aria-pressed="false" data-cx-pick="2"><img src="assets/char-edis.png" alt=""><span>에디스</span></button>
           <button type="button" aria-pressed="false" data-cx-pick="3"><img src="assets/char-pimpi.png" alt=""><span>핌피</span></button>
           <button type="button" aria-pressed="false" data-cx-pick="4"><img src="assets/char-tonitoni.png" alt=""><span>토니토니</span></button>
+          <button type="button" aria-pressed="false" data-cx-pick="5"><img src="assets/char-kiri.png" alt=""><span>키리</span></button>
+          <button type="button" aria-pressed="false" data-cx-pick="6"><img src="assets/char-ello.png" alt=""><span>엘로</span></button>
         </div>
         <button type="button" class="cx-arrow" data-cx-next aria-label="다음 캐릭터"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-      </div>
-    </div>
-  </section>
-
-  <section class="band tight" aria-labelledby="friends-title">
-    <div class="wrap">
-      <h3 class="sg-sub-title" id="friends-title" style="margin-top:0">함께하는 친구들</h3>
-      <div class="sg-friends">
-        <article class="sg-friend">
-          <img src="assets/char-kiri.jpg" alt="튜토리얼 화면 속 가이드 키리" class="photo">
-          <div><p class="sg-char-tag">가이드 캐릭터</p><h4>키리</h4><p>게임 시작 전 오늘의 운동 동작을 먼저 보여줘요. 모두가 세 번 따라 하면 튜토리얼이 끝나요.</p></div>
-        </article>
-        <article class="sg-friend">
-          <img src="assets/char-ello.png" alt="빨간 새 모양의 엘로">
-          <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p><div class="ello-views"><img src="assets/tv-ello-front.png" alt="엘로 앞모습"><img src="assets/tv-ello-side.png" alt="엘로 옆모습"><img src="assets/tv-ello-back.png" alt="엘로 뒷모습"></div></div>
-        </article>
       </div>
     </div>
   </section>
@@ -1626,15 +1612,17 @@ window.BALGURUM_SUPABASE = {
       {k:'alto',name:'알토',en:'ALTO',bg:'#6cc3f5',blob:'#a9dcfa',color:'하늘',desc:'머리에 몽글몽글 흰 구름과 파란 뿔이 달린 하늘색 친구. 졸린 듯한 눈과 콧수염이 매력이에요.'},
       {k:'edis',name:'에디스',en:'EDIS',bg:'#9be15d',blob:'#c6f09c',color:'초록',desc:'안경 쓴 화면 얼굴과 안테나를 가진 초록 네모 로봇. 하얀 장갑을 끼고 있어요.'},
       {k:'pimpi',name:'핌피',en:'PIMPI',bg:'#ff8fab',blob:'#ffc0cf',color:'분홍',desc:'머리 위에 하트 더듬이가 달린 분홍 곰. 파란 나비넥타이가 포인트예요.'},
-      {k:'tonitoni',name:'토니토니',en:'TONITONI',bg:'#c9a0f5',blob:'#e2cbfa',color:'보라',desc:'헤드폰과 선글라스를 쓴 길쭉한 연보라 친구. 노란 조끼를 입고 있어요.'}
+      {k:'tonitoni',name:'토니토니',en:'TONITONI',bg:'#c9a0f5',blob:'#e2cbfa',color:'보라',desc:'헤드폰과 선글라스를 쓴 길쭉한 연보라 친구. 노란 조끼를 입고 있어요.'},
+      {k:'kiri',name:'키리',en:'KIRI',bg:'#7fd9c8',blob:'#c2f1e7',tag:'가이드 캐릭터',views:false,desc:'고글을 쓴 주황 머리의 꼬마 박사. 게임을 시작하기 전에 오늘의 운동 동작을 먼저 보여주고, 모두가 세 번 따라 하면 모험이 시작돼요.'},
+      {k:'ello',name:'엘로',en:'ELLO',bg:'#ff8f7a',blob:'#ffc6bb',tag:'서브 캐릭터',desc:'머리에 하트 깃털이 달린 동글동글 빨간 새. 게임 속 연출과 보조 역할로 등장하고, 쿵쿵 떡방아에서는 박자를 알려줘요.'}
     ];
     let ci=0; const img=cx.querySelector('[data-cx-img]'), picks=[...cx.querySelectorAll('[data-cx-pick]')], q=k=>cx.querySelector('[data-cx-'+k+']');
-    CX.forEach(c=>{ ['char-'+c.k,'tv-'+c.k+'-front','tv-'+c.k+'-side','tv-'+c.k+'-back'].forEach(n=>{ const pre=new Image(); pre.src='assets/'+n+'.png'; }); });
+    CX.forEach(c=>{ (c.views===false?['char-'+c.k]:['char-'+c.k,'tv-'+c.k+'-front','tv-'+c.k+'-side','tv-'+c.k+'-back']).forEach(n=>{ const pre=new Image(); pre.src='assets/'+n+'.png'; }); });
     function setCx(i){
       ci=(i+CX.length)%CX.length; const c=CX[ci];
       cx.style.setProperty('--bg',c.bg); cx.style.setProperty('--blob',c.blob);
-      q('no').textContent='No.0'+(ci+1)+' · Player 카드 '+c.color; q('word').textContent=c.en; q('name').textContent=c.name; q('desc').textContent=c.desc;
-      const vw=q('views'); vw.setAttribute('aria-label',c.name+' 삼면도');
+      q('no').textContent='No.0'+(ci+1)+' · '+(c.tag||('Player 카드 '+c.color)); q('word').textContent=c.en; q('name').textContent=c.name; q('desc').textContent=c.desc;
+      const vw=q('views'); vw.setAttribute('aria-label',c.name+' 삼면도'); vw.hidden=(c.views===false);
       vw.querySelectorAll('img[data-v]').forEach(im=>{ const v=im.dataset.v; im.src='assets/tv-'+c.k+'-'+v+'.png'; im.alt=c.name+' '+({front:'앞모습',side:'옆모습',back:'뒷모습'})[v]; });
       picks.forEach((b,j)=>b.setAttribute('aria-pressed', j===ci));
       if(reduce){ img.src='assets/char-'+c.k+'.png'; return; }
