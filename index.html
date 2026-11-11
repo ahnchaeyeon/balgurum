@@ -326,12 +326,7 @@ html[data-route="contents"].at-top body::before{background:#0b1f45}
 
 /* ---------- Cheer page (easter egg) ---------- */
 :root{--cheer-1:#1f6cf0;--cheer-2:#1450c8;--cheer-line:rgba(255,255,255,.55);--cheer-soft:rgba(255,255,255,.12);--cheer-pick:#3d8dff;--cheer-mint:#7fe3ff}
-html[data-route="cheer"].at-top .site-header{background:transparent;border-color:transparent;backdrop-filter:none}
-html[data-route="cheer"].at-top .site-header .brand,html[data-route="cheer"].at-top .menu a{color:var(--white)}
-html[data-route="cheer"].at-top .site-header .brand svg{color:var(--white)}
-html[data-route="cheer"].at-top .site-header .btn{background:var(--white);color:var(--cheer-2)}
-html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
-.cheer{background:linear-gradient(170deg,var(--cheer-1),var(--cheer-2) 70%);color:var(--white);margin-top:calc(-1 * var(--hdr,72px));padding-top:var(--hdr,72px)}
+.cheer{background:var(--white);color:var(--ink)}
 .cheer-wrap{display:grid;gap:20px;padding-block:40px 80px;max-width:1080px}
 .cheer-head{text-align:center;display:grid;gap:12px;margin-bottom:10px}
 .cheer-head h1{color:var(--white);font-size:clamp(28px,4.2vw,44px);font-weight:900;animation:popUp .6s both .05s}
@@ -826,6 +821,40 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 .pk-title,.pk-lead{text-align:center}
 .pk-lead{margin-inline:auto}
 .sg-flow-band .wrap>.eyebrow,.sg-flow-band .wrap>.sec-title,.sg-flow-band .wrap>.sec-sub{text-align:center}
+
+
+/* Cheer page on white */
+.cheer-head h1{color:var(--ink)}
+.cheer-head h1 em{color:var(--blue-600)}
+.cheer-head p{color:var(--muted)}
+.cheer-card{background:var(--sky-50);border-color:var(--line)}
+.cheer-col+.cheer-col{border-color:var(--line)}
+.cheer-col legend,.cheer-col h2{color:var(--ink)}
+.cheer-col .no{color:var(--blue-600)}
+.pick{border-color:var(--sky-200);background:var(--white);color:var(--ink)}
+.pick:hover{background:var(--sky-100)}
+.pick-ico svg{stroke:var(--blue-600)}
+.pick:has(input:checked){background:var(--blue-600);border-color:var(--blue-600);color:var(--white)}
+.pick:has(input:checked) .pick-ico svg{stroke:var(--white)}
+.pick-check{background:var(--white)}
+.cheer .hint,.cheer .status,.cheer small{color:var(--muted)}
+.cheer .status.err{color:#b4231a}
+.cheer label.f{color:var(--ink)}
+.cheer input[type=text],.cheer textarea{color:var(--ink);background:var(--white);border-color:var(--sky-200)}
+.cheer input::placeholder,.cheer textarea::placeholder{color:#7a879c}
+.cheer input[type=text]:focus,.cheer textarea:focus{border-color:var(--blue-600);background:var(--white)}
+.cheer textarea.bad{border-color:#e0582f}
+.count{color:var(--muted)}
+.check{color:var(--ink)}
+.check input{accent-color:var(--blue-600)}
+.send{background:var(--blue-600);border-color:var(--blue-600)}
+.send:hover{background:var(--blue-deep)}
+.cheer-banner{border-color:var(--line);color:var(--ink);background:var(--sky-50)}
+.cheer-banner svg{fill:var(--blue-600)}
+.wall h2{color:var(--ink)}
+.wall-note{color:var(--muted)}
+.wall-card{border:1px solid var(--line);box-shadow:var(--shadow)}
+.wall-empty{border-color:var(--sky-200);color:var(--muted)}
 
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
