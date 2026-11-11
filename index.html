@@ -11,7 +11,7 @@
 <meta name="description" content="움직임이 놀이가 되고, 놀이가 성장이 된다. XR 어린이 콘텐츠 브랜드 발구름">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Outfit:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Outfit:wght@600;700;800&family=Fredoka:wght@600;700&display=swap">
 <style>
 /* Layout: airy sky world. Each page = soft hero with playable illustration, then alternating white / sky bands with rounded blobs. Single light look by design. */
 :root{
@@ -569,6 +569,47 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
 .pill-cta:hover .pill-arrow{transform:translateY(-50%) translateX(4px)}
 @media (max-width:520px){.pill-cta{min-height:76px;padding:14px 80px 14px 28px}.pill-arrow{width:48px;height:48px;right:14px}.pill-arrow svg{width:24px;height:24px}}
 
+
+/* Full-screen characters */
+.cx{position:relative;min-height:100vh;min-height:100svh;background:var(--bg);color:#0b1f45;overflow:hidden;transition:background .6s ease}
+.cx::before{content:"";position:absolute;inset:auto -10% -30% 40%;height:70%;background:rgba(255,255,255,.18);border-radius:50%;transform:rotate(-8deg);pointer-events:none}
+.cx-inner{position:relative;min-height:100vh;min-height:100svh;max-width:1360px;margin:0 auto;display:flex;flex-direction:column;padding-top:calc(var(--hdr,72px) + 24px);padding-bottom:28px;padding-left:max(24px,5vw,env(safe-area-inset-left,0px));padding-right:max(24px,5vw,env(safe-area-inset-right,0px))}
+.cx-eyebrow{font-family:var(--f-latin);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:13px;color:#0b1f45}
+.cx-title{font-size:clamp(18px,1.8vw,22px);font-weight:800;margin-top:2px;color:#0b1f45}
+.cx-body{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:24px}
+.cx-text{position:relative;z-index:2;display:grid;gap:14px;align-content:center}
+.cx-no{font-weight:700;font-size:15px;color:#0b1f45}
+.cx-word{font-family:"Fredoka","Outfit",sans-serif;font-weight:700;font-size:clamp(56px,9vw,148px);line-height:.88;letter-spacing:-.02em;color:#fff;text-shadow:0 6px 0 rgba(11,31,69,.12);margin:4px 0 2px;word-break:normal;overflow-wrap:normal}
+.cx-name{font-size:clamp(28px,3vw,40px);font-weight:900;color:#0b1f45}
+.cx-desc{font-size:clamp(15px,1.4vw,18px);max-width:28em;color:#0b1f45;font-weight:500}
+.cx-facts{display:grid;gap:10px;margin:10px 0 0;max-width:420px}
+.cx-facts>div{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:12px;padding-bottom:10px;border-bottom:2px solid rgba(11,31,69,.14)}
+.cx-facts dt{font-size:13px;font-weight:800;color:#0b1f45}
+.cx-facts dd{margin:0;font-size:15px;font-weight:600;color:#0b1f45}
+.cx-stage{position:relative;height:min(64vh,620px);display:grid;place-items:end center}
+.cx-blob{position:absolute;left:50%;bottom:6%;width:min(88%,560px);aspect-ratio:1;transform:translateX(-50%);border-radius:46% 54% 50% 50%/52% 46% 54% 48%;background:var(--blob);transition:background .6s ease}
+.cx-img{position:relative;z-index:1;height:86%;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 22px 22px rgba(11,31,69,.22));transition:opacity .35s ease,transform .45s ease}
+.cx-img.out{opacity:0;transform:translateY(24px) scale(.96)}
+.cx-spark{position:absolute;z-index:2;fill:#fff;opacity:.9}
+.cx-spark.s1{width:44px;left:8%;top:14%}.cx-spark.s2{width:26px;right:10%;top:8%}.cx-spark.s3{width:20px;right:4%;bottom:34%}
+.cx-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px}
+.cx-pick{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.cx-pick button{display:flex;flex-direction:column;align-items:center;gap:2px;width:78px;padding:8px 4px 6px;border:3px solid transparent;border-radius:20px;background:rgba(255,255,255,.5);color:#0b1f45;font-weight:800;font-size:12px;transition:transform .2s,background .2s,border-color .2s}
+.cx-pick button img{width:46px;height:46px;object-fit:contain}
+.cx-pick button:hover{transform:translateY(-3px);background:rgba(255,255,255,.8)}
+.cx-pick button[aria-pressed="true"]{background:#fff;border-color:#0b1f45}
+.cx-arrow{width:52px;height:52px;border-radius:50%;border:0;background:#0b1f45;display:grid;place-items:center;flex:none;transition:transform .2s}
+.cx-arrow:hover{transform:scale(1.08)}
+.cx-arrow svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:860px){
+  .cx-body{grid-template-columns:1fr;gap:0}
+  .cx-stage{order:-1;height:min(40vh,340px)}
+  .cx-word{font-size:clamp(52px,16vw,96px)}
+  .cx-facts{display:none}
+  .cx-arrow{display:none}
+  .cx-pick button{width:60px}.cx-pick button img{width:36px;height:36px}
+}
+
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -806,11 +847,11 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <p>다섯 친구와 함께, 몸으로 해결하러 가볼까요?</p>
     </div>
     <div class="mosaic-crew" aria-hidden="true">
-      <img src="assets/char-tonitoni.png" alt="" style="--a:0.513;--i:0">
-      <img src="assets/char-pimpi.png" alt="" style="--a:0.726;--i:1">
-      <img src="assets/char-alto.png" alt="" style="--a:1.030;--i:2">
-      <img src="assets/char-edis.png" alt="" style="--a:1.045;--i:3">
-      <img src="assets/char-puding.png" alt="" style="--a:0.710;--i:4">
+      <img src="assets/char-tonitoni.png" alt="" style="--a:0.511;--i:0">
+      <img src="assets/char-pimpi.png" alt="" style="--a:0.733;--i:1">
+      <img src="assets/char-alto.png" alt="" style="--a:1.035;--i:2">
+      <img src="assets/char-edis.png" alt="" style="--a:1.048;--i:3">
+      <img src="assets/char-puding.png" alt="" style="--a:0.713;--i:4">
     </div>
   </section>
 
@@ -923,31 +964,49 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
   </section>
 
   <!-- ===== 캐릭터 ===== -->
-  <section class="band sg-chars-band" aria-labelledby="sg-chars-title">
-    <div class="wrap">
-      <p class="eyebrow">Characters</p>
-      <h2 class="sec-title" id="sg-chars-title" style="margin-top:6px">사고뭉치 특공대를 소개합니다<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-      <p class="sec-sub">플레이어가 직접 움직이는 다섯 친구예요. 게임을 시작하면 인원수에 맞춰 랜덤으로 한 명씩 배정돼요.</p>
-      <div class="sg-chars" data-chars>
-        <div class="sg-char-stage" data-char-stage style="--c:#ffd84a;--c2:#fff4c4">
-          <span class="sg-char-ring" aria-hidden="true"></span>
-          <img class="sg-char-img" src="assets/char-puding.png" alt="푸딩" data-char-img>
-          <span class="sg-char-floor" aria-hidden="true"></span>
+  <section class="cx" aria-labelledby="cx-title" data-cx style="--bg:#ffcf4a;--blob:#ffe28c">
+    <div class="cx-inner">
+      <div class="cx-top">
+        <p class="cx-eyebrow">Characters</p>
+        <h2 class="cx-title" id="cx-title">사고뭉치 특공대를 소개합니다</h2>
+      </div>
+      <div class="cx-body">
+        <div class="cx-text" aria-live="polite">
+          <p class="cx-no" data-cx-no>No.01 · Player 카드 노랑</p>
+          <p class="cx-word" aria-hidden="true" data-cx-word>PUDING</p>
+          <h3 class="cx-name" data-cx-name>푸딩</h3>
+          <p class="cx-desc" data-cx-desc>머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.</p>
+          <dl class="cx-facts">
+            <div><dt>역할</dt><dd>플레이어 캐릭터</dd></div>
+            <div><dt>카드 색</dt><dd data-cx-color>노랑</dd></div>
+            <div><dt>등장</dt><dd>여덟 게임 모두, 랜덤 배정</dd></div>
+          </dl>
         </div>
-        <div class="sg-char-info">
-          <p class="sg-char-tag" data-char-tag>사고뭉치 특공대 · Player 카드 노랑</p>
-          <h3 class="sg-char-name"><span data-char-name>푸딩</span><small data-char-en>Puding</small></h3>
-          <p class="sg-char-desc" data-char-desc>머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.</p>
-          <div class="sg-char-pick" role="group" aria-label="캐릭터 고르기">
-            <button type="button" aria-pressed="true" data-char="puding" style="--c:#ffd84a"><img src="assets/char-puding.png" alt=""><span>푸딩</span></button>
-            <button type="button" aria-pressed="false" data-char="alto" style="--c:#5cc8f2"><img src="assets/char-alto.png" alt=""><span>알토</span></button>
-            <button type="button" aria-pressed="false" data-char="edis" style="--c:#8fd94a"><img src="assets/char-edis.png" alt=""><span>에디스</span></button>
-            <button type="button" aria-pressed="false" data-char="pimpi" style="--c:#ff7f9b"><img src="assets/char-pimpi.png" alt=""><span>핌피</span></button>
-            <button type="button" aria-pressed="false" data-char="tonitoni" style="--c:#c99af0"><img src="assets/char-tonitoni.png" alt=""><span>토니토니</span></button>
-          </div>
+        <div class="cx-stage" aria-hidden="true">
+          <span class="cx-blob"></span>
+          <svg class="cx-spark s1" viewBox="0 0 40 40"><path d="M20 0C21 13 27 19 40 20 27 21 21 27 20 40 19 27 13 21 0 20 13 19 19 13 20 0z"/></svg>
+          <svg class="cx-spark s2" viewBox="0 0 40 40"><path d="M20 0C21 13 27 19 40 20 27 21 21 27 20 40 19 27 13 21 0 20 13 19 19 13 20 0z"/></svg>
+          <svg class="cx-spark s3" viewBox="0 0 40 40"><path d="M20 0C21 13 27 19 40 20 27 21 21 27 20 40 19 27 13 21 0 20 13 19 19 13 20 0z"/></svg>
+          <img class="cx-img" src="assets/char-puding.png" alt="" data-cx-img>
         </div>
       </div>
-      <h3 class="sg-sub-title">함께하는 친구들</h3>
+      <div class="cx-nav">
+        <button type="button" class="cx-arrow" data-cx-prev aria-label="이전 캐릭터"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <div class="cx-pick" role="group" aria-label="캐릭터 고르기">
+          <button type="button" aria-pressed="true" data-cx-pick="0"><img src="assets/char-puding.png" alt=""><span>푸딩</span></button>
+          <button type="button" aria-pressed="false" data-cx-pick="1"><img src="assets/char-alto.png" alt=""><span>알토</span></button>
+          <button type="button" aria-pressed="false" data-cx-pick="2"><img src="assets/char-edis.png" alt=""><span>에디스</span></button>
+          <button type="button" aria-pressed="false" data-cx-pick="3"><img src="assets/char-pimpi.png" alt=""><span>핌피</span></button>
+          <button type="button" aria-pressed="false" data-cx-pick="4"><img src="assets/char-tonitoni.png" alt=""><span>토니토니</span></button>
+        </div>
+        <button type="button" class="cx-arrow" data-cx-next aria-label="다음 캐릭터"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight" aria-labelledby="friends-title">
+    <div class="wrap">
+      <h3 class="sg-sub-title" id="friends-title" style="margin-top:0">함께하는 친구들</h3>
       <div class="sg-friends">
         <article class="sg-friend">
           <img src="assets/char-kiri.jpg" alt="튜토리얼 화면 속 가이드 키리" class="photo">
@@ -1414,6 +1473,32 @@ window.BALGURUM_SUPABASE = {
     cards.forEach(c=>c.addEventListener('focusin',()=>{ if(native) return; const top=hs.getBoundingClientRect().top+scrollY; const target=Math.min(dist,Math.max(0,c.offsetLeft+c.offsetWidth/2-innerWidth/2)); scrollTo({top:top+target}); }));
     layout(); window.addEventListener('hashchange',()=>setTimeout(layout,50)); window.addEventListener('load',layout);
     if(window.ResizeObserver) new ResizeObserver(()=>layout()).observe(track);
+  }
+
+
+  /* ---------- Full-screen characters ---------- */
+  const cx=document.querySelector('[data-cx]');
+  if(cx){
+    const CX=[
+      {k:'puding',name:'푸딩',en:'PUDING',bg:'#ffcf4a',blob:'#ffe28c',color:'노랑',desc:'머리 위에 생크림과 체리를 올린 노란 친구. 체크무늬 스카프를 두르고 있어요.'},
+      {k:'alto',name:'알토',en:'ALTO',bg:'#6cc3f5',blob:'#a9dcfa',color:'하늘',desc:'머리에 몽글몽글 흰 구름과 파란 뿔이 달린 하늘색 친구. 졸린 듯한 눈과 콧수염이 매력이에요.'},
+      {k:'edis',name:'에디스',en:'EDIS',bg:'#9be15d',blob:'#c6f09c',color:'초록',desc:'안경 쓴 화면 얼굴과 안테나를 가진 초록 네모 로봇. 하얀 장갑을 끼고 있어요.'},
+      {k:'pimpi',name:'핌피',en:'PIMPI',bg:'#ff8fab',blob:'#ffc0cf',color:'분홍',desc:'머리 위에 하트 더듬이가 달린 분홍 곰. 파란 나비넥타이가 포인트예요.'},
+      {k:'tonitoni',name:'토니토니',en:'TONITONI',bg:'#c9a0f5',blob:'#e2cbfa',color:'보라',desc:'헤드폰과 선글라스를 쓴 길쭉한 연보라 친구. 노란 조끼를 입고 있어요.'}
+    ];
+    let ci=0; const img=cx.querySelector('[data-cx-img]'), picks=[...cx.querySelectorAll('[data-cx-pick]')], q=k=>cx.querySelector('[data-cx-'+k+']');
+    CX.forEach(c=>{ const pre=new Image(); pre.src='assets/char-'+c.k+'.png'; });
+    function setCx(i){
+      ci=(i+CX.length)%CX.length; const c=CX[ci];
+      cx.style.setProperty('--bg',c.bg); cx.style.setProperty('--blob',c.blob);
+      q('no').textContent='No.0'+(ci+1)+' · Player 카드 '+c.color; q('word').textContent=c.en; q('name').textContent=c.name; q('desc').textContent=c.desc; q('color').textContent=c.color;
+      picks.forEach((b,j)=>b.setAttribute('aria-pressed', j===ci));
+      if(reduce){ img.src='assets/char-'+c.k+'.png'; return; }
+      img.classList.add('out'); setTimeout(()=>{ img.src='assets/char-'+c.k+'.png'; img.classList.remove('out'); },260);
+    }
+    picks.forEach((b,j)=>b.addEventListener('click',()=>setCx(j)));
+    q('prev').addEventListener('click',()=>setCx(ci-1)); q('next').addEventListener('click',()=>setCx(ci+1));
+    cx.querySelector('.cx-pick').addEventListener('keydown',e=>{ if(e.key==='ArrowRight'){ setCx(ci+1); picks[ci].focus(); } if(e.key==='ArrowLeft'){ setCx(ci-1); picks[ci].focus(); } });
   }
 
   /* ---------- 사고뭉치 특공대: characters ---------- */
