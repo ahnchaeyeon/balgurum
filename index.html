@@ -846,30 +846,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
   </section>
 
-  <!-- ===== 게임 한눈에 보기 ===== -->
-  <section class="band sg-games-band" aria-labelledby="sg-grid-title">
-    <div class="wrap">
-      <p class="eyebrow">All Games</p>
-      <h2 class="sec-title" id="sg-grid-title" style="margin-top:6px">하나의 세계, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
-      <p class="sec-sub">여덟 게임을 한눈에 보고, 카드를 눌러 자세히 확인해 보세요.</p>
-      <div class="filter" role="group" aria-label="게임 방식 필터">
-        <button type="button" data-filter="all" aria-pressed="true">전체 <span data-count="all"></span></button>
-        <button type="button" data-filter="coop" aria-pressed="false">협동 <span data-count="coop"></span></button>
-        <button type="button" data-filter="solo" aria-pressed="false">개인전 <span data-count="solo"></span></button>
-      </div>
-      <div class="games" data-games>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="0"><span class="g-no">GAME 01</span><div class="thumb"><img src="assets/game-duck.png" alt=""></div><h3>태엽새 레이스</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="1"><span class="g-no">GAME 02</span><div class="thumb"><img src="assets/game-sandwich.png" alt=""></div><h3>샌드위치 공장</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="2"><span class="g-no">GAME 03</span><div class="thumb"><img src="assets/game-coin.png" alt=""></div><h3>알쏭달쏭 코인볼</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="3"><span class="g-no">GAME 04</span><div class="thumb"><img src="assets/game-fishing.png" alt=""></div><h3>운동 낚시왕</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="4"><span class="g-no">GAME 05</span><div class="thumb"><img src="assets/game-rice.png" alt=""></div><h3>쿵쿵 떡방아</h3><span class="tag coop">협동</span></button></article>
-        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="5"><span class="g-no">GAME 06</span><div class="thumb"><img src="assets/game-escape.png" alt=""></div><h3>탈출 대추격전</h3><span class="tag coop">협동</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="6"><span class="g-no">GAME 07</span><div class="thumb"><img src="assets/game-skate.png" alt=""></div><h3>리듬 피겨 점프!</h3><span class="tag">개인전</span></button></article>
-        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="7"><span class="g-no">GAME 08</span><div class="thumb"><img src="assets/game-snowman.png" alt=""></div><h3>눈사람 탈출 작전</h3><span class="tag">개인전</span></button></article>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== 플레이 흐름 ===== -->
   <section class="band sg-flow-band" aria-labelledby="sg-flow-title">
     <div class="wrap">
@@ -942,6 +918,30 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           <img src="assets/char-ello.png" alt="빨간 새 모양의 엘로">
           <div><p class="sg-char-tag">서브 캐릭터</p><h4>엘로 <small>Ello</small></h4><p>게임 속 연출과 보조 역할로 등장해요. 쿵쿵 떡방아에서는 엘로가 박자를 알려줘요.</p></div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 게임 한눈에 보기 ===== -->
+  <section class="band sg-games-band" aria-labelledby="sg-grid-title">
+    <div class="wrap">
+      <p class="eyebrow">All Games</p>
+      <h2 class="sec-title" id="sg-grid-title" style="margin-top:6px">하나의 세계, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <p class="sec-sub">여덟 게임을 한눈에 보고, 카드를 눌러 자세히 확인해 보세요.</p>
+      <div class="filter" role="group" aria-label="게임 방식 필터">
+        <button type="button" data-filter="all" aria-pressed="true">전체 <span data-count="all"></span></button>
+        <button type="button" data-filter="coop" aria-pressed="false">협동 <span data-count="coop"></span></button>
+        <button type="button" data-filter="solo" aria-pressed="false">개인전 <span data-count="solo"></span></button>
+      </div>
+      <div class="games" data-games>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="0"><span class="g-no">GAME 01</span><div class="thumb"><img src="assets/game-duck.png" alt=""></div><h3>태엽새 레이스</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="1"><span class="g-no">GAME 02</span><div class="thumb"><img src="assets/game-sandwich.png" alt=""></div><h3>샌드위치 공장</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="2"><span class="g-no">GAME 03</span><div class="thumb"><img src="assets/game-coin.png" alt=""></div><h3>알쏭달쏭 코인볼</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="3"><span class="g-no">GAME 04</span><div class="thumb"><img src="assets/game-fishing.png" alt=""></div><h3>운동 낚시왕</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="4"><span class="g-no">GAME 05</span><div class="thumb"><img src="assets/game-rice.png" alt=""></div><h3>쿵쿵 떡방아</h3><span class="tag coop">협동</span></button></article>
+        <article class="game" data-type="coop"><button type="button" class="game-btn" data-game="5"><span class="g-no">GAME 06</span><div class="thumb"><img src="assets/game-escape.png" alt=""></div><h3>탈출 대추격전</h3><span class="tag coop">협동</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="6"><span class="g-no">GAME 07</span><div class="thumb"><img src="assets/game-skate.png" alt=""></div><h3>리듬 피겨 점프!</h3><span class="tag">개인전</span></button></article>
+        <article class="game" data-type="solo"><button type="button" class="game-btn" data-game="7"><span class="g-no">GAME 08</span><div class="thumb"><img src="assets/game-snowman.png" alt=""></div><h3>눈사람 탈출 작전</h3><span class="tag">개인전</span></button></article>
       </div>
     </div>
   </section>
