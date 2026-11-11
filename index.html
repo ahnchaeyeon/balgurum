@@ -559,6 +559,16 @@ html[data-route="cheer"].at-top body::before{background:var(--cheer-1)}
   .hs-key{font-size:52px}
 }
 
+
+#all-games{scroll-margin-top:var(--hdr,72px)}
+.hs-cta{background:#14366f;display:flex;justify-content:center;padding-block:8px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.pill-cta{position:relative;display:flex;align-items:center;justify-content:center;gap:24px;width:min(620px,100%);min-height:96px;padding:18px 104px 18px 48px;border:0;border-radius:999px;background:var(--blue-600);color:#fff;font-family:var(--f-display);font-weight:900;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.01em;box-shadow:0 0 0 6px rgba(47,111,201,.25),0 14px 34px rgba(0,0,0,.35);transition:transform .2s,background .2s}
+.pill-cta:hover{background:#3b7fe0;transform:translateY(-3px)}
+.pill-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:60px;height:60px;border-radius:50%;background:var(--star);display:grid;place-items:center;transition:transform .2s}
+.pill-arrow svg{width:30px;height:30px;fill:none;stroke:var(--blue-deep);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.pill-cta:hover .pill-arrow{transform:translateY(-50%) translateX(4px)}
+@media (max-width:520px){.pill-cta{min-height:76px;padding:14px 80px 14px 28px}.pill-arrow{width:48px;height:48px;right:14px}.pill-arrow svg{width:24px;height:24px}}
+
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -871,6 +881,10 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
   </section>
 
+  <div class="hs-cta">
+    <button type="button" class="pill-cta" data-scroll="all-games">「미니게임」 안내로<span class="pill-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></button>
+  </div>
+
   <!-- ===== 사고뭉치 특공대 소개 ===== -->
   <section class="band sg-intro" id="contents-feature">
     <div class="wrap">
@@ -948,7 +962,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
   </section>
 
   <!-- ===== 게임 한눈에 보기 ===== -->
-  <section class="band sg-games-band" aria-labelledby="sg-grid-title">
+  <section class="band sg-games-band" id="all-games" aria-labelledby="sg-grid-title">
     <div class="wrap">
       <p class="eyebrow">All Games</p>
       <h2 class="sec-title" id="sg-grid-title" style="margin-top:6px">하나의 세계, 여덟 가지 놀이<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
