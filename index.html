@@ -971,6 +971,14 @@ html[data-route="cheer"] header .btn,.send{transition:background-color .2s,borde
 .mg-card .mg-moves{display:flex;flex-wrap:wrap;gap:10px}
 .mg-card .mg-moves span{background:#fff;border:0;color:#5a3a1a;font-family:var(--f-latin);font-weight:700;font-size:clamp(13px,1.15vw,17px);border-radius:999px;padding:8px 16px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
 @media (max-width:820px){.mg-card .mg-body{grid-template-columns:1fr}}
+/* Mini-game mode badge + roomier list */
+.mg-list{gap:clamp(48px,5vw,80px)}
+.mg-shot-wrap{position:relative}
+.mg-badge{position:absolute;z-index:2;left:calc(-1 * clamp(14px,1.6vw,26px));top:calc(-1 * clamp(18px,2vw,32px));width:clamp(104px,10vw,168px);aspect-ratio:1;display:grid;place-content:center;justify-items:center;gap:2px;color:#fff;text-align:center;line-height:1.05;clip-path:polygon(50.0% 0.0%,56.9% 6.5%,65.5% 2.4%,70.0% 10.8%,79.4% 9.5%,81.1% 18.9%,90.5% 20.6%,89.2% 30.0%,97.6% 34.5%,93.5% 43.1%,100.0% 50.0%,93.5% 56.9%,97.6% 65.5%,89.2% 70.0%,90.5% 79.4%,81.1% 81.1%,79.4% 90.5%,70.0% 89.2%,65.5% 97.6%,56.9% 93.5%,50.0% 100.0%,43.1% 93.5%,34.5% 97.6%,30.0% 89.2%,20.6% 90.5%,18.9% 81.1%,9.5% 79.4%,10.8% 70.0%,2.4% 65.5%,6.5% 56.9%,0.0% 50.0%,6.5% 43.1%,2.4% 34.5%,10.8% 30.0%,9.5% 20.6%,18.9% 18.9%,20.6% 9.5%,30.0% 10.8%,34.5% 2.4%,43.1% 6.5%);background:repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 8px,transparent 8px 18px),linear-gradient(180deg,#ff9a3c,#ffcc4d);filter:drop-shadow(0 6px 12px rgba(0,0,0,.18));transform:rotate(-8deg)}
+.mg-badge.coop{background:repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 8px,transparent 8px 18px),linear-gradient(180deg,#3d9ee6,#9fe3dc)}
+.mg-badge small{font-size:clamp(12px,1.1vw,17px);font-weight:800;opacity:.95}
+.mg-badge b{font-size:clamp(22px,2.4vw,40px);font-weight:900;letter-spacing:-.02em;text-shadow:0 2px 0 rgba(0,0,0,.08)}
+@media (max-width:820px){.mg-badge{left:-8px;top:-14px}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1385,9 +1393,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <div class="mg-list">
         <article class="mg-card" id="g-1" data-type="solo" style="--c:#c97800;--t:#fff3d6" aria-labelledby="g-1-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-1.jpg" alt="태엽새 레이스 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge"><small>누가 1등?</small><b>개인전</b></span><div class="mg-shot" data-video=""><img src="assets/play-1.jpg" alt="태엽새 레이스 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 01</span><span class="mg-mode">개인전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 01</span></div>
               <h3 id="g-1-t">태엽새 레이스</h3>
               <p class="mg-desc">우당탕! 사고뭉치 특공대가 태엽새의 태엽을 너무 느슨하게 풀어버렸어요. 운동으로 에너지를 채워 태엽새가 다시 잘 날아갈 수 있도록 도와줘요.</p>
               <div class="mg-info">
@@ -1399,9 +1407,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="mg-card" id="g-2" data-type="solo" style="--c:#e0582f;--t:#ffe6dc" aria-labelledby="g-2-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-2.jpg" alt="샌드위치 공장 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge"><small>누가 1등?</small><b>개인전</b></span><div class="mg-shot" data-video=""><img src="assets/play-2.jpg" alt="샌드위치 공장 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 02</span><span class="mg-mode">개인전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 02</span></div>
               <h3 id="g-2-t">샌드위치 공장</h3>
               <p class="mg-desc">특공대의 실수로 샌드위치 공장이 멈춰버렸어요. 박자에 맞춰 샌드위치에 깃발을 꽂고 배달 준비를 도와줘요.</p>
               <div class="mg-info">
@@ -1413,9 +1421,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="mg-card" id="g-3" data-type="solo" style="--c:#8a4fe0;--t:#efe4ff" aria-labelledby="g-3-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-3.jpg" alt="알쏭달쏭 코인볼 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge"><small>누가 1등?</small><b>개인전</b></span><div class="mg-shot" data-video=""><img src="assets/play-3.jpg" alt="알쏭달쏭 코인볼 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 03</span><span class="mg-mode">개인전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 03</span></div>
               <h3 id="g-3-t">알쏭달쏭 코인볼</h3>
               <p class="mg-desc">특공대의 장난으로 코인볼 가챠 기계의 목표 숫자가 뒤섞여 보석 캡슐이 열리지 않아요. 숫자 힌트를 보고 운동 횟수를 조절해 코인을 넣어요.</p>
               <div class="mg-info">
@@ -1427,9 +1435,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="mg-card" id="g-4" data-type="solo" style="--c:#1286c4;--t:#ddf0fb" aria-labelledby="g-4-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-4.jpg" alt="운동 낚시왕 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge"><small>누가 1등?</small><b>개인전</b></span><div class="mg-shot" data-video=""><img src="assets/play-4.jpg" alt="운동 낚시왕 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 04</span><span class="mg-mode">개인전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 04</span></div>
               <h3 id="g-4-t">운동 낚시왕</h3>
               <p class="mg-desc">특공대가 먹이통을 잘못 작동시켜 낚시터에 먹이가 쏟아졌어요. 몰려든 물고기로 난장판이 된 낚시터, 운동으로 낚시 게이지를 채워 물고기를 잡아요.</p>
               <div class="mg-info">
@@ -1441,9 +1449,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="mg-card" id="g-5" data-type="coop" style="--c:#e24b85;--t:#ffe3ee" aria-labelledby="g-5-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-5.jpg" alt="쿵쿵 떡방아 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge coop"><small>다 함께</small><b>협동전</b></span><div class="mg-shot" data-video=""><img src="assets/play-5.jpg" alt="쿵쿵 떡방아 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 05</span><span class="mg-mode">협동전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 05</span></div>
               <h3 id="g-5-t">쿵쿵 떡방아</h3>
               <p class="mg-desc">마을 잔치를 돕기 위해 떡 만들기에 나선 특공대. 서로 먼저 하겠다고 다투다 떡방아가 엉망이 됐어요. 엘로의 박자 안내에 맞춰 함께 떡을 완성해요.</p>
               <div class="mg-info">
@@ -1455,9 +1463,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="mg-card" id="g-6" data-type="coop" style="--c:#1f9a5c;--t:#dcf5e7" aria-labelledby="g-6-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-6.jpg" alt="탈출 대추격전 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge coop"><small>다 함께</small><b>협동전</b></span><div class="mg-shot" data-video=""><img src="assets/play-6.jpg" alt="탈출 대추격전 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 06</span><span class="mg-mode">협동전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 06</span></div>
               <h3 id="g-6-t">탈출 대추격전</h3>
               <p class="mg-desc">눈 터널을 지나던 특공대가 깊이 잠들어 있던 거대한 새를 깨워버렸어요. 화가 난 새가 쫓아와요. 다 함께 움직여 잡히기 전에 눈 터널을 탈출해요.</p>
               <div class="mg-info">
@@ -1469,9 +1477,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="mg-card" id="g-7" data-type="solo" style="--c:#3d63e0;--t:#e2e9ff" aria-labelledby="g-7-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-7.jpg" alt="리듬 피겨 점프! 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge"><small>누가 1등?</small><b>개인전</b></span><div class="mg-shot" data-video=""><img src="assets/play-7.jpg" alt="리듬 피겨 점프! 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 07</span><span class="mg-mode">개인전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 07</span></div>
               <h3 id="g-7-t">리듬 피겨 점프!</h3>
               <p class="mg-desc">특공대의 장난으로 피겨 공연에 필요한 방향과 점프 표시가 뒤섞였어요. 리듬 노트에 맞춰 움직여 공연을 끝까지 완성해요.</p>
               <div class="mg-info">
@@ -1483,9 +1491,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </article>
         <article class="mg-card" id="g-8" data-type="solo" style="--c:#1795b8;--t:#dbf3fa" aria-labelledby="g-8-t">
           <div class="mg-body">
-            <div class="mg-shot" data-video=""><img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면" loading="lazy"></div>
+            <div class="mg-shot-wrap"><span class="mg-badge"><small>누가 1등?</small><b>개인전</b></span><div class="mg-shot" data-video=""><img src="assets/play-8.jpg" alt="눈사람 탈출 작전 플레이 화면" loading="lazy"></div></div>
             <div class="mg-text">
-              <div class="mg-top"><span class="mg-no">GAME 08</span><span class="mg-mode">개인전</span></div>
+              <div class="mg-top"><span class="mg-no">GAME 08</span></div>
               <h3 id="g-8-t">눈사람 탈출 작전</h3>
               <p class="mg-desc">특공대의 장난으로 눈밭이 뒤집혀 모두 눈더미 속에 파묻혔어요. 운동을 빠르게 반복해 나를 덮은 눈을 깨고 눈사람에서 탈출해요.</p>
               <div class="mg-info">
