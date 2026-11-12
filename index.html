@@ -1264,11 +1264,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           </article>
         </div>
       </div>
-      <div class="hs-progress wrap">
-        <button type="button" class="hs-nav" data-hs-prev aria-label="이전 게임"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-        <button type="button" class="hs-nav" data-hs-next aria-label="다음 게임"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-        <span class="hs-count" data-hs-count aria-live="polite">01 / 08</span>
-      </div>
     </div>
   </section>
 
@@ -1946,7 +1941,7 @@ window.BALGURUM_SUPABASE = {
       track.style.transform='translate3d('+(-pos)+'px,0,0)';
       const mid=pos+view.clientWidth/2; let best=0,bd=1e9;
       cards.forEach((c,i)=>{ const d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid); if(d<bd){bd=d;best=i;} });
-      const t=pad(best%N+1)+' / '+pad(N); if(cnt.textContent!==t) cnt.textContent=t;
+      if(cnt){ const t=pad(best%N+1)+' / '+pad(N); if(cnt.textContent!==t) cnt.textContent=t; }
       return best;
     }
     function tick(t){
@@ -1966,7 +1961,7 @@ window.BALGURUM_SUPABASE = {
       const cur=draw(); const c=cards[Math.max(0,Math.min(cards.length-1,cur+dir))];
       target=c.offsetLeft+c.offsetWidth/2-view.clientWidth/2; hold(3000);
     }
-    prev.addEventListener('click',()=>go(-1)); next.addEventListener('click',()=>go(1));
+    if(prev) prev.addEventListener('click',()=>go(-1)); if(next) next.addEventListener('click',()=>go(1));
     /* drag / swipe */
     view.addEventListener('pointerdown',e=>{
       if(e.pointerType==='mouse'&&e.button!==0) return;
