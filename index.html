@@ -886,6 +886,12 @@ html[data-route="contents"] footer,html[data-route="games"] footer{padding-top:8
 html[data-route="cheer"] header .btn:hover,.send:hover{animation:none;transform:none}
 html[data-route="cheer"] header .btn,.send{transition:background-color .2s,border-color .2s}
 #page-cheer .cheer-head h1,#page-cheer .cheer-head p,#page-cheer .cheer-card,#page-cheer .cheer-banner,#page-cheer .wall-card{animation:none}
+/* Game packs auto row */
+.hs-view{scroll-snap-type:none;overflow:hidden;touch-action:pan-y}
+.hs-track{will-change:transform}
+.hs-intro{display:none}
+.hs-track{padding-inline:24px}
+.hs-progress{justify-content:center}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1260,7 +1266,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       </div>
       <div class="hs-progress wrap">
         <button type="button" class="hs-nav" data-hs-prev aria-label="이전 게임"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-        <div class="hs-sb" data-hs-sb aria-hidden="true"><span class="hs-thumb" data-hs-thumb></span></div>
         <button type="button" class="hs-nav" data-hs-next aria-label="다음 게임"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
         <span class="hs-count" data-hs-count aria-live="polite">01 / 08</span>
       </div>
@@ -1924,50 +1929,65 @@ window.BALGURUM_SUPABASE = {
     mdlg.addEventListener('close',()=>{ mv.pause(); });
   }
 
-  /* ---------- Horizontal game scroll (own scrollbar) ---------- */
+  /* ---------- Game packs: endless auto-moving row ---------- */
   const hs=document.querySelector('[data-hs]');
   if(hs){
-    const view=hs.querySelector('.hs-view'), cards=[...hs.querySelectorAll('.hs-card')];
-    const cnt=hs.querySelector('[data-hs-count]'), sb=hs.querySelector('[data-hs-sb]'), thumb=hs.querySelector('[data-hs-thumb]');
-    const prev=hs.querySelector('[data-hs-prev]'), next=hs.querySelector('[data-hs-next]');
+    const view=hs.querySelector('.hs-view'), track=hs.querySelector('[data-hs-track]');
+    const orig=[...track.querySelectorAll('.hs-card')], N=orig.length;
+    for(let k=0;k<2;k++) orig.forEach(c=>{ const cl=c.cloneNode(true); cl.setAttribute('aria-hidden','true'); cl.querySelectorAll('button,a').forEach(x=>x.tabIndex=-1); track.append(cl); });
+    const cards=[...track.querySelectorAll('.hs-card')];
+    const cnt=hs.querySelector('[data-hs-count]'), prev=hs.querySelector('[data-hs-prev]'), next=hs.querySelector('[data-hs-next]');
     const pad=n=>String(n).padStart(2,'0');
-    let cur=0;
-    function sync(){
-      const max=view.scrollWidth-view.clientWidth, w=sb.clientWidth;
-      const tw=Math.max(40, w*view.clientWidth/(view.scrollWidth||1));
-      thumb.style.width=tw+'px';
-      thumb.style.transform='translateX('+(max>0? (view.scrollLeft/max)*(w-tw) : 0)+'px)';
-      const mid=view.scrollLeft+view.clientWidth/2; let best=0,bd=1e9;
+    const SPEED=70; /* px per second */
+    let pos=0, last=0, hover=false, holdUntil=0, visible=true, target=null, drag=null;
+    const W=()=>cards[N].offsetLeft-cards[0].offsetLeft;
+    function wrap(){ const w=W(); if(w<=0) return; while(pos>=w){ pos-=w; if(target!==null) target-=w; } while(pos<0){ pos+=w; if(target!==null) target+=w; } }
+    function draw(){
+      track.style.transform='translate3d('+(-pos)+'px,0,0)';
+      const mid=pos+view.clientWidth/2; let best=0,bd=1e9;
       cards.forEach((c,i)=>{ const d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid); if(d<bd){bd=d;best=i;} });
-      cur=best; cnt.textContent=pad(best+1)+' / '+pad(cards.length);
-      prev.disabled=view.scrollLeft<=2; next.disabled=view.scrollLeft>=max-2;
+      const t=pad(best%N+1)+' / '+pad(N); if(cnt.textContent!==t) cnt.textContent=t;
+      return best;
     }
-    const go=i=>{ const c=cards[Math.max(0,Math.min(cards.length-1,i))]; view.scrollTo({left:c.offsetLeft+c.offsetWidth/2-view.clientWidth/2, behavior: reduce?'auto':'smooth'}); };
-    prev.addEventListener('click',()=>go(cur-1)); next.addEventListener('click',()=>go(cur+1));
-    view.addEventListener('scroll',sync,{passive:true}); addEventListener('resize',sync);
-    if(window.ResizeObserver) new ResizeObserver(sync).observe(view);
-    addEventListener('hashchange',()=>setTimeout(sync,60));
-    /* drag the custom scrollbar */
-    function fromPointer(x,grabOffset){ const r=sb.getBoundingClientRect(), tw=thumb.offsetWidth, max=view.scrollWidth-view.clientWidth;
-      const pos=Math.max(0,Math.min(r.width-tw, x-r.left-grabOffset)); view.scrollLeft=(r.width-tw>0? pos/(r.width-tw):0)*max; }
-    sb.addEventListener('pointerdown',e=>{
-      e.preventDefault(); sb.setPointerCapture(e.pointerId); sb.classList.add('dragging'); view.style.scrollSnapType='none';
-      const tr=thumb.getBoundingClientRect(); const onThumb=e.clientX>=tr.left&&e.clientX<=tr.right;
-      const off=onThumb? e.clientX-tr.left : thumb.offsetWidth/2; fromPointer(e.clientX,off);
-      const move=ev=>fromPointer(ev.clientX,off);
-      const up=()=>{ sb.classList.remove('dragging'); view.style.scrollSnapType=''; sb.removeEventListener('pointermove',move); sb.removeEventListener('pointerup',up); sb.removeEventListener('pointercancel',up); };
-      sb.addEventListener('pointermove',move); sb.addEventListener('pointerup',up); sb.addEventListener('pointercancel',up);
-    });
-    /* drag the cards with a mouse */
+    function tick(t){
+      const dt=last? Math.min(.05,(t-last)/1000):0; last=t;
+      const active=visible && document.documentElement.dataset.route==='contents' && !document.querySelector('dialog[open]');
+      if(drag){ /* position set by pointer */ }
+      else if(target!==null){ const d=target-pos; if(Math.abs(d)<.5||reduce){ pos=target; target=null; } else pos+=d*Math.min(1,dt*8); wrap(); draw(); }
+      else if(!reduce && active && !hover && t>holdUntil){ pos+=SPEED*dt; wrap(); draw(); }
+      requestAnimationFrame(tick);
+    }
+    const hold=ms=>{ holdUntil=performance.now()+ms; };
+    view.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse') hover=true; });
+    view.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse') hover=false; });
+    view.addEventListener('focusin',()=>{ hover=true; }); view.addEventListener('focusout',()=>{ hover=false; });
+    if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ visible=e.isIntersecting; })).observe(view);
+    function go(dir){
+      const cur=draw(); const c=cards[Math.max(0,Math.min(cards.length-1,cur+dir))];
+      target=c.offsetLeft+c.offsetWidth/2-view.clientWidth/2; hold(3000);
+    }
+    prev.addEventListener('click',()=>go(-1)); next.addEventListener('click',()=>go(1));
+    /* drag / swipe */
     view.addEventListener('pointerdown',e=>{
-      if(e.pointerType!=='mouse'||e.button!==0) return;
-      const sx=e.clientX, sl=view.scrollLeft; let moved=false;
-      const move=ev=>{ const dx=ev.clientX-sx; if(Math.abs(dx)>4){ moved=true; view.classList.add('dragging'); } view.scrollLeft=sl-dx; };
-      const up=()=>{ view.classList.remove('dragging'); removeEventListener('pointermove',move); removeEventListener('pointerup',up); if(moved){ const block=ev=>{ ev.stopPropagation(); ev.preventDefault(); }; view.addEventListener('click',block,{capture:true,once:true}); setTimeout(()=>view.removeEventListener('click',block,{capture:true}),0); } };
-      addEventListener('pointermove',move); addEventListener('pointerup',up);
+      if(e.pointerType==='mouse'&&e.button!==0) return;
+      drag={x:e.clientX,y:e.clientY,p:pos,moved:false,id:e.pointerId}; target=null;
     });
+    addEventListener('pointermove',e=>{
+      if(!drag||e.pointerId!==drag.id) return;
+      const dx=e.clientX-drag.x;
+      if(!drag.moved){ if(Math.abs(dx)<6) return; if(e.pointerType!=='mouse' && Math.abs(e.clientY-drag.y)>Math.abs(dx)){ drag=null; return; } drag.moved=true; view.classList.add('dragging'); }
+      pos=drag.p-dx; wrap(); draw();
+    });
+    const end=e=>{
+      if(!drag||e.pointerId!==drag.id) return;
+      const moved=drag.moved; drag=null; view.classList.remove('dragging'); hold(2000);
+      if(moved){ const block=ev=>{ ev.stopPropagation(); ev.preventDefault(); }; view.addEventListener('click',block,{capture:true,once:true}); setTimeout(()=>view.removeEventListener('click',block,{capture:true}),0); }
+    };
+    addEventListener('pointerup',end); addEventListener('pointercancel',end);
     view.addEventListener('dragstart',e=>e.preventDefault());
-    sync();
+    addEventListener('resize',()=>{ wrap(); draw(); });
+    addEventListener('hashchange',()=>setTimeout(()=>{ pos=0; target=null; draw(); },60));
+    draw(); requestAnimationFrame(tick);
   }
 
 
