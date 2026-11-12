@@ -1899,7 +1899,7 @@ window.BALGURUM_SUPABASE = {
   const mo=document.querySelector('[data-mosaic]');
   if(mo){
     const box=mo.querySelector('[data-mosaic-tiles]');
-    const POOL=['play-2','play-5','play-7','play-4','play-6','play-3','play-1','play-8','flow-lobby'].map(n=>'assets/'+n+'.jpg');
+    const POOL=['mosaic-1','mosaic-2','mosaic-3','mosaic-4','mosaic-5','mosaic-6'].map(n=>'assets/'+n+'.jpg');
     const REG=[[0,0,.36,.55],[.36,0,.3,.46],[.66,0,.34,.6],[0,.55,.3,.45],[.3,.46,.38,.54],[.68,.6,.32,.4]];
     let regImg=[0,1,2,3,4,5], tris=[], W=0,H=0, timer=null, nextImg=6;
     let TW=0,TH=0;
@@ -1925,8 +1925,10 @@ window.BALGURUM_SUPABASE = {
     }
     function swap(){
       if(document.hidden) return;
-      const r=Math.floor(Math.random()*REG.length); regImg[r]=nextImg; nextImg=(nextImg+1)%POOL.length;
-      if(regImg.filter(v=>v===regImg[r]).length>1) nextImg=(nextImg+1)%POOL.length;
+      /* six pictures for six regions: swap two regions' pictures so none repeats */
+      const r=Math.floor(Math.random()*REG.length); let r2=Math.floor(Math.random()*(REG.length-1)); if(r2>=r) r2++;
+      const tmp=regImg[r]; regImg[r]=regImg[r2]; regImg[r2]=tmp;
+      [r2].forEach(q=>tris.filter(t=>t.r===q).forEach((t,k)=>{ t.el.classList.remove('flip'); void t.el.offsetWidth; t.el.style.setProperty('--fd',(k*0.03).toFixed(2)+'s'); t.el.classList.add('flip'); setTimeout(()=>paint(t),350+k*30); }));
       tris.filter(t=>t.r===r).forEach((t,k)=>{ t.el.classList.remove('flip'); void t.el.offsetWidth; t.el.style.setProperty('--fd',(k*0.03).toFixed(2)+'s'); t.el.classList.add('flip'); setTimeout(()=>paint(t),350+k*30); });
     }
     build(); let rt; addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(build,200); });
