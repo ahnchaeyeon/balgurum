@@ -909,6 +909,18 @@ html[data-route="cheer"] header .btn,.send{transition:background-color .2s,borde
 .mosaic:not(.play) .tri,.mosaic:not(.play) .mosaic-copy p{opacity:0}
 .mosaic.played .tri:not(.flip),.mosaic.played .mosaic-copy p{animation:none}
 .js-reveal .pk-stats.in li{opacity:1;transform:none}
+/* Play flow: bigger cards, one per screen, revealed on scroll */
+@media (min-width:641px){
+  .sg-flow-band .sg-flow{max-width:1240px;gap:42vh;margin-top:72px}
+  .sg-flow-band .sg-flow li{grid-template-columns:minmax(0,600px) minmax(0,1fr);column-gap:48px;row-gap:12px;padding:28px;border-radius:30px}
+  .sg-flow-band .sg-flow li img{border-radius:22px}
+  .sg-flow-band .sg-flow li b{font-size:clamp(22px,2.4vw,32px);gap:12px}
+  .sg-flow-band .sg-flow li b::before{width:42px;height:42px;font-size:20px}
+  .sg-flow-band .sg-flow li span{font-size:clamp(16px,1.4vw,19px);line-height:1.6}
+}
+@media (max-width:640px){.sg-flow-band .sg-flow{gap:28vh}}
+.js-reveal .sg-flow-band .sg-flow li{opacity:0;transform:translateY(70px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.3,1)}
+.js-reveal .sg-flow-band .sg-flow li.in{opacity:1;transform:none}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2019,6 +2031,12 @@ window.BALGURUM_SUPABASE = {
   if(pkStats && !reduce && 'IntersectionObserver' in window){
     document.documentElement.classList.add('js-reveal');
     new IntersectionObserver((es,o)=>es.forEach(e=>{ if(e.isIntersecting){ pkStats.classList.add('in'); o.disconnect(); } }),{threshold:.3}).observe(pkStats);
+  }
+  /* ---------- Play flow steps appear one by one as you scroll ---------- */
+  if(!reduce && 'IntersectionObserver' in window){
+    document.documentElement.classList.add('js-reveal');
+    const fio=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); fio.unobserve(e.target); } }),{threshold:.3});
+    document.querySelectorAll('.sg-flow-band .sg-flow li').forEach(li=>fio.observe(li));
   }
 
   /* ---------- Full-screen characters ---------- */
