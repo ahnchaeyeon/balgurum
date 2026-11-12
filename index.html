@@ -900,9 +900,10 @@ html[data-route="cheer"] header .btn,.send{transition:background-color .2s,borde
 .hs-track{padding-inline:24px}
 .hs-progress{justify-content:center}
 /* Stat cards use the cloud image */
-.pk-stats li{background:url(assets/cloud-card.png) center/100% 100% no-repeat;border-radius:0;box-shadow:none;min-height:clamp(170px,13vw,200px);padding:14% 8% 5%;filter:drop-shadow(0 16px 22px rgba(0,0,0,.28))}
+.pk-stats li{background:url(assets/cloud-card.png) center/100% 100% no-repeat;border-radius:0;box-shadow:none;aspect-ratio:720/486;min-height:0;padding:12% 8% 6%;filter:drop-shadow(0 16px 22px rgba(0,0,0,.28))}
 .pk-stats li::before,.pk-stats li::after{content:none}
-@media (max-width:860px){.pk-stats li{min-height:0;padding:22% 6% 10%;gap:0}.pk-stats svg{width:32px;height:32px;margin-bottom:2px}.pk-stats b{font-size:22px}.pk-stats span{font-size:13px}.pk-stats small{font-size:11px}}
+@media (min-width:861px){.pk-stats li{gap:0}.pk-stats svg{width:38px;height:38px;margin-bottom:4px}.pk-stats b{font-size:clamp(24px,2.3vw,32px)}.pk-stats span{font-size:14px}.pk-stats small{font-size:11.5px}}
+@media (max-width:860px){.pk-stats li{min-height:0;padding:14% 6% 6%;gap:0}.pk-stats svg{width:32px;height:32px;margin-bottom:2px}.pk-stats b{font-size:22px}.pk-stats span{font-size:13px}.pk-stats small{font-size:11px}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
