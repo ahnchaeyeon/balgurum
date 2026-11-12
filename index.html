@@ -882,7 +882,8 @@ html[data-route="contents"] footer,html[data-route="games"] footer{padding-top:8
 .hs-cta{padding-bottom:200px}
 .hs{padding-bottom:0}
 .hs .hs-pin{padding-bottom:0}
-.hs-cta{padding-top:0;margin-top:-24px;position:relative}
+.hs-cta{padding-top:20px;margin-top:0;position:relative}
+@media (min-width:521px){.hs-cta .pill-cta{width:min(500px,100%);min-height:78px;padding:14px 88px 14px 40px;font-size:clamp(18px,2.1vw,24px)}.hs-cta .pill-arrow{width:50px;height:50px;right:14px}.hs-cta .pill-arrow svg{width:25px;height:25px}}
 .hs-cta .pill-cta{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease,background .2s;pointer-events:none}
 .hs-cta.show .pill-cta{opacity:1;transform:none;pointer-events:auto}
 .hs-cta.show .pill-cta:hover{transform:translateY(-3px)}
@@ -1955,13 +1956,10 @@ window.BALGURUM_SUPABASE = {
       const active=visible && document.documentElement.dataset.route==='contents' && !document.querySelector('dialog[open]');
       if(drag){ /* position set by pointer */ }
       else if(target!==null){ const d=target-pos; if(Math.abs(d)<.5||reduce){ pos=target; target=null; } else pos+=d*Math.min(1,dt*8); wrap(); draw(); }
-      else if(!reduce && active && !hover && t>holdUntil){ pos+=SPEED*dt; wrap(); draw(); }
+      else if(!reduce && active && t>holdUntil){ pos+=SPEED*dt; wrap(); draw(); }
       requestAnimationFrame(tick);
     }
     const hold=ms=>{ holdUntil=performance.now()+ms; };
-    view.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse') hover=true; });
-    view.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse') hover=false; });
-    view.addEventListener('focusin',()=>{ hover=true; }); view.addEventListener('focusout',()=>{ hover=false; });
     if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ visible=e.isIntersecting; })).observe(view);
     function go(dir){
       const cur=draw(); const c=cards[Math.max(0,Math.min(cards.length-1,cur+dir))];
