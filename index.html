@@ -986,6 +986,11 @@ html[data-route="cheer"] header .btn,.send{transition:background-color .2s,borde
 .mg-card .mg-head h3{margin:0;line-height:1.12}
 .mg-card .mg-desc{margin:0}
 .mg-card .mg-info{margin-top:auto}
+/* Mini-game cards: sky that stays put while the cards scroll over it */
+.mg-find{position:relative;background:#3b8cf0;isolation:isolate}
+.mg-sky{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.mg-sky i{position:sticky;top:0;display:block;height:100vh;height:100lvh;background:url(assets/sky-cards.jpg) center/cover no-repeat}
+.mg-find>.mg-band,.mg-find>.mg-wrap{position:relative}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1390,6 +1395,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
   </section>
 
   <section class="mg-find" aria-labelledby="mg-find-title">
+    <div class="mg-sky" aria-hidden="true"><i></i></div>
     <div class="mg-band"><h2 id="mg-find-title">어떤 모험을 찾고 계신가요?</h2></div>
     <div class="mg-wrap">
       <div class="filter mg-filter" role="group" aria-label="게임 방식 필터">
