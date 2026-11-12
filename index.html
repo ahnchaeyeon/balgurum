@@ -1005,6 +1005,8 @@ html[data-route="cheer"] header .btn,.send{transition:background-color .2s,borde
 .fs-sub{display:block;margin-top:14px;font-size:clamp(15px,1.45vw,21px);font-weight:600;line-height:1.75;color:rgba(255,255,255,.92);max-width:32em}
 .fs-shade{transition:background .9s ease}
 .fs-bg:has(img.light.on) .fs-shade{background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 30%,rgba(6,18,44,.75) 100%),linear-gradient(90deg,rgba(6,18,44,.94) 0%,rgba(6,18,44,.8) 38%,rgba(6,18,44,.35) 62%,rgba(6,18,44,.08) 85%)}
+@media (min-width:861px){.fs-bg img.story-3{left:auto;right:0;width:74%;object-fit:contain;object-position:100% 100%}}
+.fs-bg:has(img.story-3.on){background:#0c1d45}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1197,7 +1199,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     <div class="fs-bg" aria-hidden="true">
       <img class="on" src="assets/story-1.jpg" alt="" data-fs-img>
       <img class="light" src="assets/story-2.jpg" alt="" data-fs-img>
-      <img src="assets/play-4.jpg" alt="" data-fs-img>
+      <img class="story-3" src="assets/story-3.jpg" alt="" data-fs-img>
       <img src="assets/play-6.jpg" alt="" data-fs-img>
       <img src="assets/flow-tutorial.jpg" alt="" data-fs-img>
       <span class="fs-shade"></span>
@@ -1212,9 +1214,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         <p class="fs-kicker">STORY 02 · 친구들을 찾아서</p>
         <p class="fs-line">“나랑 함께할 친구들을 찾으러 가볼까?”<span class="fs-sub">키리는 특공대의 멤버가 되어줄 친구들을 찾아 나섰어요.<br>저마다 다른 성격과 재능을 가진 친구들이 하나둘 모이기 시작했답니다.</span></p>
       </article>
-      <article class="fs-step" data-fs-step data-label="운동 낚시왕">
-        <p class="fs-kicker">STORY 03 · 운동 낚시왕</p>
-        <p class="fs-line">먹이통을 잘못 건드려 낚시터에 먹이가 쏟아지고,<br>몰려든 물고기로 낚시터는 순식간에 난장판.</p>
+      <article class="fs-step" data-fs-step data-label="사고뭉치 특공대 탄생">
+        <p class="fs-kicker">STORY 03 · 사고뭉치 특공대 탄생</p>
+        <p class="fs-line">“드디어 모두 모였어! 사고뭉치 특공대, 출동!”<span class="fs-sub">개성 넘치는 일곱 친구들이 모여 드디어 사고뭉치 특공대가 탄생했어요!<br>조금은 서툴고 엉뚱하지만, 도움이 필요한 곳이라면 어디든 달려갈 준비가 되어 있답니다.</span></p>
       </article>
       <article class="fs-step" data-fs-step data-label="탈출 대추격전">
         <p class="fs-kicker">STORY 04 · 탈출 대추격전</p>
