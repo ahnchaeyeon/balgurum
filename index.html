@@ -884,7 +884,7 @@ html[data-route="contents"] footer,html[data-route="games"] footer{padding-top:8
 .hs .hs-pin{padding-bottom:0}
 .hs-cta{padding-top:20px;margin-top:0;position:relative}
 @media (min-width:521px){.hs-cta .pill-cta{width:min(500px,100%);min-height:78px;padding:14px 88px 14px 40px;font-size:clamp(18px,2.1vw,24px)}.hs-cta .pill-arrow{width:50px;height:50px;right:14px}.hs-cta .pill-arrow svg{width:25px;height:25px}}
-.hs-cta .pill-cta{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease,background .2s;pointer-events:none}
+.hs-cta .pill-cta{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease,background .2s;pointer-events:none}
 .hs-cta.show .pill-cta{opacity:1;transform:none;pointer-events:auto}
 .hs-cta.show .pill-cta:hover{transform:translateY(-3px)}
 
@@ -1990,14 +1990,14 @@ window.BALGURUM_SUPABASE = {
   }
 
 
-  /* ---------- Game packs CTA appears 1.5s after it comes into view ---------- */
+  /* ---------- Game packs CTA appears shortly after the game row comes into view ---------- */
   const hsCta=document.querySelector('.hs-cta');
   if(hsCta){
     if(reduce || !('IntersectionObserver' in window)) hsCta.classList.add('show');
     else { let tm=null; new IntersectionObserver(es=>es.forEach(e=>{
-      if(e.isIntersecting && !hsCta.classList.contains('show') && !tm) tm=setTimeout(()=>hsCta.classList.add('show'),1500);
+      if(e.isIntersecting && !hsCta.classList.contains('show') && !tm) tm=setTimeout(()=>hsCta.classList.add('show'),800);
       else if(!e.isIntersecting && tm){ clearTimeout(tm); tm=null; }
-    }),{threshold:.6}).observe(hsCta.querySelector('.pill-cta')); }
+    }),{threshold:.35}).observe(document.querySelector('[data-hs] .hs-view')); }
   }
 
   /* ---------- Full-screen characters ---------- */
