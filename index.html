@@ -1153,32 +1153,33 @@ html[data-route="games"] .mg-team::before{display:none}
 .cp-pwrap .dz{z-index:2}
 .cp-tv img{width:100%!important;height:100%!important;object-fit:contain;max-width:none}
 /* Games hero: sky + floating islands, wavy bottom edge */
-html[data-route="games"] .mg-hero,.mg-hero{background:#3d8ff0 url("assets/mg-sky.jpg") center/cover no-repeat;padding:clamp(20px,2.4vw,32px) 0 0;min-height:clamp(620px,50vw,860px);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 80px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 79px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 80px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 79px) no-repeat}
+html[data-route="games"] .mg-hero,.mg-hero{background:#3d8ff0 url("assets/mg-sky.jpg") center/cover no-repeat;padding:clamp(20px,2.4vw,32px) 0 0;min-height:clamp(420px,33vw,540px);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 80px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 79px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 80px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 79px) no-repeat}
 .mg-hero .gp-back{color:#fff;opacity:.9}
 .mg-hero-in{padding-top:0;z-index:3}
-.mg-hero #mg-title{margin-top:clamp(40px,8vw,130px)}
+.mg-hero #mg-title{margin-top:clamp(20px,3.6vw,56px)}
+@media (min-width:761px){.mg-hero+.mg-find .mg-filter{margin-top:6px}.mg-hero{margin-bottom:-8px}}
 .mg-hero .gp-back{position:relative;z-index:3}
-html[data-route="games"] .mg-hero h1,.mg-hero h1{color:#fff;font-size:clamp(32px,4.8vw,72px);text-wrap:balance;text-shadow:0 4px 0 #1a5fc8,0 12px 28px rgba(8,40,110,.35);margin:0 auto;max-width:12em}
-.mg-sub{margin:18px auto 0;color:#fff;font-weight:800;font-size:clamp(16px,1.7vw,24px);text-shadow:0 2px 0 rgba(26,95,200,.6),0 6px 16px rgba(8,40,110,.3)}
+html[data-route="games"] .mg-hero h1,.mg-hero h1{color:#fff;font-size:clamp(32px,4.2vw,64px);text-wrap:balance;text-shadow:0 4px 0 #1a5fc8,0 12px 28px rgba(8,40,110,.35);margin:0 auto;max-width:12em}
+.mg-sub{margin:14px auto 0;color:#fff;font-weight:800;font-size:clamp(16px,1.7vw,24px);text-shadow:0 2px 0 rgba(26,95,200,.6),0 6px 16px rgba(8,40,110,.3)}
 .mg-isles{position:absolute;inset:0;pointer-events:none;z-index:1}
-.mg-isles img{position:absolute;height:auto;filter:drop-shadow(0 18px 18px rgba(8,40,110,.28));animation:mgFloat 5.5s ease-in-out infinite;will-change:transform}
-.mg-isles .i1{left:4%;top:20%;width:clamp(110px,12vw,190px);animation-delay:-.4s}
-.mg-isles .i2{left:17%;top:41%;width:clamp(120px,13vw,210px);animation-delay:-2.1s;animation-duration:6.3s}
-.mg-isles .i3{left:3%;top:62%;width:clamp(110px,12vw,190px);animation-delay:-3.6s;animation-duration:5s}
-.mg-isles .i4{left:27%;top:69%;width:clamp(100px,10.5vw,170px);animation-delay:-1.2s;animation-duration:6.8s}
-.mg-isles .i5{right:3%;top:12%;width:clamp(110px,12vw,190px);animation-delay:-2.8s;animation-duration:6s}
-.mg-isles .i6{right:17%;top:37%;width:clamp(110px,12vw,195px);animation-delay:-.9s;animation-duration:5.2s}
-.mg-isles .i7{right:4%;top:58%;width:clamp(120px,13vw,210px);animation-delay:-4.1s;animation-duration:6.5s}
-.mg-isles .i8{right:25%;top:65%;width:clamp(95px,10vw,160px);animation-delay:-1.9s;animation-duration:5.8s}
-@keyframes mgFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
+.mg-isles img{position:absolute;height:auto;filter:drop-shadow(0 14px 14px rgba(8,40,110,.26));animation:mgFloat 5.5s ease-in-out infinite;will-change:transform}
+.mg-isles .i1{left:3%;top:30%;width:clamp(90px,8.6vw,138px);animation-delay:-.4s}
+.mg-isles .i2{left:23%;top:15%;width:clamp(96px,9.4vw,150px);animation-delay:-2.1s;animation-duration:6.3s}
+.mg-isles .i3{left:4%;top:64%;width:clamp(90px,8.6vw,138px);animation-delay:-3.6s;animation-duration:5s}
+.mg-isles .i4{left:19%;top:58%;width:clamp(80px,7.6vw,122px);animation-delay:-1.2s;animation-duration:6.8s}
+.mg-isles .i5{right:3%;top:26%;width:clamp(90px,8.6vw,138px);animation-delay:-2.8s;animation-duration:6s}
+.mg-isles .i6{right:23%;top:12%;width:clamp(90px,8.8vw,140px);animation-delay:-.9s;animation-duration:5.2s}
+.mg-isles .i7{right:4%;top:60%;width:clamp(96px,9.4vw,150px);animation-delay:-4.1s;animation-duration:6.5s}
+.mg-isles .i8{right:19%;top:56%;width:clamp(78px,7.4vw,118px);animation-delay:-1.9s;animation-duration:5.8s}
+@keyframes mgFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}
 @media (prefers-reduced-motion:reduce){.mg-isles img{animation:none}}
 @media (max-width:760px){
-  .mg-hero,html[data-route="games"] .mg-hero{min-height:0;padding-bottom:90px}
+  .mg-hero,html[data-route="games"] .mg-hero{min-height:0;padding-bottom:64px}
   .mg-hero-in{padding-top:12px}
   .mg-hero #mg-title{margin-top:20px}
-  .mg-isles{position:relative;inset:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 6px;padding:34px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));align-items:center}
-  .mg-isles img{position:static;width:100%!important;max-width:120px;margin:0 auto}
-  .mg-isles img:nth-child(even){margin-top:28px}
+  .mg-isles{position:relative;inset:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px;padding:20px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));align-items:center}
+  .mg-isles img{position:static;width:100%!important;max-width:96px;margin:0 auto}
+  .mg-isles img:nth-child(even){margin-top:16px}
 }
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
