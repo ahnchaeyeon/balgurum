@@ -1518,6 +1518,18 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
   .ab-cover .ab-tag,.ab-cover .ab-head{left:max(4px,calc((100% - var(--wrap)) / 2 + 20px))}
   .ab-cover .ab-desc{right:max(4px,calc((100% - var(--wrap)) / 2 + 20px))}
 }
+/* Story: white -> BI blue gradient */
+#page-story{background:linear-gradient(180deg,#fff 0%,#fff 14%,#eef3ff 34%,#cbd8fb 52%,#6a8cef 59%,#3260e6 68%,#1f4fe0 80%,#1f4fe0 100%)!important}
+#page-story .st-hero,#page-story .st-body{background:transparent!important}
+.st-foot{filter:saturate(calc(1 - var(--t,0))) brightness(calc(1 + var(--t,0) * .45))}
+.st-sec{transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1),color .4s}
+.st-sec.dark{color:rgba(255,255,255,.88)}
+.st-sec.dark h2,.st-sec.dark.st-q h2{color:#fff}
+.st-sec.dark .st-k{color:#ffd84a}
+.st-sec.dark .st-names span{background:#fff;color:#1f4fe0}
+html[data-route="story"] footer{background:#1f4fe0;color:rgba(255,255,255,.8);border-top:0}
+html[data-route="story"] footer p,html[data-route="story"] footer a{color:rgba(255,255,255,.8)}
+.st-sec.mid{color:#24345a}.st-sec.mid .st-k{color:#1338b0}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3057,8 +3069,10 @@ function lay(){if(!body.offsetParent)return;tr.innerHTML='';feet=[];const W=body
  for(let i=0;i<pts.length-1;i++){const[a,b]=[pts[i],pts[i+1]];const dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);if(!L)continue;const ang=Math.atan2(dy,dx);
   for(let d=acc;d<L;d+=step){const t=d/L,x=a[0]+dx*t,y=a[1]+dy*t,nx=-Math.sin(ang)*sp*side,ny=Math.cos(ang)*sp*side;
    const im=document.createElement('img');im.src='assets/foot.png';im.alt='';im.className='st-foot';im.style.left=(x+nx)+'px';im.style.top=(y+ny)+'px';
-   im.style.setProperty('--r',(ang*180/Math.PI+90)+'deg');im.style.setProperty('--sx',side>0?-1:1);tr.appendChild(im);feet.push([y+ny,im]);side*=-1}
+   im.style.setProperty('--r',(ang*180/Math.PI+90)+'deg');im.style.setProperty('--sx',side>0?-1:1);tr.appendChild(im);feet.push([y+ny,im]);im.style.setProperty('--t',Math.max(0,Math.min(1,((y+ny)/body.scrollHeight-.35)/.55)).toFixed(3));side*=-1}
   acc=(acc+Math.ceil((L-acc)/step)*step)-L}
+ const pg=document.getElementById('page-story'),PH=pg.scrollHeight,pt=pg.getBoundingClientRect().top;let le=0,ds=1;secs.forEach(sc=>{const r=sc.getBoundingClientRect(),c=((r.top+r.bottom)/2-pt)/PH,d=c>.6;sc.classList.toggle('dark',d);sc.classList.toggle('mid',!d&&c>.4);if(d)ds=Math.min(ds,(r.top-pt)/PH);else le=Math.max(le,(r.bottom-pt)/PH)});
+ const P=v=>(v*100).toFixed(1)+'%',mid=(le+ds)/2;pg.style.setProperty('background',`linear-gradient(180deg,#fff 0%,#fff 16%,#e6edfe ${P(le*.55)},#a9bff7 ${P(le*.9)},#6f90f0 ${P(mid)},#2b5ae5 ${P(ds+.02)},#1f4fe0 ${P(Math.min(1,ds+.1))},#1f4fe0 100%)`,'important');
  tick()}
 function tick(){if(!feet.length)return;const br=body.getBoundingClientRect(),lim=innerHeight*.78-br.top;let n=0;for(const[y,im]of feet){if(y<lim){if(!im.classList.contains('on')){setTimeout(()=>im.classList.add('on'),n*70);n++}}else im.classList.remove('on')}}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
