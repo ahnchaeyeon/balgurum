@@ -1142,6 +1142,11 @@ html[data-route="games"] .mg-team::before{display:none}
 @media (max-width:640px){.sg-flow-band .sg-flow{gap:16vh;margin-top:60px}}
 .pk{min-height:0;justify-content:flex-start;padding-block:clamp(100px,9vw,150px) 0}
 .cxp{padding-top:clamp(100px,9vw,150px)}
+.cp.in .a-twinkle{animation:dzTwinkle 1.8s ease-in-out infinite}
+.cp.in .a-fade{animation:dzFade 2.6s ease-in-out infinite}
+@keyframes dzTwinkle{0%,100%{transform:scale(.7) rotate(0);opacity:.5}50%{transform:scale(1.15) rotate(20deg);opacity:1}}
+@keyframes dzFade{0%,100%{opacity:.35}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.cp .a-twinkle,.cp .a-fade{animation:none}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1390,7 +1395,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
     <div class="cxp-list">
       <article class="cp" id="cp-puding" style="--c:#ffcf4a;--c2:#fff1c2" aria-labelledby="cp-puding-n">
-        <div class="cp-art fx-puding" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-puding-cut.webp" alt="" width="992" height="791" decoding="async"><img class="dz a-bob" src="assets/deco/puding-cherry.webp" alt="" style="left:12.90%;top:30.09%;width:14.72%;--d:0.00s"><img class="dz a-squish" src="assets/deco/puding-creamR.webp" alt="" style="left:72.38%;top:35.78%;width:13.10%;--d:0.37s"><img class="dz a-spin" src="assets/deco/puding-cubes.webp" alt="" style="left:74.60%;top:57.65%;width:12.10%;--d:0.74s"><img class="dz a-squish" src="assets/deco/puding-creamL.webp" alt="" style="left:12.10%;top:77.88%;width:14.52%;--d:1.11s"><img class="dz a-fan" src="assets/deco/puding-fan.webp" alt="" style="left:71.37%;top:79.65%;width:16.53%;--d:1.48s"></div></div>
+        <div class="cp-art fx-puding" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-puding2-cut.webp" alt="" width="913" height="838" decoding="async"><img class="dz a-pulse" src="assets/deco/puding2-burstTL.webp" alt="" style="left:4.38%;top:21.48%;width:8.21%;--d:0.00s"><img class="dz a-bob" src="assets/deco/puding2-cherry.webp" alt="" style="left:7.12%;top:24.22%;width:18.29%;--d:0.33s"><img class="dz a-bob" src="assets/deco/puding2-cubeTR.webp" alt="" style="left:75.90%;top:31.98%;width:7.12%;--d:0.66s"><img class="dz a-twinkle" src="assets/deco/puding2-sparkL.webp" alt="" style="left:3.83%;top:46.54%;width:5.81%;--d:0.99s"><img class="dz a-fade" src="assets/deco/puding2-arcL.webp" alt="" style="left:10.41%;top:45.70%;width:11.50%;--d:1.32s"><img class="dz a-bob" src="assets/deco/puding2-cubeL.webp" alt="" style="left:13.36%;top:58.00%;width:11.39%;--d:1.65s"><img class="dz a-twinkle" src="assets/deco/puding2-dotL.webp" alt="" style="left:8.54%;top:70.53%;width:3.07%;--d:0.00s"><img class="dz a-pulse" src="assets/deco/puding2-burstR.webp" alt="" style="left:76.67%;top:51.07%;width:8.21%;--d:0.33s"><img class="dz a-twinkle" src="assets/deco/puding2-sparkR.webp" alt="" style="left:82.15%;top:71.60%;width:5.70%;--d:0.66s"><img class="dz a-fade" src="assets/deco/puding2-arcR.webp" alt="" style="left:72.29%;top:78.28%;width:7.67%;--d:0.99s"><img class="dz a-squish" src="assets/deco/puding2-creamL.webp" alt="" style="left:5.48%;top:78.28%;width:19.50%;--d:1.32s"><img class="dz a-twinkle" src="assets/deco/puding2-dotR.webp" alt="" style="left:67.03%;top:91.41%;width:2.19%;--d:1.65s"><img class="dz a-bob" src="assets/deco/puding2-cubeBR.webp" alt="" style="left:72.07%;top:91.41%;width:6.35%;--d:0.00s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.01 · Player 카드 노랑</p>
           <h3 class="cp-name" id="cp-puding-n">푸딩</h3>
