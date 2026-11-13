@@ -1161,12 +1161,12 @@ html[data-route="games"] .mg-hero,.mg-hero{background:#3d8ff0 url("assets/mg-sky
 .mg-hero .gp-back{position:relative;z-index:3}
 html[data-route="games"] .mg-hero h1,.mg-hero h1{color:#fff;font-size:clamp(32px,4.2vw,64px);text-wrap:balance;text-shadow:0 4px 0 #1a5fc8,0 12px 28px rgba(8,40,110,.35);margin:0 auto;max-width:12em}
 .mg-sub{margin:14px auto 0;color:#fff;font-weight:800;font-size:clamp(16px,1.7vw,24px);text-shadow:0 2px 0 rgba(26,95,200,.6),0 6px 16px rgba(8,40,110,.3)}
-html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(90px,8vw,130px);min-height:0}
-.mg-ch{position:absolute;bottom:clamp(-30px,-1.5vw,-10px);height:auto;z-index:1;filter:drop-shadow(0 12px 16px rgba(8,40,110,.3));animation:mgFloat 5.5s ease-in-out infinite}
-.mg-ch-l{left:max(4%,calc(50% - 600px));width:clamp(130px,14vw,230px)}
-.mg-ch-r{right:max(4%,calc(50% - 600px));width:clamp(115px,12vw,195px);animation-delay:-2.6s}
+html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(80px,7vw,120px);min-height:0}
+.mg-ch{position:absolute;bottom:-110px;height:auto;z-index:1;filter:drop-shadow(0 12px 16px rgba(8,40,110,.3));animation:mgFloat 5.5s ease-in-out infinite}
+.mg-ch-l{left:max(5%,calc(50% - 560px));width:clamp(120px,12.5vw,210px)}
+.mg-ch-r{right:max(5%,calc(50% - 560px));width:clamp(105px,10.8vw,180px);animation-delay:-2.6s}
 @keyframes mgFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
-.mg-reel{position:relative;z-index:4;margin-top:clamp(0px,1vw,16px);padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.mg-reel{position:relative;z-index:5;margin-top:clamp(24px,2.6vw,40px);padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
 .mg-reel-in{max-width:1480px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,4fr) minmax(0,1fr);gap:clamp(8px,1vw,16px);align-items:stretch}
 .mg-side{list-style:none;margin:0;padding:0;display:grid;grid-template-rows:repeat(4,minmax(0,1fr));gap:clamp(8px,1vw,16px)}
 .mg-th{display:block;width:100%;height:100%;padding:0;border:0;border-radius:14px;overflow:hidden;cursor:pointer;background:#cfe6ff;box-shadow:0 8px 18px rgba(8,40,110,.22);outline:3px solid transparent;outline-offset:-3px;transition:transform .2s,outline-color .2s,filter .2s;filter:saturate(.85) brightness(.92)}
@@ -1179,16 +1179,16 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(90px,8vw,130px);
 .mg-stage-cap{position:absolute;left:clamp(12px,1.6vw,24px);bottom:clamp(12px,1.6vw,22px);display:flex;align-items:center;gap:10px;background:rgba(11,31,69,.72);color:#fff;border-radius:999px;padding:8px 18px 8px 10px;font-size:clamp(14px,1.3vw,19px);backdrop-filter:blur(4px)}
 .mg-stage-cap span{background:#ffd84a;color:#0b1f45;font-family:var(--f-latin);font-weight:800;font-size:.75em;border-radius:999px;padding:4px 10px}
 .mg-stage-cap b{font-weight:800}
-.mg-reel+.mg-find .mg-filter{margin-top:clamp(28px,3vw,44px)}
+.mg-hero+.mg-find .mg-filter{margin-top:clamp(8px,1vw,16px)}
 @media (prefers-reduced-motion:reduce){.mg-ch{animation:none}}
 @media (max-width:760px){
   html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:100px}
   .mg-hero-in{padding-top:12px}
   .mg-hero #mg-title{margin-top:20px}
-  .mg-ch{bottom:34px}.mg-ch-l{width:84px;left:4px}.mg-ch-r{width:72px;right:4px}
-  html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:110px}
+  .mg-ch{bottom:-30px}.mg-ch-l{width:84px;left:4px}.mg-ch-r{width:72px;right:4px}
+  html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:72px}
   .mg-hero-in{padding-inline:90px}
-  .mg-reel{margin-top:4px}
+  .mg-reel{margin-top:24px}
   .mg-reel-in{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
   .mg-stage{grid-column:1/-1;grid-row:1;border-radius:16px}
   .mg-side{display:contents}
@@ -1622,16 +1622,15 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <a class="gp-back" href="#contents">← 콘텐츠로 돌아가기</a>
       <h1 id="mg-title">어떤 소동이 벌어지고 있을까요?</h1>
       <p class="mg-sub">뛰고, 맞추고 함께 즐기는 여덟 가지 모험</p>
+      <img class="mg-ch mg-ch-l" src="assets/char-kiri.png" alt="" aria-hidden="true">
+      <img class="mg-ch mg-ch-r" src="assets/char-pimpi.png" alt="" aria-hidden="true">
     </div>
-    <img class="mg-ch mg-ch-l" src="assets/char-kiri.png" alt="" aria-hidden="true">
-    <img class="mg-ch mg-ch-r" src="assets/char-pimpi.png" alt="" aria-hidden="true">
-  </section>
-
-  <section class="mg-reel" aria-label="미니게임 미리보기">
-    <div class="mg-reel-in">
-      <ul class="mg-side mg-side-l"><li><button type="button" class="mg-th" data-i="0" data-v="assets/game-clip-1b.mp4" aria-label="태엽새 레이스 미리보기"><img src="assets/game-clip-1.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="1" data-v="assets/game-clip-2.mp4" aria-label="샌드위치 공장 미리보기"><img src="assets/game-clip-2.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="2" data-v="assets/game-clip-3.mp4" aria-label="알쏭달쏭 코인볼 미리보기"><img src="assets/game-clip-3.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="3" data-v="assets/game-clip-4.mp4" aria-label="운동 낚시왕 미리보기"><img src="assets/game-clip-4.jpg" alt="" loading="lazy"></button></li></ul>
-      <figure class="mg-stage"><video class="mg-stage-v" src="assets/game-clip-1b.mp4" poster="assets/game-clip-1.jpg" muted playsinline preload="metadata"></video><figcaption class="mg-stage-cap"><span>GAME 01</span><b>태엽새 레이스</b></figcaption></figure>
-      <ul class="mg-side mg-side-r"><li><button type="button" class="mg-th" data-i="4" data-v="assets/game-clip-5.mp4" aria-label="쿵쿵 떡방아 미리보기"><img src="assets/game-clip-5.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="5" data-v="assets/game-clip-6.mp4" aria-label="탈출 대추격전 미리보기"><img src="assets/game-clip-6.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="6" data-v="assets/game-clip-7.mp4" aria-label="리듬 피겨 점프! 미리보기"><img src="assets/game-clip-7.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="7" data-v="assets/game-clip-8.mp4" aria-label="눈사람 탈출 작전 미리보기"><img src="assets/game-clip-8.jpg" alt="" loading="lazy"></button></li></ul>
+    <div class="mg-reel" role="region" aria-label="미니게임 미리보기">
+      <div class="mg-reel-in">
+        <ul class="mg-side mg-side-l"><li><button type="button" class="mg-th" data-i="0" data-v="assets/game-clip-1b.mp4" aria-label="태엽새 레이스 미리보기"><img src="assets/game-clip-1.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="1" data-v="assets/game-clip-2.mp4" aria-label="샌드위치 공장 미리보기"><img src="assets/game-clip-2.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="2" data-v="assets/game-clip-3.mp4" aria-label="알쏭달쏭 코인볼 미리보기"><img src="assets/game-clip-3.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="3" data-v="assets/game-clip-4.mp4" aria-label="운동 낚시왕 미리보기"><img src="assets/game-clip-4.jpg" alt="" loading="lazy"></button></li></ul>
+        <figure class="mg-stage"><video class="mg-stage-v" src="assets/game-clip-1b.mp4" poster="assets/game-clip-1.jpg" muted playsinline preload="metadata"></video><figcaption class="mg-stage-cap"><span>GAME 01</span><b>태엽새 레이스</b></figcaption></figure>
+        <ul class="mg-side mg-side-r"><li><button type="button" class="mg-th" data-i="4" data-v="assets/game-clip-5.mp4" aria-label="쿵쿵 떡방아 미리보기"><img src="assets/game-clip-5.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="5" data-v="assets/game-clip-6.mp4" aria-label="탈출 대추격전 미리보기"><img src="assets/game-clip-6.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="6" data-v="assets/game-clip-7.mp4" aria-label="리듬 피겨 점프! 미리보기"><img src="assets/game-clip-7.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="7" data-v="assets/game-clip-8.mp4" aria-label="눈사람 탈출 작전 미리보기"><img src="assets/game-clip-8.jpg" alt="" loading="lazy"></button></li></ul>
+      </div>
     </div>
   </section>
 
