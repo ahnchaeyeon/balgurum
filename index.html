@@ -1418,7 +1418,7 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 /* Word glitch burst (cover) */
 .ab-word .ch{position:relative;padding:0;margin:0}
 .ab-word .ch>i{transition:none!important;transform:none!important}
-.ab-word.jit{animation:abJit .36s steps(6,end)}
+.ab-word.jit{animation:abJit .18s steps(4,end)}
 @keyframes abJit{0%{transform:translate(0,0);text-shadow:4px 0 #ffd84a,-4px 0 #7fd0ff}20%{transform:translate(-6px,3px);text-shadow:-6px 0 #ffd84a,6px 0 #7fd0ff}40%{transform:translate(5px,-2px);clip-path:inset(10% 0 40% 0)}60%{transform:translate(-3px,0);clip-path:inset(55% 0 5% 0)}80%{transform:translate(2px,2px);clip-path:none;text-shadow:2px 0 #ffd84a,-2px 0 #7fd0ff}100%{transform:none;text-shadow:none;clip-path:none}}
 .ab-glitch{position:absolute;inset:0;z-index:1;pointer-events:none;display:grid;grid-template-rows:repeat(6,1fr);overflow:hidden;opacity:0}
 .ab-glitch.on{opacity:1}
@@ -3035,12 +3035,12 @@ function build(w){el.innerHTML=[...w].map((c,i)=>`<span class="ch" style="--i:${
 function setK(n){k=n;tags.forEach((t,i)=>t.classList.toggle('on',i===n))}
 function decode(node,target,ms){const steps=Math.max(4,Math.round(ms/45));let i=0;const tm=setInterval(()=>{i++;node.textContent=[...target].map((c,j)=>i/steps>(j+1)/target.length?c:POOL[R(POOL.length)]).join('');if(i>=steps){clearInterval(tm);node.textContent=target}},45)}
 function fill(){gl.innerHTML=Array.from({length:6},()=>{const c=['','o','','y',''][R(5)];return `<div class="${c}" style="transform:translateX(${R(60)-40}%);clip-path:inset(${R(30)}% 0 ${R(30)}% 0)">${rnd(14)}</div>`}).join('')}
-function burst(ms){return new Promise(res=>{let t0=performance.now();gl.classList.add('on');(function tick(){fill();if(performance.now()-t0<ms)setTimeout(tick,60);else{gl.classList.remove('on');gl.innerHTML='';res()}})()})}
+function burst(ms){return new Promise(res=>{let t0=performance.now();gl.classList.add('on');(function tick(){fill();if(performance.now()-t0<ms)setTimeout(tick,50);else{gl.classList.remove('on');gl.innerHTML='';res()}})()})}
 async function go(n){if(busy)return;n=(n+words.length)%words.length;if(rm){setK(n);build(words[n]);num.textContent='0'+(n+1);return}busy=true;
  el.classList.remove('jit');void el.offsetWidth;el.classList.add('jit');
- decode(num,'0'+(n+1),420);
- setTimeout(()=>{el.style.visibility='hidden'},120);
- await burst(380);
+ decode(num,'0'+(n+1),200);
+ setTimeout(()=>{el.style.visibility='hidden'},60);
+ await burst(150);
  setK(n);build(words[n]);el.style.visibility='';el.classList.remove('jit');void el.offsetWidth;el.classList.add('jit');
  setTimeout(()=>{busy=false},400)}
 setK(0);build(words[0]);
