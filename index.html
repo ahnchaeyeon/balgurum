@@ -1079,45 +1079,41 @@ html[data-route="games"] .mg-team::before{display:none}
 .cp-art[class*="fx-"]{aspect-ratio:auto;display:block;place-items:initial;overflow:visible}
 .cp-poster{display:block;width:100%;height:auto;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 55%,transparent 98%);mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 55%,transparent 98%);transform-origin:50% 90%;will-change:transform}
 .cp-art .fx{position:absolute;pointer-events:none;font-style:normal}
+.cp-pwrap{position:relative;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 55%,transparent 98%);mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 55%,transparent 98%)}
+.cp-pwrap .cp-poster{-webkit-mask-image:none;mask-image:none;animation:none!important}
+.cp-pwrap .dz{position:absolute;height:auto;display:block;pointer-events:none;will-change:transform}
 @media (prefers-reduced-motion:no-preference){
-  .cp.in .fx-puding .cp-poster{animation:pdWobble 2.6s ease-in-out infinite}
-  .cp.in .fx-alto .cp-poster{animation:alFloat 4s ease-in-out infinite}
-  .cp.in .fx-edis .cp-poster{animation:edBeep 2.4s steps(1) infinite}
-  .cp.in .fx-pimpi .cp-poster{animation:pmSwing 3.2s ease-in-out infinite;transform-origin:50% 0}
-  .cp.in .fx-tonitoni .cp-poster{animation:tnBeat .6s ease-in-out infinite alternate}
-  .cp.in .fx-kiri .cp-poster{animation:krWave 3s ease-in-out infinite;transform-origin:30% 95%}
-  .cp.in .fx-ello .cp-poster{animation:elHop 1.4s cubic-bezier(.3,0,.4,1) infinite}
-  .cp.in .fx.sp{animation:fxTwinkle 1.8s ease-in-out infinite}
-  .cp.in .fx.drop{animation:fxDrop 1.8s linear infinite}
-  .cp.in .fx.gear{animation:fxSpin 6s linear infinite}
-  .cp.in .fx.heart{animation:fxRise 3s ease-in infinite}
-  .cp.in .fx.note{animation:fxNote 2.2s ease-in-out infinite}
+  .cp.in .dz{animation-delay:var(--d)}
+  .cp.in .a-bob{animation:dzBob 2.4s ease-in-out infinite}
+  .cp.in .a-squish{animation:dzSquish 2.2s ease-in-out infinite;transform-origin:50% 100%}
+  .cp.in .a-spin{animation:dzSpin 7s linear infinite}
+  .cp.in .a-spinr{animation:dzSpin 5s linear infinite reverse}
+  .cp.in .a-fan{animation:dzFan 1.6s ease-in-out infinite;transform-origin:50% 90%}
+  .cp.in .a-drift{animation:dzDrift 6s ease-in-out infinite}
+  .cp.in .a-drip{animation:dzDrip 2.2s ease-in infinite}
+  .cp.in .a-wobble{animation:dzWobble 3s ease-in-out infinite;transform-origin:50% 50%}
+  .cp.in .a-flip{animation:dzFlip 2.8s ease-in-out infinite}
+  .cp.in .a-swing{animation:dzSwing 3s ease-in-out infinite;transform-origin:50% 0}
+  .cp.in .a-note{animation:dzNote 2.4s ease-in-out infinite}
+  .cp.in .a-pulse{animation:dzPulse 1s ease-in-out infinite;transform-origin:0 50%}
+  .cp.in .a-eq{animation:dzEq .9s ease-in-out infinite alternate;transform-origin:50% 100%}
+  .cp.in .a-glow{animation:dzGlow 2.2s ease-in-out infinite}
+  .cp.in .a-beat{animation:dzBeat 1.2s ease-in-out infinite}
 }
-@keyframes pdWobble{0%,100%{transform:scale(1,1)}20%{transform:scale(1.03,.97)}40%{transform:scale(.98,1.02)}60%{transform:scale(1.01,.99)}}
-@keyframes alFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes edBeep{0%{transform:translate(0,0)}25%{transform:translate(0,-4px)}50%{transform:translate(0,0)}75%{transform:translate(0,-2px) rotate(-.6deg)}}
-@keyframes pmSwing{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
-@keyframes tnBeat{from{transform:translateY(0) scale(1)}to{transform:translateY(-6px) scale(1.012)}}
-@keyframes krWave{0%,100%{transform:rotate(0)}15%{transform:rotate(-1.6deg)}30%{transform:rotate(1.2deg)}45%{transform:rotate(-.8deg)}60%{transform:rotate(0)}}
-@keyframes elHop{0%,100%{transform:translateY(0) scale(1,1)}10%{transform:translateY(0) scale(1.03,.96)}40%{transform:translateY(-22px) scale(.98,1.03)}70%{transform:translateY(0) scale(1.02,.98)}}
-@keyframes fxTwinkle{0%,100%{opacity:.2;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.1) rotate(45deg)}}
-@keyframes fxDrop{0%{opacity:0;transform:translateY(-20px)}15%{opacity:1}100%{opacity:0;transform:translateY(90px)}}
-@keyframes fxSpin{to{transform:rotate(360deg)}}
-@keyframes fxRise{0%{opacity:0;transform:translateY(20px) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-110px) scale(1.1) rotate(12deg)}}
-@keyframes fxNote{0%,100%{opacity:.3;transform:translateY(0) rotate(-8deg)}50%{opacity:1;transform:translateY(-18px) rotate(8deg)}}
-.fx.sp{width:22px;height:22px;background:#fff6c2;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
-.fx.sp.s1{left:8%;top:30%}.fx.sp.s2{right:10%;top:18%;animation-delay:.6s!important;width:16px;height:16px}.fx.sp.s3{right:18%;bottom:20%;animation-delay:1.2s!important}
-.fx.drop{width:12px;height:16px;background:#7fd2ff;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform-origin:center}
-.fx.drop.d1{right:14%;top:30%}.fx.drop.d2{right:20%;top:42%;animation-delay:.6s!important}.fx.drop.d3{right:10%;top:50%;animation-delay:1.2s!important}
-.fx.gear{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,transparent 30%,#9be15d 31% 62%,transparent 63%),repeating-conic-gradient(#9be15d 0 12deg,transparent 12deg 30deg);-webkit-mask:radial-gradient(circle,#000 70%,transparent 71%);mask:radial-gradient(circle,#000 70%,transparent 71%)}
-.fx-edis .fx.g1{left:4%;bottom:14%}.fx-edis .fx.g2{right:6%;top:12%;width:30px;height:30px;animation-direction:reverse!important}
-.fx-kiri .fx.gear{background:radial-gradient(circle,transparent 30%,#ffb066 31% 62%,transparent 63%),repeating-conic-gradient(#ffb066 0 12deg,transparent 12deg 30deg);right:4%;bottom:18%}
-.fx-kiri .fx.sp{left:30%;top:10%}
-.fx.heart{width:22px;height:22px;background:#ff7fa8;clip-path:path("M11 20 C-6 8 3 -3 11 5 C19 -3 28 8 11 20Z")}
-.fx-pimpi .fx.h1{left:10%;bottom:20%}.fx-pimpi .fx.h2{right:12%;bottom:30%;animation-delay:1.4s!important}
-.fx-ello .fx.heart{background:#ff8a6e}.fx-ello .fx.h1{right:12%;bottom:30%}.fx-ello .fx.h2{right:22%;bottom:22%;animation-delay:1s!important}.fx-ello .fx.h3{left:12%;bottom:26%;animation-delay:2s!important}
-.fx.note{font-size:34px;font-weight:900;color:#d7a8ff}
-.fx.n1{left:8%;top:22%}.fx.n2{right:8%;top:30%;animation-delay:.7s!important;color:#ffd84a}.fx.n3{left:16%;bottom:24%;animation-delay:1.4s!important}
+@keyframes dzBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes dzSquish{0%,100%{transform:scale(1,1)}30%{transform:scale(1.08,.9)}60%{transform:scale(.95,1.06)}}
+@keyframes dzSpin{to{transform:rotate(360deg)}}
+@keyframes dzFan{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes dzDrift{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+@keyframes dzDrip{0%{opacity:0;transform:translateY(-14px)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(26px)}}
+@keyframes dzWobble{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes dzFlip{0%,40%,100%{transform:rotateY(0)}60%{transform:rotateY(180deg)}80%{transform:rotateY(360deg)}}
+@keyframes dzSwing{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes dzNote{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}}
+@keyframes dzPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.6}}
+@keyframes dzEq{from{transform:scaleY(.55)}to{transform:scaleY(1.05)}}
+@keyframes dzGlow{0%,100%{filter:brightness(1) drop-shadow(0 0 0 rgba(120,255,230,0))}50%{filter:brightness(1.25) drop-shadow(0 0 14px rgba(120,255,230,.8))}}
+@keyframes dzBeat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(.96)}45%{transform:scale(1.08)}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1367,7 +1363,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
     <div class="cxp-list">
       <article class="cp" id="cp-puding" style="--c:#ffcf4a;--c2:#fff1c2" aria-labelledby="cp-puding-n">
-        <div class="cp-art fx-puding" aria-hidden="true"><img class="cp-poster" src="assets/poster-puding.jpg" alt="" loading="lazy"><i class="fx sp s1"></i><i class="fx sp s2"></i><i class="fx sp s3"></i></div>
+        <div class="cp-art fx-puding" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-puding-base.jpg" alt="" width="992" height="791" decoding="async"><img class="dz a-bob" src="assets/deco/puding-cherry.webp" alt="" style="left:12.90%;top:30.09%;width:14.72%;--d:0.00s"><img class="dz a-squish" src="assets/deco/puding-creamR.webp" alt="" style="left:72.38%;top:35.78%;width:13.10%;--d:0.37s"><img class="dz a-spin" src="assets/deco/puding-cubes.webp" alt="" style="left:74.60%;top:57.65%;width:12.10%;--d:0.74s"><img class="dz a-squish" src="assets/deco/puding-creamL.webp" alt="" style="left:12.10%;top:77.88%;width:14.52%;--d:1.11s"><img class="dz a-fan" src="assets/deco/puding-fan.webp" alt="" style="left:71.37%;top:79.65%;width:16.53%;--d:1.48s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.01 · Player 카드 노랑</p>
           <h3 class="cp-name" id="cp-puding-n">푸딩</h3>
@@ -1376,7 +1372,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp rev" id="cp-alto" style="--c:#5fbef3;--c2:#dcf1fd" aria-labelledby="cp-alto-n">
-        <div class="cp-art fx-alto" aria-hidden="true"><img class="cp-poster" src="assets/poster-alto.jpg" alt="" loading="lazy"><i class="fx drop d1"></i><i class="fx drop d2"></i><i class="fx drop d3"></i></div>
+        <div class="cp-art fx-alto" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-alto-base.jpg" alt="" width="1000" height="786" decoding="async"><img class="dz a-drift" src="assets/deco/alto-cloud.webp" alt="" style="left:7.20%;top:32.06%;width:19.30%;--d:0.00s"><img class="dz a-drip" src="assets/deco/alto-d1.webp" alt="" style="left:82.20%;top:32.06%;width:4.40%;--d:0.37s"><img class="dz a-drip" src="assets/deco/alto-d2.webp" alt="" style="left:78.00%;top:40.08%;width:4.40%;--d:0.74s"><img class="dz a-drip" src="assets/deco/alto-d3.webp" alt="" style="left:82.30%;top:47.71%;width:4.30%;--d:1.11s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.02 · Player 카드 하늘</p>
           <h3 class="cp-name" id="cp-alto-n">알토</h3>
@@ -1385,7 +1381,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp" id="cp-edis" style="--c:#8fdb4f;--c2:#e6f8d6" aria-labelledby="cp-edis-n">
-        <div class="cp-art fx-edis" aria-hidden="true"><img class="cp-poster" src="assets/poster-edis.jpg" alt="" loading="lazy"><i class="fx gear g1"></i><i class="fx gear g2"></i></div>
+        <div class="cp-art fx-edis" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-edis-base.jpg" alt="" width="1000" height="799" decoding="async"><img class="dz a-wobble" src="assets/deco/edis-gears.webp" alt="" style="left:2.80%;top:22.65%;width:21.50%;--d:0.00s"><img class="dz a-flip" src="assets/deco/edis-coin.webp" alt="" style="left:78.00%;top:47.06%;width:7.40%;--d:0.37s"><img class="dz a-spin" src="assets/deco/edis-gearR.webp" alt="" style="left:82.00%;top:76.35%;width:12.00%;--d:0.74s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.03 · Player 카드 초록</p>
           <h3 class="cp-name" id="cp-edis-n">에디스</h3>
@@ -1394,7 +1390,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp rev" id="cp-pimpi" style="--c:#ff86a4;--c2:#ffe4eb" aria-labelledby="cp-pimpi-n">
-        <div class="cp-art fx-pimpi" aria-hidden="true"><img class="cp-poster" src="assets/poster-pimpi.jpg" alt="" loading="lazy"><i class="fx heart h1"></i><i class="fx heart h2"></i></div>
+        <div class="cp-art fx-pimpi" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-pimpi-base.jpg" alt="" width="1000" height="854" decoding="async"><img class="dz a-swing" src="assets/deco/pimpi-hangL.webp" alt="" style="left:13.20%;top:20.14%;width:13.00%;--d:0.00s"><img class="dz a-swing" src="assets/deco/pimpi-hangM.webp" alt="" style="left:73.60%;top:20.14%;width:9.40%;--d:0.37s"><img class="dz a-swing" src="assets/deco/pimpi-hangR.webp" alt="" style="left:79.80%;top:28.34%;width:14.00%;--d:0.74s"><img class="dz a-bob" src="assets/deco/pimpi-buttons.webp" alt="" style="left:77.00%;top:78.69%;width:16.40%;--d:1.11s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.04 · Player 카드 분홍</p>
           <h3 class="cp-name" id="cp-pimpi-n">핌피</h3>
@@ -1403,7 +1399,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp" id="cp-tonitoni" style="--c:#c39af2;--c2:#f1e6fc" aria-labelledby="cp-tonitoni-n">
-        <div class="cp-art fx-tonitoni" aria-hidden="true"><img class="cp-poster" src="assets/poster-tonitoni.jpg" alt="" loading="lazy"><i class="fx note n1">♪</i><i class="fx note n2">♫</i><i class="fx note n3">♪</i></div>
+        <div class="cp-art fx-tonitoni" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-tonitoni-base.jpg" alt="" width="1000" height="750" decoding="async"><img class="dz a-note" src="assets/deco/tonitoni-noteL.webp" alt="" style="left:15.50%;top:26.00%;width:13.80%;--d:0.00s"><img class="dz a-note" src="assets/deco/tonitoni-noteR.webp" alt="" style="left:72.50%;top:42.40%;width:14.40%;--d:0.37s"><img class="dz a-pulse" src="assets/deco/tonitoni-lines.webp" alt="" style="left:66.20%;top:20.93%;width:8.30%;--d:0.74s"><img class="dz a-eq" src="assets/deco/tonitoni-bL1.webp" alt="" style="left:7.20%;top:77.07%;width:5.60%;--d:1.11s"><img class="dz a-eq" src="assets/deco/tonitoni-bL2.webp" alt="" style="left:12.70%;top:71.33%;width:5.60%;--d:1.48s"><img class="dz a-eq" src="assets/deco/tonitoni-bL3.webp" alt="" style="left:18.20%;top:64.80%;width:5.60%;--d:0.00s"><img class="dz a-eq" src="assets/deco/tonitoni-bL4.webp" alt="" style="left:23.60%;top:72.13%;width:5.60%;--d:0.37s"><img class="dz a-eq" src="assets/deco/tonitoni-bL5.webp" alt="" style="left:29.00%;top:77.33%;width:5.60%;--d:0.74s"><img class="dz a-eq" src="assets/deco/tonitoni-bR1.webp" alt="" style="left:67.00%;top:77.33%;width:5.60%;--d:1.11s"><img class="dz a-eq" src="assets/deco/tonitoni-bR2.webp" alt="" style="left:72.40%;top:72.40%;width:5.60%;--d:1.48s"><img class="dz a-eq" src="assets/deco/tonitoni-bR3.webp" alt="" style="left:77.80%;top:66.13%;width:5.60%;--d:0.00s"><img class="dz a-eq" src="assets/deco/tonitoni-bR4.webp" alt="" style="left:83.20%;top:72.40%;width:5.60%;--d:0.37s"><img class="dz a-eq" src="assets/deco/tonitoni-bR5.webp" alt="" style="left:88.60%;top:77.33%;width:5.60%;--d:0.74s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.05 · Player 카드 보라</p>
           <h3 class="cp-name" id="cp-tonitoni-n">토니토니</h3>
@@ -1412,7 +1408,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp rev" id="cp-kiri" style="--c:#ff9a4d;--c2:#ffe9d6" aria-labelledby="cp-kiri-n">
-        <div class="cp-art fx-kiri" aria-hidden="true"><img class="cp-poster" src="assets/poster-kiri.jpg" alt="" loading="lazy"><i class="fx gear g1"></i><i class="fx sp s1"></i></div>
+        <div class="cp-art fx-kiri" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-kiri-base.jpg" alt="" width="1000" height="790" decoding="async"><img class="dz a-glow" src="assets/deco/kiri-bulb.webp" alt="" style="left:15.20%;top:63.54%;width:16.00%;--d:0.00s"><img class="dz a-spin" src="assets/deco/kiri-gearB.webp" alt="" style="left:35.80%;top:56.33%;width:13.60%;--d:0.37s"><img class="dz a-spinr" src="assets/deco/kiri-gearO.webp" alt="" style="left:81.80%;top:34.43%;width:8.80%;--d:0.74s"><img class="dz a-bob" src="assets/deco/kiri-bolt.webp" alt="" style="left:90.50%;top:25.57%;width:7.10%;--d:1.11s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.06 · 가이드 캐릭터</p>
           <h3 class="cp-name" id="cp-kiri-n">키리</h3>
@@ -1421,7 +1417,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp" id="cp-ello" style="--c:#ff6f5e;--c2:#ffe2dc" aria-labelledby="cp-ello-n">
-        <div class="cp-art fx-ello" aria-hidden="true"><img class="cp-poster" src="assets/poster-ello.jpg" alt="" loading="lazy"><i class="fx heart h1"></i><i class="fx heart h2"></i><i class="fx heart h3"></i></div>
+        <div class="cp-art fx-ello" aria-hidden="true"><div class="cp-pwrap"><img class="cp-poster" src="assets/poster-ello-base.jpg" alt="" width="1000" height="799" decoding="async"><img class="dz a-beat" src="assets/deco/ello-heartB.webp" alt="" style="left:85.00%;top:22.90%;width:11.50%;--d:0.00s"><img class="dz a-beat" src="assets/deco/ello-heartS.webp" alt="" style="left:78.30%;top:33.79%;width:7.90%;--d:0.37s"><img class="dz a-note" src="assets/deco/ello-note.webp" alt="" style="left:10.60%;top:33.17%;width:12.20%;--d:0.74s"><img class="dz a-pulse" src="assets/deco/ello-lines.webp" alt="" style="left:75.00%;top:50.31%;width:11.60%;--d:1.11s"></div></div>
         <div class="cp-text">
           <p class="cp-no">No.07 · 서브 캐릭터</p>
           <h3 class="cp-name" id="cp-ello-n">엘로</h3>
