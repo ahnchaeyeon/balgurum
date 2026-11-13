@@ -1513,6 +1513,11 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 .vx-btn:hover .vx-t b,.vx-btn:hover .vx-t small{color:#fff!important}
 .vd-topbtn{background:#1f4fe0!important;box-shadow:0 6px 0 #1338b0!important}
 .vd-topbtn:active{box-shadow:0 2px 0 #1338b0!important}
+/* Align cover copy with header logo / CTA edges */
+@media (min-width:821px){
+  .ab-cover .ab-tag,.ab-cover .ab-head{left:max(4px,calc((100% - var(--wrap)) / 2 + 20px))}
+  .ab-cover .ab-desc{right:max(4px,calc((100% - var(--wrap)) / 2 + 20px))}
+}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
