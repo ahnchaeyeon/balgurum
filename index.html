@@ -1415,20 +1415,24 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
   .vd-wish{flex-direction:column;align-items:center}
 }
 @media (prefers-reduced-motion:reduce){.vd-panel.in .vd-fig,.vd-panel.in .vd-ptext{animation:none}}
-/* Word block-wipe (cover) */
-.ab-word .ch{position:relative;overflow:visible;padding:0;margin:0}
-.ab-word .ch>i{transition:none!important;transform:none!important}
-.ab-word .ch::after{content:"";position:absolute;left:-.02em;right:-.02em;top:.12em;bottom:.08em;background:currentColor;opacity:0;transform:scaleX(0);transform-origin:left;pointer-events:none}
-.ab-word .ch.hide::after,.ab-word .ch.show::after{animation:abBlock .5s cubic-bezier(.7,0,.3,1) both calc(var(--i) * .06s)}
-.ab-word .ch.hide>i{animation:abOff .5s steps(1,end) both calc(var(--i) * .06s)}
-.ab-word .ch.show>i{animation:abOn .5s steps(1,end) both calc(var(--i) * .06s)}
-.ab-word .ch.gone>i{opacity:0}
-@keyframes abBlock{0%{opacity:1;transform:scaleX(0);transform-origin:left}49.9%{opacity:1;transform:scaleX(1);transform-origin:left}50%{opacity:1;transform:scaleX(1);transform-origin:right}99%{opacity:1;transform:scaleX(.01);transform-origin:right}100%{opacity:0;transform:scaleX(0);transform-origin:right}}
-@keyframes abOff{0%{opacity:1}50%,100%{opacity:0}}
-@keyframes abOn{0%{opacity:0}50%,100%{opacity:1}}
-.ab-num,.ab-tag span{transition:opacity .3s}
+/* Word wipe + layout shifts (cover) */
+.ab-word .ch{position:relative;padding:0;margin:0;overflow:visible}
+.ab-word .ch>i{display:inline-block;transition:none!important;transform:none!important;clip-path:inset(-10% -2% -10% -2%)}
+.ab-word .ch.hide>i{animation:abWipeOut .42s cubic-bezier(.7,0,.3,1) both calc(var(--i) * .05s)}
+.ab-word .ch.show>i{animation:abWipeIn .5s cubic-bezier(.2,.7,.2,1) both calc(.05s + var(--i) * .06s)}
+@keyframes abWipeOut{0%{clip-path:inset(-10% -2% -10% -2%)}100%{clip-path:inset(-10% -2% -10% 102%)}}
+@keyframes abWipeIn{0%{clip-path:inset(-10% 102% -10% -2%)}100%{clip-path:inset(-10% -2% -10% -2%)}}
 .ab-num.swap{animation:abNum .6s cubic-bezier(.7,0,.3,1)}
 @keyframes abNum{0%,100%{clip-path:inset(0 0 0 0)}45%{clip-path:inset(0 0 0 100%)}55%{clip-path:inset(0 100% 0 0)}}
+.ab-cover .ab-device{transition:transform .9s cubic-bezier(.65,0,.25,1)}
+.ab-cover .ab-word{transform-origin:50% 50%}
+@media (min-width:821px){
+  .ab-cover[data-k="1"] .ab-device{transform:translateX(-17vw)}
+  .ab-cover[data-k="1"] .ab-word{transform:translateX(min(22vw,30vh)) rotate(90deg);font-size:clamp(60px,min(12vw,25vh),300px)}
+  .ab-cover[data-k="2"] .ab-device{transform:translateX(19vw)}
+  .ab-cover[data-k="2"] .ab-word{transform:translateX(-17vw);font-size:clamp(60px,min(14vw,30vh),330px)}
+  .ab-cover[data-k="1"] .ab-num{transform:translate(calc(-1 * min(36vw,600px)),calc(-1 * clamp(70px,min(12vw,22vh),230px)))}
+}
 /* BI blue everywhere */
 .site-header .btn{background:#1f4fe0;border-color:#1f4fe0;color:#fff}
 .site-header .btn:hover{background:#1338b0;border-color:#1338b0}
@@ -3032,17 +3036,16 @@ show(0,false);})();
 const words=el.dataset.words.split('|'),num=cov.querySelector('.ab-num'),tags=[...cov.querySelectorAll('.ab-tag span')];
 const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;let k=0,busy=false;
 function build(w,cls){el.innerHTML=[...w].map((c,i)=>`<span class="ch ${cls||''}" style="--i:${i}"><i>${c}</i></span>`).join('')}
-function setK(n){k=n;num.textContent='0'+(n+1);tags.forEach((t,i)=>t.classList.toggle('on',i===n))}
+function setK(n){k=n;cov.dataset.k=n;num.textContent='0'+(n+1);tags.forEach((t,i)=>t.classList.toggle('on',i===n))}
 function go(n){if(busy)return;n=(n+words.length)%words.length;if(rm){setK(n);build(words[n]);return}busy=true;
  const old=[...el.querySelectorAll('.ch')];old.forEach(c=>{c.classList.remove('show');void c.offsetWidth;c.classList.add('hide')});
  num.classList.remove('swap');void num.offsetWidth;num.classList.add('swap');
- setTimeout(()=>{setK(n)},270);
- const dur=500+old.length*60+80;
- setTimeout(()=>{build(words[n],'show')},dur);
- setTimeout(()=>{busy=false},dur+500+words[n].length*60)}
-build(words[0],rm?'':'show');
+ const out=420+old.length*50;
+ setTimeout(()=>{el.style.visibility='hidden';setK(n);build(words[n],'show');requestAnimationFrame(()=>{el.style.visibility=''})},out);
+ setTimeout(()=>{busy=false},out+600+words[n].length*60)}
+setK(0);build(words[0],rm?'':'show');
 tags.forEach((t,i)=>{t.style.cursor='pointer';t.addEventListener('click',()=>{if(i!==k){go(i);restart()}})});
-let t=null;function restart(){clearInterval(t);t=setInterval(()=>{if(!document.hidden&&el.offsetParent)go(k+1)},3400)}
+let t=null;function restart(){clearInterval(t);t=setInterval(()=>{if(!document.hidden&&el.offsetParent)go(k+1)},3600)}
 setTimeout(restart,parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--intro-delay'))*1000+1200);})();
 </script>
 <script>
