@@ -489,14 +489,14 @@ html[data-route="contents"].at-top body::before{background:#0b1f45}
 .mosaic{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#0b1f45}
 .mosaic-tiles{position:absolute;inset:0}
 .tri{position:absolute;background-repeat:no-repeat;outline:1px solid rgba(255,255,255,.18);will-change:transform}
-.mosaic.play .tri{animation:triIn .8s cubic-bezier(.2,.8,.3,1.2) both;animation-delay:var(--d)}
+.mosaic.play .tri{animation:triIn .5s cubic-bezier(.2,.8,.3,1.2) both;animation-delay:var(--d)}
 @keyframes triIn{0%{transform:scale(.2) rotate(-40deg);opacity:0}100%{transform:none;opacity:1}}
 .tri.flip{animation:triFlip .7s ease both!important;animation-delay:var(--fd)!important}
 @keyframes triFlip{0%{transform:rotateY(0)}50%{transform:rotateY(90deg);filter:brightness(1.6)}100%{transform:rotateY(0)}}
 .mosaic-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,69,0) 45%,rgba(11,31,69,.86) 78%,#0b1f45 100%)}
 .mosaic-copy{position:absolute;left:max(24px,7vw,env(safe-area-inset-left,0px));bottom:max(48px,8vh);max-width:min(33%,460px);z-index:3;display:grid;gap:10px}
 .mosaic-copy p{color:#fff;font-size:clamp(16px,1.7vw,23px);font-weight:800;text-shadow:0 2px 14px rgba(0,0,0,.5)}
-.mosaic.play .mosaic-copy p{animation:popUp .7s both;animation-delay:calc(1s + var(--n,0) * .18s)}
+.mosaic.play .mosaic-copy p{animation:popUp .5s both;animation-delay:calc(.3s + var(--n,0) * .1s)}
 .mosaic-copy p:nth-child(2){--n:1}.mosaic-copy p:nth-child(3){--n:2}
 .mosaic-crew{position:absolute;right:max(8px,1.5vw);bottom:0;z-index:2;width:min(56vw,960px)}
 .mosaic-crew img{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 22px rgba(0,0,0,.4))}
@@ -2617,7 +2617,7 @@ window.BALGURUM_SUPABASE = {
         const cx=(x+tw/2)/W, cy=(y+th*(up?.66:.33))/H;
         let ri=REG.findIndex(([a,b,w,h])=>cx>=a&&cx<a+w&&cy>=b&&cy<b+h); if(ri<0) ri=cx<.5?(cy<.5?0:3):(cy<.5?2:5);
         const d=Math.hypot(cx-.5,cy-.5);
-        el.style.setProperty('--d',(d*1.6).toFixed(2)+'s');
+        el.style.setProperty('--d',(d*.65).toFixed(2)+'s');
         const t={el,x,y,r:ri}; paint(t); tris.push(t); box.append(el);
       }
     }
@@ -2636,11 +2636,11 @@ window.BALGURUM_SUPABASE = {
       new IntersectionObserver(es=>es.forEach(e=>{
         if(e.isIntersecting){
           if(!tris.length) build();
-          if(e.intersectionRatio>=.8 && !mo.classList.contains('play')){ mo.classList.add('play'); setTimeout(()=>mo.classList.add('played'),2600); }
+          if(e.intersectionRatio>=.35 && !mo.classList.contains('play')){ mo.classList.add('play'); setTimeout(()=>mo.classList.add('played'),1300); }
           if(!timer) timer=setInterval(swap,2600);
         }
         else { clearInterval(timer); timer=null; }
-      }),{threshold:[0,.8]}).observe(mo);
+      }),{threshold:[0,.35]}).observe(mo);
     } else mo.classList.add('play','played');
   }
 
