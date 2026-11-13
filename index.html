@@ -1470,7 +1470,7 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 .ab-word .gap{display:block}
 .ab-word.long{letter-spacing:-.01em}
 /* Brand story v2 + footprint trail */
-.st-body{position:relative;max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,90px) max(20px,env(safe-area-inset-right,0px)) clamp(60px,8vw,120px) max(20px,env(safe-area-inset-left,0px));display:grid;gap:clamp(70px,10vw,150px)}
+.st-body{position:relative;max-width:var(--wrap);margin:0 auto;padding:clamp(40px,6vw,90px) max(20px,env(safe-area-inset-right,0px)) clamp(60px,8vw,120px) max(20px,env(safe-area-inset-left,0px));display:grid;gap:clamp(70px,10vw,150px)}
 .st-trail{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .st-foot{position:absolute;width:clamp(30px,3.4vw,48px);height:auto;opacity:0;transform:translate(-50%,-50%) rotate(var(--r)) scale(var(--sx),1) scale(1.4);transition:opacity .25s ease,transform .35s cubic-bezier(.3,1.6,.5,1)}
 .st-foot.on{opacity:1;transform:translate(-50%,-50%) rotate(var(--r)) scale(var(--sx),1)}
@@ -1491,6 +1491,11 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 /* About body: white sections only */
 #page-about>section:not(.ab-cover),#page-about .band,#page-about .sky,#page-about .ab-eye,#page-about .vx,.vd .vd-more{background:#fff!important}
 #page-about .band::before,#page-about .band::after,#page-about .sky::before,#page-about .sky::after{display:none}
+/* Story header: plain white */
+.st-hero{background:#fff;padding-block:clamp(48px,7vw,100px) 0}
+.st-hero h1{font-size:clamp(32px,4.6vw,56px);font-weight:900;line-height:1.25;margin:10px 0 18px}
+.st-hero .lead{font-size:clamp(16px,1.3vw,19px);color:var(--muted);max-width:34em}
+#page-story,#page-story .st-body{background:#fff}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2262,25 +2267,12 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
 <!-- ============ STORY ============ -->
 <div class="page" id="page-story" data-page="story" hidden>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="crumb">HOME / 브랜드 스토리</p>
-        <p class="eyebrow">Brand Story</p>
-        <h1>네 명의 대학생이 함께 만든,<br>움직이는 놀이</h1>
-        <p class="lead">발구름은 상명대학교 AI미디어콘텐츠학과 학생 네 명이 함께 만든 산학협력 졸업 프로젝트입니다.</p>
-      </div>
-      <button class="art walk-art" type="button" aria-label="발걸음 다시 걷기">
-        <span class="cloud" style="width:34%;height:15%;left:6%;top:24%"></span>
-        <span class="cloud" style="width:36%;height:16%;right:-2%;bottom:8%;animation-delay:-4s"></span>
-        <span class="foot" style="left:6%;bottom:8%;width:18%"><svg style="transform:rotate(-30deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#3f7fd9"/></svg></span>
-        <span class="foot" style="left:30%;bottom:28%;width:15%"><svg style="transform:rotate(-34deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#4b8ae0"/></svg></span>
-        <span class="foot" style="left:48%;bottom:44%;width:12%"><svg style="transform:rotate(-36deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#5b97e6"/></svg></span>
-        <span class="foot" style="left:62%;bottom:58%;width:10%"><svg style="transform:rotate(-38deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#6aa2ea"/></svg></span>
-        <span class="foot" style="left:72%;bottom:70%;width:8%"><svg style="transform:rotate(-40deg)" viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#7aaeee"/></svg></span>
-        <svg class="star" style="left:82%;top:4%;width:14%" aria-hidden="true"><use href="#starshape"/></svg>
-        <span class="art-hint">눌러서 다시 걷기</span>
-      </button>
+  <section class="st-hero">
+    <div class="wrap">
+      <p class="crumb">HOME / 브랜드 스토리</p>
+      <p class="eyebrow">Brand Story</p>
+      <h1>네 명의 대학생이 함께 만든,<br>움직이는 놀이</h1>
+      <p class="lead">발구름은 상명대학교 AI미디어콘텐츠학과 학생 네 명이 함께 만든 산학협력 졸업 프로젝트입니다.</p>
     </div>
   </section>
 
@@ -3048,7 +3040,7 @@ function lay(){if(!body.offsetParent)return;tr.innerHTML='';feet=[];const W=body
  secs.forEach(sc=>{const r=sc.getBoundingClientRect(),top=r.top-br.top,bot=r.bottom-br.top;let x;
   if(mob)x=W-28;else if(sc.classList.contains('st-r'))x=Math.max(70,(r.left-br.left)/2);else x=Math.min(W-70,(r.right-br.left)+(W-(r.right-br.left))/2);
   pts.push([x,top-30],[x,bot+10])});
- const step=mob?70:105,sp=mob?9:20;let side=1,acc=0;
+ const step=mob?190:270,sp=mob?9:22;let side=1,acc=0;
  for(let i=0;i<pts.length-1;i++){const[a,b]=[pts[i],pts[i+1]];const dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);if(!L)continue;const ang=Math.atan2(dy,dx);
   for(let d=acc;d<L;d+=step){const t=d/L,x=a[0]+dx*t,y=a[1]+dy*t,nx=-Math.sin(ang)*sp*side,ny=Math.cos(ang)*sp*side;
    const im=document.createElement('img');im.src='assets/foot.png';im.alt='';im.className='st-foot';im.style.left=(x+nx)+'px';im.style.top=(y+ny)+'px';
