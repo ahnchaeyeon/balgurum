@@ -1241,7 +1241,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     <div class="wrap brand-intro">
       <div>
         <p class="eyebrow">Our Brand</p>
-        <h2>작은 발걸음에서<br>새로운 놀이가 시작됩니다.<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+        <h2>작은 발걸음에서<br>새로운 놀이가 시작됩니다.</h2>
       </div>
       <div class="copy">
         <p>발구름은 아이들의 움직임을 즐거운 놀이로 연결하는 XR 어린이 콘텐츠 브랜드입니다.</p>
@@ -1253,7 +1253,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
   <section class="wrap">
     <div class="blob">
       <div class="wrap center">
-        <h2 class="sec-title">발구름이 만드는 네 가지 가치<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+        <h2 class="sec-title">발구름이 만드는 네 가지 가치</h2>
         <div class="values">
           <article class="value">
             <div class="ico"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 40c0-6 4-8 8-9l10-3 6-10c2-3 6-3 8 0l4 8c2 3 6 5 10 6 4 1 6 4 6 8v4H8z"/><path d="M8 44h56v4a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/><path d="M28 30l4 4M33 26l4 4"/></svg></div>
@@ -1278,7 +1278,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
   <section class="band">
     <div class="wrap center">
-      <h2 class="sec-title"><svg class="sparks" aria-hidden="true" style="transform:scaleX(-1);margin:0 4px 0 0"><use href="#sparks"/></svg>움직이고, 반응하고, 다시 도전해요.</h2>
+      <h2 class="sec-title">움직이고, 반응하고, 다시 도전해요.</h2>
       <div class="steps" data-steps>
         <button type="button" class="stepcard on"><img src="assets/step-1.png" alt="바닥 센서 위에 찍힌 두 발자국"><span class="lbl"><span class="num">01</span>움직임이 입력이 되고</span></button>
         <button type="button" class="stepcard"><img src="assets/step-2.png" alt="화면 속에서 반짝이는 별"><span class="lbl"><span class="num">02</span>반응이 재미가 되고</span></button>
@@ -1290,7 +1290,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
   <section class="band tight sky">
     <div class="wrap">
-      <h2 class="sec-title center">하나의 브랜드, 더 넓어질 놀이 세상<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <h2 class="sec-title center">하나의 브랜드, 더 넓어질 놀이 세상</h2>
       <div class="feature" style="background:var(--white)">
         <div>
           <span class="badge">발구름의 첫 번째 콘텐츠</span>
@@ -1466,7 +1466,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
   <section class="band sg-flow-band" aria-labelledby="sg-flow-title">
     <div class="wrap">
       <p class="eyebrow">How to Play</p>
-      <h2 class="sec-title" id="sg-flow-title" style="margin-top:6px">이제, 여러분의 움직임으로 소동을 해결해 볼까요?<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+      <h2 class="sec-title" id="sg-flow-title" style="margin-top:6px">이제, 여러분의 움직임으로 소동을 해결해 볼까요?</h2>
       <p class="sec-sub">앞에는 게임 화면이, 발밑에는 바닥 센서 화면이 있어요. 컨트롤러 없이 움직임만으로 플레이해요.</p>
       <ol class="sg-flow">
         <li><img src="assets/flow-lobby-2.jpg" alt="하늘섬 로비 화면"><b>섬 고르기</b><span>로비에서 놀고 싶은 게임 섬을 눌러요.</span></li>
@@ -1484,7 +1484,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     <div class="hs-pin">
       <div class="hs-head wrap">
         <p class="hs-en">Eight Islands · Eight Games</p>
-        <h2 id="hs-title"><svg class="sparks" aria-hidden="true" style="transform:scaleX(-1)"><use href="#sparks"/></svg>여덟 개의 섬에서 기다리는 여덟 가지 모험<svg class="sparks" aria-hidden="true"><use href="#sparks"/></svg></h2>
+        <h2 id="hs-title">여덟 개의 섬에서 기다리는 여덟 가지 모험</h2>
       </div>
       <div class="hs-view">
         <div class="hs-track" data-hs-track>
@@ -2238,7 +2238,7 @@ window.BALGURUM_SUPABASE = {
   /* ---------- Play flow steps appear one by one as you scroll ---------- */
   if(!reduce && 'IntersectionObserver' in window){
     document.documentElement.classList.add('js-reveal');
-    const fio=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); fio.unobserve(e.target); } }),{threshold:.3});
+    const fio=new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.3) e.target.classList.add('in'); else if(!e.isIntersecting) e.target.classList.remove('in'); }),{threshold:[0,.3]});
     document.querySelectorAll('.sg-flow-band .sg-flow li').forEach(li=>fio.observe(li));
   }
 
