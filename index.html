@@ -1415,24 +1415,17 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
   .vd-wish{flex-direction:column;align-items:center}
 }
 @media (prefers-reduced-motion:reduce){.vd-panel.in .vd-fig,.vd-panel.in .vd-ptext{animation:none}}
-/* Word wipe + layout shifts (cover) */
-.ab-word .ch{position:relative;padding:0;margin:0;overflow:visible}
-.ab-word .ch>i{display:inline-block;transition:none!important;transform:none!important;clip-path:inset(-10% -2% -10% -2%)}
-.ab-word .ch.hide>i{animation:abWipeOut .42s cubic-bezier(.7,0,.3,1) both calc(var(--i) * .05s)}
-.ab-word .ch.show>i{animation:abWipeIn .5s cubic-bezier(.2,.7,.2,1) both calc(.05s + var(--i) * .06s)}
-@keyframes abWipeOut{0%{clip-path:inset(-10% -2% -10% -2%)}100%{clip-path:inset(-10% -2% -10% 102%)}}
-@keyframes abWipeIn{0%{clip-path:inset(-10% 102% -10% -2%)}100%{clip-path:inset(-10% -2% -10% -2%)}}
-.ab-num.swap{animation:abNum .6s cubic-bezier(.7,0,.3,1)}
-@keyframes abNum{0%,100%{clip-path:inset(0 0 0 0)}45%{clip-path:inset(0 0 0 100%)}55%{clip-path:inset(0 100% 0 0)}}
-.ab-cover .ab-device{transition:transform .9s cubic-bezier(.65,0,.25,1)}
-.ab-cover .ab-word{transform-origin:50% 50%}
-@media (min-width:821px){
-  .ab-cover[data-k="1"] .ab-device{transform:translateX(-17vw)}
-  .ab-cover[data-k="1"] .ab-word{transform:translateX(min(22vw,30vh)) rotate(90deg);font-size:clamp(60px,min(12vw,25vh),300px)}
-  .ab-cover[data-k="2"] .ab-device{transform:translateX(19vw)}
-  .ab-cover[data-k="2"] .ab-word{transform:translateX(-17vw);font-size:clamp(60px,min(14vw,30vh),330px)}
-  .ab-cover[data-k="1"] .ab-num{transform:translate(calc(-1 * min(36vw,600px)),calc(-1 * clamp(70px,min(12vw,22vh),230px)))}
-}
+/* Word glitch burst (cover) */
+.ab-word .ch{position:relative;padding:0;margin:0}
+.ab-word .ch>i{transition:none!important;transform:none!important}
+.ab-word.jit{animation:abJit .36s steps(6,end)}
+@keyframes abJit{0%{transform:translate(0,0);text-shadow:4px 0 #ffd84a,-4px 0 #7fd0ff}20%{transform:translate(-6px,3px);text-shadow:-6px 0 #ffd84a,6px 0 #7fd0ff}40%{transform:translate(5px,-2px);clip-path:inset(10% 0 40% 0)}60%{transform:translate(-3px,0);clip-path:inset(55% 0 5% 0)}80%{transform:translate(2px,2px);clip-path:none;text-shadow:2px 0 #ffd84a,-2px 0 #7fd0ff}100%{transform:none;text-shadow:none;clip-path:none}}
+.ab-glitch{position:absolute;inset:0;z-index:1;pointer-events:none;display:grid;grid-template-rows:repeat(6,1fr);overflow:hidden;opacity:0}
+.ab-glitch.on{opacity:1}
+.ab-glitch div{font-family:"Fredoka",var(--f-latin),sans-serif;font-weight:700;font-size:clamp(48px,min(11vw,17vh),220px);line-height:1;color:#fff;white-space:nowrap;overflow:hidden;display:flex;align-items:center}
+.ab-glitch div.o{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.75)}
+.ab-glitch div.y{color:#ffd84a}
+.ab-num.dec{font-variant-numeric:tabular-nums}
 /* BI blue everywhere */
 .site-header .btn{background:#1f4fe0;border-color:#1f4fe0;color:#fff}
 .site-header .btn:hover{background:#1338b0;border-color:#1338b0}
@@ -1512,6 +1505,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     <div class="ab-stage">
       <p class="ab-tag" aria-label="Move. Play. Grow."><span style="--i:0" class="on">MOVE.</span><span style="--i:1">PLAY.</span><span style="--i:2">GROW.</span></p>
       <span class="ab-num" aria-hidden="true">01</span>
+      <div class="ab-glitch" aria-hidden="true"></div>
       <p class="ab-word" aria-hidden="true" data-words="MOVE|PLAY|GROW"></p>
       <div class="ab-device"><img src="assets/device-cut2.png" alt="발구름 XR 놀이 기기" width="706" height="1531"></div>
       <h1 id="ab-title" class="ab-head"><span class="ab-ln"><span>발을 구르는 순간,</span></span><span class="ab-ln"><span>새로운 놀이가 시작됩니다.</span></span></h1>
@@ -3033,19 +3027,25 @@ show(0,false);})();
 </script>
 <script>
 (()=>{const cov=document.querySelector('.ab-cover');const el=cov&&cov.querySelector('.ab-word[data-words]');if(!el)return;
-const words=el.dataset.words.split('|'),num=cov.querySelector('.ab-num'),tags=[...cov.querySelectorAll('.ab-tag span')];
+const words=el.dataset.words.split('|'),num=cov.querySelector('.ab-num'),tags=[...cov.querySelectorAll('.ab-tag span')],gl=cov.querySelector('.ab-glitch');
 const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;let k=0,busy=false;
-function build(w,cls){el.innerHTML=[...w].map((c,i)=>`<span class="ch ${cls||''}" style="--i:${i}"><i>${c}</i></span>`).join('')}
-function setK(n){k=n;cov.dataset.k=n;num.textContent='0'+(n+1);tags.forEach((t,i)=>t.classList.toggle('on',i===n))}
-function go(n){if(busy)return;n=(n+words.length)%words.length;if(rm){setK(n);build(words[n]);return}busy=true;
- const old=[...el.querySelectorAll('.ch')];old.forEach(c=>{c.classList.remove('show');void c.offsetWidth;c.classList.add('hide')});
- num.classList.remove('swap');void num.offsetWidth;num.classList.add('swap');
- const out=420+old.length*50;
- setTimeout(()=>{el.style.visibility='hidden';setK(n);build(words[n],'show');requestAnimationFrame(()=>{el.style.visibility=''})},out);
- setTimeout(()=>{busy=false},out+600+words[n].length*60)}
-setK(0);build(words[0],rm?'':'show');
+const POOL='BALGURUMMOVEPLAYGROW.XR/0123',R=n=>Math.floor(Math.random()*n);
+const rnd=n=>Array.from({length:n},()=>POOL[R(POOL.length)]).join('');
+function build(w){el.innerHTML=[...w].map((c,i)=>`<span class="ch" style="--i:${i}"><i>${c}</i></span>`).join('')}
+function setK(n){k=n;tags.forEach((t,i)=>t.classList.toggle('on',i===n))}
+function decode(node,target,ms){const steps=Math.max(4,Math.round(ms/45));let i=0;const tm=setInterval(()=>{i++;node.textContent=[...target].map((c,j)=>i/steps>(j+1)/target.length?c:POOL[R(POOL.length)]).join('');if(i>=steps){clearInterval(tm);node.textContent=target}},45)}
+function fill(){gl.innerHTML=Array.from({length:6},()=>{const c=['','o','','y',''][R(5)];return `<div class="${c}" style="transform:translateX(${R(60)-40}%);clip-path:inset(${R(30)}% 0 ${R(30)}% 0)">${rnd(14)}</div>`}).join('')}
+function burst(ms){return new Promise(res=>{let t0=performance.now();gl.classList.add('on');(function tick(){fill();if(performance.now()-t0<ms)setTimeout(tick,60);else{gl.classList.remove('on');gl.innerHTML='';res()}})()})}
+async function go(n){if(busy)return;n=(n+words.length)%words.length;if(rm){setK(n);build(words[n]);num.textContent='0'+(n+1);return}busy=true;
+ el.classList.remove('jit');void el.offsetWidth;el.classList.add('jit');
+ decode(num,'0'+(n+1),420);
+ setTimeout(()=>{el.style.visibility='hidden'},120);
+ await burst(380);
+ setK(n);build(words[n]);el.style.visibility='';el.classList.remove('jit');void el.offsetWidth;el.classList.add('jit');
+ setTimeout(()=>{busy=false},400)}
+setK(0);build(words[0]);
 tags.forEach((t,i)=>{t.style.cursor='pointer';t.addEventListener('click',()=>{if(i!==k){go(i);restart()}})});
-let t=null;function restart(){clearInterval(t);t=setInterval(()=>{if(!document.hidden&&el.offsetParent)go(k+1)},3600)}
+let t=null;function restart(){clearInterval(t);t=setInterval(()=>{if(!document.hidden&&el.offsetParent)go(k+1)},3400)}
 setTimeout(restart,parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--intro-delay'))*1000+1200);})();
 </script>
 <script>
