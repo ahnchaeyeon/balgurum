@@ -1194,6 +1194,17 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(80px,7vw,120px);
   .mg-side{display:contents}
   .mg-th{aspect-ratio:16/10;height:auto;border-radius:10px}
 }
+/* Games crew strip: no clipped shadow box, soft feet fade */
+html[data-route="games"] .mg-team img{filter:none;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
+/* Games hero fits one screen */
+.mg-hero #mg-title{max-width:none;font-size:clamp(26px,min(4vw,6.2vh),60px)}
+.mg-sub{font-size:clamp(14px,min(1.6vw,2.4vh),22px);margin-top:min(14px,1.4vh)}
+html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10vh),104px)}
+.mg-reel{margin-top:min(26px,2.6vh)}
+.mg-reel-in{position:relative;max-width:min(1480px,calc((100svh - var(--hdr,75px) - clamp(285px,33vh,350px)) * 2.6))}
+.mg-reel-in>.mg-side,.mg-reel-in>.mg-stage{position:relative;z-index:1}
+.mg-reel-in>.mg-ch{position:absolute;bottom:calc(100% - 34px);right:1%;top:auto;left:auto;width:min(calc((100% - 2 * clamp(8px,1vw,16px)) / 6 * .88),calc(20vh + 40px));z-index:0}
+@media (max-width:760px){.mg-reel-in>.mg-ch{width:86px;bottom:calc(100% - 22px)}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1622,10 +1633,10 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <a class="gp-back" href="#contents">← 콘텐츠로 돌아가기</a>
       <h1 id="mg-title">어떤 소동이 벌어지고 있을까요?</h1>
       <p class="mg-sub">뛰고, 맞추고 함께 즐기는 여덟 가지 모험</p>
-      <img class="mg-ch mg-ch-r" src="assets/mg-pimpi.png" alt="" aria-hidden="true">
     </div>
     <div class="mg-reel" role="region" aria-label="미니게임 미리보기">
       <div class="mg-reel-in">
+        <img class="mg-ch mg-ch-r" src="assets/mg-pimpi.png" alt="" aria-hidden="true">
         <ul class="mg-side mg-side-l"><li><button type="button" class="mg-th" data-i="0" data-v="assets/game-clip-1b.mp4" aria-label="태엽새 레이스 미리보기"><img src="assets/game-clip-1.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="1" data-v="assets/game-clip-2.mp4" aria-label="샌드위치 공장 미리보기"><img src="assets/game-clip-2.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="2" data-v="assets/game-clip-3.mp4" aria-label="알쏭달쏭 코인볼 미리보기"><img src="assets/game-clip-3.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="3" data-v="assets/game-clip-4.mp4" aria-label="운동 낚시왕 미리보기"><img src="assets/game-clip-4.jpg" alt="" loading="lazy"></button></li></ul>
         <figure class="mg-stage"><video class="mg-stage-v" src="assets/game-clip-1b.mp4" poster="assets/game-clip-1.jpg" muted playsinline preload="metadata"></video><figcaption class="mg-stage-cap"><span>GAME 01</span><b>태엽새 레이스</b></figcaption></figure>
         <ul class="mg-side mg-side-r"><li><button type="button" class="mg-th" data-i="4" data-v="assets/game-clip-5.mp4" aria-label="쿵쿵 떡방아 미리보기"><img src="assets/game-clip-5.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="5" data-v="assets/game-clip-6.mp4" aria-label="탈출 대추격전 미리보기"><img src="assets/game-clip-6.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="6" data-v="assets/game-clip-7.mp4" aria-label="리듬 피겨 점프! 미리보기"><img src="assets/game-clip-7.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="7" data-v="assets/game-clip-8.mp4" aria-label="눈사람 탈출 작전 미리보기"><img src="assets/game-clip-8.jpg" alt="" loading="lazy"></button></li></ul>
