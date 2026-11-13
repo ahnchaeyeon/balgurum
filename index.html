@@ -1416,10 +1416,13 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 }
 @media (prefers-reduced-motion:reduce){.vd-panel.in .vd-fig,.vd-panel.in .vd-ptext{animation:none}}
 /* Word roll + glitch to Balgurum (cover) */
-.ab-word .ch{display:inline-block;overflow:hidden;padding-block:.06em .2em;margin-block:-.06em -.2em;vertical-align:top}
-.ab-word .ch>i{display:inline-block;font-style:normal;transform:translateY(0);opacity:1;transition:transform .5s cubic-bezier(.7,0,.2,1),opacity .5s;transition-delay:calc(var(--i) * .045s)}
-.ab-word .ch.pre>i{transform:translateY(105%);opacity:0;transition:none}
-.ab-word .ch.out>i{transform:translateY(-105%);opacity:0}
+.ab-word .ch{display:inline-block;position:relative}
+.ab-word .ch>i{display:inline-block;font-style:normal;transform:none;clip-path:inset(-10% -2% -20% -2%)}
+.ab-word .ch.pre>i{clip-path:inset(-10% 102% -20% -2%)}
+.ab-word .ch.in>i{animation:abWipeIn .5s cubic-bezier(.2,.7,.2,1) both calc(var(--i) * .06s)}
+.ab-word .ch.out>i{animation:abWipeOut .42s cubic-bezier(.7,0,.3,1) both calc(var(--i) * .05s)}
+@keyframes abWipeOut{0%{clip-path:inset(-10% -2% -20% -2%)}100%{clip-path:inset(-10% -2% -20% 102%)}}
+@keyframes abWipeIn{0%{clip-path:inset(-10% 102% -20% -2%)}100%{clip-path:inset(-10% -2% -20% -2%)}}
 .ab-word.long{font-size:clamp(52px,min(13vw,26vh),300px)!important;letter-spacing:0}
 .ab-word.jit{animation:abJit .14s steps(3,end)}
 @keyframes abJit{0%{transform:translate(0,0);text-shadow:4px 0 #ffd84a,-4px 0 #7fd0ff}33%{transform:translate(-5px,2px);clip-path:inset(15% 0 45% 0)}66%{transform:translate(4px,-2px);clip-path:inset(55% 0 5% 0);text-shadow:-3px 0 #ffd84a,3px 0 #7fd0ff}100%{transform:none;text-shadow:none;clip-path:none}}
@@ -1433,7 +1436,7 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 /* Bigger device, bleeding below like the mock */
 @media (min-width:821px){
   .ab-cover .ab-stage{min-height:calc(100svh - var(--hdr,72px) - 120px)}
-  .ab-cover .ab-device{position:absolute;left:50%;top:clamp(0px,3vh,40px);width:min(25vw,54vh,520px);transform:translateX(-50%)!important;margin:0}
+  .ab-cover .ab-device{position:absolute;left:50%;top:clamp(24px,8vh,90px);width:min(21vw,46vh,440px);transform:translateX(-50%)!important;margin:0}
   .ab-cover .ab-word{transform:translateY(-6%)}
 }
 /* BI blue everywhere */
@@ -3042,7 +3045,7 @@ const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;let k=0,busy=fal
 const POOL='BALGURUMOVEPLAY',R=n=>Math.floor(Math.random()*n);
 const rnd=n=>Array.from({length:n},()=>POOL[R(POOL.length)]).join('');
 function build(w,pre){el.classList.toggle('long',w.length>5);el.innerHTML=[...w].map((c,i)=>`<span class="ch${pre?' pre':''}" style="--i:${i}"><i>${c}</i></span>`).join('')}
-function reveal(){requestAnimationFrame(()=>requestAnimationFrame(()=>el.querySelectorAll('.ch').forEach(c=>c.classList.remove('pre'))))}
+function reveal(){requestAnimationFrame(()=>el.querySelectorAll('.ch').forEach(c=>{c.classList.remove('pre');c.classList.add('in')}))}
 function setK(n){k=n;const brand=n===3;cov.classList.toggle('is-bi',brand);if(!brand)num.textContent='0'+(n+1);tags.forEach((t,i)=>t.classList.toggle('on',!brand&&i===n))}
 function fill(){gl.innerHTML=Array.from({length:3},()=>`<div class="${R(3)?'':'o'}" style="transform:translateX(${R(40)-20}%)">${rnd(6+R(3))}</div>`).join('')}
 function burst(ms){return new Promise(res=>{const t0=performance.now();gl.classList.add('on');(function tick(){fill();if(performance.now()-t0<ms)setTimeout(tick,45);else{gl.classList.remove('on');gl.innerHTML='';res()}})()})}
@@ -3050,8 +3053,8 @@ function jit(){el.classList.remove('jit');void el.offsetWidth;el.classList.add('
 async function go(n){if(busy)return;n=(n+words.length)%words.length;if(rm){setK(n);build(words[n]);return}busy=true;
  if(n===3||k===3){jit();await new Promise(r=>setTimeout(r,60));el.style.visibility='hidden';await burst(90);setK(n);build(words[n]);el.style.visibility='';jit();setTimeout(()=>busy=false,200);return}
  el.querySelectorAll('.ch').forEach(c=>c.classList.add('out'));
- const out=500+el.querySelectorAll('.ch').length*45;
- setTimeout(()=>{setK(n);build(words[n],true);reveal()},out-120);
+ const out=420+el.querySelectorAll('.ch').length*50;
+ setTimeout(()=>{setK(n);build(words[n],true);reveal()},out);
  setTimeout(()=>busy=false,out+500)}
 setK(0);build(words[0],!rm);reveal();
 tags.forEach((t,i)=>{t.style.cursor='pointer';t.addEventListener('click',()=>{if(i!==k){go(i);restart()}})});
