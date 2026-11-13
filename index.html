@@ -1488,6 +1488,9 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 .ab-eye .ab-two.rev{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
 .ab-eye-art{background:none!important;aspect-ratio:auto!important;border-radius:28px!important;max-width:none!important;overflow:hidden;box-shadow:0 20px 44px rgba(23,63,130,.14)}
 .ab-eye-art img{width:100%!important;height:auto!important;display:block;filter:none!important}
+/* About body: white sections only */
+#page-about>section:not(.ab-cover),#page-about .band,#page-about .sky,#page-about .ab-eye,#page-about .vx,.vd .vd-more{background:#fff!important}
+#page-about .band::before,#page-about .band::after,#page-about .sky::before,#page-about .sky::after{display:none}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
