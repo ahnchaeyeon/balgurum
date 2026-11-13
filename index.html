@@ -472,7 +472,8 @@ html[data-route="contents"].at-top body::before{background:#0b1f45}
 .fs-kicker{font-family:var(--f-latin);font-weight:700;letter-spacing:.14em;font-size:14px;color:#ffd864}
 .fs-line{font-size:clamp(22px,2.9vw,38px);font-weight:800;line-height:1.6;text-shadow:0 2px 18px rgba(0,0,0,.55);max-width:22em;color:#fff}
 .fs-dots{position:absolute;top:0;right:max(14px,env(safe-area-inset-right,0px));height:100%;z-index:3;pointer-events:none}
-.fs-dots-in{position:sticky;top:calc(50vh - 150px);display:grid;gap:14px;padding:12px 8px;pointer-events:auto}
+.fs-dots-in{position:sticky;top:0;height:100vh;height:100svh;display:grid;align-content:center;gap:14px;padding:12px 8px;pointer-events:none}
+.fs-dots-in button{pointer-events:auto}
 .fs-track,.fs-fill{position:absolute;left:50%;width:6px;margin-left:-3px;border-radius:6px;pointer-events:none}
 .fs-track{background:rgba(255,255,255,.3);box-shadow:0 0 4px rgba(0,0,0,.35)}
 .fs-fill{background:linear-gradient(180deg,#ffe8a3,#ffd864);box-shadow:0 0 10px rgba(255,216,100,.6);height:0}
