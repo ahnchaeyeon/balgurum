@@ -1156,30 +1156,43 @@ html[data-route="games"] .mg-team::before{display:none}
 html[data-route="games"] .mg-hero,.mg-hero{background:#3d8ff0 url("assets/mg-sky.jpg") center/cover no-repeat;padding:clamp(20px,2.4vw,32px) 0 0;min-height:clamp(420px,33vw,540px);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 80px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 79px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 80px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 79px) no-repeat}
 .mg-hero .gp-back{color:#fff;opacity:.9}
 .mg-hero-in{padding-top:0;z-index:3}
-.mg-hero #mg-title{margin-top:clamp(20px,3.6vw,56px)}
+.mg-hero #mg-title{margin-top:clamp(12px,2.2vw,36px)}
 @media (min-width:761px){.mg-hero+.mg-find .mg-filter{margin-top:6px}.mg-hero{margin-bottom:-8px}}
 .mg-hero .gp-back{position:relative;z-index:3}
 html[data-route="games"] .mg-hero h1,.mg-hero h1{color:#fff;font-size:clamp(32px,4.2vw,64px);text-wrap:balance;text-shadow:0 4px 0 #1a5fc8,0 12px 28px rgba(8,40,110,.35);margin:0 auto;max-width:12em}
 .mg-sub{margin:14px auto 0;color:#fff;font-weight:800;font-size:clamp(16px,1.7vw,24px);text-shadow:0 2px 0 rgba(26,95,200,.6),0 6px 16px rgba(8,40,110,.3)}
-.mg-isles{position:absolute;inset:0;pointer-events:none;z-index:1}
-.mg-isles img{position:absolute;height:auto;filter:drop-shadow(0 14px 14px rgba(8,40,110,.26));animation:mgFloat 5.5s ease-in-out infinite;will-change:transform}
-.mg-isles .i1{left:3%;top:30%;width:clamp(90px,8.6vw,138px);animation-delay:-.4s}
-.mg-isles .i2{left:23%;top:15%;width:clamp(96px,9.4vw,150px);animation-delay:-2.1s;animation-duration:6.3s}
-.mg-isles .i3{left:4%;top:64%;width:clamp(90px,8.6vw,138px);animation-delay:-3.6s;animation-duration:5s}
-.mg-isles .i4{left:19%;top:58%;width:clamp(80px,7.6vw,122px);animation-delay:-1.2s;animation-duration:6.8s}
-.mg-isles .i5{right:3%;top:26%;width:clamp(90px,8.6vw,138px);animation-delay:-2.8s;animation-duration:6s}
-.mg-isles .i6{right:23%;top:12%;width:clamp(90px,8.8vw,140px);animation-delay:-.9s;animation-duration:5.2s}
-.mg-isles .i7{right:4%;top:60%;width:clamp(96px,9.4vw,150px);animation-delay:-4.1s;animation-duration:6.5s}
-.mg-isles .i8{right:19%;top:56%;width:clamp(78px,7.4vw,118px);animation-delay:-1.9s;animation-duration:5.8s}
-@keyframes mgFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}
-@media (prefers-reduced-motion:reduce){.mg-isles img{animation:none}}
+html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(90px,8vw,130px);min-height:0}
+.mg-ch{position:absolute;bottom:clamp(-30px,-1.5vw,-10px);height:auto;z-index:1;filter:drop-shadow(0 12px 16px rgba(8,40,110,.3));animation:mgFloat 5.5s ease-in-out infinite}
+.mg-ch-l{left:max(4%,calc(50% - 600px));width:clamp(130px,14vw,230px)}
+.mg-ch-r{right:max(4%,calc(50% - 600px));width:clamp(115px,12vw,195px);animation-delay:-2.6s}
+@keyframes mgFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+.mg-reel{position:relative;z-index:4;margin-top:clamp(0px,1vw,16px);padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.mg-reel-in{max-width:1480px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,4fr) minmax(0,1fr);gap:clamp(8px,1vw,16px);align-items:stretch}
+.mg-side{list-style:none;margin:0;padding:0;display:grid;grid-template-rows:repeat(4,minmax(0,1fr));gap:clamp(8px,1vw,16px)}
+.mg-th{display:block;width:100%;height:100%;padding:0;border:0;border-radius:14px;overflow:hidden;cursor:pointer;background:#cfe6ff;box-shadow:0 8px 18px rgba(8,40,110,.22);outline:3px solid transparent;outline-offset:-3px;transition:transform .2s,outline-color .2s,filter .2s;filter:saturate(.85) brightness(.92)}
+.mg-th img{display:block;width:100%;height:100%;object-fit:cover}
+.mg-th:hover{transform:translateY(-3px);filter:none}
+.mg-th[aria-current="true"]{outline-color:#ffd84a;filter:none}
+.mg-th:focus-visible{outline-color:#fff}
+.mg-stage{position:relative;margin:0;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:#0b1f45;box-shadow:0 18px 40px rgba(8,40,110,.3)}
+.mg-stage-v{display:block;width:100%;height:100%;object-fit:cover}
+.mg-stage-cap{position:absolute;left:clamp(12px,1.6vw,24px);bottom:clamp(12px,1.6vw,22px);display:flex;align-items:center;gap:10px;background:rgba(11,31,69,.72);color:#fff;border-radius:999px;padding:8px 18px 8px 10px;font-size:clamp(14px,1.3vw,19px);backdrop-filter:blur(4px)}
+.mg-stage-cap span{background:#ffd84a;color:#0b1f45;font-family:var(--f-latin);font-weight:800;font-size:.75em;border-radius:999px;padding:4px 10px}
+.mg-stage-cap b{font-weight:800}
+.mg-reel+.mg-find .mg-filter{margin-top:clamp(28px,3vw,44px)}
+@media (prefers-reduced-motion:reduce){.mg-ch{animation:none}}
 @media (max-width:760px){
-  .mg-hero,html[data-route="games"] .mg-hero{min-height:0;padding-bottom:64px}
+  html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:100px}
   .mg-hero-in{padding-top:12px}
   .mg-hero #mg-title{margin-top:20px}
-  .mg-isles{position:relative;inset:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px;padding:20px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));align-items:center}
-  .mg-isles img{position:static;width:100%!important;max-width:96px;margin:0 auto}
-  .mg-isles img:nth-child(even){margin-top:16px}
+  .mg-ch{bottom:34px}.mg-ch-l{width:84px;left:4px}.mg-ch-r{width:72px;right:4px}
+  html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:110px}
+  .mg-hero-in{padding-inline:90px}
+  .mg-reel{margin-top:4px}
+  .mg-reel-in{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .mg-stage{grid-column:1/-1;grid-row:1;border-radius:16px}
+  .mg-side{display:contents}
+  .mg-th{aspect-ratio:16/10;height:auto;border-radius:10px}
 }
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
@@ -1610,7 +1623,16 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <h1 id="mg-title">어떤 소동이 벌어지고 있을까요?</h1>
       <p class="mg-sub">뛰고, 맞추고 함께 즐기는 여덟 가지 모험</p>
     </div>
-    <div class="mg-isles" aria-hidden="true"><img class="mg-fl i1" src="assets/isl-race.png" alt=""><img class="mg-fl i2" src="assets/isl-fishing.png" alt=""><img class="mg-fl i3" src="assets/isl-ricecake.png" alt=""><img class="mg-fl i4" src="assets/isl-snowman.png" alt=""><img class="mg-fl i5" src="assets/isl-lucky.png" alt=""><img class="mg-fl i6" src="assets/isl-skating.png" alt=""><img class="mg-fl i7" src="assets/isl-sandwich.png" alt=""><img class="mg-fl i8" src="assets/isl-escape.png" alt=""></div>
+    <img class="mg-ch mg-ch-l" src="assets/char-kiri.png" alt="" aria-hidden="true">
+    <img class="mg-ch mg-ch-r" src="assets/char-pimpi.png" alt="" aria-hidden="true">
+  </section>
+
+  <section class="mg-reel" aria-label="미니게임 미리보기">
+    <div class="mg-reel-in">
+      <ul class="mg-side mg-side-l"><li><button type="button" class="mg-th" data-i="0" data-v="assets/game-clip-1b.mp4" aria-label="태엽새 레이스 미리보기"><img src="assets/game-clip-1.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="1" data-v="assets/game-clip-2.mp4" aria-label="샌드위치 공장 미리보기"><img src="assets/game-clip-2.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="2" data-v="assets/game-clip-3.mp4" aria-label="알쏭달쏭 코인볼 미리보기"><img src="assets/game-clip-3.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="3" data-v="assets/game-clip-4.mp4" aria-label="운동 낚시왕 미리보기"><img src="assets/game-clip-4.jpg" alt="" loading="lazy"></button></li></ul>
+      <figure class="mg-stage"><video class="mg-stage-v" src="assets/game-clip-1b.mp4" poster="assets/game-clip-1.jpg" muted playsinline preload="metadata"></video><figcaption class="mg-stage-cap"><span>GAME 01</span><b>태엽새 레이스</b></figcaption></figure>
+      <ul class="mg-side mg-side-r"><li><button type="button" class="mg-th" data-i="4" data-v="assets/game-clip-5.mp4" aria-label="쿵쿵 떡방아 미리보기"><img src="assets/game-clip-5.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="5" data-v="assets/game-clip-6.mp4" aria-label="탈출 대추격전 미리보기"><img src="assets/game-clip-6.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="6" data-v="assets/game-clip-7.mp4" aria-label="리듬 피겨 점프! 미리보기"><img src="assets/game-clip-7.jpg" alt="" loading="lazy"></button></li><li><button type="button" class="mg-th" data-i="7" data-v="assets/game-clip-8.mp4" aria-label="눈사람 탈출 작전 미리보기"><img src="assets/game-clip-8.jpg" alt="" loading="lazy"></button></li></ul>
+    </div>
   </section>
 
   <section class="mg-find" aria-label="미니게임 목록">
@@ -2570,6 +2592,15 @@ window.BALGURUM_SUPABASE = {
   window.addEventListener('hashchange',()=>{ if(keepIntro){ keepIntro=false; return; } endIntro(false); });
 })();
 </script>
+<script>
+(()=>{const st=document.querySelector('.mg-stage');if(!st)return;const v=st.querySelector('video'),cap=st.querySelector('.mg-stage-cap'),th=[...document.querySelectorAll('.mg-th')];let cur=0,vis=false;
+function show(i,play){cur=(i+th.length)%th.length;const b=th[cur];th.forEach(x=>x.setAttribute('aria-current',x===b?'true':'false'));v.src=b.dataset.v;v.poster=b.querySelector('img').src;cap.querySelector('span').textContent='GAME 0'+(cur+1);cap.querySelector('b').textContent=b.getAttribute('aria-label').replace(/ 미리보기$/,'');if(play&&vis)v.play().catch(()=>{})}
+th.forEach((b,i)=>b.addEventListener('click',()=>show(i,true)));
+v.addEventListener('ended',()=>show(cur+1,true));
+new IntersectionObserver(es=>{vis=es[0].isIntersecting;vis?v.play().catch(()=>{}):v.pause()},{threshold:.25}).observe(st);
+show(0,false);})();
+</script>
+
 
 </body>
 </html>
