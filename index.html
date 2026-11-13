@@ -1195,9 +1195,10 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(80px,7vw,120px);
   .mg-th{aspect-ratio:16/10;height:auto;border-radius:10px}
 }
 /* Games crew strip: no clipped shadow box, soft feet fade */
-html[data-route="games"] .mg-team img{filter:none;-webkit-mask-image:linear-gradient(180deg,#000 96%,transparent 100%);mask-image:linear-gradient(180deg,#000 96%,transparent 100%)}
+html[data-route="games"] .mg-team img{filter:none;-webkit-mask-image:none;mask-image:none}
 html[data-route="games"] .mg-moves-sec{padding-bottom:28px}
-html[data-route="games"] .mg-islands{padding-block:8px 28px}
+html[data-route="games"] .mg-islands{padding-block:8px 150px}
+@media (max-width:760px){html[data-route="games"] .mg-islands{padding-bottom:100px}}
 .mg-islands .pill-cta{width:min(480px,100%);min-height:72px;padding:12px 84px 12px 36px;font-size:clamp(18px,1.9vw,23px)}
 .mg-islands .pill-arrow{width:48px;height:48px;right:12px}.mg-islands .pill-arrow svg{width:24px;height:24px}
 /* Games hero fits one screen */
@@ -1205,7 +1206,7 @@ html[data-route="games"] .mg-islands{padding-block:8px 28px}
 .mg-sub{font-size:clamp(14px,min(1.6vw,2.4vh),22px);margin-top:min(14px,1.4vh)}
 html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10vh),104px)}
 .mg-reel{margin-top:min(26px,2.6vh)}
-.mg-reel-in{position:relative;max-width:min(1960px,calc((100svh - var(--hdr,75px) - clamp(240px,28vh,290px)) * 2.6))}
+.mg-reel-in{position:relative;max-width:min(2200px,calc((100svh - var(--hdr,75px) - clamp(200px,23.5vh,250px)) * 2.6))}
 .mg-reel-in>.mg-side,.mg-reel-in>.mg-stage{position:relative;z-index:1}
 .mg-reel-in>.mg-ch{position:absolute;bottom:calc(100% - 44px);right:5%;top:auto;left:auto;width:min(calc((100% - 2 * clamp(8px,1vw,16px)) / 6 * .9),calc(17vh + 26px));z-index:0}
 @media (max-width:760px){.mg-reel-in>.mg-ch{width:86px;bottom:calc(100% - 22px)}}
