@@ -1075,6 +1075,49 @@ html[data-route="games"] .mg-mv-list li{background:#fff;border:0;box-shadow:0 0 
 html[data-route="games"] .mg-mv-list b{color:#1c5fbf}
 html[data-route="games"] .mg-mv-list span{color:#5a4a2c}
 html[data-route="games"] .mg-team::before{display:none}
+/* Character posters with concept motion */
+.cp-art[class*="fx-"]{aspect-ratio:auto;display:block;place-items:initial;overflow:visible}
+.cp-poster{display:block;width:100%;height:auto;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 55%,transparent 98%);mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 55%,transparent 98%);transform-origin:50% 90%;will-change:transform}
+.cp-art .fx{position:absolute;pointer-events:none;font-style:normal}
+@media (prefers-reduced-motion:no-preference){
+  .cp.in .fx-puding .cp-poster{animation:pdWobble 2.6s ease-in-out infinite}
+  .cp.in .fx-alto .cp-poster{animation:alFloat 4s ease-in-out infinite}
+  .cp.in .fx-edis .cp-poster{animation:edBeep 2.4s steps(1) infinite}
+  .cp.in .fx-pimpi .cp-poster{animation:pmSwing 3.2s ease-in-out infinite;transform-origin:50% 0}
+  .cp.in .fx-tonitoni .cp-poster{animation:tnBeat .6s ease-in-out infinite alternate}
+  .cp.in .fx-kiri .cp-poster{animation:krWave 3s ease-in-out infinite;transform-origin:30% 95%}
+  .cp.in .fx-ello .cp-poster{animation:elHop 1.4s cubic-bezier(.3,0,.4,1) infinite}
+  .cp.in .fx.sp{animation:fxTwinkle 1.8s ease-in-out infinite}
+  .cp.in .fx.drop{animation:fxDrop 1.8s linear infinite}
+  .cp.in .fx.gear{animation:fxSpin 6s linear infinite}
+  .cp.in .fx.heart{animation:fxRise 3s ease-in infinite}
+  .cp.in .fx.note{animation:fxNote 2.2s ease-in-out infinite}
+}
+@keyframes pdWobble{0%,100%{transform:scale(1,1)}20%{transform:scale(1.03,.97)}40%{transform:scale(.98,1.02)}60%{transform:scale(1.01,.99)}}
+@keyframes alFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes edBeep{0%{transform:translate(0,0)}25%{transform:translate(0,-4px)}50%{transform:translate(0,0)}75%{transform:translate(0,-2px) rotate(-.6deg)}}
+@keyframes pmSwing{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
+@keyframes tnBeat{from{transform:translateY(0) scale(1)}to{transform:translateY(-6px) scale(1.012)}}
+@keyframes krWave{0%,100%{transform:rotate(0)}15%{transform:rotate(-1.6deg)}30%{transform:rotate(1.2deg)}45%{transform:rotate(-.8deg)}60%{transform:rotate(0)}}
+@keyframes elHop{0%,100%{transform:translateY(0) scale(1,1)}10%{transform:translateY(0) scale(1.03,.96)}40%{transform:translateY(-22px) scale(.98,1.03)}70%{transform:translateY(0) scale(1.02,.98)}}
+@keyframes fxTwinkle{0%,100%{opacity:.2;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.1) rotate(45deg)}}
+@keyframes fxDrop{0%{opacity:0;transform:translateY(-20px)}15%{opacity:1}100%{opacity:0;transform:translateY(90px)}}
+@keyframes fxSpin{to{transform:rotate(360deg)}}
+@keyframes fxRise{0%{opacity:0;transform:translateY(20px) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-110px) scale(1.1) rotate(12deg)}}
+@keyframes fxNote{0%,100%{opacity:.3;transform:translateY(0) rotate(-8deg)}50%{opacity:1;transform:translateY(-18px) rotate(8deg)}}
+.fx.sp{width:22px;height:22px;background:#fff6c2;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
+.fx.sp.s1{left:8%;top:30%}.fx.sp.s2{right:10%;top:18%;animation-delay:.6s!important;width:16px;height:16px}.fx.sp.s3{right:18%;bottom:20%;animation-delay:1.2s!important}
+.fx.drop{width:12px;height:16px;background:#7fd2ff;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform-origin:center}
+.fx.drop.d1{right:14%;top:30%}.fx.drop.d2{right:20%;top:42%;animation-delay:.6s!important}.fx.drop.d3{right:10%;top:50%;animation-delay:1.2s!important}
+.fx.gear{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,transparent 30%,#9be15d 31% 62%,transparent 63%),repeating-conic-gradient(#9be15d 0 12deg,transparent 12deg 30deg);-webkit-mask:radial-gradient(circle,#000 70%,transparent 71%);mask:radial-gradient(circle,#000 70%,transparent 71%)}
+.fx-edis .fx.g1{left:4%;bottom:14%}.fx-edis .fx.g2{right:6%;top:12%;width:30px;height:30px;animation-direction:reverse!important}
+.fx-kiri .fx.gear{background:radial-gradient(circle,transparent 30%,#ffb066 31% 62%,transparent 63%),repeating-conic-gradient(#ffb066 0 12deg,transparent 12deg 30deg);right:4%;bottom:18%}
+.fx-kiri .fx.sp{left:30%;top:10%}
+.fx.heart{width:22px;height:22px;background:#ff7fa8;clip-path:path("M11 20 C-6 8 3 -3 11 5 C19 -3 28 8 11 20Z")}
+.fx-pimpi .fx.h1{left:10%;bottom:20%}.fx-pimpi .fx.h2{right:12%;bottom:30%;animation-delay:1.4s!important}
+.fx-ello .fx.heart{background:#ff8a6e}.fx-ello .fx.h1{right:12%;bottom:30%}.fx-ello .fx.h2{right:22%;bottom:22%;animation-delay:1s!important}.fx-ello .fx.h3{left:12%;bottom:26%;animation-delay:2s!important}
+.fx.note{font-size:34px;font-weight:900;color:#d7a8ff}
+.fx.n1{left:8%;top:22%}.fx.n2{right:8%;top:30%;animation-delay:.7s!important;color:#ffd84a}.fx.n3{left:16%;bottom:24%;animation-delay:1.4s!important}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1324,11 +1367,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     </div>
     <div class="cxp-list">
       <article class="cp" id="cp-puding" style="--c:#ffcf4a;--c2:#fff1c2" aria-labelledby="cp-puding-n">
-        <div class="cp-art" aria-hidden="true">
-          <span class="cp-blob"></span>
-          <span class="cp-word">PUDING</span>
-          <img class="cp-img" src="assets/char-puding.png" alt="" loading="lazy">
-        </div>
+        <div class="cp-art fx-puding" aria-hidden="true"><img class="cp-poster" src="assets/poster-puding.jpg" alt="" loading="lazy"><i class="fx sp s1"></i><i class="fx sp s2"></i><i class="fx sp s3"></i></div>
         <div class="cp-text">
           <p class="cp-no">No.01 · Player 카드 노랑</p>
           <h3 class="cp-name" id="cp-puding-n">푸딩</h3>
@@ -1337,11 +1376,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp rev" id="cp-alto" style="--c:#5fbef3;--c2:#dcf1fd" aria-labelledby="cp-alto-n">
-        <div class="cp-art" aria-hidden="true">
-          <span class="cp-blob"></span>
-          <span class="cp-word">ALTO</span>
-          <img class="cp-img" src="assets/char-alto.png" alt="" loading="lazy">
-        </div>
+        <div class="cp-art fx-alto" aria-hidden="true"><img class="cp-poster" src="assets/poster-alto.jpg" alt="" loading="lazy"><i class="fx drop d1"></i><i class="fx drop d2"></i><i class="fx drop d3"></i></div>
         <div class="cp-text">
           <p class="cp-no">No.02 · Player 카드 하늘</p>
           <h3 class="cp-name" id="cp-alto-n">알토</h3>
@@ -1350,11 +1385,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp" id="cp-edis" style="--c:#8fdb4f;--c2:#e6f8d6" aria-labelledby="cp-edis-n">
-        <div class="cp-art" aria-hidden="true">
-          <span class="cp-blob"></span>
-          <span class="cp-word">EDIS</span>
-          <img class="cp-img" src="assets/char-edis.png" alt="" loading="lazy">
-        </div>
+        <div class="cp-art fx-edis" aria-hidden="true"><img class="cp-poster" src="assets/poster-edis.jpg" alt="" loading="lazy"><i class="fx gear g1"></i><i class="fx gear g2"></i></div>
         <div class="cp-text">
           <p class="cp-no">No.03 · Player 카드 초록</p>
           <h3 class="cp-name" id="cp-edis-n">에디스</h3>
@@ -1363,11 +1394,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp rev" id="cp-pimpi" style="--c:#ff86a4;--c2:#ffe4eb" aria-labelledby="cp-pimpi-n">
-        <div class="cp-art" aria-hidden="true">
-          <span class="cp-blob"></span>
-          <span class="cp-word">PIMPI</span>
-          <img class="cp-img" src="assets/char-pimpi.png" alt="" loading="lazy">
-        </div>
+        <div class="cp-art fx-pimpi" aria-hidden="true"><img class="cp-poster" src="assets/poster-pimpi.jpg" alt="" loading="lazy"><i class="fx heart h1"></i><i class="fx heart h2"></i></div>
         <div class="cp-text">
           <p class="cp-no">No.04 · Player 카드 분홍</p>
           <h3 class="cp-name" id="cp-pimpi-n">핌피</h3>
@@ -1376,11 +1403,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp" id="cp-tonitoni" style="--c:#c39af2;--c2:#f1e6fc" aria-labelledby="cp-tonitoni-n">
-        <div class="cp-art" aria-hidden="true">
-          <span class="cp-blob"></span>
-          <span class="cp-word">TONITONI</span>
-          <img class="cp-img" src="assets/char-tonitoni.png" alt="" loading="lazy">
-        </div>
+        <div class="cp-art fx-tonitoni" aria-hidden="true"><img class="cp-poster" src="assets/poster-tonitoni.jpg" alt="" loading="lazy"><i class="fx note n1">♪</i><i class="fx note n2">♫</i><i class="fx note n3">♪</i></div>
         <div class="cp-text">
           <p class="cp-no">No.05 · Player 카드 보라</p>
           <h3 class="cp-name" id="cp-tonitoni-n">토니토니</h3>
@@ -1389,11 +1412,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp rev" id="cp-kiri" style="--c:#ff9a4d;--c2:#ffe9d6" aria-labelledby="cp-kiri-n">
-        <div class="cp-art" aria-hidden="true">
-          <span class="cp-blob"></span>
-          <span class="cp-word">KIRI</span>
-          <img class="cp-img" src="assets/char-kiri.png" alt="" loading="lazy">
-        </div>
+        <div class="cp-art fx-kiri" aria-hidden="true"><img class="cp-poster" src="assets/poster-kiri.jpg" alt="" loading="lazy"><i class="fx gear g1"></i><i class="fx sp s1"></i></div>
         <div class="cp-text">
           <p class="cp-no">No.06 · 가이드 캐릭터</p>
           <h3 class="cp-name" id="cp-kiri-n">키리</h3>
@@ -1402,11 +1421,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         </div>
       </article>
       <article class="cp" id="cp-ello" style="--c:#ff6f5e;--c2:#ffe2dc" aria-labelledby="cp-ello-n">
-        <div class="cp-art" aria-hidden="true">
-          <span class="cp-blob"></span>
-          <span class="cp-word">ELLO</span>
-          <img class="cp-img" src="assets/char-ello.png" alt="" loading="lazy">
-        </div>
+        <div class="cp-art fx-ello" aria-hidden="true"><img class="cp-poster" src="assets/poster-ello.jpg" alt="" loading="lazy"><i class="fx heart h1"></i><i class="fx heart h2"></i><i class="fx heart h3"></i></div>
         <div class="cp-text">
           <p class="cp-no">No.07 · 서브 캐릭터</p>
           <h3 class="cp-name" id="cp-ello-n">엘로</h3>
