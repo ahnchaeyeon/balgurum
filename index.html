@@ -1530,6 +1530,11 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 html[data-route="story"] footer{background:#1f4fe0;color:rgba(255,255,255,.8);border-top:0}
 html[data-route="story"] footer p,html[data-route="story"] footer a{color:rgba(255,255,255,.8)}
 .st-sec.mid{color:#24345a}.st-sec.mid .st-k{color:#1338b0}
+/* Big word: halves pinned to the content edges */
+@media (min-width:821px){
+  .ab-cover .ab-word{width:min(100% - 8px,var(--wrap) - 40px)!important;justify-self:center;margin-inline:auto}
+  .ab-word .half.l{justify-self:start}.ab-word .half.r{justify-self:end}
+}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3035,7 +3040,7 @@ const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;let k=0,busy=fal
 const POOL='BALGURUMOVEPLAY',R=n=>Math.floor(Math.random()*n);
 const rnd=n=>Array.from({length:n},()=>POOL[R(POOL.length)]).join('');
 function build(w,pre){el.classList.toggle('long',w.length>5);const h=Math.ceil(w.length/2);const L=[...w].map((c,i)=>`<span class="ch${pre?' pre':''}" style="--i:${i}"><i>${c}</i></span>`);el.innerHTML=`<span class="half l">${L.slice(0,h).join('')}</span><span class="gap"></span><span class="half r">${L.slice(h).join('')}</span>`;fit()}
-function fit(){const dv=cov.querySelector('.ab-device');if(!dv)return;el.style.removeProperty('font-size');const gw=dv.getBoundingClientRect().width*1.08;el.style.setProperty('--gap',gw+'px');const room=(cov.querySelector('.ab-stage').clientWidth-gw)/2*.96;const ws=[...el.querySelectorAll('.half')].map(x=>x.scrollWidth);const m=Math.max(...ws);if(m>room){const fs=parseFloat(getComputedStyle(el).fontSize);el.style.setProperty('font-size',(fs*room/m)+'px','important')}}
+function fit(){const dv=cov.querySelector('.ab-device');if(!dv)return;el.style.removeProperty('font-size');const gw=dv.getBoundingClientRect().width*1.08;el.style.setProperty('--gap',gw+'px');const room=(el.clientWidth-gw)/2*.97;const ws=[...el.querySelectorAll('.half')].map(x=>x.scrollWidth);const m=Math.max(...ws);if(m>room){const fs=parseFloat(getComputedStyle(el).fontSize);el.style.setProperty('font-size',(fs*room/m)+'px','important')}}
 addEventListener('resize',()=>fit());
 function reveal(){requestAnimationFrame(()=>el.querySelectorAll('.ch').forEach(c=>{c.classList.remove('pre');c.classList.add('in')}))}
 function setK(n){k=n;const brand=n===3;cov.classList.toggle('is-bi',brand);tags.forEach((t,i)=>t.classList.toggle('on',!brand&&i===n))}
@@ -3072,7 +3077,7 @@ function lay(){if(!body.offsetParent)return;tr.innerHTML='';feet=[];const W=body
    im.style.setProperty('--r',(ang*180/Math.PI+90)+'deg');im.style.setProperty('--sx',side>0?-1:1);tr.appendChild(im);feet.push([y+ny,im]);im.style.setProperty('--t',Math.max(0,Math.min(1,((y+ny)/body.scrollHeight-.35)/.55)).toFixed(3));side*=-1}
   acc=(acc+Math.ceil((L-acc)/step)*step)-L}
  const pg=document.getElementById('page-story'),PH=pg.scrollHeight,pt=pg.getBoundingClientRect().top;let le=0,ds=1;secs.forEach(sc=>{const r=sc.getBoundingClientRect(),c=((r.top+r.bottom)/2-pt)/PH,d=c>.6;sc.classList.toggle('dark',d);sc.classList.toggle('mid',!d&&c>.4);if(d)ds=Math.min(ds,(r.top-pt)/PH);else le=Math.max(le,(r.bottom-pt)/PH)});
- const P=v=>(v*100).toFixed(1)+'%',mid=(le+ds)/2;pg.style.setProperty('background',`linear-gradient(180deg,#fff 0%,#fff 16%,#e6edfe ${P(le*.55)},#a9bff7 ${P(le*.9)},#6f90f0 ${P(mid)},#2b5ae5 ${P(ds+.02)},#1f4fe0 ${P(Math.min(1,ds+.1))},#1f4fe0 100%)`,'important');
+ const P=v=>(v*100).toFixed(1)+'%',mid=(le+ds)/2;pg.style.setProperty('background',`linear-gradient(180deg,#fff 0%,#fff ${P(le*.5)},#eef3ff ${P(le*.72)},#b8caf8 ${P(le*.95)},#6f90f0 ${P(mid)},#2b5ae5 ${P(ds+.02)},#1f4fe0 ${P(Math.min(1,ds+.1))},#1f4fe0 100%)`,'important');
  tick()}
 function tick(){if(!feet.length)return;const br=body.getBoundingClientRect(),lim=innerHeight*.78-br.top;let n=0;for(const[y,im]of feet){if(y<lim){if(!im.classList.contains('on')){setTimeout(()=>im.classList.add('on'),n*70);n++}}else im.classList.remove('on')}}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
