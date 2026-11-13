@@ -1535,6 +1535,25 @@ html[data-route="story"] footer p,html[data-route="story"] footer a{color:rgba(2
   .ab-cover .ab-word{width:min(100% - 8px,var(--wrap) - 40px)!important;justify-self:center;margin-inline:auto}
   .ab-word .half.l{justify-self:start}.ab-word .half.r{justify-self:end}
 }
+/* Name mark: B + footprint merge into logo */
+.ab-name-mark{cursor:pointer}
+.ab-name-mark>svg{display:none}
+.nm-stage{position:relative;width:clamp(200px,20vw,260px);height:clamp(96px,9vw,120px);display:grid;place-items:center}
+.nm-stage>*{grid-area:1/1}
+.ab-name-mark .nm-b{font-family:var(--f-latin);font-weight:800;font-size:clamp(76px,7.4vw,104px);line-height:1;color:#fff;opacity:0;letter-spacing:0}
+.ab-name-mark .nm-plus{font-family:var(--f-latin);font-weight:800;font-size:30px;line-height:1;color:#ffd84a;opacity:0}
+.nm-f{width:clamp(52px,5vw,68px);height:auto;fill:#fff;opacity:0}
+.nm-logo{width:clamp(96px,9vw,120px);aspect-ratio:572/576;height:auto;fill:#fff}
+.ab-name-mark{background:#1f4fe0!important}
+.nm-stage.play .nm-b{animation:nmB 2.6s cubic-bezier(.5,0,.3,1) both}
+.nm-stage.play .nm-f{animation:nmF 2.6s cubic-bezier(.5,0,.3,1) both}
+.nm-stage.play .nm-plus{animation:nmP 2.6s ease both}
+.nm-stage.play .nm-logo{animation:nmL 2.6s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes nmB{0%{opacity:0;transform:translateX(-90%)}15%,40%{opacity:1;transform:translateX(-95%)}62%{opacity:1;transform:translateX(-8%) scale(.85)}70%,100%{opacity:0;transform:translateX(0) scale(.6)}}
+@keyframes nmF{0%{opacity:0;transform:translateX(120%) rotate(20deg)}15%,40%{opacity:1;transform:translateX(110%) rotate(8deg)}62%{opacity:1;transform:translateX(12%) scale(.85)}70%,100%{opacity:0;transform:translateX(0) scale(.6)}}
+@keyframes nmP{0%,12%{opacity:0;transform:scale(.4)}22%,40%{opacity:1;transform:scale(1)}52%,100%{opacity:0;transform:scale(.4)}}
+@keyframes nmL{0%,62%{opacity:0;transform:scale(.4) rotate(-12deg)}80%{opacity:1;transform:scale(1.12) rotate(4deg)}100%{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.nm-stage.play>*{animation:none!important}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1684,7 +1703,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
   <section class="ab-sec ab-name">
     <div class="wrap ab-two">
-      <div class="ab-name-mark"><svg viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint"/></svg><span>발구름</span><small>도약하기 위해 발을 힘껏 구르는 동작</small></div>
+      <div class="ab-name-mark" title="다시 보기"><div class="nm-stage" aria-hidden="true"><span class="nm-b">B</span><span class="nm-plus">+</span><svg class="nm-f" viewBox="0 0 40 52"><use href="#footprint"/></svg><svg class="nm-logo"><use href="#logo" width="100%" height="100%"/></svg></div><span>발구름</span><small>도약하기 위해 발을 힘껏 구르는 동작</small></div>
       <div>
         <p class="eyebrow">Our Name</p>
         <h2 class="sec-title">작은 발구름에 담은 의미</h2>
@@ -3085,6 +3104,12 @@ body.querySelectorAll('.st-sec').forEach(x=>io.observe(x));
 addEventListener('scroll',tick,{passive:true});let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(lay,150)});
 addEventListener('hashchange',()=>setTimeout(lay,120));if(location.hash==='#story')setTimeout(lay,300);addEventListener('load',()=>setTimeout(lay,200));})();
 </script>
+<script>
+(()=>{const st=document.querySelector('.nm-stage');if(!st)return;const play=()=>{st.classList.remove('play');void st.offsetWidth;st.classList.add('play')};
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){play();o.disconnect()}}),{threshold:.6}).observe(st);
+st.closest('.ab-name-mark').addEventListener('click',play);})();
+</script>
+
 
 
 
