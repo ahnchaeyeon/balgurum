@@ -1210,6 +1210,45 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 .mg-reel-in>.mg-side,.mg-reel-in>.mg-stage{position:relative;z-index:1}
 .mg-reel-in>.mg-ch{position:absolute;bottom:calc(100% - 44px);right:5%;top:auto;left:auto;width:min(calc((100% - 2 * clamp(8px,1vw,16px)) / 6 * .9),calc(17vh + 26px));z-index:0}
 @media (max-width:760px){.mg-reel-in>.mg-ch{width:86px;bottom:calc(100% - 22px)}}
+/* About cover: big wordmark behind the device */
+.ab-cover{position:relative;overflow:hidden;background:radial-gradient(ellipse 55% 50% at 50% 42%,#3a6bff 0,transparent 70%),#1f4fe0;color:#fff;min-height:calc(100svh - var(--hdr,72px));display:flex;flex-direction:column;padding:clamp(16px,2vw,28px) max(16px,env(safe-area-inset-right,0px)) clamp(70px,7vw,110px) max(16px,env(safe-area-inset-left,0px));-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 60px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 59px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1320 8 1220 6 1090 34S850 76 700 52 470 6 330 22 110 74 0 46Z'/%3E%3C/svg%3E") bottom/100% 60px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 59px) no-repeat}
+.ab-stage{position:relative;flex:1;display:grid;place-items:center;min-height:clamp(340px,52vh,620px)}
+.ab-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;width:100%}
+.ab-row>.ab-word:first-child{justify-self:end}
+.ab-row>.ab-word:last-child{justify-self:start}
+.ab-word{position:relative;z-index:1;margin:0;font-family:"Fredoka",var(--f-latin),sans-serif;font-weight:700;font-size:clamp(52px,min(12.4vw,28vh),270px);line-height:.9;letter-spacing:-.02em;color:#fff;text-shadow:0 .03em 0 rgba(10,30,120,.25);white-space:nowrap;user-select:none}
+.ab-device{position:relative;flex:none;width:min(15vw,25vh,270px);aspect-ratio:474/1068;margin-inline:-.4vw;transform:rotate(-6deg);z-index:2}
+.ab-device img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 30px 34px rgba(5,20,90,.45))}
+.ab-badge{position:absolute;right:-26%;top:16%;width:clamp(56px,5.6vw,92px);aspect-ratio:1;border-radius:50%;background:#0b1f45;color:#fff;display:grid;place-content:center;text-align:center;line-height:1;box-shadow:0 0 0 4px #fff,0 10px 20px rgba(5,20,90,.35);transform:rotate(6deg)}
+.ab-badge b{font-family:var(--f-latin);font-size:clamp(18px,1.8vw,30px);font-weight:800}
+.ab-badge small{font-family:var(--f-latin);font-size:clamp(9px,.8vw,13px);font-weight:700;letter-spacing:.14em;color:#ffd84a;margin-top:3px}
+.ab-spark{position:absolute;fill:#ffd84a;z-index:1}
+.ab-spark.s1{width:clamp(22px,2.4vw,40px);height:clamp(22px,2.4vw,40px);left:18%;top:12%}
+.ab-spark.s2{width:clamp(14px,1.4vw,24px);height:clamp(14px,1.4vw,24px);right:16%;top:20%;fill:#fff}
+.ab-spark.s3{width:clamp(16px,1.8vw,30px);height:clamp(16px,1.8vw,30px);right:24%;bottom:10%}
+.ab-cta{position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);z-index:3;background:#ffd84a;color:#0b1f45;text-decoration:none;font-weight:900;font-size:clamp(15px,1.4vw,20px);padding:14px 30px;border-radius:999px;box-shadow:0 8px 0 #c99a00,0 16px 26px rgba(5,20,90,.3);transition:transform .15s}
+.ab-cta:hover{transform:translateX(-50%) translateY(-2px)}
+.ab-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(20px,3vw,48px);align-items:end;max-width:1280px;width:100%;margin:clamp(28px,3.5vw,52px) auto 0}
+.ab-eyebrow{margin:0 0 8px;font-family:var(--f-latin);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:#ffd84a}
+.ab-copy h1{margin:0;font-size:clamp(26px,2.8vw,42px);font-weight:900;line-height:1.25;color:#fff;text-wrap:balance}
+.ab-lead{margin:12px 0 0;color:rgba(255,255,255,.85);font-size:clamp(14px,1.15vw,17px);line-height:1.6;max-width:30em}
+.ab-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.2vw,18px)}
+.ab-cards a{position:relative;display:flex;flex-direction:column;gap:4px;min-height:clamp(120px,11vw,170px);padding:16px 18px;border-radius:22px;background:var(--k);color:#fff;text-decoration:none;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);transition:transform .2s}
+.ab-cards a:hover{transform:translateY(-4px)}
+.ab-cards b{font-size:clamp(15px,1.3vw,19px);font-weight:900}
+.ab-cards small{font-size:13px;opacity:.85}
+.ab-cards img{position:absolute;right:-6px;bottom:-10px;height:72%;width:auto;filter:drop-shadow(0 8px 10px rgba(5,20,90,.3))}
+@media (max-width:820px){
+  .ab-bottom{grid-template-columns:1fr}
+  .ab-stage{min-height:56vh}
+  .ab-word{font-size:10.6vw}
+  .ab-device{width:min(26vw,22vh)}
+  .ab-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ab-cards a{min-height:120px;padding:12px}
+  .ab-cards b{font-size:14px}.ab-cards small{font-size:11.5px}
+  .ab-cards img{height:56%}
+}
+@media (max-width:480px){.ab-cards{grid-template-columns:1fr}.ab-cards a{min-height:84px}.ab-cards img{height:90%}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1281,27 +1320,32 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <main>
 <!-- ============ ABOUT ============ -->
 <div class="page" id="page-about" data-page="about">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="crumb">HOME / 발구름 소개</p>
-        <p class="eyebrow">About Balgurum</p>
-        <h1>움직임이 놀이가 되고,<br>놀이가 성장이 된다.</h1>
-        <p class="lead">아이들의 자발적인 움직임에서 시작되는 즐거운 성장의 경험을 만듭니다.</p>
+  <section class="ab-cover" aria-labelledby="ab-title">
+    <div class="ab-stage">
+      <div class="ab-row">
+        <span class="ab-word" aria-hidden="true">Bal</span>
+        <div class="ab-device">
+          <img src="assets/device-cut.png" alt="발구름 XR 놀이 기기" width="474" height="1068">
+          <span class="ab-badge" aria-hidden="true"><b>XR</b><small>PLAY</small></span>
+        </div>
+        <span class="ab-word" aria-hidden="true">gurum</span>
       </div>
-      <button class="art jump-art" type="button" aria-label="발판을 눌러 별까지 점프하기">
-        <span class="cloud" style="width:30%;height:13%;left:4%;top:44%"></span>
-        <span class="cloud" style="width:34%;height:15%;right:-2%;bottom:6%;animation-delay:-3s"></span>
-        <span class="stone" data-stone style="width:30%;left:4%;bottom:12%"></span>
-        <span class="stone" data-stone style="width:24%;left:38%;bottom:30%"></span>
-        <span class="stone" data-stone style="width:21%;left:52%;bottom:46%"></span>
-        <span class="stone" data-stone style="width:18%;left:46%;bottom:61%"></span>
-        <span class="stone" data-stone style="width:15%;left:58%;bottom:74%"></span>
-        <svg class="star" data-star style="left:72%;top:2%" aria-hidden="true"><use href="#starshape"/></svg>
-        <svg class="jumper" data-jumper viewBox="0 0 40 52" aria-hidden="true"><use href="#footprint" fill="#173f82"/></svg>
-        <span class="score" data-score>별 0개</span>
-        <span class="art-hint">눌러서 점프!</span>
-      </button>
+      <svg class="ab-spark s1" aria-hidden="true"><use href="#starshape"/></svg>
+      <svg class="ab-spark s2" aria-hidden="true"><use href="#starshape"/></svg>
+      <svg class="ab-spark s3" aria-hidden="true"><use href="#starshape"/></svg>
+      <a class="ab-cta" href="#contents">콘텐츠 보러가기</a>
+    </div>
+    <div class="ab-bottom">
+      <div class="ab-copy">
+        <p class="ab-eyebrow">About Balgurum</p>
+        <h1 id="ab-title">움직임이 놀이가 되고,<br>놀이가 성장이 된다.</h1>
+        <p class="ab-lead">아이들의 자발적인 움직임에서 시작되는 즐거운 성장의 경험을 만듭니다.</p>
+      </div>
+      <ul class="ab-cards">
+        <li><a href="#contents" style="--k:#4f7bff"><b>사고뭉치 특공대</b><small>첫 번째 XR 콘텐츠</small><img src="assets/char-kiri.png" alt="" loading="lazy"></a></li>
+        <li><a href="#games" style="--k:#6b8cff"><b>미니게임</b><small>하늘섬 여덟 곳</small><img src="assets/isl-race.png" alt="" loading="lazy"></a></li>
+        <li><a href="#story" style="--k:#8aa5ff"><b>브랜드 스토리</b><small>발구름이 걷는 길</small><img src="assets/char-pimpi.png" alt="" loading="lazy"></a></li>
+      </ul>
     </div>
   </section>
 
