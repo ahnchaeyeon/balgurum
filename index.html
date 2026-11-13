@@ -1542,17 +1542,27 @@ html[data-route="story"] footer p,html[data-route="story"] footer a{color:rgba(2
 .nm-stage>*{grid-area:1/1}
 .ab-name-mark .nm-b{font-family:var(--f-latin);font-weight:800;font-size:clamp(76px,7.4vw,104px);line-height:1;color:#fff;opacity:0;letter-spacing:0}
 .ab-name-mark .nm-plus{font-family:var(--f-latin);font-weight:800;font-size:30px;line-height:1;color:#ffd84a;opacity:0}
-.nm-f{width:clamp(52px,5vw,68px);height:auto;fill:#fff;opacity:0}
+.nm-f{width:clamp(40px,3.8vw,52px);height:auto;opacity:0}
 .nm-logo{width:clamp(96px,9vw,120px);aspect-ratio:572/576;height:auto;fill:#fff}
 .ab-name-mark{background:#1f4fe0!important}
-.nm-stage.play .nm-b{animation:nmB 2.6s cubic-bezier(.5,0,.3,1) both}
-.nm-stage.play .nm-f{animation:nmF 2.6s cubic-bezier(.5,0,.3,1) both}
-.nm-stage.play .nm-plus{animation:nmP 2.6s ease both}
-.nm-stage.play .nm-logo{animation:nmL 2.6s cubic-bezier(.3,1.5,.5,1) both}
-@keyframes nmB{0%{opacity:0;transform:translateX(-90%)}15%,40%{opacity:1;transform:translateX(-95%)}62%{opacity:1;transform:translateX(-8%) scale(.85)}70%,100%{opacity:0;transform:translateX(0) scale(.6)}}
-@keyframes nmF{0%{opacity:0;transform:translateX(120%) rotate(20deg)}15%,40%{opacity:1;transform:translateX(110%) rotate(8deg)}62%{opacity:1;transform:translateX(12%) scale(.85)}70%,100%{opacity:0;transform:translateX(0) scale(.6)}}
-@keyframes nmP{0%,12%{opacity:0;transform:scale(.4)}22%,40%{opacity:1;transform:scale(1)}52%,100%{opacity:0;transform:scale(.4)}}
-@keyframes nmL{0%,62%{opacity:0;transform:scale(.4) rotate(-12deg)}80%{opacity:1;transform:scale(1.12) rotate(4deg)}100%{opacity:1;transform:none}}
+.nm-ring{width:40px;height:40px;border-radius:50%;border:4px solid #fff;opacity:0}
+.nm-ring.y{border-color:#ffd84a;border-width:3px}
+.nm-rays{width:10px;height:10px;opacity:0}
+.nm-rays i{position:absolute;left:50%;top:50%;width:6px;height:16px;margin:-8px 0 0 -3px;border-radius:3px;background:#ffd84a;transform:rotate(var(--a)) translateY(-46px)}
+.nm-stage.play .nm-b{animation:nmB 2.4s both}
+.nm-stage.play .nm-f{animation:nmF 2.4s both}
+.nm-stage.play .nm-plus{animation:nmP 2.4s ease both}
+.nm-stage.play .nm-ring{animation:nmR 2.4s ease-out both}
+.nm-stage.play .nm-ring.y{animation:nmR2 2.4s ease-out both}
+.nm-stage.play .nm-rays{animation:nmRays 2.4s ease-out both}
+.nm-stage.play .nm-logo{animation:nmL 2.4s both}
+@keyframes nmB{0%{opacity:0;transform:translateX(-140%);animation-timing-function:cubic-bezier(.2,.8,.3,1)}22%{opacity:1;transform:translateX(-95%)}46%{opacity:1;transform:translateX(-95%);animation-timing-function:cubic-bezier(.6,0,.9,.4)}57%{opacity:1;transform:translateX(-30%) scale(1.05)}59%{opacity:0;transform:translateX(-20%) scale(.2)}100%{opacity:0;transform:scale(0)}}
+@keyframes nmF{0%{opacity:0;transform:translateX(180%) rotate(25deg);animation-timing-function:cubic-bezier(.2,.8,.3,1)}22%{opacity:1;transform:translateX(150%) rotate(10deg)}46%{opacity:1;transform:translateX(150%) rotate(10deg);animation-timing-function:cubic-bezier(.6,0,.9,.4)}57%{opacity:1;transform:translateX(45%) rotate(0) scale(1.05)}59%{opacity:0;transform:translateX(30%) scale(.2)}100%{opacity:0;transform:scale(0)}}
+@keyframes nmP{0%,18%{opacity:0;transform:scale(.3)}26%{opacity:1;transform:scale(1.25)}32%,44%{opacity:1;transform:scale(1)}50%,100%{opacity:0;transform:scale(0)}}
+@keyframes nmR{0%,57%{opacity:0;transform:scale(.3)}60%{opacity:1;transform:scale(.6)}80%,100%{opacity:0;transform:scale(4.2)}}
+@keyframes nmR2{0%,59%{opacity:0;transform:scale(.3)}63%{opacity:1;transform:scale(.8)}85%,100%{opacity:0;transform:scale(3.2)}}
+@keyframes nmRays{0%,58%{opacity:0;transform:scale(.4)}62%{opacity:1;transform:scale(.9)}78%{opacity:1;transform:scale(1.45)}88%,100%{opacity:0;transform:scale(1.6)}}
+@keyframes nmL{0%,58%{opacity:0;transform:scale(0) rotate(-20deg)}66%{opacity:1;transform:scale(1.28) rotate(6deg)}74%{transform:scale(.92) rotate(-2deg)}82%,100%{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.nm-stage.play>*{animation:none!important}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
@@ -1703,7 +1713,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
   <section class="ab-sec ab-name">
     <div class="wrap ab-two">
-      <div class="ab-name-mark" title="다시 보기"><div class="nm-stage" aria-hidden="true"><span class="nm-b">B</span><span class="nm-plus">+</span><svg class="nm-f" viewBox="0 0 40 52"><use href="#footprint"/></svg><svg class="nm-logo"><use href="#logo" width="100%" height="100%"/></svg></div><span>발구름</span><small>도약하기 위해 발을 힘껏 구르는 동작</small></div>
+      <div class="ab-name-mark" title="다시 보기"><div class="nm-stage" aria-hidden="true"><span class="nm-b">B</span><span class="nm-plus">+</span><img class="nm-f" src="assets/foot-white.png" alt=""><span class="nm-ring"></span><span class="nm-ring y"></span><span class="nm-rays"><i style="--a:0deg"></i><i style="--a:45deg"></i><i style="--a:90deg"></i><i style="--a:135deg"></i><i style="--a:180deg"></i><i style="--a:225deg"></i><i style="--a:270deg"></i><i style="--a:315deg"></i></span><svg class="nm-logo"><use href="#logo" width="100%" height="100%"/></svg></div><span>발구름</span><small>도약하기 위해 발을 힘껏 구르는 동작</small></div>
       <div>
         <p class="eyebrow">Our Name</p>
         <h2 class="sec-title">작은 발구름에 담은 의미</h2>
