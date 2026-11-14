@@ -1600,6 +1600,7 @@ html[data-route="story"] footer p,html[data-route="story"] footer a{color:revert
 .st-qm{position:absolute;right:0;top:-.15em;width:clamp(52px,5vw,82px);height:auto;fill:#2f62ff}
 .st-sec{max-width:min(560px,48%)}
 @media (max-width:820px){.st-qh{padding-right:56px}.st-qm{width:44px}}
+#page-story .st-body{gap:clamp(90px,11vw,170px)!important}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3125,17 +3126,17 @@ function lay(){if(!body.offsetParent)return;tr.innerHTML='';feet=[];const W=body
  const br=body.getBoundingClientRect(),pts=[];
  secs.forEach((sc,i)=>{const r=sc.getBoundingClientRect(),cy=(r.top+r.bottom)/2-br.top;let x;
   if(mob)x=W-(i%2?34:12);else{const L=sc.classList.contains('st-l');x=L?Math.min(W-60,(r.right-br.left)+(W-(r.right-br.left))*.45):Math.max(60,(r.left-br.left)*.55)}
-  pts.push([x,cy])});
+  pts.push([x,r.top-br.top+30],[x,r.bottom-br.top-30])});
  if(!pts.length)return;
- pts.unshift([pts[0][0]+(mob?-14:-120),pts[0][1]-(secs[0].offsetHeight*.6)]);
+ const rects=secs.map(sc=>{const r=sc.getBoundingClientRect();return[r.left-br.left-10,r.top-br.top-10,r.right-br.left+10,r.bottom-br.top+10]});
  const cr=(p0,p1,p2,p3,t)=>{const t2=t*t,t3=t2*t;return[0,1].map(k=>.5*(2*p1[k]+(-p0[k]+p2[k])*t+(2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*t2+(-p0[k]+3*p1[k]-3*p2[k]+p3[k])*t3))};
  const P=[pts[0],...pts,pts[pts.length-1]],dense=[];
  for(let i=0;i<P.length-3;i++)for(let k=0;k<40;k++)dense.push(cr(P[i],P[i+1],P[i+2],P[i+3],k/40));
  dense.push(pts[pts.length-1]);
  const len=[0];for(let i=1;i<dense.length;i++)len.push(len[i-1]+Math.hypot(dense[i][0]-dense[i-1][0],dense[i][1]-dense[i-1][1]));
- const N=9,Ltot=len[len.length-1],sp=mob?5:20;let side=1,j=0;
+ const N=mob?30:24,Ltot=len[len.length-1],sp=mob?5:20;let side=1,j=0;
  for(let n=0;n<N;n++){const d=Ltot*(n+.5)/N;while(j<len.length-2&&len[j+1]<d)j++;const a=dense[j],b=dense[j+1],f=(d-len[j])/((len[j+1]-len[j])||1),x=a[0]+(b[0]-a[0])*f,y=a[1]+(b[1]-a[1])*f,ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
-  const nx=-Math.sin(ang)*sp*side,ny=Math.cos(ang)*sp*side;const im=document.createElement('span');im.className='st-foot';im.style.left=(x+nx)+'px';im.style.top=(y+ny)+'px';
+  const nx=-Math.sin(ang)*sp*side,ny=Math.cos(ang)*sp*side,fx=x+nx,fy=y+ny,hw=mob?9:22;if(rects.some(q=>fx+hw>q[0]&&fx-hw<q[2]&&fy+hw>q[1]&&fy-hw<q[3])){side*=-1;continue}const im=document.createElement('span');im.className='st-foot';im.style.left=(x+nx)+'px';im.style.top=(y+ny)+'px';
   im.style.setProperty('--r',(ang*180/Math.PI+90)+'deg');im.style.setProperty('--sx',side>0?-1:1);tr.appendChild(im);feet.push([y+ny,im]);
   {const t=n/(N-1),c=[[196,213,248],[31,79,224]],m=c[0].map((v,i)=>Math.round(v+(c[1][i]-v)*t));im.style.background=`rgb(${m})`}side*=-1}
  tick()}
