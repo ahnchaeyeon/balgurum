@@ -1711,7 +1711,9 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 @media (max-width:600px){.intro{background:radial-gradient(ellipse 95% 55% at 50% calc(50% - 48px),#3f70ff 0%,#3463f5 30%,#2656e6 58%,#1f4fe0 82%,#1a46d2 100%)}}
 /* Intro: hold page animations until the circle reveal */
 .intro-hold main,.intro-hold main *{animation-play-state:paused!important}
-.intro{will-change:mask-image}
+.intro{background:none!important}
+.intro-bg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+.intro-stage{position:relative;z-index:1}
 .intro-stage{gap:0}
 @media (max-width:600px){.intro-word{margin-top:var(--iw-gap,18px)}}
 /* Game detail dialog */
@@ -1762,6 +1764,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 (function(){var h=document.documentElement;try{if(sessionStorage.getItem('balgurum-intro')){h.classList.add('no-intro')}else{h.classList.add('intro-hold');sessionStorage.setItem('balgurum-intro','1')}}catch(e){}})();
 </script>
 <div class="intro" id="intro">
+  <svg class="intro-bg" aria-hidden="true" focusable="false"><defs><radialGradient id="ibg-grad" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3f70ff"/><stop offset=".3" stop-color="#3463f5"/><stop offset=".58" stop-color="#2656e6"/><stop class="ibg-s4" offset=".8" stop-color="#1f4fe0"/><stop offset="1" stop-color="#1a46d2"/></radialGradient><mask id="ibg-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%" style="mask-type:luminance"><rect x="0" y="0" width="100%" height="100%" fill="#fff"/><path id="ibg-foot" fill="#000" visibility="hidden" d="M628.5 401.9 621.2 401.4 616.5 400.1 611.2 397.9 604.2 393.1 597.9 386.5 593.9 380.5 590.6 373.5 588.1 364.2 587.6 360.0 587.6 352.2 588.1 348.2 590.4 340.0 593.6 333.2 597.1 328.5 603.5 322.6 609.8 319.1 617.2 317.1 625.8 317.1 631.5 318.4 639.2 321.9 644.8 325.9 649.9 331.0 654.9 338.2 658.1 345.2 660.6 354.5 661.1 358.8 661.1 366.5 660.4 371.8 658.4 378.8 654.6 386.2 651.6 390.2 647.2 394.6 643.0 397.6 636.8 400.4 628.5 401.9ZM539.5 384.9 533.5 384.6 527.2 382.9 522.5 380.4 519.0 377.9 514.1 372.8 511.1 368.2 507.9 360.5 506.6 354.5 506.4 348.2 507.1 342.8 508.9 337.0 512.4 330.8 517.5 325.1 520.2 323.1 524.8 320.9 531.8 319.1 537.2 319.1 543.8 320.6 549.0 323.1 554.0 326.9 556.9 329.8 560.6 335.0 563.9 342.0 565.4 348.2 565.6 357.5 565.1 360.8 563.1 367.2 560.1 372.8 556.2 377.4 551.8 380.9 544.2 384.1 539.5 384.9ZM472.5 394.6 465.5 394.6 462.8 394.1 458.8 392.9 452.0 388.9 448.6 385.8 445.1 381.0 443.4 377.5 441.6 370.8 441.4 365.8 442.1 360.8 443.6 356.2 447.1 350.2 450.5 346.6 455.8 342.9 462.0 340.4 466.2 339.6 472.0 339.6 476.8 340.6 482.5 343.1 486.2 345.6 490.4 349.8 493.6 354.8 495.4 359.2 496.4 364.0 496.4 370.5 495.4 375.2 492.9 381.0 490.9 384.0 487.0 388.1 483.2 390.9 479.2 392.9 472.5 394.6ZM411.8 422.9 405.8 422.9 401.2 421.9 395.5 419.4 392.2 417.1 387.9 412.8 385.6 409.2 383.4 404.0 382.4 399.0 382.4 393.5 382.9 390.5 384.4 386.0 387.4 380.8 392.2 375.6 394.8 373.9 400.0 371.4 405.2 370.1 412.2 370.1 415.8 370.9 419.2 372.1 424.5 375.1 428.6 379.0 432.1 384.0 434.1 388.8 435.1 393.8 435.1 399.8 434.4 403.5 431.6 410.0 429.4 413.2 425.5 417.1 422.2 419.4 418.0 421.4 411.8 422.9ZM404.2 775.6 402.8 775.6 397.8 773.1 387.0 768.9 379.0 764.4 371.2 758.4 355.6 742.2 345.9 725.5 339.6 712.2 335.6 700.0 331.9 683.5 329.9 677.0 329.9 633.5 330.6 619.0 332.1 608.0 343.6 561.5 355.6 516.0 363.6 496.5 372.1 479.5 376.9 473.8 390.0 461.1 397.2 455.4 405.2 450.6 430.2 438.4 456.0 426.9 472.0 421.1 491.0 416.1 519.2 411.1 532.5 410.4 557.8 410.9 574.5 413.4 595.0 417.9 608.0 421.9 618.2 427.1 624.0 431.1 630.8 436.9 634.9 441.2 638.4 446.0 646.1 459.0 651.9 477.2 653.1 483.2 653.6 489.5 652.4 501.8 650.4 509.2 647.9 515.8 645.1 521.2 641.4 527.2 632.6 537.8 627.2 543.1 615.0 553.6 603.8 561.9 587.8 571.1 583.2 573.4 572.2 577.6 528.8 591.4 511.2 597.6 499.5 603.4 485.0 613.4 480.2 617.4 474.4 623.8 466.4 634.2 457.1 647.8 455.1 651.5 453.1 657.2 449.6 671.2 449.4 677.5 450.9 686.8 453.9 696.0 456.9 701.5 463.6 710.8 470.0 717.6 480.8 726.1 489.8 732.1 505.0 739.9 518.0 744.9 525.2 746.9 540.5 748.4 553.8 748.9 575.5 748.9 576.1 749.5 575.5 750.1 404.2 775.6ZM356.8 464.1 351.2 463.9 345.8 462.4 342.2 460.6 337.8 457.1 334.9 453.8 332.4 449.2 330.9 444.5 330.4 440.8 330.6 436.0 331.6 431.8 333.4 427.8 335.9 424.0 339.8 420.1 342.2 418.4 346.5 416.4 352.8 414.9 357.0 414.9 362.2 415.9 367.8 418.4 370.2 420.1 374.1 424.0 376.9 428.2 378.6 432.8 379.4 436.5 379.4 442.5 378.4 447.0 376.4 451.5 373.6 455.5 369.8 459.1 366.2 461.4 361.0 463.4 356.8 464.1Z"/></mask></defs><rect x="0" y="0" width="100%" height="100%" fill="url(#ibg-grad)" mask="url(#ibg-mask)"/></svg>
   <div class="intro-stage">
     <svg class="intro-logo" viewBox="232 206 572 576" role="img" aria-label="발구름 로고"><defs><mask id="intro-toe-mask" maskUnits="userSpaceOnUse" x="200" y="180" width="640" height="640"><rect x="200" y="180" width="640" height="640" fill="#fff"/><g fill="#000"><ellipse class="toe" style="--i:0" cx="355.1" cy="439.6" rx="24.5" ry="24.6" transform="rotate(18 355.1 439.6)"/><ellipse class="toe" style="--i:1" cx="408.9" cy="396.6" rx="26.4" ry="26.5" transform="rotate(142 408.9 396.6)"/><ellipse class="toe" style="--i:2" cx="469.1" cy="367.3" rx="27.5" ry="27.6" transform="rotate(164 469.1 367.3)"/><ellipse class="toe" style="--i:3" cx="536.2" cy="352.1" rx="29.4" ry="33.1" transform="rotate(166 536.2 352.1)"/><ellipse class="toe" style="--i:4" cx="624.5" cy="359.5" rx="36.4" ry="42.8" transform="rotate(166 624.5 359.5)"/></g></mask></defs><path class="sole" d="M715.8 251.2C709.0 245.8 697.0 237.1 688.8 232.2C680.5 227.4 673.0 224.5 666.2 222.0C659.5 219.5 658.2 218.7 648.2 217.0C638.2 215.3 618.4 212.8 606.2 212.0C594.1 211.2 587.6 211.2 575.5 212.0C563.4 212.8 545.7 215.0 533.5 217.0C521.3 219.0 514.0 220.8 502.5 224.0C491.0 227.2 475.7 232.2 464.5 236.0C453.3 239.8 446.0 242.7 435.5 247.0C425.0 251.3 419.4 253.3 401.5 262.0C383.6 270.7 343.4 290.9 328.0 299.2C312.6 307.6 314.6 307.8 309.0 312.2C303.4 316.7 297.9 322.0 294.2 326.0C290.6 330.0 288.7 333.1 287.0 336.5C285.3 339.9 284.5 343.5 284.0 346.5C283.5 349.5 283.5 350.5 284.0 354.2C284.5 358.0 284.3 361.5 287.0 369.2C289.7 377.0 296.3 390.1 300.0 400.5C303.7 410.9 307.2 424.0 309.0 431.5C310.8 439.0 310.8 436.4 311.0 445.5C311.2 454.6 311.0 475.6 310.0 486.2C309.0 496.9 307.5 501.1 305.0 509.2C302.5 517.4 300.2 523.7 295.0 535.2C289.8 546.8 279.4 568.1 273.8 578.8C268.1 589.4 265.0 592.0 261.2 599.0C257.5 606.0 254.2 612.2 251.0 620.5C247.8 628.8 244.0 641.2 242.0 648.5C240.0 655.8 239.5 658.9 239.0 664.5C238.5 670.1 238.2 676.1 239.0 682.2C239.8 688.4 241.3 694.8 244.0 701.2C246.7 707.7 251.2 715.2 255.2 720.8C259.2 726.3 262.2 729.5 268.0 734.5C273.8 739.5 283.2 746.3 290.0 750.5C296.8 754.7 301.8 756.9 308.5 759.8C315.2 762.6 322.7 765.4 330.5 767.8C338.3 770.1 347.8 772.2 355.5 773.8C363.2 775.2 369.0 776.3 376.5 776.8C384.0 777.2 396.9 776.7 400.8 776.2C404.6 775.8 402.4 775.7 399.8 774.2C397.1 772.8 389.5 770.2 385.0 767.8C380.5 765.3 377.3 763.4 373.0 759.8C368.7 756.1 362.3 749.4 359.0 745.8C355.7 742.1 356.2 743.3 353.0 737.8C349.8 732.2 343.3 721.3 339.8 712.2C336.2 703.2 333.4 690.4 331.8 683.2C330.1 676.1 329.9 679.7 329.8 669.2C329.6 658.8 329.8 633.0 330.8 620.5C331.8 608.0 332.1 610.0 335.8 594.5C339.4 579.0 348.9 541.8 352.8 527.5C356.6 513.2 355.9 515.8 358.8 508.5C361.6 501.2 367.0 489.8 370.0 484.0C373.0 478.2 373.2 478.2 377.0 474.0C380.8 469.8 387.7 463.2 393.0 459.0C398.3 454.8 398.8 454.2 409.0 449.0C419.2 443.8 442.4 432.8 454.5 427.8C466.6 422.7 472.3 421.2 481.5 418.8C490.7 416.2 501.7 414.1 509.5 412.8C517.3 411.4 521.5 411.1 528.5 410.8C535.5 410.4 544.3 410.4 551.2 410.8C558.2 411.1 561.9 411.2 570.2 412.8C578.6 414.2 593.3 417.4 601.2 419.8C609.2 422.1 612.5 423.8 617.8 427.0C623.0 430.2 628.6 434.7 632.8 439.0C636.9 443.3 640.4 449.2 642.8 453.0C645.1 456.8 645.3 456.6 647.0 461.5C648.7 466.4 652.0 476.4 653.0 482.5C654.0 488.6 653.7 493.1 653.0 498.2C652.3 503.4 650.9 508.5 649.0 513.2C647.1 518.0 645.1 522.0 641.8 526.8C638.4 531.5 634.1 536.6 628.8 541.8C623.4 546.9 615.6 553.4 609.8 557.8C603.9 562.1 599.7 564.5 593.8 567.8C587.8 571.0 587.6 572.1 574.2 577.0C560.9 581.9 527.5 591.5 513.5 597.0C499.5 602.5 496.2 606.1 490.0 610.2C483.8 614.4 481.4 616.2 476.2 622.0C471.1 627.8 463.0 639.4 459.2 645.0C455.5 650.6 455.5 651.2 454.0 655.5C452.5 659.8 450.7 666.2 450.0 670.5C449.3 674.8 449.5 677.5 450.0 681.2C450.5 685.0 451.8 689.8 453.0 693.2C454.2 696.7 454.9 698.2 457.2 701.8C459.6 705.3 463.5 710.8 467.2 714.8C471.0 718.7 475.5 722.2 480.0 725.5C484.5 728.8 488.6 731.6 494.0 734.5C499.4 737.4 506.1 740.5 512.5 742.8C518.9 745.0 521.4 746.8 532.5 747.8C543.6 748.8 565.5 749.4 579.2 748.8C593.0 748.1 604.9 745.6 615.2 743.8C625.6 741.9 633.4 739.9 641.2 737.8C649.1 735.6 652.7 734.8 662.2 730.8C671.8 726.7 687.3 720.0 698.8 713.5C710.2 707.0 720.5 699.8 730.8 691.5C741.0 683.2 753.4 670.9 760.5 663.8C767.6 656.6 769.7 653.8 773.5 648.8C777.3 643.8 780.8 638.3 783.5 633.8C786.2 629.2 787.7 626.3 789.8 621.2C791.8 616.2 794.2 609.1 795.8 603.2C797.2 597.4 798.2 593.5 798.8 586.2C799.2 579.0 799.1 566.1 798.8 559.5C798.4 552.9 798.2 552.7 796.8 546.5C795.2 540.3 792.3 529.4 789.8 522.5C787.2 515.6 784.5 510.4 781.5 505.0C778.5 499.6 777.3 496.6 771.5 490.0C765.7 483.4 753.5 471.2 746.8 465.2C740.0 459.3 736.7 457.8 730.8 454.2C724.8 450.7 717.7 446.9 711.2 444.0C704.8 441.1 697.2 438.5 692.2 437.0C687.3 435.5 683.6 435.6 681.5 435.0C679.4 434.4 680.0 434.0 679.8 433.2C679.5 432.5 679.4 431.4 679.8 430.5C680.1 429.6 679.5 429.3 682.0 428.0C684.5 426.7 690.6 424.8 694.8 422.5C698.9 420.2 700.8 419.5 706.8 414.5C712.7 409.5 724.7 399.3 730.5 392.8C736.3 386.2 738.9 380.7 741.8 375.2C744.6 369.8 746.1 365.4 747.8 360.2C749.4 355.1 750.9 352.0 751.8 344.2C752.6 336.5 753.4 321.8 752.8 313.5C752.1 305.2 750.5 301.1 747.8 294.5C745.0 287.9 739.5 278.9 736.5 274.0C733.5 269.1 733.0 268.8 729.5 265.0C726.0 261.2 722.5 256.7 715.8 251.2Z" fill="var(--logo)" mask="url(#intro-toe-mask)"/></svg>
     <div class="intro-word" aria-label="Balgurum"><span style="--i:0" aria-hidden="true">B</span><span style="--i:1" aria-hidden="true">a</span><span style="--i:2" aria-hidden="true">l</span><span style="--i:3" aria-hidden="true">g</span><span style="--i:4" aria-hidden="true">u</span><span style="--i:5" aria-hidden="true">r</span><span style="--i:6" aria-hidden="true">u</span><span style="--i:7" aria-hidden="true">m</span></div>
@@ -3006,7 +3009,6 @@ window.BALGURUM_SUPABASE = {
   const iLogo = intro.querySelector('.intro-logo'), iSole = intro.querySelector('.intro-logo .sole'), iWord = intro.querySelector('.intro-word');
   const iLast = iWord.querySelector('span:last-child');
   const rmIntro = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const footMask = new Image(); footMask.src = 'assets/foot-mask.png';
   let introEnding = false, introAnims = [], introRaf = 0;
   function replayHero(){ document.querySelectorAll('.page:not([hidden])').forEach(p=>{ p.hidden=true; void p.offsetWidth; p.hidden=false; }); }
   // visible gap between BI ink bottom and glyph tops (desktop 24 / mobile 18)
@@ -3022,11 +3024,11 @@ window.BALGURUM_SUPABASE = {
     const logoInset = Math.max(0,(vb.y+vb.height)-(bb.y+bb.height))*sc; // svg box bottom -> sole bottom
     root.style.setProperty('--iw-gap', Math.max(0, want - inkTop - logoInset).toFixed(2)+'px');
   }
+  function resetHole(){ const f=document.getElementById('ibg-foot'); if(f){ f.setAttribute('visibility','hidden'); f.removeAttribute('transform'); } }
   function finishIntro(){
     cancelAnimationFrame(introRaf);
     introAnims.forEach(a=>a.cancel()); introAnims=[];
-    ['mask-image','-webkit-mask-image','mask-size','-webkit-mask-size','mask-position','-webkit-mask-position','mask-repeat','-webkit-mask-repeat','mask-composite','-webkit-mask-composite'].forEach(k=>intro.style.removeProperty(k));
-    iLogo.style.visibility='';
+    resetHole();
     root.classList.add('no-intro'); root.classList.remove('intro-hold');
     replayHero();
     window.dispatchEvent(new Event('balgurum:intro-end'));
@@ -3036,43 +3038,43 @@ window.BALGURUM_SUPABASE = {
     const ready = !im ? Promise.resolve() : (im.complete && im.naturalWidth ? (im.decode? im.decode().catch(()=>{}) : Promise.resolve()) : new Promise(r=>{ im.addEventListener('load',r,{once:true}); im.addEventListener('error',r,{once:true}); }));
     return Promise.race([ready, new Promise(r=>setTimeout(r,1500))]);
   }
+  /* full-screen loading background (SVG) with a luminance mask: white = background visible, black footprint = hole */
+  const ibgGrad = document.getElementById('ibg-grad'), ibgFoot = document.getElementById('ibg-foot');
+  const FOOT_A = {x:448.5, y:529.5}, FOOT_IR = 89.8;      // footprint's largest inscribed circle, BI viewBox units
+  function sizeIntroBg(){
+    const W=innerWidth, H=innerHeight, mob=W<=600, rx=W*(mob?.95:.7), ry=H*(mob?.55:.6), cx=W/2, cy=H/2-(mob?48:64);
+    ibgGrad.setAttribute('cx',cx); ibgGrad.setAttribute('cy',cy); ibgGrad.setAttribute('fx',cx); ibgGrad.setAttribute('fy',cy); ibgGrad.setAttribute('r',rx);
+    ibgGrad.setAttribute('gradientTransform',`translate(${cx} ${cy}) scale(1 ${ry/rx}) translate(${-cx} ${-cy})`);
+    ibgGrad.querySelector('.ibg-s4').setAttribute('offset', mob?'.82':'.8');
+  }
+  sizeIntroBg(); addEventListener('resize', sizeIntroBg);
   async function endIntro(instant){
     if(introEnding || root.classList.contains('no-intro')) return;
     introEnding = true;
     if(instant){ finishIntro(); return; }
-    await Promise.all([whenCoverReady(), footMask.decode ? footMask.decode().catch(()=>{}) : null]);
+    await whenCoverReady();
     if(rmIntro){ introAnims.push(intro.animate([{opacity:1},{opacity:0}],{duration:250,easing:'ease-out',fill:'forwards'})); setTimeout(finishIntro,260); return; }
-    const lr = iLogo.getBoundingClientRect(), sb = iSole.getBoundingClientRect();
-    const cx = sb.left+sb.width/2, cy = sb.top+sb.height/2;          // BI visual centre
-    const AX=.464, AY=.407, IR=.351, RATIO=1.964;           // footprint mask: inscribed-circle centre & radius (fraction of width)
-    const lh = sb.height*1.05, lw = lh/RATIO, lx = cx-lw/2, ly = cy-lh/2;   // footprint starts the size of the BI, on top of it
-    const ax = lx+lw*AX, ay = ly+lh*AY;
-    iLogo.style.transformOrigin = `${cx-lr.left}px ${cy-lr.top}px`;
-    const R = Math.hypot(Math.max(ax, innerWidth-ax), Math.max(ay, innerHeight-ay)) + 2;
-    introAnims.push(iWord.animate([{opacity:1},{opacity:0}],{duration:110,easing:'ease-out',fill:'forwards'}));
-    introAnims.push(iLogo.animate([{transform:'scale(1)',opacity:1},{transform:'scale(1.08)',opacity:0}],{duration:180,delay:40,easing:'ease-out',fill:'forwards'}));
-    const DUR = 480, DELAY = 60;
-    ['.site-header','main'].forEach(sel=>{ const el=document.querySelector(sel); if(!el) return; const r=el.getBoundingClientRect();
-      introAnims.push(el.animate([{transform:'scale(1.04)',transformOrigin:`${ax-r.left}px ${ay-r.top}px`},{transform:'scale(1)',transformOrigin:`${ax-r.left}px ${ay-r.top}px`}],{duration:DELAY+DUR,easing:'cubic-bezier(.2,.6,.2,1)',fill:'forwards'})); });
-    // window = footprint (mirrored), starting on the BI and growing until it covers the screen
-    const ist = intro.style;
-    ist.setProperty('-webkit-mask-image','url(assets/foot-mask.png), linear-gradient(#000,#000)'); ist.setProperty('mask-image','url(assets/foot-mask.png), linear-gradient(#000,#000)');
-    ist.setProperty('-webkit-mask-repeat','no-repeat'); ist.setProperty('mask-repeat','no-repeat');
-    ist.setProperty('-webkit-mask-composite','xor'); ist.setProperty('mask-composite','exclude');
-    const setW = sc => { const w=lw*sc, h=lh*sc, pos=`${(ax-(ax-lx)*sc).toFixed(1)}px ${(ay-(ay-ly)*sc).toFixed(1)}px, 0 0`, sz=`${w.toFixed(1)}px ${h.toFixed(1)}px, 100% 100%`;
-      ist.setProperty('-webkit-mask-size',sz); ist.setProperty('mask-size',sz); ist.setProperty('-webkit-mask-position',pos); ist.setProperty('mask-position',pos); };
-    const SMAX = R/(IR*lw)*1.03;
-    let opened = false;    const t0 = performance.now();
+    // 1. white BI + wordmark disappear completely
+    const m = iLogo.getScreenCTM();                          // BI viewBox -> screen (logo is at rest here)
+    introAnims.push(iWord.animate([{opacity:1},{opacity:0}],{duration:120,easing:'ease-out',fill:'forwards'}));
+    introAnims.push(iLogo.animate([{opacity:1},{opacity:0}],{duration:150,easing:'ease-out',fill:'forwards'}));
+    // 2-4. footprint hole in the loading background, starting exactly where the BI's footprint was, growing
+    const Ax = m.a*FOOT_A.x + m.e, Ay = m.d*FOOT_A.y + m.f;
+    const R = Math.hypot(Math.max(Ax, innerWidth-Ax), Math.max(Ay, innerHeight-Ay)) + 2;
+    const SMAX = R/(FOOT_IR*m.a)*1.03;
+    const setS = sc => ibgFoot.setAttribute('transform',`matrix(${sc*m.a} 0 0 ${sc*m.d} ${sc*m.e+(1-sc)*Ax} ${sc*m.f+(1-sc)*Ay})`);
+    const DELAY = 150, DUR = 460, t0 = performance.now();
+    let opened = false;
     (function step(now){
       const p = Math.min(1, Math.max(0, (now-t0-DELAY)/DUR));
-      if(!opened && now-t0>=DELAY){ opened=true; setW(1); }
-      if(opened) setW(1 + (SMAX-1) * (p<1 ? Math.pow(p,2.2) : 1));
-      if(p<1) introRaf = requestAnimationFrame(step); else finishIntro();
+      if(!opened && now-t0>=DELAY){ opened=true; setS(1); ibgFoot.setAttribute('visibility','visible'); }
+      if(opened) setS(1 + (SMAX-1) * (p<1 ? Math.pow(p,2.2) : 1));
+      if(p<1) introRaf = requestAnimationFrame(step); else finishIntro();   // 5. hole covers screen -> remove loading layer
     })(t0);
   }
   function startIntro(){
     cancelAnimationFrame(introRaf); introAnims.forEach(a=>a.cancel()); introAnims=[];
-    ['mask-image','-webkit-mask-image','mask-size','-webkit-mask-size','mask-position','-webkit-mask-position'].forEach(k=>intro.style.removeProperty(k)); iLogo.style.transformOrigin=''; iLogo.style.visibility='';
+    resetHole();
     introEnding = false;
     root.classList.add('intro-hold'); root.classList.remove('no-intro');
     window.dispatchEvent(new Event('balgurum:intro-start'));
