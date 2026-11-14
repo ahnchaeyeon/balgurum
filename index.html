@@ -1987,6 +1987,10 @@ html.vh .vd .vd-head>*{opacity:0;transform:translateY(20px)}
 html.vh .vd .vd-head.vh-in>*{animation:vhUp 1s cubic-bezier(.22,.61,.36,1) both;animation-delay:calc(.35s + var(--vi,0) * .12s)}
 html.vh .vd .vd-head>*:nth-child(2){--vi:1}html.vh .vd .vd-head>*:nth-child(3){--vi:2}
 @keyframes vhUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+/* device screen overlay: stays hidden from the first paint until JS has sized it (--ks) and the image is decoded;
+   the screen baked into the kids image shows underneath meanwhile, so nothing jumps */
+.ab-kid-box .ab-scr{visibility:hidden}
+.ab-kid-box.scr-ok .ab-scr{visibility:visible}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3840,7 +3844,12 @@ const pick=need=>need>700?'assets/screen-menu.webp':need>340?'assets/screen-menu
 const set=b=>{const k=b.clientWidth/1200;b.style.setProperty('--ks',k.toFixed(6));const im=b.querySelector('.ab-scr');if(!im||!k)return;
  const src=pick(k*320*(devicePixelRatio||1)*1.5);if(!im.getAttribute('src').endsWith(src.slice(7)))im.setAttribute('src',src)};
 if('ResizeObserver' in window){const ro=new ResizeObserver(es=>es.forEach(e=>set(e.target)));boxes.forEach(b=>ro.observe(b))}else{const f=()=>boxes.forEach(set);addEventListener('resize',f);f()}
-boxes.forEach(set);})();</script>
+boxes.forEach(set);
+/* reveal each overlay only once it has its real scale and its pixels are ready */
+boxes.forEach(b=>{const im=b.querySelector('.ab-scr');if(!im)return;
+ const ok=()=>{if(parseFloat(b.style.getPropertyValue('--ks'))>0&&im.naturalWidth)b.classList.add('scr-ok')};
+ const ready=()=>{if(im.decode)im.decode().then(ok,ok);else ok()};
+ im.addEventListener('load',ready);if(im.complete&&im.naturalWidth)ready()});})();</script>
 <script>(()=>{const pg=document.getElementById('page-story'),end=pg&&pg.querySelector('.st-close');if(!end)return;
 function lay(){if(pg.hidden)return;const secs=pg.querySelectorAll('.st-sec');const last=secs[secs.length-1];if(!last)return;
  const pr=pg.getBoundingClientRect(),lr=last.getBoundingClientRect();
