@@ -3281,7 +3281,7 @@ function pose(t){const u=1-Math.pow(1-t,3);const rot=lerp(-55,0,u),sc=lerp(.96,1
  G.rotation.y=rot*Math.PI/180;G.scale.setScalar(sc);G.position.y=y*HH;cvs.style.opacity=Math.min(1,t/.12);draw()}
 let raf=0;
 let done=false;
-window.balgurumDev3d={play(){size();png.style.visibility='hidden';cvs.style.visibility='visible';if(done||raf){if(done)pose(1);return}
+window.balgurumDev3d={play(){size();png.style.visibility='hidden';cvs.style.visibility='visible';if(raf)return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){done=true;pose(1);return}
   pose(0);const t0=performance.now(),dur=1800;raf=requestAnimationFrame(function f(n){const t=Math.min(1,Math.max(0,(n-t0)/dur));pose(t);if(t<1)raf=requestAnimationFrame(f);else{raf=0;done=true;pose(1)}})}};
 cov.classList.add('has-3d');addEventListener('resize',size);pose(1);size();
