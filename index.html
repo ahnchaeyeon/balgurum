@@ -1627,6 +1627,14 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
   .ab-kids{top:auto;height:44%;bottom:clamp(150px,15vh,220px)}
   .ab-cover:not(.is-bi) .ab-word{transform:translateY(-19vh)!important}
 }
+/* Kids art sized to the device, gradient letters */
+@media (min-width:821px){
+  .ab-cover{--dw:min(21vw,46vh,440px)}
+  .ab-kids{top:calc(50% - var(--dw) * .55 - var(--dw) * .14)!important;bottom:auto!important;height:calc(var(--dw) * 2.168 / .93)!important;max-width:none!important}
+}
+@media (min-width:821px) and (max-aspect-ratio:1/1){.ab-cover{--dw:min(30vw,34vh,440px)}}
+.ab-word .ch>i{background:linear-gradient(180deg,#fff 0%,#fff 35%,rgba(255,255,255,.55) 72%,rgba(255,255,255,.08) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ab-cover .ab-head,.ab-cover .ab-desc{z-index:4;text-shadow:0 2px 12px rgba(10,30,120,.55),0 0 2px rgba(10,30,120,.4)}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
