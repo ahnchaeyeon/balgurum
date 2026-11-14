@@ -1930,6 +1930,8 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd .vd-bubble::after{content:"";position:absolute;z-index:-1;border:0!important;display:block!important;right:auto;bottom:auto;width:var(--tw,44px);height:var(--tw,44px);left:var(--tl,calc(100% - 40px));top:var(--tt,calc(100% - 40px));
  background:var(--bg) calc(var(--tl,0px) * -1) calc(var(--tt,0px) * -1)/var(--gw,100%) var(--gh,100%) no-repeat;
  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 0H60C58 40 70 75 100 96C78 102 50 98 28 86L0 70Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 0H60C58 40 70 75 100 96C78 102 50 98 28 86L0 70Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+/* wish bubble: one line on wider screens, compact height; natural wrapping on narrow screens */
+@media (min-width:861px){.vd .vd-bubble{max-width:none!important;white-space:nowrap;font-size:clamp(24px,2.3vw,32px)!important;padding-block:clamp(16px,1.6vw,22px)!important;padding-inline:clamp(34px,3vw,48px)!important;line-height:1.3}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
