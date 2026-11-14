@@ -1862,6 +1862,23 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 #page-story .st-close-glow{position:absolute;inset:0;background:radial-gradient(ellipse 62% 48% at 50% var(--st-end-cy,50%),rgba(72,118,255,.42) 0%,rgba(62,108,250,.24) 38%,rgba(46,92,236,.08) 62%,rgba(31,79,224,0) 80%)}
 #page-story .st-close-word{position:absolute;left:50%;bottom:-.04em;translate:-50% 0;font-family:var(--f-latin);font-weight:800;font-size:clamp(88px,19.5vw,360px);line-height:1;letter-spacing:-.02em;white-space:nowrap;color:#fff;opacity:.08;user-select:none}
 #page-story .st-body{position:relative;z-index:1}
+/* wish bubble: a small round blue shape opens sideways into the bubble (JS adds .bx only when motion is allowed) */
+.vd .vd-bubble.bx{background:transparent;box-shadow:none;isolation:isolate}
+.vd .vd-bubble.bx::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c);border-radius:40px;box-shadow:0 8px 0 var(--d)}
+.vd .vd-bubble.bx:not(.go){color:transparent}
+.vd .vd-bubble.bx:not(.go)::before{inset:calc(50% - 26px) calc(50% - 26px);border-radius:26px;opacity:0;box-shadow:0 0 0 var(--d)}
+.vd .vd-bubble.bx:not(.go)::after{opacity:0;transform:scaleX(0)}
+.vd .vd-bubble.bx::after{transform-origin:0 50%}
+.vd .vd-bubble.bx.go::before{animation:bxBody 1.05s both}
+.vd .vd-bubble.bx.go::after{animation:bxTail .38s cubic-bezier(.25,.8,.3,1) .56s both}
+.vd .vd-bubble.bx.go{animation:bxText .3s ease-out .62s both}
+@keyframes bxBody{
+ 0%{inset:calc(50% - 18px) calc(50% - 18px);border-radius:18px;opacity:0;box-shadow:0 0 0 var(--d);animation-timing-function:cubic-bezier(.3,.7,.4,1)}
+ 14%{inset:calc(50% - 34px) calc(50% - 34px);border-radius:34px;opacity:1;box-shadow:0 4px 0 var(--d);animation-timing-function:cubic-bezier(.45,.05,.25,1)}
+ 62%{inset:0 -1.4%;border-radius:40px;box-shadow:0 8px 0 var(--d);animation-timing-function:cubic-bezier(.3,0,.25,1)}
+ 100%{inset:0 0;border-radius:40px;opacity:1;box-shadow:0 8px 0 var(--d)}}
+@keyframes bxTail{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:none}}
+@keyframes bxText{from{color:transparent}to{color:#fff}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3707,6 +3724,12 @@ function lay(){if(pg.hidden)return;const secs=pg.querySelectorAll('.st-sec');con
  end.style.setProperty('--st-end-cy',(((lr.top+lr.height/2)-pr.top-top)/h*100).toFixed(1)+'%')}
 addEventListener('resize',lay);addEventListener('hashchange',()=>setTimeout(lay,80));addEventListener('load',lay);if(document.fonts)document.fonts.ready.then(lay);
 if('ResizeObserver' in window)new ResizeObserver(lay).observe(pg);lay();})();</script>
+<script>(()=>{const bs=[...document.querySelectorAll('.vd .vd-bubble')];if(!bs.length||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+bs.forEach(b=>b.classList.add('bx'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.6){e.target.classList.add('go');io.unobserve(e.target)}}),{threshold:[0,.6,1]});
+/* once per visit of a detail page: re-arm when a value page is (re)opened */
+function arm(){bs.forEach(b=>{const pg=b.closest('.page');if(pg&&!pg.hidden){b.classList.remove('go');io.unobserve(b);void b.offsetWidth;io.observe(b)}})}
+addEventListener('hashchange',()=>setTimeout(arm,30));arm();})();</script>
 
 
 
