@@ -1889,19 +1889,24 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd .vd-head{padding-block:0;max-width:640px}
 /* back link aligned with the header logo (same --edge gutter as the header) */
 .vd-backrow{position:relative;z-index:2;padding-left:max(var(--edge),env(safe-area-inset-left,0px));padding-right:max(var(--edge),env(safe-area-inset-right,0px));margin-bottom:clamp(8px,1.4vw,18px)}
-/* vertical wheel (JS): items share one left axis, rotate on a horizontal axis, selected item centred */
-.vd-left nav.is-wheel{position:relative;height:var(--wh,300px);perspective:700px}
+/* vertical wheel (JS): rows = arrow slot / number / name on fixed columns; selected row centred */
+.vd-hero .vd-hgrid{max-width:1180px;grid-template-columns:320px minmax(0,1fr);column-gap:clamp(32px,4vw,64px);align-items:start}
+.vd-left nav.is-wheel{position:relative;height:var(--wh,300px);perspective:800px;touch-action:none;padding-block:0;margin-inline:-12px;padding-inline:12px;cursor:default}
 .vd-left nav.is-wheel .vd-tabs{display:block;margin:0;height:100%;position:relative}
 .vd-left nav.is-wheel li{position:static}
-.vd-left nav.is-wheel .vd-tab{position:absolute;left:30px;top:0;display:flex;align-items:center;gap:12px;height:auto;padding:6px 8px;border:0;border-radius:10px;background:none!important;box-shadow:none!important;color:#fff;white-space:nowrap;transform-origin:0 50%;will-change:transform,opacity,filter;font-size:19px;font-weight:800;pointer-events:auto}
+.vd-left nav.is-wheel .vd-tab{position:absolute;left:12px;top:0;display:grid;grid-template-columns:16px 28px auto;column-gap:10px;align-items:center;height:auto;padding:6px 8px 6px 0;border:0;border-radius:10px;background:none!important;box-shadow:none!important;color:#fff;text-decoration:none;white-space:nowrap;transform-origin:0 50%;will-change:transform,opacity;font-size:19px;font-weight:800;pointer-events:auto;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.vd-left nav.is-wheel .vd-tab *{text-decoration:none}
 .vd-left nav.is-wheel .vd-tab[aria-current]{font-weight:900}
-.vd-left nav.is-wheel .vd-tab-n{width:auto;height:auto;background:none;color:inherit;font-size:13px;letter-spacing:.06em;opacity:.9}
+.vd-left nav.is-wheel .vd-tab-a{width:16px;height:16px;fill:#fff;opacity:0;transition:opacity .25s}
+.vd-left nav.is-wheel .vd-tab[aria-current] .vd-tab-a{opacity:1}
+.vd-left nav.is-wheel .vd-tab-n{width:auto;height:auto;background:none!important;color:inherit;font-size:13px;letter-spacing:.06em;opacity:.9;text-align:left}
 .vd-left nav.is-wheel .vd-tab:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.vd-left nav.is-wheel .vd-arrow{position:absolute;left:4px;top:calc(50% - 8px);width:16px;height:16px;fill:#fff;pointer-events:none}
+.vd-left nav.is-wheel .vd-arrow{display:none}
 .vd-head.swap{animation:vdHeadIn .35s ease-out both}
 @keyframes vdHeadIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
 @media (max-width:820px){
  .vd-hero .vd-hgrid{grid-template-columns:1fr;row-gap:8px}
+ .vd-hero .vd-hgrid{grid-template-columns:1fr}
  .vd-left nav.is-wheel{--wh:250px}
  .vd-left nav.is-wheel .vd-tab{font-size:17px}
 }
@@ -2849,6 +2854,7 @@ window.BALGURUM_SUPABASE = {
     const to = sessionStorage.getItem('bg-scroll-to'); sessionStorage.removeItem('bg-scroll-to');
     const tgt = to && document.getElementById(to);
     if(tgt && !tgt.closest('[hidden]')) requestAnimationFrame(()=>{ const h=(document.querySelector('header')||{}).offsetHeight||72; window.scrollTo({top:tgt.getBoundingClientRect().top+scrollY-h-12, behavior:'instant'}); });
+    else if(typeof window.__vdKeep==='number'){ const y=window.__vdKeep; window.__vdKeep=null; window.scrollTo({top:y, behavior:'instant'}); }
     else window.scrollTo({top:0, behavior:'instant'});
     if(route==='story') walk(document.querySelector('.walk-art'));
   }
@@ -3352,6 +3358,7 @@ window.BALGURUM_SUPABASE = {
     const to = sessionStorage.getItem('bg-scroll-to'); sessionStorage.removeItem('bg-scroll-to');
     const tgt = to && document.getElementById(to);
     if(tgt && !tgt.closest('[hidden]')) requestAnimationFrame(()=>{ const h=(document.querySelector('header')||{}).offsetHeight||72; window.scrollTo({top:tgt.getBoundingClientRect().top+scrollY-h-12, behavior:'instant'}); });
+    else if(typeof window.__vdKeep==='number'){ const y=window.__vdKeep; window.__vdKeep=null; window.scrollTo({top:y, behavior:'instant'}); }
     else window.scrollTo({top:0, behavior:'instant'});
   }
   document.querySelectorAll('a.brand').forEach(a=>a.addEventListener('click',e=>{
@@ -3785,28 +3792,55 @@ let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,40)};
 addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,60));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
 <script>(()=>{const navs=[...document.querySelectorAll('.vd .vd-left nav')];if(!navs.length)return;
 const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let shown=null;                          /* drawn position (float index), shared so a page switch continues the turn */
+let shown=null;                                  /* drawn position (float index), shared across the 4 pages so a switch continues the turn */
+const STEP=26;let acc=0,lock=0;   /* shared: after a step the next page's menu keeps ignoring the same gesture */
+function go(i){window.__vdKeep=scrollY;location.hash='#value-'+(i+1)}   /* router keeps the scroll position */
 const W=navs.map(nav=>{nav.classList.add('is-wheel');const links=[...nav.querySelectorAll('.vd-tab')];
- const sel=links.findIndex(a=>a.hasAttribute('aria-current'));
- nav.insertAdjacentHTML('beforeend','<svg class="vd-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5 13 8 3 13.5z"/></svg>');
- links.forEach((a,i)=>a.addEventListener('keydown',e=>{const d=e.key==='ArrowDown'?1:e.key==='ArrowUp'?-1:0;if(!d)return;e.preventDefault();const j=Math.max(0,Math.min(links.length-1,i+d));links[j].focus();links[j].click()}));
- return {nav,links,sel,page:nav.closest('.page'),raf:0}});
-function draw(w,v){const mob=innerWidth<=820,H=w.nav.clientHeight||(mob?250:300),cy=H/2,r=mob?92:112,step=26,D=Math.PI/180;
- w.links.forEach((a,i)=>{const d=i-v,th=Math.max(-80,Math.min(80,d*step)),c=Math.cos(th*D),y=cy+r*Math.sin(th*D);
-  const s=.84+.16*c,o=.55+.45*c*c,bl=Math.min(.6,Math.abs(d)*.3);
-  a.style.transform=`translateY(${(y-a.offsetHeight/2).toFixed(1)}px) rotateX(${(-th*.45).toFixed(2)}deg) scale(${s.toFixed(3)})`;
-  a.style.opacity=o.toFixed(3);a.style.filter=bl>.05?`blur(${bl.toFixed(2)}px)`:'none'})}
+ links.forEach(a=>a.insertAdjacentHTML('afterbegin','<svg class="vd-tab-a" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5 13 8 3 13.5z"/></svg>'));
+ const w={nav,links,sel:links.findIndex(a=>a.hasAttribute('aria-current')),page:nav.closest('.page'),raf:0};
+ links.forEach((a,i)=>{a.addEventListener('click',()=>{window.__vdKeep=scrollY});
+  a.addEventListener('keydown',e=>{const d=e.key==='ArrowDown'?1:e.key==='ArrowUp'?-1:0;if(!d)return;e.preventDefault();const j=Math.max(0,Math.min(links.length-1,i+d));links[j].focus();go(j)})});
+ /* mouse wheel / trackpad: one step per gesture, page scroll continues past the ends */
+ nav.addEventListener('wheel',e=>{const now=performance.now(),dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?400:1);
+  if(now<lock){e.preventDefault();lock=Math.max(lock,now+160);return}
+  const dir=dy>0?1:-1,nx=w.sel+dir;
+  if(nx<0||nx>=links.length){acc=0;return}                        /* at an end: let the page scroll */
+  e.preventDefault();acc+=dy;
+  if(Math.abs(acc)>=40){acc=0;lock=now+520;go(nx)}},{passive:false});
+ /* touch / pen: drag the list, release settles on the nearest item; a light tap keeps the normal link click */
+ let drag=null;
+ nav.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;drag={id:e.pointerId,y:e.clientY,v:shown==null?w.sel:shown,moved:false}});
+ nav.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const dy=e.clientY-drag.y;
+  if(!drag.moved&&Math.abs(dy)<8)return;if(!drag.moved){drag.moved=true;try{nav.setPointerCapture(e.pointerId)}catch(_){};cancelAnimationFrame(w.raf)}
+  const v=Math.max(-.35,Math.min(links.length-1+.35,drag.v-dy/row(w)));shown=v;draw(w,v)});
+ const end=e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=null;if(!d.moved)return;
+  const t=Math.max(0,Math.min(links.length-1,Math.round(shown)));
+  nav.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation()},{capture:true,once:true});setTimeout(()=>{},0);
+  if(t!==w.sel)go(t);else show(w)};
+ nav.addEventListener('pointerup',end);nav.addEventListener('pointercancel',end);
+ return w});
+function geo(w){const mob=innerWidth<=820;const H=w.nav.clientHeight||(mob?250:300);return {H,cy:H/2,r:mob?100:124}}
+function row(w){const g=geo(w);return g.r*Math.sin(STEP*Math.PI/180)}
+function draw(w,v){const g=geo(w),D=Math.PI/180;
+ w.links.forEach((a,i)=>{const d=i-v,th=Math.max(-80,Math.min(80,d*STEP)),c=Math.cos(th*D),y=g.cy+g.r*Math.sin(th*D);
+  const o=.6+.4*c*c,bl=Math.min(.3,Math.abs(d)*.15);
+  a.style.transform=`translateY(${(y-a.offsetHeight/2).toFixed(1)}px) scaleY(${(.62+.38*c).toFixed(3)})`;   /* rolls back on the wheel: vertical squash only, baseline stays level, left axis fixed */
+  a.style.opacity=o.toFixed(3);a.style.filter=bl>.04?`blur(${bl.toFixed(2)}px)`:'none'})}
+/* the big title's vertical centre lines up with the selected row (= middle of the wheel) */
+function alignHead(w){const h=w.page.querySelector('.vd-head'),t=h&&h.querySelector('h1');if(!t)return;h.style.marginTop='0px';
+ if(innerWidth<=820)return;const n=w.nav.getBoundingClientRect(),tr=t.getBoundingClientRect(),hr=h.getBoundingClientRect();
+ const want=(n.top+n.height/2)-(tr.top-hr.top+tr.height/2)-hr.top;h.style.marginTop=Math.round(want)+'px'}
 function show(w){const from=shown==null?w.sel:shown,to=w.sel;cancelAnimationFrame(w.raf);
- if(rm||from===to){shown=to;draw(w,to);return}
- const t0=performance.now(),dur=Math.min(1000,480+Math.abs(to-from)*160),ease=t=>1-Math.pow(1-t,4);
+ if(rm||Math.abs(from-to)<.001){shown=to;draw(w,to);return}
+ const t0=performance.now(),dur=Math.min(1000,420+Math.abs(to-from)*170),ease=t=>1-Math.pow(1-t,4);
  (function f(n){const t=Math.min(1,(n-t0)/dur),v=from+(to-from)*ease(t);shown=v;draw(w,v);if(t<1)w.raf=requestAnimationFrame(f)})(t0)}
 function cur(){return W.find(w=>w.page&&!w.page.hidden)}
 function onRoute(){const w=cur();W.forEach(x=>{if(x!==w)cancelAnimationFrame(x.raf)});if(!w)return;
- const h=w.page.querySelector('.vd-head');if(h&&shown!=null&&!rm){h.classList.remove('swap');void h.offsetWidth;h.classList.add('swap')}
+ alignHead(w);const h=w.page.querySelector('.vd-head');if(h&&shown!=null&&!rm){h.classList.remove('swap');void h.offsetWidth;h.classList.add('swap')}
  show(w)}
 addEventListener('hashchange',()=>requestAnimationFrame(onRoute));
-addEventListener('resize',()=>{const w=cur();if(w)draw(w,shown==null?w.sel:shown)});
-if(document.fonts)document.fonts.ready.then(()=>{const w=cur();if(w)draw(w,shown==null?w.sel:shown)});
+addEventListener('resize',()=>{const w=cur();if(w){alignHead(w);draw(w,shown==null?w.sel:shown)}});
+if(document.fonts)document.fonts.ready.then(()=>{const w=cur();if(w){alignHead(w);draw(w,shown==null?w.sel:shown)}});
 W.forEach(w=>draw(w,w.sel));requestAnimationFrame(onRoute);
 addEventListener('hashchange',()=>{if(!/^#value-/.test(location.hash))shown=null});
 })();</script>
