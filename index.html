@@ -1852,7 +1852,6 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd .vd-flow .vd-panel .vd-fig{order:0!important;box-shadow:none;border:0;border-radius:24px;overflow:hidden;aspect-ratio:auto;height:auto;min-height:0;padding:0;background:none;display:block;align-self:start}
 .vd .vd-flow .vd-panel .vd-fig img,.vd .vd-flow .vd-panel .vd-fig video{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:fill}
 .vd .vd-flow .vd-ptext{position:relative;border-radius:24px;background:linear-gradient(135deg,#ffffff 0%,#f1f5ff 55%,#e8eefd 100%);border:1px solid #e1e8fb;padding:clamp(24px,3vw,44px) clamp(24px,3vw,44px) clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:center;text-align:left;min-width:0;word-break:keep-all}
-.vd .vd-flow .vd-ptext::after{content:"";position:absolute;top:18px;right:18px;width:12px;height:12px;border-radius:50%;background:var(--c,#1f4fe0)}
 .vd .vd-flow .vd-ptext h3{color:var(--c,#1f4fe0)}
 .vd .vd-flow .vd-ptext p:not(.vd-pk){color:#1e2a4a}
 @media (max-width:760px){.vd .vd-flow .vd-panel{grid-template-columns:1fr!important}}
@@ -1908,6 +1907,14 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
  .vd-left nav.is-wheel .vd-tab{font-size:14px}.vd-left nav.is-wheel .vd-tab[aria-current]{font-size:18px}
 }
 @media (prefers-reduced-motion:reduce){.vd-head.swap{animation:none}}
+/* STEP: image and text box share top and bottom edges (JS sets the image column so its 16:9 height = text box height) */
+.vd .vd-story.wrap{max-width:1280px}
+.vd .vd-flow .vd-ptext{padding:clamp(20px,2.4vw,32px) clamp(24px,2.8vw,40px)!important}
+.vd .vd-flow .vd-panel.fit{grid-template-columns:var(--iw) minmax(0,1fr)!important;align-items:stretch}
+.vd .vd-flow .vd-panel.fit .vd-fig{align-self:stretch}
+.vd .vd-flow .vd-panel.fit .vd-fig img{width:100%;height:100%;object-fit:fill}
+.vd .vd-flow .vd-panel.one{grid-template-columns:1fr!important;max-width:760px;width:100%;margin-inline:auto}
+.vd .vd-flow .vd-fig,.vd .vd-flow .vd-ptext{border-radius:24px}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3797,6 +3804,20 @@ W.forEach(w=>draw(w,w.sel));requestAnimationFrame(onRoute);
 /* leaving the experience pages resets the shared position */
 addEventListener('hashchange',()=>{if(!/^#value-/.test(location.hash))shown=null});
 })();</script>
+<script>(()=>{const R=16/9;
+function fitPanel(p){const fig=p.querySelector('.vd-fig'),txt=p.querySelector('.vd-ptext');if(!fig||!txt)return;
+ p.classList.remove('fit','one');p.style.removeProperty('--iw');
+ if(innerWidth<=760)return;
+ const cs=getComputedStyle(p),gap=parseFloat(cs.columnGap)||14,avail=p.clientWidth;
+ let iw=avail*.55;p.classList.add('fit');
+ for(let i=0;i<10;i++){p.style.setProperty('--iw',iw+'px');const h=txt.offsetHeight,n=h*R;if(Math.abs(n-iw)<.5){iw=n;break}iw=n}
+ p.style.setProperty('--iw',iw+'px');
+ if(avail-gap-iw<380){p.classList.remove('fit');p.style.removeProperty('--iw');p.classList.add('one')}}
+function fit(){document.querySelectorAll('.page.vd:not([hidden]) .vd-flow').forEach(fl=>{const ps=[...fl.querySelectorAll('.vd-panel')];ps.forEach(fitPanel);
+ /* keep one layout per page: if any STEP cannot keep both edges aligned in 2 columns, all STEPs use 1 column */
+ if(ps.some(p=>p.classList.contains('one')))ps.forEach(p=>{p.classList.remove('fit');p.style.removeProperty('--iw');p.classList.add('one')})})}
+let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,50)};
+addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,80));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
 
 
 
