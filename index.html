@@ -3531,8 +3531,23 @@ function slab(shape,depth,bev,mat){const g=new THREE.ExtrudeGeometry(shape,{dept
 const G=new THREE.Group();S.add(G);
 /* body: top plan rounded so the side reads as a thick cabinet */
 function cab(y0,y1,mat){const w=7.06-.12,d=D-.12;const plan=rr(w,d,.32);const g=new THREE.ExtrudeGeometry(plan,{depth:y1-y0-.12,bevelEnabled:true,bevelThickness:.06,bevelSize:.06,bevelSegments:4,curveSegments:12});g.rotateX(-Math.PI/2);g.translate(0,y0+.06,0);return new THREE.Mesh(g,mat)}
-G.add(cab(1.16,11.07,white));G.add(cab(11.11,15.31,white2));
-const sm=new THREE.Mesh(new THREE.BoxGeometry(6.95,.05,D-.05),seam);sm.position.set(0,11.09,0);G.add(sm);
+/* white front cover (thin) + dark grey rear body; the monitor housing is shallower than the lower body (step at the seam) */
+const CV=.55,BODY=D-CV,TOPD=2.2,gry=M(0x3c3e44,.62),slotM=M(0x141518,.8),lipM=M(0x5a5d64,.6);
+const zc=(z0,z1)=>(z0+z1)/2;
+function box(y0,y1,w,z0,z1,mat,r){const g=new THREE.ExtrudeGeometry(rr(w-.12,z1-z0-.12,r),{depth:y1-y0-.12,bevelEnabled:true,bevelThickness:.06,bevelSize:.06,bevelSegments:4,curveSegments:12});g.rotateX(-Math.PI/2);g.translate(0,y0+.06,0);const m=new THREE.Mesh(g,mat);m.position.z=zc(z0,z1);return m}
+/* lower body */
+G.add(box(1.16,11.07,7.06,FZ-CV,FZ,white,.2));
+G.add(box(1.16,11.07,7.0,-FZ,FZ-CV+.02,gry,.32));
+/* monitor housing (shallower) */
+G.add(box(11.11,15.31,7.06,FZ-CV,FZ,white2,.2));
+G.add(box(11.11,15.31,7.0,FZ-CV-TOPD,FZ-CV+.02,gry,.32));
+/* thin seam between housing and body on the white cover */
+const sm=new THREE.Mesh(new THREE.BoxGeometry(6.98,.04,CV-.04),seam);sm.position.set(0,11.09,FZ-CV/2);G.add(sm);
+/* side vents: only on the side seen in the reference (device's left, -X); recessed look = dark slot + lighter lower lip */
+{const x=-3.5-.004,za=-FZ+.31*BODY,zb=-FZ+.81*BODY,L=zb-za;
+ for(let i=0;i<23;i++){const y=10.55-i*.22;
+  const sl=new THREE.Mesh(new THREE.BoxGeometry(.012,.085,L),slotM);sl.position.set(x,y,(za+zb)/2);G.add(sl);
+  const lp=new THREE.Mesh(new THREE.BoxGeometry(.012,.022,L),lipM);lp.position.set(x,y-.054,(za+zb)/2);G.add(lp)}}
 /* bezel + screen */
 const bz=slab(rr(6.5,3.7,.22),.06,.03,bez);bz.position.set(0,13.31,FZ);G.add(bz);
 const sc=new THREE.Mesh(new THREE.PlaneGeometry(6.12,3.27),new THREE.MeshBasicMaterial({map:tex('assets/dev3d-screen.jpg?v=2')}));sc.position.set(0,13.325,FZ+.095);G.add(sc);
