@@ -2000,6 +2000,9 @@ html.vh .vd .vd-head>*:nth-child(2){--vi:1}html.vh .vd .vd-head>*:nth-child(3){-
 /* narrow screens (iPad portrait and below): image on top, text block below in the same order */
 @media (max-width:900px){.sg-flow-band .sg-flow li{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto!important;max-width:640px;margin-inline:auto;width:100%;box-sizing:border-box}.sg-flow-band .sg-flow li>img,.sg-flow-band .sg-flow li>b,.sg-flow-band .sg-flow li>span:not(.flow-deco){grid-row:auto!important;grid-column:1!important}.sg-flow-band .sg-flow li>b{padding-top:12px}}
 @media (max-width:640px){.sg-flow-band .sg-flow li b{padding-top:10px}.sg-flow-band .sg-flow li b::before{margin-bottom:16px}.sg-flow-band .sg-flow li b::after{margin-top:14px}.sg-flow-band .sg-flow li{row-gap:14px}}
+/* games hero back link: left edge on the logo line (header gutter), like the experience pages */
+.mg-hero .gp-back{max-width:none;width:fit-content;margin-left:calc(max(var(--edge),env(safe-area-inset-left,0px)) - 20px);margin-right:0}
+@media (max-width:760px){.mg-hero .gp-back{margin-left:calc(max(var(--edge),env(safe-area-inset-left,0px)) - 90px)}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
