@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+<defs>
+<radialGradient id="g" cx="1000" cy="40" r="560" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a9bdf4" stop-opacity=".62"/><stop offset=".55" stop-color="#c3d3fb" stop-opacity=".46"/><stop offset=".86" stop-color="#dbe6ff" stop-opacity=".30"/><stop offset="1" stop-color="#e8efff" stop-opacity=".22"/></radialGradient>
+<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".62" stop-color="#fff"/><stop offset=".9" stop-color="#000"/></linearGradient>
+<mask id="m" maskUnits="userSpaceOnUse" x="-200" y="-200" width="1400" height="1400"><rect x="-200" y="-200" width="1400" height="1400" fill="url(#fade)"/></mask>
+<filter id="b" filterUnits="userSpaceOnUse" x="-200" y="-200" width="1400" height="1400"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<g mask="url(#m)" filter="url(#b)">
+<path d="M520 -60 C548 150 640 268 772 330 C872 377 952 388 1060 452 L1060 -60 Z" fill="url(#g)"/>
+<path d="M610 -60 C640 108 726 210 838 252 C930 286 990 292 1060 330 L1060 -60 Z" fill="#b6c8f6" fill-opacity=".20"/>
+</g>
+</svg>
