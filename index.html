@@ -1964,9 +1964,11 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .pk-stats .pk-ico{display:block;width:44px;height:44px;object-fit:contain;margin-bottom:6px}
 @media (max-width:860px){.pk-stats .pk-ico{width:36px;height:36px;margin-bottom:4px}}
 /* keep the 4th cloud's extra line out of the stack so all icons and numbers sit on the same row */
-.pk-stats span{position:relative}
-.pk-stats small{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap}
+.pk-stats span{display:block;max-width:100%;word-break:keep-all}
+.pk-stats small{white-space:nowrap}
 @media (max-width:520px){.pk-stats li{padding:8% 6% 13%}.pk-stats .pk-ico{width:34px;height:34px;margin-bottom:2px}}
+@media (max-width:380px){.pk-stats li{padding:7% 3% 10%}.pk-stats small{font-size:10px}}
+@media (max-width:340px){.pk-stats li{padding:4% 3% 9%}.pk-stats .pk-ico{width:28px;height:28px;margin-bottom:1px}.pk-stats b{font-size:20px}.pk-stats li span{line-height:1.25}.pk-stats li:last-child{padding-bottom:3%}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2392,7 +2394,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         <li><img class="pk-ico" src="assets/pk-ico-game.png" alt="" width="192" height="192"><b>8개</b><span>게임 콘텐츠</span></li>
         <li><img class="pk-ico" src="assets/pk-ico-move.png" alt="" width="192" height="192"><b>18가지</b><span>운동 동작</span></li>
         <li><img class="pk-ico" src="assets/pk-ico-people.png" alt="" width="192" height="192"><b>1–5명</b><span>동시 플레이</span></li>
-        <li><img class="pk-ico" src="assets/pk-ico-mode.png" alt="" width="192" height="192"><b>2가지</b><span>플레이 모드<small>(개인전 · 협동전)</small></span></li>
+        <li><img class="pk-ico" src="assets/pk-ico-mode.png" alt="" width="192" height="192"><b>2가지</b><span>플레이 모드 <small>(개인전 · 협동전)</small></span></li>
       </ul>
     </div>
   </section>
