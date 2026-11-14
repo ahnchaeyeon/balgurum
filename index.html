@@ -1833,6 +1833,11 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 #page-about .ab-eye .ab-two.rev.one{grid-template-columns:1fr;justify-items:center;row-gap:clamp(32px,4vw,48px)}
 #page-about .ab-eye .ab-two.rev.one .ab-eye-art{max-width:640px!important;width:100%}
 #page-about .ab-eye .ab-two.rev.one>div:last-child{max-width:640px;width:100%}
+/* cover kids: the device screen is the full-resolution original layered on the image (same box, perspective via matrix3d) */
+.ab-kids{container-type:size}
+.ab-kid-box{position:absolute;left:50%;bottom:0;width:min(100cqw,150cqh);aspect-ratio:3/2;transform:translateX(-50%)}
+.ab-kid-box>img:first-child{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ab-kid-box .ab-scr{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;transform-origin:0 0;transform:scale(var(--ks,.5)) var(--m);border-radius:48px;display:block;backface-visibility:hidden}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1938,7 +1943,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <div class="ab-glitch" aria-hidden="true"></div>
       <p class="ab-word" aria-hidden="true" data-words="MOVE|PLAY|GROW"></p>
       <div class="ab-device"><img class="ab-dev-still" src="assets/device-cut2.png" alt="발구름 XR 놀이 기기" width="706" height="1531"><!-- 회전 영상 연결 위치: data-src에 55°→-5°→0° 턴테이블 영상(알파 포함 webm/mov)을 넣으면 정지 이미지 대신 재생 --><video class="ab-dev-turn" data-src="" muted playsinline preload="auto" hidden></video><canvas class="ab-dev3d" aria-hidden="true"></canvas></div>
-      <div class="ab-kids" aria-hidden="true"><img class="ab-kid on" data-k="0" src="assets/kids-1.webp?v=2" alt="" width="1200" height="800" decoding="async"><img class="ab-kid" data-k="1" src="assets/kids-3.webp" alt="" width="1200" height="800" decoding="async"><img class="ab-kid" data-k="2" src="assets/kids-2.webp?v=2" alt="" width="1200" height="800" decoding="async"></div>
+      <div class="ab-kids" aria-hidden="true"><div class="ab-kid on" data-k="0"><div class="ab-kid-box"><img src="assets/kids-1.webp?v=2" alt="" width="1200" height="800" decoding="async"><img class="ab-scr" src="assets/screen-menu.webp" alt="" width="1920" height="1080" decoding="async" style="--m:matrix3d(0.169686113,0.0164804408,0,5.20193623e-05,-0.00135949353,0.170740532,0,-4.183057e-06,0,0,1,0,325,36,0,1)"></div></div><div class="ab-kid" data-k="1"><div class="ab-kid-box"><img src="assets/kids-3.webp" alt="" width="1200" height="800" decoding="async"></div></div><div class="ab-kid" data-k="2"><div class="ab-kid-box"><img src="assets/kids-2.webp?v=2" alt="" width="1200" height="800" decoding="async"><img class="ab-scr" src="assets/screen-menu.webp" alt="" width="1920" height="1080" decoding="async" style="--m:matrix3d(0.166134955,-3.26203736e-05,0,-8.1550934e-07,0,0.177129632,0,0,0,0,1,0,332,40,0,1)"></div></div></div>
       <h1 id="ab-title" class="ab-head"><span class="ab-ln"><span>발을 구르는 순간,</span></span><span class="ab-ln"><span>새로운 놀이가 시작됩니다.</span></span></h1>
       <p class="ab-desc"><span class="ab-ln"><span>아이들의 움직임을 놀이로 잇는</span></span><span class="ab-ln"><span><b>XR 콘텐츠 브랜드</b></span></span></p>
     </div>
@@ -3181,7 +3186,7 @@ window.BALGURUM_SUPABASE = {
     window.dispatchEvent(new Event('balgurum:intro-end'));
   }
   function whenCoverReady(){
-    const im = document.querySelector('.ab-cover .ab-kid.on') || document.querySelector('.ab-cover .ab-kid');
+    const im = document.querySelector('.ab-cover .ab-kid.on img') || document.querySelector('.ab-cover .ab-kid img');
     const ready = !im ? Promise.resolve() : (im.complete && im.naturalWidth ? (im.decode? im.decode().catch(()=>{}) : Promise.resolve()) : new Promise(r=>{ im.addEventListener('load',r,{once:true}); im.addEventListener('error',r,{once:true}); }));
     return Promise.race([ready, new Promise(r=>setTimeout(r,1500))]);
   }
@@ -3647,6 +3652,12 @@ function fit(){g.classList.remove('fit','one');g.style.removeProperty('--iw');
 let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,60)};
 addEventListener('resize',run);addEventListener('hashchange',run);addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);img.complete?fit():img.addEventListener('load',fit);
 })();</script>
+<script>(()=>{const boxes=[...document.querySelectorAll('.ab-cover .ab-kid-box')];if(!boxes.length)return;
+const pick=need=>need>700?'assets/screen-menu.webp':need>340?'assets/screen-menu-960.webp':'assets/screen-menu-480.webp';
+const set=b=>{const k=b.clientWidth/1200;b.style.setProperty('--ks',k.toFixed(6));const im=b.querySelector('.ab-scr');if(!im||!k)return;
+ const src=pick(k*320*(devicePixelRatio||1)*1.5);if(!im.getAttribute('src').endsWith(src.slice(7)))im.setAttribute('src',src)};
+if('ResizeObserver' in window){const ro=new ResizeObserver(es=>es.forEach(e=>set(e.target)));boxes.forEach(b=>ro.observe(b))}else{const f=()=>boxes.forEach(set);addEventListener('resize',f);f()}
+boxes.forEach(set);})();</script>
 
 
 
