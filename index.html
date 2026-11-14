@@ -1606,6 +1606,27 @@ html[data-route="story"] footer p,html[data-route="story"] footer a{color:rgba(2
 .st-sec.dark .st-qm{fill:#fff}
 html[data-route="story"] footer,html[data-route="story"] .site-footer{background:#1f4fe0!important;border-top:0!important}
 html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
+/* Kids scenes for MOVE / PLAY / GROW, device only for Balgurum */
+.ab-kids{position:absolute;left:50%;top:clamp(40px,7vh,80px);bottom:clamp(120px,17vh,180px);aspect-ratio:3/2;max-width:94%;transform:translateX(-50%);z-index:2;pointer-events:none}
+.ab-kid{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;opacity:0;transform:translateX(6%) scale(.96);transition:opacity .35s,transform .35s;filter:drop-shadow(0 24px 30px rgba(5,20,90,.35))}
+.ab-kid.on{opacity:1;transform:none;transition:opacity .45s .15s,transform .7s .15s cubic-bezier(.2,.8,.2,1.15)}
+.ab-cover .ab-device{transition:opacity .4s,transform .6s cubic-bezier(.2,.8,.2,1.15)}
+.ab-cover:not(.is-bi) .ab-device{opacity:0;pointer-events:none}
+.ab-cover.is-bi .ab-kids{opacity:0}
+.ab-cover.is-bi .ab-kids .ab-kid{opacity:0}
+.ab-cover:not(.is-bi) .ab-word .half.l{justify-self:end!important}
+.ab-cover:not(.is-bi) .ab-word .half.r{justify-self:start!important}
+.ab-cover:not(.is-bi) .ab-word{transform:translateY(-14%)}
+.ab-cover .ab-tag,.ab-cover .ab-head,.ab-cover .ab-desc{z-index:3}
+@media (max-width:820px){
+  .ab-kids{position:relative;left:auto;top:auto;bottom:auto;transform:none;grid-area:art;width:100%;max-width:none;align-self:end}
+  .ab-cover:not(.is-bi) .ab-word{align-self:start;margin-top:8px;transform:none}
+}
+@media (prefers-reduced-motion:reduce){.ab-kid{transition:opacity .2s!important;transform:none!important}}
+@media (min-width:821px) and (max-aspect-ratio:1/1){
+  .ab-kids{top:auto;height:44%;bottom:clamp(150px,15vh,220px)}
+  .ab-cover:not(.is-bi) .ab-word{transform:translateY(-19vh)!important}
+}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1683,6 +1704,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <div class="ab-glitch" aria-hidden="true"></div>
       <p class="ab-word" aria-hidden="true" data-words="MOVE|PLAY|GROW"></p>
       <div class="ab-device"><img src="assets/device-cut2.png" alt="발구름 XR 놀이 기기" width="706" height="1531"></div>
+      <div class="ab-kids" aria-hidden="true"><img class="ab-kid on" data-k="0" src="assets/kids-1.webp" alt="" width="1200" height="800"><img class="ab-kid" data-k="1" src="assets/kids-2.webp" alt="" width="1200" height="800" loading="lazy"><img class="ab-kid" data-k="2" src="assets/kids-3.webp" alt="" width="1200" height="800" loading="lazy"></div>
       <h1 id="ab-title" class="ab-head"><span class="ab-ln"><span>발을 구르는 순간,</span></span><span class="ab-ln"><span>새로운 놀이가 시작됩니다.</span></span></h1>
       <p class="ab-desc"><span class="ab-ln"><span>아이들의 움직임을 놀이로 잇는</span></span><span class="ab-ln"><span><b>XR 콘텐츠 브랜드</b></span></span></p>
     </div>
@@ -3102,10 +3124,10 @@ const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;let k=0,busy=fal
 const POOL='BALGURUMOVEPLAY',R=n=>Math.floor(Math.random()*n);
 const rnd=n=>Array.from({length:n},()=>POOL[R(POOL.length)]).join('');
 function build(w,pre){el.classList.toggle('long',w.length>5);const h=Math.ceil(w.length/2);const L=[...w].map((c,i)=>`<span class="ch${pre?' pre':''}" style="--i:${i}"><i>${c}</i></span>`);el.innerHTML=`<span class="half l">${L.slice(0,h).join('')}</span><span class="gap"></span><span class="half r">${L.slice(h).join('')}</span>`;fit()}
-function fit(){const dv=cov.querySelector('.ab-device');if(!dv)return;el.style.removeProperty('font-size');const gw=dv.getBoundingClientRect().width*1.08;el.style.setProperty('--gap',gw+'px');const room=(el.clientWidth-gw)/2*.97;const ws=[...el.querySelectorAll('.half')].map(x=>x.scrollWidth);const m=Math.max(...ws);if(m>room){const fs=parseFloat(getComputedStyle(el).fontSize);el.style.setProperty('font-size',(fs*room/m)+'px','important')}}
+function fit(){const dv=cov.querySelector('.ab-device');if(!dv)return;el.style.removeProperty('font-size');const gw=cov.classList.contains('is-bi')?dv.getBoundingClientRect().width*1.08:0;el.style.setProperty('--gap',gw+'px');const room=(el.clientWidth-gw)/2*.97;const ws=[...el.querySelectorAll('.half')].map(x=>x.scrollWidth);const m=Math.max(...ws);if(m>room){const fs=parseFloat(getComputedStyle(el).fontSize);el.style.setProperty('font-size',(fs*room/m)+'px','important')}}
 addEventListener('resize',()=>fit());
 function reveal(){requestAnimationFrame(()=>el.querySelectorAll('.ch').forEach(c=>{c.classList.remove('pre');c.classList.add('in')}))}
-function setK(n){k=n;const brand=n===3;cov.classList.toggle('is-bi',brand);tags.forEach((t,i)=>t.classList.toggle('on',!brand&&i===n))}
+function setK(n){k=n;const brand=n===3;cov.classList.toggle('is-bi',brand);cov.querySelectorAll('.ab-kid').forEach(im=>{const on=+im.dataset.k===n;if(on&&!im.classList.contains('on')){im.classList.remove('on');void im.offsetWidth}im.classList.toggle('on',on)});tags.forEach((t,i)=>t.classList.toggle('on',!brand&&i===n))}
 function fill(){gl.innerHTML=Array.from({length:3},()=>`<div class="${R(3)?'':'o'}" style="transform:translateX(${R(40)-20}%)">${rnd(6+R(3))}</div>`).join('')}
 function burst(ms){return new Promise(res=>{const t0=performance.now();gl.classList.add('on');(function tick(){fill();if(performance.now()-t0<ms)setTimeout(tick,45);else{gl.classList.remove('on');gl.innerHTML='';res()}})()})}
 function jit(){el.classList.remove('jit');void el.offsetWidth;el.classList.add('jit')}
