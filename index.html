@@ -1704,6 +1704,10 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
   #page-cheer .cheer-col legend,#page-cheer .cheer-col h2{font-size:17px}
   #page-cheer .cheer-col .no{font-size:16px;display:inline;margin-right:6px}
 }
+/* cheer: title+box fill first screen, board below fold */
+#page-cheer .cheer-wrap{padding-top:0!important}
+#page-cheer .cheer-first{min-height:calc(100vh - var(--hh,72px));min-height:calc(100svh - var(--hh,72px));display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2.4vh,24px);padding-block:clamp(20px,4vh,48px);box-sizing:border-box}
+#page-cheer .wall{padding-top:clamp(40px,6vh,72px)}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2483,6 +2487,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <div class="page" id="page-cheer" data-page="cheer" hidden>
   <section class="cheer">
     <div class="wrap cheer-wrap">
+      <div class="cheer-first">
       <div class="cheer-head">
         <h1>구매 대신, <em>응원</em> 한마디 어떠세요?</h1>
         <p>발구름은 팀 코끼리가 코드리치와 함께 만든 산학 연계 졸업 프로젝트입니다.<br>여러분의 응원이 발구름의 다음 발걸음에 힘이 됩니다.</p>
@@ -2515,6 +2520,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           </div>
         </div>
       </form>
+      </div>
       <section class="wall" aria-labelledby="wall-title">
         <div class="wall-head"><h2 id="wall-title">응원 보드</h2><p class="wall-note" id="wall-note">공개로 남겨진 응원이 여기에 모여요.</p></div>
         <div class="wall-list" id="wall-list" aria-live="polite"><p class="wall-empty">응원을 불러오는 중이에요…</p></div>
@@ -3320,6 +3326,7 @@ window.balgurumDev3d={play(){size();png.style.visibility='hidden';cvs.style.visi
 cov.classList.add('has-3d');addEventListener('resize',size);pose(1);size();
 })();
 </script>
+<script>(function(){function f(){var h=document.querySelector('.site-header');if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px')}f();addEventListener('resize',f);addEventListener('load',f)})();</script>
 
 
 
