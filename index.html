@@ -3165,14 +3165,24 @@ window.BALGURUM_SUPABASE = {
   }
 
 
-  /* ---------- Game packs CTA appears shortly after the game row comes into view ---------- */
+  /* ---------- Game packs CTA: shows as soon as the button itself is ~32px inside the viewport (same rule from above or below); resets only when fully off-screen ---------- */
   const hsCta=document.querySelector('.hs-cta');
   if(hsCta){
-    if(reduce || !('IntersectionObserver' in window)) hsCta.classList.add('show');
-    else { let tm=null; new IntersectionObserver(es=>es.forEach(e=>{
-      if(e.isIntersecting && !hsCta.classList.contains('show') && !tm) tm=setTimeout(()=>hsCta.classList.add('show'),800);
-      else if(!e.isIntersecting && tm){ clearTimeout(tm); tm=null; }
-    }),{threshold:.35}).observe(document.querySelector('[data-hs] .hs-view')); }
+    const pill=hsCta.querySelector('.pill-cta');
+    if(reduce) hsCta.classList.add('show');
+    else {
+      const IN=32; let raf=0;
+      const check=()=>{ raf=0;
+        const r=hsCta.getBoundingClientRect(); if(!r.height){ hsCta.classList.remove('show'); return; }
+        /* layout box of the button (ignores its own translateY), so the trigger is symmetric */
+        const top=r.top+pill.offsetTop, bot=top+pill.offsetHeight, vh=innerHeight;
+        if(top<vh-IN && bot>IN) hsCta.classList.add('show');
+        else if(bot<=0 || top>=vh) hsCta.classList.remove('show');
+      };
+      const q=()=>{ if(!raf) raf=requestAnimationFrame(check); };
+      addEventListener('scroll',q,{passive:true}); addEventListener('resize',q); addEventListener('hashchange',()=>setTimeout(check,60));
+      check();
+    }
   }
 
   /* ---------- Stat clouds pop in on scroll ---------- */
