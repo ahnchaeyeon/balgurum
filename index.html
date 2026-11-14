@@ -1991,6 +1991,15 @@ html.vh .vd .vd-head>*:nth-child(2){--vi:1}html.vh .vd .vd-head>*:nth-child(3){-
    the screen baked into the kids image shows underneath meanwhile, so nothing jumps */
 .ab-kid-box .ab-scr{visibility:hidden}
 .ab-kid-box.scr-ok .ab-scr{visibility:visible}
+/* How to Play cards: STEP label -> title -> thin rule -> body, one left edge */
+.sg-flow-band .sg-flow li b{display:flex;flex-direction:column;align-items:flex-start;gap:0;line-height:1.3;width:100%;word-break:keep-all}
+.sg-flow-band .sg-flow li b::before{content:"STEP " counter(flow);display:inline-block;width:auto;height:auto;padding:5px 10px;border-radius:6px;background:#ffd864;color:#0b1f45;font-family:var(--f-latin);font-weight:800;font-size:13px;line-height:1.2;letter-spacing:.06em;margin-bottom:22px}
+.sg-flow-band .sg-flow li b::after{content:"";align-self:stretch;height:1px;background:rgba(255,255,255,.16);margin-top:18px}
+.sg-flow-band .sg-flow li{row-gap:18px}
+.sg-flow-band .sg-flow li span:not(.flow-deco){word-break:keep-all}
+/* narrow screens (iPad portrait and below): image on top, text block below in the same order */
+@media (max-width:900px){.sg-flow-band .sg-flow li{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto!important;max-width:640px;margin-inline:auto;width:100%;box-sizing:border-box}.sg-flow-band .sg-flow li>img,.sg-flow-band .sg-flow li>b,.sg-flow-band .sg-flow li>span:not(.flow-deco){grid-row:auto!important;grid-column:1!important}.sg-flow-band .sg-flow li>b{padding-top:12px}}
+@media (max-width:640px){.sg-flow-band .sg-flow li b{padding-top:10px}.sg-flow-band .sg-flow li b::before{margin-bottom:16px}.sg-flow-band .sg-flow li b::after{margin-top:14px}.sg-flow-band .sg-flow li{row-gap:14px}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
