@@ -1639,7 +1639,7 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 .ab-cover .ab-word{display:block!important;text-align:center;white-space:nowrap;letter-spacing:-.035em!important;line-height:1!important;width:auto!important;font-family:"Fredoka","Outfit",sans-serif}
 .ab-cover .ab-word .wd{display:inline-block}
 .ab-cover .ab-word .ch{display:inline-block;vertical-align:top}
-.ab-cover .ab-word .ch>i{line-height:1;padding:0;background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.85) 40%,rgba(255,255,255,.35) 75%,rgba(255,255,255,.05) 100%) 0 var(--gt,0px)/100% calc(var(--gh,100%) + 4px) no-repeat;padding-inline:.12em!important;margin-inline:-.12em;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ab-cover .ab-word .ch>i{line-height:1;padding:0;background:linear-gradient(180deg,rgba(255,255,255,.95) calc(var(--gt,0px) + .15em),rgba(255,255,255,.85) calc((var(--gt,0px) + .15em) + var(--gh,100px) * .4),rgba(255,255,255,.35) calc((var(--gt,0px) + .15em) + var(--gh,100px) * .75),rgba(255,255,255,.05) calc((var(--gt,0px) + .15em) + var(--gh,100px)));padding-inline:.12em!important;margin-inline:-.12em;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .ab-cover .ab-word.jit{text-shadow:none}
 @media (min-width:821px){
   .ab-cover .ab-word{position:absolute!important;left:0;right:0;margin:0!important;z-index:1;grid-area:auto!important}
@@ -1658,6 +1658,7 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 .ab-cover>*{position:relative;z-index:1}
 .ab-cover .ab-stage{z-index:1}
 .ab-cover .ab-word .ch,.ab-cover .ab-word .wd,.ab-cover .ab-word .half{overflow:visible!important;padding:0!important;margin:0!important}
+.ab-cover .ab-word .ch>i{padding:.15em .12em .3em!important;margin:-.15em -.12em -.3em!important}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
