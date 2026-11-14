@@ -3530,7 +3530,7 @@ G.add(cab(1.16,11.07,white));G.add(cab(11.11,15.31,white2));
 const sm=new THREE.Mesh(new THREE.BoxGeometry(6.95,.05,D-.05),seam);sm.position.set(0,11.09,0);G.add(sm);
 /* bezel + screen */
 const bz=slab(rr(6.5,3.7,.22),.06,.03,bez);bz.position.set(0,13.31,FZ);G.add(bz);
-const sc=new THREE.Mesh(new THREE.PlaneGeometry(6.12,3.27),new THREE.MeshBasicMaterial({map:tex('assets/dev3d-screen.jpg')}));sc.position.set(0,13.325,FZ+.095);G.add(sc);
+const sc=new THREE.Mesh(new THREE.PlaneGeometry(6.12,3.27),new THREE.MeshBasicMaterial({map:tex('assets/dev3d-screen.jpg?v=2')}));sc.position.set(0,13.325,FZ+.095);G.add(sc);
 /* pod with real recess */
 const podS=rr(6.03,4.95,.7);const hole=rr(5.85,1.75,.25);hole.curves.forEach(()=>{});const hp=new THREE.Path(hole.getPoints(24).map(p=>new THREE.Vector2(p.x,p.y+1.1)).reverse());podS.holes.push(hp);
 const pod=slab(podS,.3,.07,podM);pod.position.set(0,8.285,FZ);G.add(pod);
