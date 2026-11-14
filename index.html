@@ -1649,6 +1649,14 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 @keyframes devRise{0%{opacity:0;transform:translateY(6%) scale(.97)}100%{opacity:1;transform:none}}
 .ab-dev-turn{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 @media (prefers-reduced-motion:reduce){.ab-dev-still.enter{animation:none}}
+/* Cover depth: soft light layer behind type and objects */
+.ab-cover::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:
+  radial-gradient(ellipse 38% 50% at 50% 45%,rgba(122,160,255,.55) 0%,rgba(100,142,255,.36) 35%,rgba(72,116,246,.16) 65%,rgba(31,79,224,0) 100%),
+  radial-gradient(ellipse 80% 78% at 50% 45%,rgba(18,56,190,0) 50%,rgba(18,56,190,.38) 100%),
+  linear-gradient(180deg,rgba(24,66,204,0) 60%,rgba(24,66,204,.3) 100%)}
+.ab-cover>*{position:relative;z-index:1}
+.ab-cover .ab-stage{z-index:1}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
