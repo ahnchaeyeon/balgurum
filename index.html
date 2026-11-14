@@ -1807,6 +1807,22 @@ footer{position:relative;z-index:3}
 html.rv-on #page-about .rv{opacity:0;transform:translateY(var(--dy,20px));transition:none}
 html.rv-on #page-about .rv.in{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.22,.61,.36,1) var(--d,0s),transform .6s cubic-bezier(.22,.61,.36,1) var(--d,0s)}
 html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
+/* XR Playground readability */
+#page-about .ab-eye{overflow-x:clip}
+#page-about .ab-eye .ab-two.rev{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center}
+#page-about .ab-eye .ab-two>div:last-child{position:relative;max-width:600px;isolation:isolate;word-break:keep-all}
+#page-about .ab-eye .ab-two>div:last-child::before{content:"";position:absolute;inset:-90px -110px;z-index:-1;pointer-events:none;
+ background:radial-gradient(closest-side,rgba(255,255,255,.96) 0%,rgba(255,255,255,.9) 55%,rgba(255,255,255,.55) 78%,rgba(255,255,255,0) 100%)}
+#page-about .ab-eye .sec-title{margin:10px 0 30px}
+#page-about .ab-eye .ab-copy{margin:0;gap:22px;color:#475569;font-size:clamp(18px,1.35vw,19.5px);font-weight:450;line-height:1.6;opacity:1}
+#page-about .ab-eye .ab-copy p{margin:0;color:inherit;opacity:1}
+@media (max-width:900px){
+ #page-about .ab-eye .ab-two.rev{grid-template-columns:1fr;justify-items:center}
+ #page-about .ab-eye .ab-eye-art{max-width:640px!important;width:100%}
+ #page-about .ab-eye .ab-two>div:last-child{max-width:640px;width:100%}
+ #page-about .ab-eye .ab-copy{font-size:18px}
+}
+@media (max-width:600px){#page-about .ab-eye .ab-copy{font-size:17px}#page-about .ab-eye .ab-two>div:last-child::before{inset:-60px -40px}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
