@@ -1953,6 +1953,11 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd-left .vd-tab-n{width:31px!important;height:31px!important;font-size:12.5px!important}
 .vd .vd-num b{font-size:clamp(41px,5.1vw,71px)}
 @media (max-width:820px){.vd-hero .vd-hgrid{min-height:0;grid-template-columns:1fr!important;row-gap:28px}.vd-left{max-width:420px}.vd-left .vd-tab{min-height:50px;white-space:normal}}
+/* experience hero fills the first screen (below the fixed header); wish label fades up before the bubble */
+.vd .vd-hero{min-height:calc(100svh - var(--hh,72px));box-sizing:border-box;display:flex;flex-direction:column}
+.vd .vd-hero .vd-hgrid{flex:1 1 auto;width:100%;box-sizing:border-box;align-content:center}
+.vd .vd-wish.wx .vd-wish-k{opacity:0;transform:translateY(12px);transition:opacity .45s ease-out,transform .45s ease-out}
+.vd .vd-wish.wx.in .vd-wish-k{opacity:1;transform:none}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3805,11 +3810,14 @@ function lay(){if(pg.hidden)return;const secs=pg.querySelectorAll('.st-sec');con
 addEventListener('resize',lay);addEventListener('hashchange',()=>setTimeout(lay,80));addEventListener('load',lay);if(document.fonts)document.fonts.ready.then(lay);
 if('ResizeObserver' in window)new ResizeObserver(lay).observe(pg);lay();})();</script>
 <script>(()=>{const bs=[...document.querySelectorAll('.vd .vd-bubble')];if(!bs.length||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
-bs.forEach(b=>b.classList.add('bx'));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.6){e.target.classList.add('go');io.unobserve(e.target)}}),{threshold:[0,.6,1]});
-/* once per visit of a detail page: re-arm when a value page is (re)opened */
-function arm(){bs.forEach(b=>{const pg=b.closest('.page');if(pg&&!pg.hidden){b.classList.remove('go');io.unobserve(b);void b.offsetWidth;io.observe(b)}})}
-addEventListener('hashchange',()=>setTimeout(arm,30));arm();})();</script>
+/* wish label + bubble: play when the section scrolls into view, reset once it is fully out of view (replays on return) */
+const secs=bs.map(b=>b.closest('.vd-wish'));
+bs.forEach(b=>b.classList.add('bx'));secs.forEach(s=>s&&s.classList.add('wx'));
+const timers=new Map();
+const on=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||e.intersectionRatio<.5)return;const s=e.target,b=s.querySelector('.vd-bubble');if(s.classList.contains('in'))return;
+ s.classList.add('in');clearTimeout(timers.get(s));timers.set(s,setTimeout(()=>b.classList.add('go'),180))}),{threshold:[0,.5,1]});
+const off=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)return;const s=e.target;clearTimeout(timers.get(s));s.classList.remove('in');s.querySelector('.vd-bubble').classList.remove('go')}),{threshold:0,rootMargin:'0px 0px -60px 0px'});
+secs.forEach(s=>{if(s){on.observe(s);off.observe(s)}});})();</script>
 <script>(()=>{const pages=[...document.querySelectorAll('.page.vd')];if(!pages.length)return;
 function fit(){pages.forEach(pg=>{if(pg.hidden)return;const lead=pg.querySelector('.vd-lead');if(!lead)return;lead.style.minHeight='';
  const hh=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hh'))||(document.querySelector('.site-header')||{offsetHeight:0}).offsetHeight;
@@ -3820,7 +3828,6 @@ let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,40)};
 addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,60));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
 <script>(()=>{/* experience menu: plain buttons; keep scroll position across experience switches and fade the title in */
 let prev=null;
-document.querySelectorAll('.vd .vd-left .vd-tab').forEach(a=>a.addEventListener('click',()=>{window.__vdKeep=scrollY}));
 addEventListener('hashchange',()=>{const v=/^#value-/.test(location.hash);if(v&&prev&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const h=document.querySelector('.page.vd:not([hidden]) .vd-head');if(h){h.classList.remove('swap');void h.offsetWidth;h.classList.add('swap')}}prev=v?location.hash:null});
 prev=/^#value-/.test(location.hash)?location.hash:null;})();</script>
 <script>(()=>{const R=16/9;
