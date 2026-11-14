@@ -1856,6 +1856,12 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd .vd-flow .vd-ptext h3{color:var(--c,#1f4fe0)}
 .vd .vd-flow .vd-ptext p:not(.vd-pk){color:#1e2a4a}
 @media (max-width:760px){.vd .vd-flow .vd-panel{grid-template-columns:1fr!important}}
+/* brand story: closing blue section - soft centre glow + large background wordmark (glow -> word -> content) */
+#page-story{position:relative;overflow-x:clip}
+#page-story .st-close{position:absolute;left:0;right:0;bottom:0;top:var(--st-end-top,auto);height:var(--st-end-h,0);z-index:0;pointer-events:none;overflow:hidden}
+#page-story .st-close-glow{position:absolute;inset:0;background:radial-gradient(ellipse 62% 48% at 50% var(--st-end-cy,50%),rgba(72,118,255,.42) 0%,rgba(62,108,250,.24) 38%,rgba(46,92,236,.08) 62%,rgba(31,79,224,0) 80%)}
+#page-story .st-close-word{position:absolute;left:50%;bottom:-.04em;translate:-50% 0;font-family:var(--f-latin);font-weight:800;font-size:clamp(88px,19.5vw,360px);line-height:1;letter-spacing:-.02em;white-space:nowrap;color:#fff;opacity:.08;user-select:none}
+#page-story .st-body{position:relative;z-index:1}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2648,6 +2654,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ STORY ============ -->
 <div class="page" id="page-story" data-page="story" hidden>
 <h1 class="sr-only">브랜드 스토리</h1>
+<div class="st-close" aria-hidden="true"><div class="st-close-glow"></div><span class="st-close-word">BALGURUM</span></div>
 <div class="st-body"><div class="st-trail" aria-hidden="true"></div>
 <section class="st-sec st-l"><p class="st-k">01 · 팀 코끼리</p><h2>네 명의 대학생이 함께 만든, 움직이는 놀이</h2><p>발구름은 상명대학교 AI미디어콘텐츠학과 학생 네 명이 함께 만든 산학협력 졸업 프로젝트입니다.</p><p>박예원, 안채연, 곽진주, 박세미. 우리는 ‘팀 코끼리’라는 이름으로 모여, 협력기관 코드리치와 함께 유아를 위한 XR 놀이를 기획했습니다.</p><p>우리에게 이 프로젝트는 수업에서 배운 것을 하나의 결과물로 완성하는 일이자, 우리가 만든 콘텐츠를 누가 어떻게 경험할지 구체적으로 고민하는 과정이었습니다. 화면 속에서 보기 좋은 콘텐츠를 넘어, 아이가 직접 참여하며 즐거움을 느낄 수 있는 놀이를 만들고 싶었습니다.</p></section>
 <section class="st-sec st-r"><p class="st-k">02 · 시작의 질문</p><h2 class="st-qh">아이들이 놀고 싶어서 움직이게 할 수 있을까?<svg class="st-qm" viewBox="0 0 88 72" aria-hidden="true"><path d="M4 0h32v30c0 20-9 34-27 42l-6-10c9-5 14-12 15-20H4z"/><path d="M52 0h32v30c0 20-9 34-27 42l-6-10c9-5 14-12 15-20H52z"/></svg></h2><p>발구름의 출발점에는 이 질문이 있었습니다.</p><p>아이들에게 몸을 움직이는 시간은 주변을 탐색하고, 새로운 행동을 해보고, 친구와 어울리는 시간이기도 합니다. 하지만 날씨나 사용할 수 있는 공간에 따라 마음껏 뛰어놀기 어려운 순간도 있습니다.</p><p>우리는 실내에서도 아이들이 즐겁게 움직일 수 있는 방법을 고민했습니다. 운동의 필요성을 설명하는 것만으로는 아이의 관심을 붙잡기 어렵다고 생각했습니다. 대신 아이가 궁금해할 상황, 도와주고 싶은 친구, 직접 해결해보고 싶은 일이 있다면 움직임이 자연스럽게 시작될 수 있다고 보았습니다.</p><p>그렇게 ‘해야 하는 운동’을 전달하는 대신, ‘참여하고 싶은 놀이’를 만드는 방향으로 프로젝트를 시작했습니다.</p></section>
@@ -3692,6 +3699,14 @@ const set=b=>{const k=b.clientWidth/1200;b.style.setProperty('--ks',k.toFixed(6)
  const src=pick(k*320*(devicePixelRatio||1)*1.5);if(!im.getAttribute('src').endsWith(src.slice(7)))im.setAttribute('src',src)};
 if('ResizeObserver' in window){const ro=new ResizeObserver(es=>es.forEach(e=>set(e.target)));boxes.forEach(b=>ro.observe(b))}else{const f=()=>boxes.forEach(set);addEventListener('resize',f);f()}
 boxes.forEach(set);})();</script>
+<script>(()=>{const pg=document.getElementById('page-story'),end=pg&&pg.querySelector('.st-close');if(!end)return;
+function lay(){if(pg.hidden)return;const secs=pg.querySelectorAll('.st-sec');const last=secs[secs.length-1];if(!last)return;
+ const pr=pg.getBoundingClientRect(),lr=last.getBoundingClientRect();
+ const top=Math.max(0,lr.top-pr.top-innerHeight*.35),h=pr.height-top;
+ end.style.setProperty('--st-end-top',top+'px');end.style.setProperty('--st-end-h',h+'px');
+ end.style.setProperty('--st-end-cy',(((lr.top+lr.height/2)-pr.top-top)/h*100).toFixed(1)+'%')}
+addEventListener('resize',lay);addEventListener('hashchange',()=>setTimeout(lay,80));addEventListener('load',lay);if(document.fonts)document.fonts.ready.then(lay);
+if('ResizeObserver' in window)new ResizeObserver(lay).observe(pg);lay();})();</script>
 
 
 
