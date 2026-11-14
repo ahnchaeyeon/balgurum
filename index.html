@@ -3006,6 +3006,7 @@ window.BALGURUM_SUPABASE = {
   const iLogo = intro.querySelector('.intro-logo'), iSole = intro.querySelector('.intro-logo .sole'), iWord = intro.querySelector('.intro-word');
   const iLast = iWord.querySelector('span:last-child');
   const rmIntro = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const footMask = new Image(); footMask.src = 'assets/foot-mask.png';
   let introEnding = false, introAnims = [], introRaf = 0;
   function replayHero(){ document.querySelectorAll('.page:not([hidden])').forEach(p=>{ p.hidden=true; void p.offsetWidth; p.hidden=false; }); }
   // visible gap between BI ink bottom and glyph tops (desktop 24 / mobile 18)
@@ -3024,7 +3025,7 @@ window.BALGURUM_SUPABASE = {
   function finishIntro(){
     cancelAnimationFrame(introRaf);
     introAnims.forEach(a=>a.cancel()); introAnims=[];
-    intro.style.removeProperty('mask-image'); intro.style.removeProperty('-webkit-mask-image');
+    ['mask-image','-webkit-mask-image','mask-size','-webkit-mask-size','mask-position','-webkit-mask-position','mask-repeat','-webkit-mask-repeat','mask-composite','-webkit-mask-composite'].forEach(k=>intro.style.removeProperty(k));
     root.classList.add('no-intro'); root.classList.remove('intro-hold');
     replayHero();
     window.dispatchEvent(new Event('balgurum:intro-end'));
@@ -3038,30 +3039,36 @@ window.BALGURUM_SUPABASE = {
     if(introEnding || root.classList.contains('no-intro')) return;
     introEnding = true;
     if(instant){ finishIntro(); return; }
-    await whenCoverReady();
+    await Promise.all([whenCoverReady(), footMask.decode ? footMask.decode().catch(()=>{}) : null]);
     if(rmIntro){ introAnims.push(intro.animate([{opacity:1},{opacity:0}],{duration:250,easing:'ease-out',fill:'forwards'})); setTimeout(finishIntro,260); return; }
     const b = iSole.getBoundingClientRect(), cx = b.left+b.width/2, cy = b.top+b.height/2;
     const R = Math.hypot(Math.max(cx, innerWidth-cx), Math.max(cy, innerHeight-cy)) + 2;
     const lr = iLogo.getBoundingClientRect();
     iLogo.style.transformOrigin = `${cx-lr.left}px ${cy-lr.top}px`;
-    introAnims.push(iWord.animate([{opacity:1},{opacity:0}],{duration:150,easing:'ease-out',fill:'forwards'}));
-    introAnims.push(iLogo.animate([{transform:'scale(1)',opacity:1},{transform:'scale(1.08)',opacity:0}],{duration:420,delay:60,easing:'cubic-bezier(.3,0,.2,1)',fill:'forwards'}));
-    const DUR = 820, DELAY = 90;
+    introAnims.push(iWord.animate([{opacity:1},{opacity:0}],{duration:110,easing:'ease-out',fill:'forwards'}));
+    introAnims.push(iLogo.animate([{transform:'scale(1)',opacity:1},{transform:'scale(1.08)',opacity:0}],{duration:260,delay:30,easing:'cubic-bezier(.3,0,.2,1)',fill:'forwards'}));
+    const DUR = 460, DELAY = 50;
     ['.site-header','main'].forEach(sel=>{ const el=document.querySelector(sel); if(!el) return; const r=el.getBoundingClientRect();
       introAnims.push(el.animate([{transform:'scale(1.04)',transformOrigin:`${cx-r.left}px ${cy-r.top}px`},{transform:'scale(1)',transformOrigin:`${cx-r.left}px ${cy-r.top}px`}],{duration:DELAY+DUR,easing:'cubic-bezier(.2,.6,.2,1)',fill:'forwards'})); });
+    // footprint-shaped window: anchor = centre of the sole's largest inscribed circle (0.496,0.481), radius 0.374*width
+    const AX=.496, AY=.481, IR=.374, RATIO=1.4925, WMAX = R/IR*1.03;
+    const ist = intro.style;
+    ist.setProperty('-webkit-mask-image','url(assets/foot-mask.png), linear-gradient(#000,#000)'); ist.setProperty('mask-image','url(assets/foot-mask.png), linear-gradient(#000,#000)');
+    ist.setProperty('-webkit-mask-repeat','no-repeat'); ist.setProperty('mask-repeat','no-repeat');
+    ist.setProperty('-webkit-mask-composite','xor'); ist.setProperty('mask-composite','exclude');
+    const setW = w => { const h=w*RATIO, pos=`${(cx-w*AX).toFixed(1)}px ${(cy-h*AY).toFixed(1)}px, 0 0`, sz=`${w.toFixed(1)}px ${h.toFixed(1)}px, 100% 100%`;
+      ist.setProperty('-webkit-mask-size',sz); ist.setProperty('mask-size',sz); ist.setProperty('-webkit-mask-position',pos); ist.setProperty('mask-position',pos); };
+    setW(0);
     const t0 = performance.now();
-    const setR = r => { const v=`radial-gradient(circle at ${cx}px ${cy}px, transparent ${r}px, #000 ${r+1.5}px)`; intro.style.setProperty('-webkit-mask-image',v); intro.style.setProperty('mask-image',v); };
-    setR(0);
     (function step(now){
       const p = Math.min(1, Math.max(0, (now-t0-DELAY)/DUR));
-      const e = p<1 ? Math.pow(p,2.2) : 1;               // smooth acceleration
-      setR(R*e);
+      setW(WMAX * (p<1 ? Math.pow(p,2.2) : 1));
       if(p<1) introRaf = requestAnimationFrame(step); else finishIntro();
     })(t0);
   }
   function startIntro(){
     cancelAnimationFrame(introRaf); introAnims.forEach(a=>a.cancel()); introAnims=[];
-    intro.style.removeProperty('mask-image'); intro.style.removeProperty('-webkit-mask-image'); iLogo.style.transformOrigin='';
+    ['mask-image','-webkit-mask-image','mask-size','-webkit-mask-size','mask-position','-webkit-mask-position'].forEach(k=>intro.style.removeProperty(k)); iLogo.style.transformOrigin='';
     introEnding = false;
     root.classList.add('intro-hold'); root.classList.remove('no-intro');
     window.dispatchEvent(new Event('balgurum:intro-start'));
