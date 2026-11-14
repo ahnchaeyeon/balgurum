@@ -1826,6 +1826,13 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 /* XR Playground: lead-in subtitle for the three items */
 #page-about section.ab-how-band{padding-top:clamp(24px,4vw,56px)}
 #page-about .ab-how-sub{text-align:center;font-size:clamp(21px,2vw,27px);font-weight:800;color:var(--ink);line-height:1.35;letter-spacing:-.01em;margin:0 auto clamp(36px,4.5vw,56px);word-break:keep-all;text-wrap:balance}
+/* XR Playground: image sized to the full text height (JS sets the image column width) */
+#page-about .ab-eye .wrap.ab-two{max-width:1280px;column-gap:clamp(40px,4.4vw,72px)}
+#page-about .ab-eye .ab-two.rev.fit{grid-template-columns:var(--iw) minmax(0,1fr)}
+#page-about .ab-eye .ab-two.rev.fit .ab-eye-art{width:var(--iw)}
+#page-about .ab-eye .ab-two.rev.one{grid-template-columns:1fr;justify-items:center;row-gap:clamp(32px,4vw,48px)}
+#page-about .ab-eye .ab-two.rev.one .ab-eye-art{max-width:640px!important;width:100%}
+#page-about .ab-eye .ab-two.rev.one>div:last-child{max-width:640px;width:100%}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3627,6 +3634,18 @@ const enter=new IntersectionObserver(es=>{let k=0;es.forEach(e=>{const t=e.targe
   requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('in')))})},{rootMargin:'-6% 0px -10% 0px',threshold:.12});
 const leave=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)e.target.classList.remove('in')}),{threshold:0});
 els.forEach(e=>{enter.observe(e);leave.observe(e)});
+})();</script>
+<script>(()=>{const g=document.querySelector('#page-about .ab-eye .ab-two.rev');if(!g)return;
+const art=g.querySelector('.ab-eye-art'),img=art&&art.querySelector('img'),txt=g.querySelector(':scope>div:last-child');if(!img||!txt)return;
+const R=(img.naturalWidth&&img.naturalHeight)?img.naturalWidth/img.naturalHeight:1400/788;
+function fit(){g.classList.remove('fit','one');g.style.removeProperty('--iw');
+ if(innerWidth<=900||g.offsetParent===null)return;
+ const cs=getComputedStyle(g),avail=g.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),gap=parseFloat(cs.columnGap)||0;
+ let iw=avail*.5;g.classList.add('fit');
+ for(let i=0;i<8;i++){g.style.setProperty('--iw',iw+'px');const h=txt.getBoundingClientRect().height,n=h*R;if(Math.abs(n-iw)<.5)break;iw=n}
+ if(avail-gap-iw<420){g.classList.remove('fit');g.style.removeProperty('--iw');g.classList.add('one')}}
+let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,60)};
+addEventListener('resize',run);addEventListener('hashchange',run);addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);img.complete?fit():img.addEventListener('load',fit);
 })();</script>
 
 
