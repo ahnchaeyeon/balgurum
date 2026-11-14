@@ -1728,6 +1728,18 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 .ab-name-c .ab-name-cols .ab-copy{text-align:left;max-width:none}
 .ab-name-cols h3{font-size:clamp(18px,1.6vw,21px);font-weight:800;color:var(--ink);margin-bottom:2px}
 @media (max-width:760px){.ab-name-cols{grid-template-columns:1fr}}
+/* about: soft sky graphic tone + scroll parallax */
+#page-about{position:relative;isolation:isolate;background:linear-gradient(180deg,#f7faff 0%,#f1f6ff 45%,#f5f9ff 100%)}
+#page-about>section:not(.ab-cover),#page-about .band,#page-about .sky,#page-about .ab-eye,#page-about .vx{background:transparent!important}
+#page-about>section{position:relative;z-index:1}
+.ab-deco{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.ab-deco .ad{position:absolute;left:var(--x);top:var(--y);width:var(--s);aspect-ratio:1;border-radius:50%;will-change:transform;transform:translate3d(0,var(--ty,0px),0) rotate(calc(var(--r,0) * 1deg + var(--rot,0deg)))}
+.ab-deco .ad-orb{background:radial-gradient(circle at 40% 40%,rgba(150,190,255,.38) 0%,rgba(170,202,255,.22) 38%,rgba(200,222,255,0) 70%);filter:blur(10px)}
+.ab-deco .ad-arc{background:radial-gradient(circle at 50% 50%,rgba(214,230,255,0) 58%,rgba(196,218,255,.42) 66%,rgba(214,230,255,.18) 72%,rgba(232,241,255,0) 76%);filter:blur(2px)}
+.ab-deco .ad-ball{background:radial-gradient(circle at 34% 30%,#e4eeff 0%,#a9c6ff 34%,#6f9dff 72%,#5a8cff 100%);box-shadow:0 12px 30px rgba(90,140,255,.22);opacity:.75}
+.ab-deco .ad-ball.sm{opacity:.6}
+.ab-how img{mix-blend-mode:multiply}
+@media (max-width:760px){.ab-deco .ad-orb{width:calc(var(--s) * 1.8)}.ab-deco .ad-arc{width:calc(var(--s) * 1.7)}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1798,6 +1810,20 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <main>
 <!-- ============ ABOUT ============ -->
 <div class="page" id="page-about" data-page="about">
+<div class="ab-deco" aria-hidden="true">
+  <span class="ad ad-orb"   style="--x:78%;--y:2%;--s:46vw;--sp:-.10"></span>
+  <span class="ad ad-arc"   style="--x:58%;--y:9%;--s:70vw;--sp:.06;--r:8"></span>
+  <span class="ad ad-ball"  style="--x:3%;--y:15%;--s:clamp(44px,4.6vw,80px);--sp:-.22"></span>
+  <span class="ad ad-orb"   style="--x:-18%;--y:24%;--s:40vw;--sp:.08"></span>
+  <span class="ad ad-arc"   style="--x:-30%;--y:33%;--s:62vw;--sp:-.05;--r:-10"></span>
+  <span class="ad ad-ball sm" style="--x:90%;--y:31%;--s:clamp(24px,2.4vw,40px);--sp:-.3"></span>
+  <span class="ad ad-orb"   style="--x:70%;--y:46%;--s:44vw;--sp:-.08"></span>
+  <span class="ad ad-arc"   style="--x:50%;--y:57%;--s:66vw;--sp:.07;--r:12"></span>
+  <span class="ad ad-ball"  style="--x:6%;--y:60%;--s:clamp(36px,3.6vw,64px);--sp:-.2"></span>
+  <span class="ad ad-orb"   style="--x:-14%;--y:72%;--s:42vw;--sp:.1"></span>
+  <span class="ad ad-ball sm" style="--x:88%;--y:78%;--s:clamp(22px,2vw,36px);--sp:-.26"></span>
+  <span class="ad ad-arc"   style="--x:60%;--y:86%;--s:60vw;--sp:-.06;--r:-8"></span>
+</div>
   <section class="ab-cover" aria-labelledby="ab-title" data-k="0">
     <div class="ab-stage">
       <p class="ab-tag" aria-label="Move. Play. Grow."><span style="--i:0" class="on">MOVE.</span><span style="--i:1">PLAY.</span><span style="--i:2">GROW.</span></p>
@@ -3422,6 +3448,11 @@ cov.classList.add('has-3d');addEventListener('resize',size);pose(1);size();
 })();
 </script>
 <script>(function(){function f(){var h=document.querySelector('.site-header');if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px')}f();addEventListener('resize',f);addEventListener('load',f)})();</script>
+<script>(()=>{const pg=document.getElementById('page-about'),els=[...document.querySelectorAll('.ab-deco .ad')];if(!pg||!els.length)return;
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+let raf=0;function upd(){raf=0;if(pg.hidden)return;const top=pg.getBoundingClientRect().top+scrollY,y=scrollY-top,vh=innerHeight;
+ els.forEach(e=>{const sp=+e.style.getPropertyValue('--sp')||0;e.style.setProperty('--ty',(y*sp).toFixed(1)+'px');if(e.classList.contains('ad-arc'))e.style.setProperty('--rot',(y*sp*.04).toFixed(2)+'deg')})}
+addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true});addEventListener('resize',upd);addEventListener('hashchange',()=>setTimeout(upd,50));upd();})();</script>
 
 
 
