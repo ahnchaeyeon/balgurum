@@ -1882,6 +1882,32 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 /* experience detail: centred lead; hero + bubble + lead fill the first screen so STEP starts on the next scroll */
 .vd .vd-lead{max-width:760px!important;text-align:center;justify-items:center;align-content:start;gap:18px;line-height:1.75;word-break:keep-all;text-wrap:pretty;box-sizing:border-box;padding-bottom:clamp(96px,22vh,200px)!important}
 .vd .vd-lead p{margin:0;text-wrap:pretty}
+/* experience hero: left arc menu (wheel) + right current-experience title */
+.vd-hero .vd-hgrid{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);column-gap:clamp(40px,6vw,110px);align-items:center}
+.vd-left{display:flex;flex-direction:column;gap:6px;min-width:0}
+.vd-left .vd-back{align-self:flex-start}
+.vd-left .vd-tabs{grid-template-columns:1fr}
+.vd .vd-head{padding-block:0;max-width:640px}
+/* wheel mode (JS) */
+.vd-left nav.is-wheel{position:relative;height:var(--wh,470px);margin-left:-8px}
+.vd-left nav.is-wheel .vd-tabs{display:block;margin:0;height:100%;position:relative}
+.vd-left nav.is-wheel li{position:static}
+.vd-left nav.is-wheel .vd-tab{position:absolute;left:0;top:0;display:flex;align-items:center;gap:12px;height:auto;padding:8px 10px;border:0;border-radius:12px;background:none!important;box-shadow:none!important;color:#fff;white-space:nowrap;transform-origin:0 50%;will-change:transform;opacity:.55;font-size:16px;font-weight:700;pointer-events:auto;transition:opacity .3s,font-size .3s}
+.vd-left nav.is-wheel .vd-tab:hover{opacity:.85}
+.vd-left nav.is-wheel .vd-tab[aria-current]{opacity:1;font-size:21px;font-weight:900;color:#fff}
+.vd-left nav.is-wheel .vd-tab-n{width:auto;height:auto;background:none;color:inherit;font-size:13px;letter-spacing:.06em;opacity:.85}
+.vd-left nav.is-wheel .vd-tab[aria-current] .vd-tab-n{background:#fff;color:var(--c);border-radius:999px;padding:3px 9px;opacity:1}
+.vd-left nav.is-wheel .vd-tab:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.vd-left nav.is-wheel .vd-tick{position:absolute;left:0;top:0;width:10px;height:2px;border-radius:2px;background:rgba(255,255,255,.35);transform-origin:0 50%;pointer-events:none}
+.vd-left nav.is-wheel .vd-tick.mj{width:16px;background:rgba(255,255,255,.6)}
+.vd-head.swap{animation:vdHeadIn .35s ease-out both}
+@keyframes vdHeadIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+@media (max-width:820px){
+ .vd-hero .vd-hgrid{grid-template-columns:1fr;row-gap:8px}
+ .vd-left nav.is-wheel{--wh:330px}
+ .vd-left nav.is-wheel .vd-tab{font-size:14px}.vd-left nav.is-wheel .vd-tab[aria-current]{font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){.vd-head.swap{animation:none}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2095,9 +2121,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 01 ============ -->
 <div class="page vd" id="page-value-1" data-page="value-1" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
-    <div class="wrap">
-      <a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
-      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav>
+    <div class="wrap vd-hgrid">
+      <div class="vd-left"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
+      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav></div>
       <div class="vd-head">
         <p class="vd-num"><span>EXPERIENCE</span><b>01</b></p>
         <h1>스스로 시작하는 즐거움</h1>
@@ -2131,9 +2157,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 02 ============ -->
 <div class="page vd" id="page-value-2" data-page="value-2" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
-    <div class="wrap">
-      <a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
-      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav>
+    <div class="wrap vd-hgrid">
+      <div class="vd-left"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
+      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav></div>
       <div class="vd-head">
         <p class="vd-num"><span>EXPERIENCE</span><b>02</b></p>
         <h1>내 움직임이 만드는 변화</h1>
@@ -2167,9 +2193,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 03 ============ -->
 <div class="page vd" id="page-value-3" data-page="value-3" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
-    <div class="wrap">
-      <a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
-      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav>
+    <div class="wrap vd-hgrid">
+      <div class="vd-left"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
+      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav></div>
       <div class="vd-head">
         <p class="vd-num"><span>EXPERIENCE</span><b>03</b></p>
         <h1>함께해서 커지는 재미</h1>
@@ -2206,9 +2232,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 04 ============ -->
 <div class="page vd" id="page-value-4" data-page="value-4" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
-    <div class="wrap">
-      <a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
-      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav>
+    <div class="wrap vd-hgrid">
+      <div class="vd-left"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a>
+      <nav aria-label="네 가지 경험"><ul class="vd-tabs"><li><a class="vd-tab" href="#value-1" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">01</span><span class="vd-tab-t">스스로 시작하는 즐거움</span></a></li><li><a class="vd-tab" href="#value-2" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">02</span><span class="vd-tab-t">내 움직임이 만드는 변화</span></a></li><li><a class="vd-tab" href="#value-3" style="--c:#1f4fe0;--d:#1338b0"><span class="vd-tab-n">03</span><span class="vd-tab-t">함께해서 커지는 재미</span></a></li><li><a class="vd-tab" href="#value-4" style="--c:#1f4fe0;--d:#1338b0" aria-current="page"><span class="vd-tab-n">04</span><span class="vd-tab-t">다시 해보고 싶은 놀이</span></a></li></ul></nav></div>
       <div class="vd-head">
         <p class="vd-num"><span>EXPERIENCE</span><b>04</b></p>
         <h1>다시 해보고 싶은 놀이</h1>
@@ -3741,6 +3767,36 @@ function fit(){pages.forEach(pg=>{if(pg.hidden)return;const lead=pg.querySelecto
  if(need>lead.offsetHeight)lead.style.minHeight=need+'px'})}
 let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,40)};
 addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,60));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
+<script>(()=>{const navs=[...document.querySelectorAll('.vd .vd-left nav')];if(!navs.length)return;
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let shown=null;                          /* value currently drawn (float index), shared so a page switch continues the turn */
+const W=navs.map(nav=>{nav.classList.add('is-wheel');const links=[...nav.querySelectorAll('.vd-tab')];
+ const sel=links.findIndex(a=>a.hasAttribute('aria-current'));
+ const ticks=[];for(let i=0;i<41;i++){const t=document.createElement('i');t.className='vd-tick'+(i%4===0?' mj':'');nav.appendChild(t);ticks.push(t)}
+ links.forEach((a,i)=>a.addEventListener('keydown',e=>{const d=e.key==='ArrowDown'||e.key==='ArrowRight'?1:e.key==='ArrowUp'||e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();const j=Math.max(0,Math.min(links.length-1,i+d));links[j].focus();links[j].click()}));
+ return {nav,links,sel,ticks,page:nav.closest('.page'),raf:0}});
+function geo(w){const mob=innerWidth<=820,H=w.nav.clientHeight||(mob?330:470);const R=mob?300:440,step=mob?10:9.5;return {H,R,step,cx:12+R,cy:H/2}}
+function draw(w,v){const g=geo(w),D=Math.PI/180;
+ w.links.forEach((a,i)=>{const ph=(i-v)*g.step,x=g.cx-g.R*Math.cos(ph*D),y=g.cy+g.R*Math.sin(ph*D);
+  a.style.transform=`translate(${x.toFixed(1)}px,${(y-a.offsetHeight/2).toFixed(1)}px) rotate(${(-ph*.7).toFixed(2)}deg)`});
+ const base=-(v*g.step)%2.5;
+ w.ticks.forEach((t,k)=>{const ph=base+(k-20)*2.5,r=g.R+34,x=g.cx-r*Math.cos(ph*D),y=g.cy+r*Math.sin(ph*D);const f=Math.max(0,1-Math.abs(ph)/52);
+  t.style.transform=`translate(${(x-(t.classList.contains('mj')?16:10)).toFixed(1)}px,${(y-1).toFixed(1)}px) rotate(${(-ph).toFixed(2)}deg)`;t.style.opacity=f.toFixed(2)})}
+function show(w){const from=shown==null?w.sel:shown,to=w.sel;cancelAnimationFrame(w.raf);
+ if(rm||from===to){shown=to;draw(w,to);return}
+ const t0=performance.now(),dur=Math.min(1100,520+Math.abs(to-from)*170),ease=t=>1-Math.pow(1-t,4);
+ (function f(n){const t=Math.min(1,(n-t0)/dur),v=from+(to-from)*ease(t);shown=v;draw(w,v);if(t<1)w.raf=requestAnimationFrame(f)})(t0)}
+function cur(){return W.find(w=>w.page&&!w.page.hidden)}
+function onRoute(){const w=cur();W.forEach(x=>{if(x!==w)cancelAnimationFrame(x.raf)});if(!w){return}
+ const h=w.page.querySelector('.vd-head');if(h&&shown!=null&&!rm){h.classList.remove('swap');void h.offsetWidth;h.classList.add('swap')}
+ show(w)}
+addEventListener('hashchange',()=>requestAnimationFrame(onRoute));
+addEventListener('resize',()=>{const w=cur();if(w)draw(w,shown==null?w.sel:shown)});
+if(document.fonts)document.fonts.ready.then(()=>{const w=cur();if(w)draw(w,shown==null?w.sel:shown)});
+W.forEach(w=>draw(w,w.sel));requestAnimationFrame(onRoute);
+/* leaving the experience pages resets the shared position */
+addEventListener('hashchange',()=>{if(!/^#value-/.test(location.hash))shown=null});
+})();</script>
 
 
 
