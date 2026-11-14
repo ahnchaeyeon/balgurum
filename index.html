@@ -1595,12 +1595,12 @@ html[data-route="story"] footer p,html[data-route="story"] footer a{color:rgba(2
 /* Story v4 */
 .st-first::after{content:none!important}
 .st-qh{position:relative;padding-right:clamp(70px,7vw,110px)}
-.st-qm{position:absolute;right:0;top:-.15em;width:clamp(52px,5vw,82px);height:auto;fill:#2f62ff}
+.st-qm{position:absolute;right:0;top:-.15em;width:clamp(52px,5vw,82px);height:auto;fill:currentColor}
 .st-sec{max-width:min(560px,48%)}
 @media (max-width:820px){.st-qh{padding-right:56px}.st-qm{width:44px}}
 #page-story .st-body{gap:clamp(90px,11vw,170px)!important}
 /* Story: white -> BI blue all the way into the footer */
-#page-story{background:linear-gradient(180deg,#fff 0%,#fff 22%,#e3eafd 44%,#9fb7f5 58%,#4a74ea 70%,#1f4fe0 80%,#1f4fe0 100%)!important}
+#page-story{background:linear-gradient(180deg,#fff 0%,#fff 55%,#e8eefd 68%,#a9bff6 78%,#4f78eb 86%,#1f4fe0 92%,#1f4fe0 100%)!important}
 .st-sec.dark .st-k{color:#ffd84a}.st-sec.dark p b{color:#ffd84a}
 .st-sec.dark .st-names{color:#fff!important}.st-sec.dark .st-names i{color:rgba(255,255,255,.6)}
 .st-sec.dark .st-qm{fill:#fff}
@@ -3143,8 +3143,8 @@ function lay(){if(!body.offsetParent)return;tr.innerHTML='';feet=[];const W=body
  for(let n=0;n<N;n++){const d=Ltot*(n+.5)/N;while(j<len.length-2&&len[j+1]<d)j++;const a=dense[j],b=dense[j+1],f=(d-len[j])/((len[j+1]-len[j])||1),x=a[0]+(b[0]-a[0])*f,y=a[1]+(b[1]-a[1])*f,ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
   const nx=-Math.sin(ang)*sp*side,ny=Math.cos(ang)*sp*side,fx=x+nx,fy=y+ny,hw=mob?9:22;if(rects.some(q=>fx+hw>q[0]&&fx-hw<q[2]&&fy+hw>q[1]&&fy-hw<q[3])){side*=-1;continue}const im=document.createElement('span');im.className='st-foot';im.style.left=(x+nx)+'px';im.style.top=(y+ny)+'px';
   im.style.setProperty('--r',(ang*180/Math.PI+90)+'deg');im.style.setProperty('--sx',side>0?-1:1);tr.appendChild(im);feet.push([y+ny,im]);
-  {const t=fy/body.scrollHeight,ST=[[0,[196,213,248]],[.45,[90,130,235]],[.6,[31,79,224]],[.68,[200,215,255]],[.8,[255,255,255]],[1,[255,255,255]]];let k=0;while(k<ST.length-2&&ST[k+1][0]<t)k++;const[a0,c0]=ST[k],[a1,c1]=ST[k+1],f=Math.max(0,Math.min(1,(t-a0)/(a1-a0)));im.style.background=`rgb(${c0.map((v,i)=>Math.round(v+(c1[i]-v)*f))})`}side*=-1}
- {const pg=document.getElementById('page-story'),PH=pg.scrollHeight,pt=pg.getBoundingClientRect().top;secs.forEach(sc=>{const r=sc.getBoundingClientRect(),c=((r.top+r.bottom)/2-pt)/PH;sc.classList.toggle('dark',c>.66);sc.classList.toggle('mid',c>.5&&c<=.66)})}
+  {const t=fy/body.scrollHeight,ST=[[0,[196,213,248]],[.6,[90,130,235]],[.83,[31,79,224]],[.87,[200,215,255]],[.91,[255,255,255]],[1,[255,255,255]]];let k=0;while(k<ST.length-2&&ST[k+1][0]<t)k++;const[a0,c0]=ST[k],[a1,c1]=ST[k+1],f=Math.max(0,Math.min(1,(t-a0)/(a1-a0)));im.style.background=`rgb(${c0.map((v,i)=>Math.round(v+(c1[i]-v)*f))})`}side*=-1}
+ {const pg=document.getElementById('page-story'),PH=pg.scrollHeight,pt=pg.getBoundingClientRect().top;secs.forEach(sc=>{const r=sc.getBoundingClientRect(),c=((r.top+r.bottom)/2-pt)/PH;sc.classList.toggle('dark',c>.86);sc.classList.toggle('mid',c>.74&&c<=.86)})}
  tick()}
 function tick(){if(!feet.length)return;const br=body.getBoundingClientRect(),lim=innerHeight*.55-br.top;let n=0;for(const[y,im]of feet){if(y<lim){if(!im.classList.contains('on')){setTimeout(()=>im.classList.add('on'),n*260);n++}}else im.classList.remove('on')}}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
