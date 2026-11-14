@@ -1982,6 +1982,11 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .hs-key-stack>.hs-gap{margin-top:.32em}
 .hs-key .hs-w{display:inline-block}.hs-key .hs-w+.hs-w{margin-inline-start:.32em}
 @media (max-width:760px){.hs-key{font-size:min(35px,calc((100cqh - 40px) / 6.2))}}
+/* experience hero title: EXPERIENCE+number -> title -> subtitle fade up (space kept; menu/back/background not delayed) */
+html.vh .vd .vd-head>*{opacity:0;transform:translateY(20px)}
+html.vh .vd .vd-head.vh-in>*{animation:vhUp 1s cubic-bezier(.22,.61,.36,1) both;animation-delay:calc(.35s + var(--vi,0) * .12s)}
+html.vh .vd .vd-head>*:nth-child(2){--vi:1}html.vh .vd .vd-head>*:nth-child(3){--vi:2}
+@keyframes vhUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2027,6 +2032,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
 
 <script>
+(function(){var h=document.documentElement;try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('vh')}catch(e){}})();
 (function(){var h=document.documentElement;try{if(sessionStorage.getItem('balgurum-intro')){h.classList.add('no-intro')}else{h.classList.add('intro-hold');sessionStorage.setItem('balgurum-intro','1')}}catch(e){}})();
 </script>
 <div class="intro" id="intro">
@@ -3869,10 +3875,15 @@ function fit(){pages.forEach(pg=>{if(pg.hidden)return;const lead=pg.querySelecto
  if(need>lead.offsetHeight)lead.style.minHeight=need+'px'})}
 let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,40)};
 addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,60));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
-<script>(()=>{/* experience menu: plain buttons; keep scroll position across experience switches and fade the title in */
-let prev=null;
-addEventListener('hashchange',()=>{const v=/^#value-/.test(location.hash);if(v&&prev&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const h=document.querySelector('.page.vd:not([hidden]) .vd-head');if(h){h.classList.remove('swap');void h.offsetWidth;h.classList.add('swap')}}prev=v?location.hash:null});
-prev=/^#value-/.test(location.hash)?location.hash:null;})();</script>
+<script>(()=>{/* experience hero title: plays once each time an experience page is shown (first visit or menu switch), after the router has swapped the page and jumped to top */
+const root=document.documentElement;if(!root.classList.contains('vh'))return;
+let raf1=0,raf2=0;
+function play(){cancelAnimationFrame(raf1);cancelAnimationFrame(raf2);
+ document.querySelectorAll('.vd .vd-head.vh-in').forEach(h=>h.classList.remove('vh-in'));   // stop any previous run
+ if(!/^#value-/.test(location.hash))return;
+ /* wait two frames: the router has unhidden the page and scrolled to top, and that state has been painted */
+ raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>{const h=document.querySelector('.page.vd:not([hidden]) .vd-head');if(h){void h.offsetWidth;h.classList.add('vh-in')}})})}
+addEventListener('hashchange',play);play();})();</script>
 <script>(()=>{const R=16/9;
 /* STEP rows share ONE column grid per page: image width --iw is computed once for the whole list
    (smallest width whose 16:9 image is at least as tall as the tallest description), so every row has the same edges.
