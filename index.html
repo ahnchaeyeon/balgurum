@@ -1946,6 +1946,13 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd-left .vd-tab[aria-current] .vd-tab-n{background:var(--c,#1f4fe0)!important;color:#fff!important}
 .vd-left .vd-tab:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media (max-width:820px){.vd-hero .vd-hgrid{grid-template-columns:1fr!important;row-gap:28px}.vd-left{max-width:520px}.vd .vd-hero{padding-bottom:88px!important}.vd-left .vd-tab{min-height:58px;font-size:16px}}
+/* experience hero: smaller menu buttons (80%), same hero height */
+.vd-hero .vd-hgrid{grid-template-columns:minmax(0,320px) minmax(0,1fr)!important;column-gap:clamp(56px,5.5vw,76px)!important;min-height:310px}
+.vd-left .vd-tabs{gap:12px!important}
+.vd-left .vd-tab{min-height:53px;padding:8px 16px!important;border-radius:17px!important;grid-template-columns:31px minmax(0,1fr)!important;column-gap:13px!important;white-space:nowrap}
+.vd-left .vd-tab-n{width:31px!important;height:31px!important;font-size:12.5px!important}
+.vd .vd-num b{font-size:clamp(41px,5.1vw,71px)}
+@media (max-width:820px){.vd-hero .vd-hgrid{min-height:0;grid-template-columns:1fr!important;row-gap:28px}.vd-left{max-width:420px}.vd-left .vd-tab{min-height:50px;white-space:normal}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
