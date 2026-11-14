@@ -1863,19 +1863,18 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 #page-story .st-body{position:relative;z-index:1}
 /* wish bubble: a small round blue shape opens sideways into the bubble (JS adds .bx only when motion is allowed) */
 .vd .vd-bubble.bx{background:transparent;box-shadow:none;isolation:isolate}
-.vd .vd-bubble.bx::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c);border-radius:40px;box-shadow:0 8px 0 var(--d)}
 .vd .vd-bubble.bx:not(.go){color:transparent}
-.vd .vd-bubble.bx:not(.go)::before{inset:calc(50% - 26px) calc(50% - 26px);border-radius:26px;opacity:0;box-shadow:0 0 0 var(--d)}
+.vd .vd-bubble.bx:not(.go)::before{inset:calc(50% - 18px) calc(50% - 18px);opacity:0}
 .vd .vd-bubble.bx:not(.go)::after{opacity:0;transform:scaleX(0)}
-.vd .vd-bubble.bx::after{transform-origin:0 50%}
+.vd .vd-bubble.bx::after{transform-origin:0 0}
 .vd .vd-bubble.bx.go::before{animation:bxBody 1.05s both}
 .vd .vd-bubble.bx.go::after{animation:bxTail .38s cubic-bezier(.25,.8,.3,1) .56s both}
 .vd .vd-bubble.bx.go{animation:bxText .3s ease-out .62s both}
 @keyframes bxBody{
- 0%{inset:calc(50% - 18px) calc(50% - 18px);border-radius:18px;opacity:0;box-shadow:0 0 0 var(--d);animation-timing-function:cubic-bezier(.3,.7,.4,1)}
- 14%{inset:calc(50% - 34px) calc(50% - 34px);border-radius:34px;opacity:1;box-shadow:0 4px 0 var(--d);animation-timing-function:cubic-bezier(.45,.05,.25,1)}
- 62%{inset:0 -1.4%;border-radius:40px;box-shadow:0 8px 0 var(--d);animation-timing-function:cubic-bezier(.3,0,.25,1)}
- 100%{inset:0 0;border-radius:40px;opacity:1;box-shadow:0 8px 0 var(--d)}}
+ 0%{inset:calc(50% - 18px) calc(50% - 18px);opacity:0;animation-timing-function:cubic-bezier(.3,.7,.4,1)}
+ 14%{inset:calc(50% - 34px) calc(50% - 34px);opacity:1;animation-timing-function:cubic-bezier(.45,.05,.25,1)}
+ 62%{inset:0 -1.4%;animation-timing-function:cubic-bezier(.3,0,.25,1)}
+ 100%{inset:0 0;opacity:1}}
 @keyframes bxTail{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:none}}
 @keyframes bxText{from{color:transparent}to{color:#fff}}
 /* experience detail: centred lead; hero + bubble + lead fill the first screen so STEP starts on the next scroll */
@@ -1925,6 +1924,12 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd .vd-lead p.vd-desc{font-size:clamp(16px,1.2vw,18px);font-weight:400;line-height:1.7;color:#3f4c66}
 .vd .vd-lead p{word-break:keep-all;text-wrap:pretty}
 @media (max-width:760px){.vd .vd-lead br.pc{display:none}}
+/* wish bubble: capsule body + curved lower-right tail, one continuous subtle BI-blue gradient (no base slab / shadow) */
+.vd .vd-bubble{--bg:linear-gradient(135deg,#3b68f7 0%,#2f5df0 40%,#2555e6 72%,#1f4fe0 100%);background:transparent!important;box-shadow:none!important;border-radius:0;isolation:isolate;position:relative;padding-inline:clamp(30px,3.4vw,52px)!important}
+.vd .vd-bubble::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:999px;background:var(--bg) 0 0/var(--gw,100%) var(--gh,100%) no-repeat;box-shadow:none}
+.vd .vd-bubble::after{content:"";position:absolute;z-index:-1;border:0!important;display:block!important;right:auto;bottom:auto;width:var(--tw,44px);height:var(--tw,44px);left:var(--tl,calc(100% - 40px));top:var(--tt,calc(100% - 40px));
+ background:var(--bg) calc(var(--tl,0px) * -1) calc(var(--tt,0px) * -1)/var(--gw,100%) var(--gh,100%) no-repeat;
+ -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 0H60C58 40 70 75 100 96C78 102 50 98 28 86L0 70Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 0H60C58 40 70 75 100 96C78 102 50 98 28 86L0 70Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3858,6 +3863,12 @@ function fit(){document.querySelectorAll('.page.vd:not([hidden]) .vd-flow').forE
  if(ps.some(p=>p.classList.contains('one')))ps.forEach(p=>{p.classList.remove('fit');p.style.removeProperty('--iw');p.classList.add('one')})})}
 let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,50)};
 addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,80));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
+<script>(()=>{const bs=[...document.querySelectorAll('.vd .vd-bubble')];if(!bs.length)return;
+/* one gradient across body + tail: both layers are sized to the bubble */
+const set=b=>{const w=b.offsetWidth,h=b.offsetHeight,tw=Math.round(h*.42);
+ b.style.setProperty('--tw',tw+'px');b.style.setProperty('--tl',Math.round(w-h*.38)+'px');b.style.setProperty('--tt',Math.round(h-tw*.95)+'px');
+ b.style.setProperty('--gw',(w+tw)+'px');b.style.setProperty('--gh',(h+tw)+'px')};
+if('ResizeObserver' in window){const ro=new ResizeObserver(es=>es.forEach(e=>set(e.target)));bs.forEach(b=>ro.observe(b))}addEventListener('resize',()=>bs.forEach(set));bs.forEach(set);})();</script>
 
 
 
