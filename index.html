@@ -1659,6 +1659,14 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 .ab-cover .ab-stage{z-index:1}
 .ab-cover .ab-word .ch,.ab-cover .ab-word .wd,.ab-cover .ab-word .half{overflow:visible!important;padding:0!important;margin:0!important}
 .ab-cover .ab-word .ch>i{padding:.15em .12em .3em!important;margin:-.15em -.12em -.3em!important}
+/* Wide header: content edges = cover wordmark edges */
+:root{--edge:max(16px,4vw,calc((100vw - 1760px) / 2))}
+.site-header .wrap.nav{max-width:none;padding-left:max(var(--edge),env(safe-area-inset-left,0px));padding-right:max(var(--edge),env(safe-area-inset-right,0px))}
+@media (min-width:821px){
+  .ab-cover .ab-stage{max-width:none!important}
+  .ab-cover .ab-tag,.ab-cover .ab-head{left:calc(var(--edge) - max(16px,env(safe-area-inset-left,0px)))!important}
+  .ab-cover .ab-desc{right:calc(var(--edge) - max(16px,env(safe-area-inset-right,0px)))!important}
+}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
