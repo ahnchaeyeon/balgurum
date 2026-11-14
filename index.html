@@ -1973,6 +1973,13 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 @media (max-width:520px){.pk-stats li{padding:8% 6% 13%}.pk-stats .pk-ico{width:34px;height:34px;margin-bottom:2px}}
 @media (max-width:380px){.pk-stats li{padding:7% 3% 10%}.pk-stats small{font-size:10px}}
 @media (max-width:340px){.pk-stats li{padding:4% 3% 9%}.pk-stats .pk-ico{width:28px;height:28px;margin-bottom:1px}.pk-stats b{font-size:20px}.pk-stats li span{line-height:1.25}.pk-stats li:last-child{padding-bottom:3%}}
+/* game card keyword: ~27% smaller, sized by card width and capped by card height so the longest word fits */
+.hs-card{container-type:size}
+.hs-key{font-size:min(clamp(36px,5.1vw,70px),calc((100cqh - 40px) / 6));text-orientation:upright;white-space:nowrap;letter-spacing:.02em;right:clamp(14px,2cqw,22px);top:clamp(14px,3.4cqh,22px)}
+/* upright Latin letters get a 1.4em vertical advance in this font; tighten them to match the Hangul rhythm */
+.hs-key-en{letter-spacing:-.38em;margin-inline-end:.38em}
+.hs-key .hs-w{display:inline-block}.hs-key .hs-w+.hs-w{margin-inline-start:.32em}
+@media (max-width:760px){.hs-key{font-size:min(38px,calc((100cqh - 32px) / 6))}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2518,49 +2525,49 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           </div>
           <article class="hs-card">
             <img src="assets/hs-1.jpg" alt="태엽새 레이스 플레이 화면">
-            <span class="hs-key" aria-hidden="true">날려라</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w">비행</span><span class="hs-w">거리</span></span>
             <div class="hs-top"><span class="g-no">GAME 01</span><span class="tag">개인전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-1.webp" alt="태엽새 레이스"></h3></div>
           </article>
           <article class="hs-card">
             <img src="assets/hs-2.jpg" alt="샌드위치 공장 플레이 화면">
-            <span class="hs-key" aria-hidden="true">포장</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w hs-key-en">BPM</span><span class="hs-w">리듬</span></span>
             <div class="hs-top"><span class="g-no">GAME 02</span><span class="tag">개인전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-2.webp" alt="샌드위치 공장"></h3></div>
           </article>
           <article class="hs-card">
             <img src="assets/hs-3.jpg" alt="알쏭달쏭 코인볼 플레이 화면">
-            <span class="hs-key" aria-hidden="true">정답</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w">숫자</span><span class="hs-w">연산</span></span>
             <div class="hs-top"><span class="g-no">GAME 03</span><span class="tag">개인전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-3.webp" alt="알쏭달쏭 코인볼"></h3></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-4.jpg" alt="운동 낚시왕 플레이 화면">
-            <span class="hs-key" aria-hidden="true">낚시</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w">게이지</span><span class="hs-w">충전</span></span>
             <div class="hs-top"><span class="g-no">GAME 04</span><span class="tag">개인전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-4.webp" alt="운동 낚시왕"></h3></div>
           </article>
           <article class="hs-card">
             <img src="assets/hs-5.jpg" alt="쿵쿵 떡방아 플레이 화면">
-            <span class="hs-key" aria-hidden="true">쿵쿵</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w">리듬</span><span class="hs-w">협동</span></span>
             <div class="hs-top"><span class="g-no">GAME 05</span><span class="tag coop">협동전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-5.webp" alt="쿵쿵 떡방아"></h3></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-6.jpg" alt="탈출 대추격전 플레이 화면">
-            <span class="hs-key" aria-hidden="true">탈출</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w">거리</span><span class="hs-w">경쟁</span></span>
             <div class="hs-top"><span class="g-no">GAME 06</span><span class="tag coop">협동전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-6.webp" alt="탈출 대추격전"></h3></div>
           </article>
           <article class="hs-card">
             <img src="assets/play-7.jpg" alt="리듬 피겨 점프 플레이 화면">
-            <span class="hs-key" aria-hidden="true">점프</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w">리듬</span><span class="hs-w">액션</span></span>
             <div class="hs-top"><span class="g-no">GAME 07</span><span class="tag">개인전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-7.webp" alt="리듬 피겨 점프!"></h3></div>
           </article>
           <article class="hs-card">
             <img src="assets/hs-8.jpg" alt="눈사람 탈출 작전 플레이 화면">
-            <span class="hs-key" aria-hidden="true">깨기</span>
+            <span class="hs-key" aria-hidden="true"><span class="hs-w">구간</span><span class="hs-w">돌파</span></span>
             <div class="hs-top"><span class="g-no">GAME 08</span><span class="tag">개인전</span></div>
             <div class="hs-cap"><h3 class="hs-logo"><img src="assets/logo-game-8.webp" alt="눈사람 탈출 작전"></h3></div>
           </article>
