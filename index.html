@@ -1823,6 +1823,9 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
  #page-about .ab-eye .ab-copy{font-size:18px}
 }
 @media (max-width:600px){#page-about .ab-eye .ab-copy{font-size:17px}#page-about .ab-eye .ab-two>div:last-child::before{inset:-60px -40px}}
+/* XR Playground: lead-in subtitle for the three items */
+#page-about section.ab-how-band{padding-top:clamp(24px,4vw,56px)}
+#page-about .ab-how-sub{text-align:center;font-size:clamp(21px,2vw,27px);font-weight:800;color:var(--ink);line-height:1.35;letter-spacing:-.01em;margin:0 auto clamp(36px,4.5vw,56px);word-break:keep-all;text-wrap:balance}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1961,6 +1964,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 
   <section class="band ab-how-band">
     <div class="wrap">
+      <h3 class="ab-how-sub">이렇게 참여하고, 함께 즐겨요.</h3>
       <ul class="ab-how">
         <li><img src="assets/step-1.png" alt="" width="440" height="270" loading="lazy"><span class="num">01</span><h3>움직임으로 조작해요.</h3><p>별도의 컨트롤러 없이 발을 구르고, 뛰고, 옆으로 움직이며 게임을 진행합니다.</p></li>
         <li><img src="assets/step-2.png" alt="" width="410" height="270" loading="lazy"><span class="num">02</span><h3>게임에 맞춰 운동을 선택해요.</h3><p>게임마다 제시되는 운동 중 하나를 선택하고, 플레이 시간과 참여 인원을 설정할 수 있습니다.</p></li>
@@ -3613,7 +3617,7 @@ const btns=[...pg.querySelectorAll('#ab-values .vx-btn')];
 btns.forEach(b=>b.addEventListener('click',()=>{const was=b.classList.contains('is-sel');btns.forEach(x=>{x.classList.remove('is-sel');x.removeAttribute('aria-current')});if(!was){b.classList.add('is-sel');b.setAttribute('aria-current','true')}}));
 /* scroll reveal: re-plays every time a block re-enters, from below when scrolling down, from above when scrolling up */
 if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
-const sel=['.ab-intro .ab-two>div:first-child','.ab-intro .ab-copy','.ab-eye .ab-eye-art','.ab-eye .ab-two>div:last-child','.ab-how li','#ab-values .vx-head','#ab-values .vx-list li','.ab-name-c>.eyebrow','.ab-name-c>.sec-title','.ab-name-cols>.ab-copy','.band.tight>.wrap>.sec-title','.feature>div:first-child','.feature>.img'];
+const sel=['.ab-intro .ab-two>div:first-child','.ab-intro .ab-copy','.ab-eye .ab-eye-art','.ab-eye .ab-two>div:last-child','.ab-how-sub','.ab-how li','#ab-values .vx-head','#ab-values .vx-list li','.ab-name-c>.eyebrow','.ab-name-c>.sec-title','.ab-name-cols>.ab-copy','.band.tight>.wrap>.sec-title','.feature>div:first-child','.feature>.img'];
 const els=[];sel.forEach(q=>pg.querySelectorAll(q).forEach(e=>{if(!els.includes(e)&&!els.some(p=>p.contains(e)||e.contains(p)))els.push(e)}));
 if(!els.length)return;
 let lastY=scrollY,dir=1;addEventListener('scroll',()=>{const y=scrollY;if(y!==lastY){dir=y>lastY?1:-1;lastY=y}},{passive:true});
