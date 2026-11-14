@@ -3006,7 +3006,7 @@ window.BALGURUM_SUPABASE = {
   const iLogo = intro.querySelector('.intro-logo'), iSole = intro.querySelector('.intro-logo .sole'), iWord = intro.querySelector('.intro-word');
   const iLast = iWord.querySelector('span:last-child');
   const rmIntro = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const footMask = new Image(); footMask.src = 'assets/foot-mask.png';
+  const footMask = new Image(); footMask.src = 'assets/bi-mask.svg';
   let introEnding = false, introAnims = [], introRaf = 0;
   function replayHero(){ document.querySelectorAll('.page:not([hidden])').forEach(p=>{ p.hidden=true; void p.offsetWidth; p.hidden=false; }); }
   // visible gap between BI ink bottom and glyph tops (desktop 24 / mobile 18)
@@ -3026,6 +3026,7 @@ window.BALGURUM_SUPABASE = {
     cancelAnimationFrame(introRaf);
     introAnims.forEach(a=>a.cancel()); introAnims=[];
     ['mask-image','-webkit-mask-image','mask-size','-webkit-mask-size','mask-position','-webkit-mask-position','mask-repeat','-webkit-mask-repeat','mask-composite','-webkit-mask-composite'].forEach(k=>intro.style.removeProperty(k));
+    iLogo.style.visibility='';
     root.classList.add('no-intro'); root.classList.remove('intro-hold');
     replayHero();
     window.dispatchEvent(new Event('balgurum:intro-end'));
@@ -3041,34 +3042,33 @@ window.BALGURUM_SUPABASE = {
     if(instant){ finishIntro(); return; }
     await Promise.all([whenCoverReady(), footMask.decode ? footMask.decode().catch(()=>{}) : null]);
     if(rmIntro){ introAnims.push(intro.animate([{opacity:1},{opacity:0}],{duration:250,easing:'ease-out',fill:'forwards'})); setTimeout(finishIntro,260); return; }
-    const b = iSole.getBoundingClientRect(), cx = b.left+b.width/2, cy = b.top+b.height/2;
-    const R = Math.hypot(Math.max(cx, innerWidth-cx), Math.max(cy, innerHeight-cy)) + 2;
-    const lr = iLogo.getBoundingClientRect();
-    iLogo.style.transformOrigin = `${cx-lr.left}px ${cy-lr.top}px`;
+    const lr = iLogo.getBoundingClientRect(), lx = lr.left, ly = lr.top, lw = lr.width, lh = lr.height;
+    const AX=.776, AY=.717, IR=.157;                    // largest inscribed circle of the BI sole (fraction of logo box)
+    const ax = lx+lw*AX, ay = ly+lh*AY;
+    const R = Math.hypot(Math.max(ax, innerWidth-ax), Math.max(ay, innerHeight-ay)) + 2;
     introAnims.push(iWord.animate([{opacity:1},{opacity:0}],{duration:110,easing:'ease-out',fill:'forwards'}));
-    introAnims.push(iLogo.animate([{transform:'scale(1)',opacity:1},{transform:'scale(1.08)',opacity:0}],{duration:260,delay:30,easing:'cubic-bezier(.3,0,.2,1)',fill:'forwards'}));
-    const DUR = 460, DELAY = 50;
+    const DUR = 480, DELAY = 60;
     ['.site-header','main'].forEach(sel=>{ const el=document.querySelector(sel); if(!el) return; const r=el.getBoundingClientRect();
-      introAnims.push(el.animate([{transform:'scale(1.04)',transformOrigin:`${cx-r.left}px ${cy-r.top}px`},{transform:'scale(1)',transformOrigin:`${cx-r.left}px ${cy-r.top}px`}],{duration:DELAY+DUR,easing:'cubic-bezier(.2,.6,.2,1)',fill:'forwards'})); });
-    // footprint-shaped window: anchor = centre of the sole's largest inscribed circle (0.496,0.481), radius 0.374*width
-    const AX=.496, AY=.481, IR=.374, RATIO=1.4925, WMAX = R/IR*1.03;
+      introAnims.push(el.animate([{transform:'scale(1.04)',transformOrigin:`${ax-r.left}px ${ay-r.top}px`},{transform:'scale(1)',transformOrigin:`${ax-r.left}px ${ay-r.top}px`}],{duration:DELAY+DUR,easing:'cubic-bezier(.2,.6,.2,1)',fill:'forwards'})); });
+    // window = the BI's own footprint (sole minus toes), starting exactly on top of the logo and growing
     const ist = intro.style;
-    ist.setProperty('-webkit-mask-image','url(assets/foot-mask.png), linear-gradient(#000,#000)'); ist.setProperty('mask-image','url(assets/foot-mask.png), linear-gradient(#000,#000)');
+    ist.setProperty('-webkit-mask-image','url(assets/bi-mask.svg), linear-gradient(#000,#000)'); ist.setProperty('mask-image','url(assets/bi-mask.svg), linear-gradient(#000,#000)');
     ist.setProperty('-webkit-mask-repeat','no-repeat'); ist.setProperty('mask-repeat','no-repeat');
     ist.setProperty('-webkit-mask-composite','xor'); ist.setProperty('mask-composite','exclude');
-    const setW = w => { const h=w*RATIO, pos=`${(cx-w*AX).toFixed(1)}px ${(cy-h*AY).toFixed(1)}px, 0 0`, sz=`${w.toFixed(1)}px ${h.toFixed(1)}px, 100% 100%`;
+    const setW = sc => { const w=lw*sc, h=lh*sc, pos=`${(ax-(ax-lx)*sc).toFixed(1)}px ${(ay-(ay-ly)*sc).toFixed(1)}px, 0 0`, sz=`${w.toFixed(1)}px ${h.toFixed(1)}px, 100% 100%`;
       ist.setProperty('-webkit-mask-size',sz); ist.setProperty('mask-size',sz); ist.setProperty('-webkit-mask-position',pos); ist.setProperty('mask-position',pos); };
-    setW(0);
-    const t0 = performance.now();
+    const SMAX = R/(IR*lw)*1.03;
+    let opened = false;    const t0 = performance.now();
     (function step(now){
       const p = Math.min(1, Math.max(0, (now-t0-DELAY)/DUR));
-      setW(WMAX * (p<1 ? Math.pow(p,2.2) : 1));
+      if(!opened && now-t0>=DELAY){ opened=true; setW(1); iLogo.style.visibility='hidden'; }
+      if(opened) setW(1 + (SMAX-1) * (p<1 ? Math.pow(p,2.2) : 1));
       if(p<1) introRaf = requestAnimationFrame(step); else finishIntro();
     })(t0);
   }
   function startIntro(){
     cancelAnimationFrame(introRaf); introAnims.forEach(a=>a.cancel()); introAnims=[];
-    ['mask-image','-webkit-mask-image','mask-size','-webkit-mask-size','mask-position','-webkit-mask-position'].forEach(k=>intro.style.removeProperty(k)); iLogo.style.transformOrigin='';
+    ['mask-image','-webkit-mask-image','mask-size','-webkit-mask-size','mask-position','-webkit-mask-position'].forEach(k=>intro.style.removeProperty(k)); iLogo.style.transformOrigin=''; iLogo.style.visibility='';
     introEnding = false;
     root.classList.add('intro-hold'); root.classList.remove('no-intro');
     window.dispatchEvent(new Event('balgurum:intro-start'));
