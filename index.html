@@ -1667,6 +1667,10 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
   .ab-cover .ab-tag,.ab-cover .ab-head{left:calc(var(--edge) - max(16px,env(safe-area-inset-left,0px)))!important}
   .ab-cover .ab-desc{right:calc(var(--edge) - max(16px,env(safe-area-inset-right,0px)))!important}
 }
+/* 3D device canvas: 200% x 120% of the PNG box, bottom-aligned */
+.ab-dev3d{position:absolute;left:-50%;bottom:0;width:200%;height:120%;pointer-events:none;visibility:hidden;opacity:0}
+.ab-cover.has-3d .ab-dev-still{visibility:hidden}
+.ab-cover .ab-device img.ab-dev-still{filter:none}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -1743,7 +1747,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <p class="ab-tag" aria-label="Move. Play. Grow."><span style="--i:0" class="on">MOVE.</span><span style="--i:1">PLAY.</span><span style="--i:2">GROW.</span></p>
       <div class="ab-glitch" aria-hidden="true"></div>
       <p class="ab-word" aria-hidden="true" data-words="MOVE|PLAY|GROW"></p>
-      <div class="ab-device"><img class="ab-dev-still" src="assets/device-cut2.png" alt="발구름 XR 놀이 기기" width="706" height="1531"><!-- 회전 영상 연결 위치: data-src에 55°→-5°→0° 턴테이블 영상(알파 포함 webm/mov)을 넣으면 정지 이미지 대신 재생 --><video class="ab-dev-turn" data-src="" muted playsinline preload="auto" hidden></video></div>
+      <div class="ab-device"><img class="ab-dev-still" src="assets/device-cut2.png" alt="발구름 XR 놀이 기기" width="706" height="1531"><!-- 회전 영상 연결 위치: data-src에 55°→-5°→0° 턴테이블 영상(알파 포함 webm/mov)을 넣으면 정지 이미지 대신 재생 --><video class="ab-dev-turn" data-src="" muted playsinline preload="auto" hidden></video><canvas class="ab-dev3d" aria-hidden="true"></canvas></div>
       <div class="ab-kids" aria-hidden="true"><img class="ab-kid on" data-k="0" src="assets/kids-1.webp" alt="" width="1200" height="800" decoding="async"><img class="ab-kid" data-k="1" src="assets/kids-3.webp" alt="" width="1200" height="800" decoding="async"><img class="ab-kid" data-k="2" src="assets/kids-2.webp" alt="" width="1200" height="800" decoding="async"></div>
       <h1 id="ab-title" class="ab-head"><span class="ab-ln"><span>발을 구르는 순간,</span></span><span class="ab-ln"><span>새로운 놀이가 시작됩니다.</span></span></h1>
       <p class="ab-desc"><span class="ab-ln"><span>아이들의 움직임을 놀이로 잇는</span></span><span class="ab-ln"><span><b>XR 콘텐츠 브랜드</b></span></span></p>
@@ -3177,7 +3181,7 @@ function fit(){const C=cov.getBoundingClientRect(),W=cov.clientWidth,H=C.height-
 addEventListener('resize',()=>fit());
 function reveal(){requestAnimationFrame(()=>el.querySelectorAll('.ch').forEach(c=>{c.classList.remove('pre');c.classList.add('in')}))}
 function setK(n){k=n;const brand=n===3;const was=cov.classList.contains('is-bi');cov.classList.toggle('is-bi',brand);if(brand&&!was)devIn();cov.querySelectorAll('.ab-kid').forEach(im=>{const on=+im.dataset.k===n;if(on&&!im.classList.contains('on')){im.classList.remove('on');void im.offsetWidth}im.classList.toggle('on',on)});tags.forEach((t,i)=>t.classList.toggle('on',!brand&&i===n))}
-function devIn(){const dv=cov.querySelector('.ab-device'),st=dv.querySelector('.ab-dev-still'),vd=dv.querySelector('.ab-dev-turn');if(rm)return;
+function devIn(){const dv=cov.querySelector('.ab-device'),st=dv.querySelector('.ab-dev-still'),vd=dv.querySelector('.ab-dev-turn');if(window.balgurumDev3d){window.balgurumDev3d.play();return}if(rm)return;
  if(vd&&vd.dataset.src){vd.src=vd.dataset.src;vd.hidden=false;st.style.visibility='hidden';vd.currentTime=0;vd.play().catch(()=>{vd.hidden=true;st.style.visibility=''});vd.onended=()=>{st.style.visibility='';vd.hidden=true};return}
  st.classList.remove('enter');void st.offsetWidth;st.classList.add('enter')}
 function fill(){gl.innerHTML=Array.from({length:3},()=>`<div class="${R(3)?'':'o'}" style="transform:translateX(${R(40)-20}%)">${rnd(6+R(3))}</div>`).join('')}
@@ -3231,6 +3235,62 @@ addEventListener('hashchange',()=>setTimeout(lay,120));if(location.hash==='#stor
 function fit(){const lw=parseFloat(getComputedStyle(lg).width),ww=wd.offsetWidth,gap=parseFloat(getComputedStyle(st).getPropertyValue('--gap'))||18;st.style.setProperty('--ls',(-(gap+ww)/2)+'px');st.style.setProperty('--wl',((lw+gap-ww)/2)+'px')}
 fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);addEventListener('hashchange',()=>setTimeout(fit,80));})();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(()=>{const cov=document.querySelector('.ab-cover'),dev=cov&&cov.querySelector('.ab-device'),cvs=dev&&dev.querySelector('.ab-dev3d'),png=dev&&dev.querySelector('.ab-dev-still');
+if(!cvs||typeof THREE==='undefined')return;
+let R;try{R=new THREE.WebGLRenderer({canvas:cvs,alpha:true,antialias:true,premultipliedAlpha:true})}catch(e){return}
+if(!R.getContext())return;
+R.setClearColor(0x000000,0);R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.NoToneMapping;
+const S=new THREE.Scene(),HH=15.31,D=3.5,FZ=D/2,HEAD=1.2,FOV=14;
+const cam=new THREE.PerspectiveCamera(FOV,1,1,400);const dist=(HH*HEAD/2)/Math.tan(FOV*Math.PI/360);
+cam.position.set(0,HH*HEAD/2,FZ+dist);cam.lookAt(0,HH*HEAD/2,FZ);
+S.add(new THREE.HemisphereLight(0xffffff,0xb4c0e0,.42));
+const key=new THREE.DirectionalLight(0xffffff,.5);key.position.set(-10,16,24);S.add(key);
+const fill=new THREE.DirectionalLight(0xffffff,.18);fill.position.set(12,6,10);S.add(fill);
+const back=new THREE.DirectionalLight(0xcfd9ff,.35);back.position.set(4,10,-20);S.add(back);
+const TL=new THREE.TextureLoader();const tex=u=>{const t=TL.load(u,()=>draw());t.encoding=THREE.sRGBEncoding;t.anisotropy=8;return t};
+const M=(c,r=.55,m=0)=>new THREE.MeshStandardMaterial({color:new THREE.Color(c).convertSRGBToLinear(),roughness:r,metalness:m});
+const white=M(0xeeeef4,.5),white2=M(0xe8e8ef,.5),hood=M(0xd9dce2,.7),podM=M(0xf2f2f7,.5),bez=M(0x26282c,.35),blk=M(0x111214,.25),dark=M(0x2a2c31,.55),sil=M(0xb9bec6,.3,.6),seam=M(0xc3c7ce,.6);
+function rr(w,h,r){const s=new THREE.Shape(),x=-w/2,y=-h/2;s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s}
+function slab(shape,depth,bev,mat){const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:bev>0,bevelThickness:bev,bevelSize:bev,bevelSegments:4,curveSegments:12});return new THREE.Mesh(g,mat)}
+const G=new THREE.Group();S.add(G);
+/* body: top plan rounded so the side reads as a thick cabinet */
+function cab(y0,y1,mat){const w=7.06-.12,d=D-.12;const plan=rr(w,d,.32);const g=new THREE.ExtrudeGeometry(plan,{depth:y1-y0-.12,bevelEnabled:true,bevelThickness:.06,bevelSize:.06,bevelSegments:4,curveSegments:12});g.rotateX(-Math.PI/2);g.translate(0,y0+.06,0);return new THREE.Mesh(g,mat)}
+G.add(cab(1.16,11.07,white));G.add(cab(11.11,15.31,white2));
+const sm=new THREE.Mesh(new THREE.BoxGeometry(6.95,.05,D-.05),seam);sm.position.set(0,11.09,0);G.add(sm);
+/* bezel + screen */
+const bz=slab(rr(6.5,3.7,.22),.06,.03,bez);bz.position.set(0,13.31,FZ);G.add(bz);
+const sc=new THREE.Mesh(new THREE.PlaneGeometry(6.12,3.27),new THREE.MeshBasicMaterial({map:tex('assets/dev3d-screen.jpg')}));sc.position.set(0,13.325,FZ+.095);G.add(sc);
+/* pod with real recess */
+const podS=rr(6.03,4.95,.7);const hole=rr(5.85,1.75,.25);hole.curves.forEach(()=>{});const hp=new THREE.Path(hole.getPoints(24).map(p=>new THREE.Vector2(p.x,p.y+1.1)).reverse());podS.holes.push(hp);
+const pod=slab(podS,.3,.07,podM);pod.position.set(0,8.285,FZ);G.add(pod);
+const hw=5.85,hh=1.75,ht=.24;const hb=new THREE.Mesh(new THREE.PlaneGeometry(hw,Math.hypot(hh,ht)),hood);hb.position.set(0,9.385,FZ+.02+ht/2);hb.rotation.x=-Math.atan2(ht,hh);G.add(hb);
+const sn=new THREE.Mesh(new THREE.BoxGeometry(1.7,.48,.08),blk);sn.position.set(0,9.77,FZ+.02+ht*((10.26-9.77)/hh)+.05);sn.rotation.x=hb.rotation.x;G.add(sn);
+const lg=new THREE.Mesh(new THREE.PlaneGeometry(4.84,1.48),new THREE.MeshStandardMaterial({map:tex('assets/dev3d-logo.png'),transparent:true,roughness:.6}));lg.position.set(0,7.39,FZ+.3+.07+.004);G.add(lg);
+const lb=new THREE.Mesh(new THREE.PlaneGeometry(1.34,.42),new THREE.MeshStandardMaterial({map:tex('assets/dev3d-label.png'),transparent:true,roughness:.6}));lb.position.set(0,1.62,FZ+.003);G.add(lb);
+/* base + feet */
+const base=new THREE.Mesh((()=>{const g=new THREE.ExtrudeGeometry(rr(6.98,D-.2,.25),{depth:.98,bevelEnabled:true,bevelThickness:.02,bevelSize:.02,bevelSegments:2,curveSegments:10});g.rotateX(-Math.PI/2);g.translate(0,.17,0);return g})(),dark);G.add(base);
+const fb=new THREE.Mesh(new THREE.BoxGeometry(.84,.42,.2),blk);fb.position.set(0,.37,FZ-.15);G.add(fb);
+[[-2.4,1.1],[2.4,1.1],[-2.4,-1.1],[2.4,-1.1]].forEach(([x,z])=>{const f=new THREE.Mesh(new THREE.CylinderGeometry(.32,.36,.17,20),sil);f.position.set(x,.085,z);G.add(f)});
+/* sizing: canvas = 200% x 120% of the PNG box, bottom-aligned */
+function size(){const r=cvs.getBoundingClientRect();if(!r.width)return;R.setPixelRatio(Math.min(2,devicePixelRatio||1));R.setSize(r.width,r.height,false);cam.aspect=r.width/r.height;cam.updateProjectionMatrix();draw()}
+function draw(){R.render(S,cam)}
+const lerp=(a,b,t)=>a+(b-a)*t,eo=t=>1-Math.pow(1-t,3),eo5=t=>1-Math.pow(1-t,5),eio=t=>-(Math.cos(Math.PI*t)-1)/2;
+function pose(t){let rot,sc,y;
+ if(t<.6){const u=1-Math.pow(1-t/.6,2);rot=lerp(-55,0,u);sc=lerp(.97,1.065,u);y=lerp(-.035,0,u)}
+ else if(t<.8){const u=eio((t-.6)/.2);rot=lerp(0,5,u);sc=lerp(1.065,1.03,u);y=0}
+ else{const u=eo5((t-.8)/.2);rot=lerp(5,0,u);sc=lerp(1.03,1,u);y=0}
+ G.rotation.y=rot*Math.PI/180;G.scale.setScalar(sc);G.position.y=y*HH;cvs.style.opacity=Math.min(1,t/.12);draw()}
+let raf=0;
+window.balgurumDev3d={play(){cancelAnimationFrame(raf);size();png.style.visibility='hidden';cvs.style.visibility='visible';
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){pose(1);return}
+  pose(0);const t0=performance.now(),dur=1800;(function f(n){const t=Math.min(1,(n-t0)/dur);pose(t);if(t<1)raf=requestAnimationFrame(f)})(t0)}};
+cov.classList.add('has-3d');addEventListener('resize',size);pose(1);size();
+})();
+</script>
+
+
 
 
 
