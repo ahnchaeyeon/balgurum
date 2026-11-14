@@ -1731,27 +1731,14 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 /* about: viewport-fixed abstract surfaces, shown after the first intro block; motion is time-based only */
 #page-about{position:relative;isolation:isolate;background:#fff}
 #page-about>section:not(.ab-cover),#page-about .band,#page-about .sky,#page-about .ab-eye,#page-about .vx{background:transparent!important}
-#page-about>section{position:relative;z-index:1}
+#page-about>section{position:relative;z-index:auto}
 #page-about>.ab-cover{z-index:2}
 .ab-bg{position:fixed;left:0;right:0;bottom:0;top:var(--hh,72px);z-index:0;pointer-events:none;overflow:hidden;opacity:0;visibility:hidden;
  transition:opacity 1.1s ease,visibility 0s linear 1.1s;contain:strict;
  -webkit-mask-image:linear-gradient(180deg,transparent var(--cut,100vh),#000 calc(var(--cut,100vh) + 320px));mask-image:linear-gradient(180deg,transparent var(--cut,100vh),#000 calc(var(--cut,100vh) + 320px))}
 .ab-bg.on{opacity:1;visibility:visible;transition:opacity 1.6s cubic-bezier(.33,0,.2,1),visibility 0s}
-.ab-bg .abg{position:absolute;inset:-25%;background:center/100% 100% no-repeat;will-change:transform;animation-play-state:paused}
-.ab-bg.on .abg,.ab-bg.fading .abg{animation-play-state:running}
-.ab-bg .abg-a{background-image:url(assets/about-bg-a.svg);animation:abgA 37s linear infinite}
-.ab-bg .abg-b{background-image:url(assets/about-bg-b.svg);animation:abgB 43s linear infinite}
-.ab-bg .abg-c{background-image:url(assets/about-bg-c.svg);animation:abgC 29s linear infinite}
-/* keep the middle (text column) bright */
-.ab-bg .abg-clear{position:absolute;inset:0;background:radial-gradient(ellipse 46% 58% at 50% 50%,rgba(255,255,255,.72) 0%,rgba(255,255,255,.4) 55%,rgba(255,255,255,0) 100%);animation:abgL 33s ease-in-out infinite}
-/* closed loops (100% = 0%), smooth turns via ease-in-out per segment */
-@keyframes abgA{0%{transform:translate3d(0,0,0) scale(1)}25%{transform:translate3d(-2.2%,1.6%,0) scale(1.03)}50%{transform:translate3d(-3.2%,-1%,0) scale(1.055)}75%{transform:translate3d(-1%,-2.4%,0) scale(1.025)}100%{transform:translate3d(0,0,0) scale(1)}}
-@keyframes abgB{0%{transform:translate3d(0,0,0) scale(1.02)}30%{transform:translate3d(2.8%,-1.4%,0) scale(1.05)}60%{transform:translate3d(1.2%,-3.4%,0) scale(1.03)}85%{transform:translate3d(-.8%,-1.2%,0) scale(1.01)}100%{transform:translate3d(0,0,0) scale(1.02)}}
-@keyframes abgC{0%{transform:translate3d(0,0,0) scale(1.01)}33%{transform:translate3d(-2.4%,-2%,0) scale(1.045)}66%{transform:translate3d(1.4%,-3.2%,0) scale(1.06)}100%{transform:translate3d(0,0,0) scale(1.01)}}
-@keyframes abgL{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.82;transform:scale(1.05)}}
-.ab-bg .abg-a,.ab-bg .abg-b,.ab-bg .abg-c{animation-timing-function:cubic-bezier(.45,0,.55,1)}
-@media (max-width:760px){.ab-bg .abg{inset:-30% -45%}.ab-bg .abg-clear{background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(255,255,255,.7) 0%,rgba(255,255,255,.35) 60%,rgba(255,255,255,0) 100%)}}
-@media (prefers-reduced-motion:reduce){.ab-bg .abg,.ab-bg .abg-clear{animation:none!important}.ab-bg,.ab-bg.on{transition:none}}
+.ab-bg .abg-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+@media (prefers-reduced-motion:reduce){.ab-bg,.ab-bg.on{transition:none}}
 footer{position:relative;z-index:3}
 .ab-how img{mix-blend-mode:multiply}
 /* Game detail dialog */
@@ -1825,10 +1812,33 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ ABOUT ============ -->
 <div class="page" id="page-about" data-page="about">
 <div class="ab-bg" aria-hidden="true">
-  <div class="abg abg-a"></div>
-  <div class="abg abg-b"></div>
-  <div class="abg abg-c"></div>
-  <div class="abg-clear"></div>
+  <svg class="abg-svg" xmlns="http://www.w3.org/2000/svg" focusable="false" preserveAspectRatio="none">
+    <defs>
+      <!-- back blue shade -->
+      <radialGradient id="abg1" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#9daff0" stop-opacity=".46"/><stop offset=".42" stop-color="#b3c3f6" stop-opacity=".34"/><stop offset=".78" stop-color="#d3defc" stop-opacity=".18"/><stop offset="1" stop-color="#e6edfe" stop-opacity=".1"/></radialGradient>
+      <linearGradient id="abg1f" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".22" stop-color="#fff"/><stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <mask id="abg1m" maskUnits="userSpaceOnUse" style="mask-type:luminance"><rect class="abg-full" fill="url(#abg1f)"/></mask>
+      <!-- front translucent membrane: bright face -> ice blue -->
+      <linearGradient id="abg2" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffffff" stop-opacity=".78"/><stop offset=".35" stop-color="#eef3ff" stop-opacity=".62"/><stop offset=".7" stop-color="#d5e1fd" stop-opacity=".46"/><stop offset="1" stop-color="#c3d2fa" stop-opacity=".38"/></linearGradient>
+      <radialGradient id="abg2s" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a7b8f2" stop-opacity=".34"/><stop offset=".6" stop-color="#bfcdf8" stop-opacity=".14"/><stop offset="1" stop-color="#d9e3fd" stop-opacity="0"/></radialGradient>
+      <linearGradient id="abg2f" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".3" stop-color="#fff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+      <mask id="abg2m" maskUnits="userSpaceOnUse" style="mask-type:luminance"><rect class="abg-full" fill="url(#abg2f)"/></mask>
+      <linearGradient id="abg2e" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#bccbf6" stop-opacity="0"/><stop offset=".35" stop-color="#b6c6f5" stop-opacity=".7"/><stop offset=".7" stop-color="#c9d6fa" stop-opacity=".45"/><stop offset="1" stop-color="#d6e0fc" stop-opacity="0"/></linearGradient>
+      <!-- bottom-left sheet -->
+      <radialGradient id="abg3" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a9baf2" stop-opacity=".42"/><stop offset=".5" stop-color="#c4d2f9" stop-opacity=".26"/><stop offset="1" stop-color="#e3eafe" stop-opacity=".06"/></radialGradient>
+      <linearGradient id="abg3f" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".45" stop-color="#fff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+      <mask id="abg3m" maskUnits="userSpaceOnUse" style="mask-type:luminance"><rect class="abg-full" fill="url(#abg3f)"/></mask>
+      <!-- drifting light -->
+      <radialGradient id="abg4" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c5cdf8" stop-opacity=".34"/><stop offset=".55" stop-color="#d8def9" stop-opacity=".14"/><stop offset="1" stop-color="#eef1fd" stop-opacity="0"/></radialGradient>
+      <!-- keep text column bright -->
+      <radialGradient id="abg5" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect class="abg-full" fill="url(#abg4)"/>
+    <path id="abg-p1" fill="url(#abg1)" mask="url(#abg1m)"/>
+    <path id="abg-p3" fill="url(#abg3)" mask="url(#abg3m)"/>
+    <g mask="url(#abg2m)"><path id="abg-p2" fill="url(#abg2)"/><path id="abg-p2s" fill="url(#abg2s)"/><path id="abg-p2e" fill="none" stroke="url(#abg2e)" stroke-width="1.6"/></g>
+    <rect class="abg-full" fill="url(#abg5)"/>
+  </svg>
 </div>
   <section class="ab-cover" aria-labelledby="ab-title" data-k="0">
     <div class="ab-stage">
@@ -3464,6 +3474,57 @@ function upd(){raf=0;if(pg.hidden){set(false);return}const t=gate.getBoundingCli
  bg.style.setProperty('--cut',Math.round(intro.getBoundingClientRect().bottom-bg.getBoundingClientRect().top-160)+'px');
  if(!on&&t<vh*.92)set(true);else if(on&&t>vh*1.04)set(false)}
 addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd)},{passive:true});addEventListener('resize',upd);addEventListener('hashchange',()=>setTimeout(upd,60));addEventListener('load',upd);upd();})();</script>
+<script>(()=>{const bg=document.querySelector('#page-about .ab-bg'),svg=bg&&bg.querySelector('.abg-svg');if(!svg)return;
+const $=id=>document.getElementById(id),P1=$('abg-p1'),P2=$('abg-p2'),P2s=$('abg-p2s'),P2e=$('abg-p2e'),P3=$('abg-p3');
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches,TAU=Math.PI*2;
+let W=0,H=0;
+function size(){W=svg.clientWidth||innerWidth;H=svg.clientHeight||innerHeight;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+ svg.querySelectorAll('.abg-full').forEach(r=>{r.setAttribute('x',-W*.2);r.setAttribute('y',-H*.2);r.setAttribute('width',W*1.4);r.setAttribute('height',H*1.4)})}
+// smooth closed path through points (Catmull-Rom -> cubic Bezier): curvature varies, never a circle
+function path(pts){const n=pts.length;let d=`M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+ for(let i=0;i<n;i++){const p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];
+  d+=`C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`}
+ return d+'Z'}
+function openPath(pts){let d=`M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;const n=pts.length;
+ for(let i=0;i<n-1;i++){const p0=pts[Math.max(i-1,0)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(i+2,n-1)];
+  d+=`C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`}return d}
+const w=(t,P,ph)=>Math.sin(TAU*(t/P+ph));                        // periodic -> seamless loop
+function attrs(el,o){for(const k in o)el.setAttribute(k,typeof o[k]==='number'?o[k].toFixed(1):o[k])}
+function draw(t){const mob=W<760,k=mob?1.25:1;                       // on phones push shapes further out to the edges
+ const X=v=>W*(v>0.5?1-(1-v)/k:v/k), Y=v=>H*v, A=W*.06;               // A ~ 6% of width
+ // 1. back blue shade (right): bulging asymmetric sheet, mostly off-screen
+ const p1=[[1.35,-.3],[.9,-.22],[.74+.0*w(t,17,0),.06],[.66,.30],[.72,.56],[.68,.80],[.80,1.1],[1.35,1.3]].map(([x,y],i)=>[X(x),Y(y)]);
+ p1[2][0]+=A*.9*w(t,17,0);p1[2][1]+=H*.04*w(t,21,.3);p1[3][0]+=A*1.1*w(t,19,.15);p1[3][1]+=H*.05*w(t,15,.6);
+ p1[4][0]+=A*.8*w(t,16,.5);p1[5][0]+=A*1.0*w(t,22,.8);p1[5][1]+=H*.04*w(t,18,.1);
+ P1.setAttribute('d',path(p1));
+ attrs($('abg1'),{cx:X(.93)+A*.9*w(t,19,.25),cy:Y(.46)+H*.08*w(t,16,0),r:Math.max(W,H)*.52});
+ attrs($('abg1f'),{x1:0,y1:Y(-.05),x2:0,y2:Y(1.05)});
+ // 2. front translucent membrane: sweeps from the top down to the right edge, unfolding opposite to the shade
+ const p2=[[.50,-.4],[.56,-.02],[.66,.24],[.82,.42],[1.02,.52],[1.4,.5],[1.45,-.4]].map(([x,y])=>[X(x),Y(y)]);
+ p2[1][0]-=A*.9*w(t,14,.2);p2[2][0]-=A*1.1*w(t,18,.45);p2[2][1]+=H*.05*w(t,14,.7);
+ p2[3][0]-=A*.9*w(t,20,.1);p2[3][1]+=H*.07*w(t,16,.35);p2[4][1]+=H*.08*w(t,18,.9);
+ const d2=path(p2);P2.setAttribute('d',d2);P2s.setAttribute('d',d2);
+ P2e.setAttribute('d',openPath(p2.slice(0,5)));                        // visible curved rim on part of the edge only
+ attrs($('abg2'),{x1:p2[3][0],y1:p2[3][1],x2:X(1.02),y2:Y(-.05)});
+ attrs($('abg2s'),{cx:X(.98)-A*.8*w(t,15,.6),cy:Y(.12)+H*.06*w(t,20,.2),r:Math.max(W,H)*.34});
+ attrs($('abg2e'),{x1:p2[0][0],y1:Y(0),x2:p2[4][0],y2:p2[4][1]});
+ attrs($('abg2f'),{x1:0,y1:Y(-.02),x2:0,y2:Y(.22)});
+ // 3. bottom-left sheet
+ const p3=[[-.4,.52],[-.02,.62],[.16,.78],[.27,.98],[.24,1.3],[-.4,1.35]].map(([x,y])=>[X(x),Y(y)]);
+ p3[1][1]+=H*.05*w(t,16,.4);p3[2][0]+=A*.9*w(t,21,.1);p3[2][1]-=H*.04*w(t,14,.55);p3[3][0]+=A*1.0*w(t,18,.75);
+ P3.setAttribute('d',path(p3));
+ attrs($('abg3'),{cx:X(-.04)+A*.8*w(t,20,.5),cy:Y(1.0)-H*.06*w(t,17,.2),r:Math.max(W,H)*.5});
+ attrs($('abg3f'),{x1:0,y1:Y(.55),x2:0,y2:Y(.82)});
+ // 4. drifting light + bright centre
+ attrs($('abg4'),{cx:X(.78)+A*1.2*w(t,22,0),cy:Y(.78)-H*.08*w(t,19,.4),r:Math.max(W,H)*.45});
+ attrs($('abg5'),{cx:W/2,cy:H*.5,r:Math.max(W*(mob?.75:.42),H*.55),gradientTransform:`translate(${W/2} ${H/2}) scale(${mob?1:1.15} ${mob?1.1:1}) translate(${-W/2} ${-H/2})`});
+}
+size();draw(0);addEventListener('resize',()=>{size();draw(performance.now()/1000)});
+if(rm)return;
+let last=0;(function loop(now){requestAnimationFrame(loop);
+ if(!(bg.classList.contains('on')||bg.classList.contains('fading')))return;   // paused when hidden / off-page
+ if(now-last<33)return;last=now;draw(now/1000)})(0);
+})();</script>
 
 
 

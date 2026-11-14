@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-<defs>
-<radialGradient id="g" cx="1040" cy="1040" r="520" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c0cdf7" stop-opacity=".52"/><stop offset=".6" stop-color="#d6e1fd" stop-opacity=".34"/><stop offset="1" stop-color="#ecf2ff" stop-opacity=".12"/></radialGradient>
-<filter id="b" filterUnits="userSpaceOnUse" x="-200" y="-200" width="1400" height="1400"><feGaussianBlur stdDeviation="8"/></filter>
-</defs>
-<path filter="url(#b)" d="M1060 560 C930 590 830 660 772 760 C730 834 716 930 712 1060 L1060 1060 Z" fill="url(#g)"/>
-</svg>
