@@ -1914,8 +1914,10 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
 .vd .vd-story.wrap{max-width:1280px}
 .vd .vd-flow .vd-ptext{padding:clamp(20px,2.4vw,32px) clamp(24px,2.8vw,40px)!important}
 .vd .vd-flow .vd-panel.fit{grid-template-columns:var(--iw) minmax(0,1fr)!important;align-items:stretch}
-.vd .vd-flow .vd-panel.fit .vd-fig{align-self:stretch}
-.vd .vd-flow .vd-panel.fit .vd-fig img{width:100%;height:100%;object-fit:fill}
+.vd .vd-flow .vd-panel.fit .vd-fig{align-self:start;min-width:0}
+.vd .vd-flow .vd-panel.fit .vd-fig img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
+.vd .vd-flow .vd-panel.fit .vd-ptext{min-width:0}
+.vd .vd-flow.meas .vd-panel.fit .vd-ptext{align-self:start}
 .vd .vd-flow .vd-panel.one{grid-template-columns:1fr!important;max-width:760px;width:100%;margin-inline:auto}
 .vd .vd-flow .vd-fig,.vd .vd-flow .vd-ptext{border-radius:24px}
 /* lead: key message + short supporting paragraph */
@@ -3863,19 +3865,22 @@ let prev=null;
 addEventListener('hashchange',()=>{const v=/^#value-/.test(location.hash);if(v&&prev&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const h=document.querySelector('.page.vd:not([hidden]) .vd-head');if(h){h.classList.remove('swap');void h.offsetWidth;h.classList.add('swap')}}prev=v?location.hash:null});
 prev=/^#value-/.test(location.hash)?location.hash:null;})();</script>
 <script>(()=>{const R=16/9;
-function fitPanel(p){const fig=p.querySelector('.vd-fig'),txt=p.querySelector('.vd-ptext');if(!fig||!txt)return;
- p.classList.remove('fit','one');p.style.removeProperty('--iw');
+/* STEP rows share ONE column grid per page: image width --iw is computed once for the whole list
+   (smallest width whose 16:9 image is at least as tall as the tallest description), so every row has the same edges.
+   If the description column would get narrower than 380px, the whole list switches to one column. */
+function fitFlow(fl){const ps=[...fl.querySelectorAll('.vd-panel')];if(!ps.length)return;
+ ps.forEach(p=>{p.classList.remove('fit','one');p.style.removeProperty('--iw')});fl.style.removeProperty('--iw');
  if(innerWidth<=760)return;
- const cs=getComputedStyle(p),gap=parseFloat(cs.columnGap)||14,avail=p.clientWidth;
- let iw=avail*.55;p.classList.add('fit');
- for(let i=0;i<10;i++){p.style.setProperty('--iw',iw+'px');const h=txt.offsetHeight,n=h*R;if(Math.abs(n-iw)<.5){iw=n;break}iw=n}
- p.style.setProperty('--iw',iw+'px');
- if(avail-gap-iw<380){p.classList.remove('fit');p.style.removeProperty('--iw');p.classList.add('one')}}
-function fit(){document.querySelectorAll('.page.vd:not([hidden]) .vd-flow').forEach(fl=>{const ps=[...fl.querySelectorAll('.vd-panel')];ps.forEach(fitPanel);
- /* keep one layout per page: if any STEP cannot keep both edges aligned in 2 columns, all STEPs use 1 column */
- if(ps.some(p=>p.classList.contains('one')))ps.forEach(p=>{p.classList.remove('fit');p.style.removeProperty('--iw');p.classList.add('one')})})}
+ const p0=ps[0],cs=getComputedStyle(p0),gap=parseFloat(cs.columnGap)||14,avail=p0.clientWidth;
+ fl.classList.add('meas');ps.forEach(p=>p.classList.add('fit'));
+ const txts=ps.map(p=>p.querySelector('.vd-ptext')).filter(Boolean);
+ let iw=avail*.5;
+ for(let i=0;i<14;i++){fl.style.setProperty('--iw',iw+'px');const H=Math.max(...txts.map(t=>t.offsetHeight)),n=H*R;if(Math.abs(n-iw)<.5){iw=n;break}iw=n}
+ iw=Math.ceil(Math.max(iw,avail*.3));fl.style.setProperty('--iw',iw+'px');fl.classList.remove('meas');
+ if(avail-gap-iw<380){ps.forEach(p=>{p.classList.remove('fit');p.classList.add('one')});fl.style.removeProperty('--iw')}}
+function fit(){document.querySelectorAll('.page.vd:not([hidden]) .vd-flow').forEach(fitFlow)}
 let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,50)};
-addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,80));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
+addEventListener('resize',run);addEventListener('orientationchange',run);addEventListener('hashchange',()=>setTimeout(fit,80));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
 <script>(()=>{const bs=[...document.querySelectorAll('.vd .vd-bubble')];if(!bs.length)return;
 /* one gradient across body + tail: both layers are sized to the bubble */
 const set=b=>{const w=b.offsetWidth,h=b.offsetHeight,tw=Math.round(h*.42);
