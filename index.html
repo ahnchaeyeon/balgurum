@@ -1879,6 +1879,9 @@ html.rv-on #page-about .rv:focus-within{opacity:1;transform:none}
  100%{inset:0 0;border-radius:40px;opacity:1;box-shadow:0 8px 0 var(--d)}}
 @keyframes bxTail{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:none}}
 @keyframes bxText{from{color:transparent}to{color:#fff}}
+/* experience detail: centred lead; hero + bubble + lead fill the first screen so STEP starts on the next scroll */
+.vd .vd-lead{max-width:760px!important;text-align:center;justify-items:center;align-content:start;gap:18px;line-height:1.75;word-break:keep-all;text-wrap:pretty;box-sizing:border-box;padding-bottom:clamp(96px,22vh,200px)!important}
+.vd .vd-lead p{margin:0;text-wrap:pretty}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -3730,6 +3733,14 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.inte
 /* once per visit of a detail page: re-arm when a value page is (re)opened */
 function arm(){bs.forEach(b=>{const pg=b.closest('.page');if(pg&&!pg.hidden){b.classList.remove('go');io.unobserve(b);void b.offsetWidth;io.observe(b)}})}
 addEventListener('hashchange',()=>setTimeout(arm,30));arm();})();</script>
+<script>(()=>{const pages=[...document.querySelectorAll('.page.vd')];if(!pages.length)return;
+function fit(){pages.forEach(pg=>{if(pg.hidden)return;const lead=pg.querySelector('.vd-lead');if(!lead)return;lead.style.minHeight='';
+ const hh=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hh'))||(document.querySelector('.site-header')||{offsetHeight:0}).offsetHeight;
+ const above=lead.getBoundingClientRect().top-pg.getBoundingClientRect().top;      // hero + bubble
+ const need=innerHeight-hh-above;                                                 // rest of the first screen
+ if(need>lead.offsetHeight)lead.style.minHeight=need+'px'})}
+let t;const run=()=>{clearTimeout(t);t=setTimeout(fit,40)};
+addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,60));addEventListener('load',fit);if(document.fonts)document.fonts.ready.then(fit);fit();})();</script>
 
 
 
