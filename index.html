@@ -1509,6 +1509,8 @@ html[data-route="games"] .mg-hero,.mg-hero{padding-bottom:clamp(82px,min(7vw,10v
 .vx-btn:hover .vx-t b,.vx-btn:hover .vx-t small{color:#fff!important}
 .vd-topbtn{background:#1f4fe0!important;box-shadow:0 6px 0 #1338b0!important}
 .vd-topbtn:active{box-shadow:0 2px 0 #1338b0!important}
+/* flat button: no bottom "thickness" in any state */
+.vd-topbtn,.vd-topbtn:hover,.vd-topbtn:focus-visible,.vd-topbtn:active{box-shadow:none!important;border:0;transform:none!important}
 /* Align cover copy with header logo / CTA edges */
 @media (min-width:821px){
   .ab-cover .ab-tag,.ab-cover .ab-head{left:max(4px,calc((100% - var(--wrap)) / 2 + 20px))}
