@@ -2016,6 +2016,15 @@ html.vh .vd-hero.vh-in .vd-kid{animation:kidIn .95s cubic-bezier(.34,1.45,.64,1)
 .pick-ico img{width:40px;height:40px;object-fit:contain;display:block}
 .pick-ico img{box-sizing:border-box;border-radius:50%;transition:background-color .2s,padding .2s}
 .pick:has(input:checked) .pick-ico img{background:#fff;padding:6px}
+/* 18 moves: on PC the whole block (title -> last card) is one screen below the fixed header, centred with breathing room */
+@media (min-width:861px){
+ html[data-route="games"] .mg-moves-sec,.mg-moves-sec{min-height:calc(100svh - var(--hh,72px));box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(28px,7vh,80px) clamp(20px,5vh,64px)}
+ .mg-moves-sec>.mg-wrap{width:100%}
+ .mg-moves-sec .mg-mv-lead{margin:16px auto 24px}
+ .mg-moves-sec .mg-mv-list{gap:8px}
+ .mg-moves-sec .mg-mv-list li{padding:9px 16px}
+}
+@media (min-width:861px) and (max-height:820px){.mg-moves-sec .mg-mv-lead{margin:12px auto 18px}.mg-moves-sec .mg-mv-list{gap:6px}.mg-moves-sec .mg-mv-list li{padding:7px 16px}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
