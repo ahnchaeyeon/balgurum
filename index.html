@@ -1721,7 +1721,7 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 /* about: how-to-play cards + name columns */
 .ab-how{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
 .ab-how li{display:grid;justify-items:start;align-content:start;gap:10px;min-width:0}
-.ab-how img{width:100%;max-width:300px;height:clamp(150px,14vw,190px);object-fit:contain;object-position:center bottom;border-radius:16px;margin-bottom:8px;justify-self:center}
+.ab-how>li>img{width:100%;max-width:300px;height:clamp(150px,14vw,190px);object-fit:contain;object-position:center bottom;border-radius:16px;margin-bottom:8px;justify-self:center}
 .ab-how .num{font-family:var(--f-latin);font-weight:800;font-size:15px;color:#fff;background:#1f4fe0;border-radius:999px;padding:2px 12px}
 .ab-how h3{font-size:clamp(18px,1.6vw,21px);font-weight:800;color:var(--ink);line-height:1.4;text-wrap:balance}
 .ab-how p{color:var(--muted);line-height:1.75;font-size:15.5px}
@@ -1742,11 +1742,11 @@ html[data-route="story"] footer *{color:rgba(255,255,255,.85)!important}
 .ab-bg .abg-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
 @media (prefers-reduced-motion:reduce){.ab-bg,.ab-bg.on{transition:none}}
 footer{position:relative;z-index:3}
-.ab-how img{mix-blend-mode:multiply}
+.ab-how>li>img{mix-blend-mode:multiply}
 /* XR playground items: vertical, centred, fade-up on scroll */
 .ab-how{grid-template-columns:1fr!important;max-width:640px;margin-inline:auto!important;gap:clamp(64px,8vw,112px)!important}
 .ab-how li{justify-items:center!important;text-align:center;gap:12px}
-.ab-how img{justify-self:center;width:auto!important;max-width:100%!important;height:clamp(170px,18vw,220px)!important;object-fit:contain;object-position:center;margin:0 auto 14px!important}
+.ab-how>li>img{justify-self:center;width:auto!important;max-width:100%!important;height:clamp(170px,18vw,220px)!important;object-fit:contain;object-position:center;margin:0 auto 14px!important}
 .ab-how p{max-width:30em;margin-inline:auto}
 .ab-how.fx li{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .ab-how.fx li.in{opacity:1;transform:none}
@@ -2025,6 +2025,86 @@ html.vh .vd-hero.vh-in .vd-kid{animation:kidIn .95s cubic-bezier(.34,1.45,.64,1)
  .mg-moves-sec .mg-mv-list li{padding:9px 16px}
 }
 @media (min-width:861px) and (max-height:820px){.mg-moves-sec .mg-mv-lead{margin:12px auto 18px}.mg-moves-sec .mg-mv-list{gap:6px}.mg-moves-sec .mg-mv-list li{padding:7px 16px}}
+/* ===== How-to scenes (3 short looping web animations). Static styles = representative still (used for reduced motion). ===== */
+.hw{position:relative;width:min(100%,400px);aspect-ratio:5/3;margin:0 auto 14px;border-radius:22px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#ffffff 0%,#f1f6ff 55%,#e3edff 100%);box-shadow:inset 0 0 0 1px #e1e9fb;justify-self:center}
+.hw *{box-sizing:border-box}
+.hw-floor{position:absolute;left:6%;right:6%;bottom:5%;height:20%;border-radius:50%;background:radial-gradient(closest-side,#d6e4ff 0%,rgba(214,228,255,.55) 60%,rgba(214,228,255,0) 100%)}
+.hw-kid{position:absolute;bottom:9%;height:64%;width:auto;filter:drop-shadow(0 8px 8px rgba(20,50,140,.18));transform-origin:50% 100%}
+/* scene 1 */
+.hw-proj{position:absolute;left:8%;width:58%;bottom:5%;height:20%;border-radius:50%;background:radial-gradient(closest-side,rgba(31,79,224,.30),rgba(31,79,224,.12) 65%,rgba(31,79,224,0));}
+.hw-pad{position:absolute;bottom:5%;width:11%;height:10%;display:grid;place-items:center}
+.hw-pad svg{width:62%;height:auto;fill:#7fa6f5;transform:scaleY(.55) rotate(-8deg);transition:none}
+.hw-pad i{position:absolute;inset:-30% -40%;border-radius:50%;border:2px solid #1f4fe0;opacity:0}
+.hw-pad-a{left:23%}.hw-pad-b{left:36%}
+.hw-pad-b svg{transform:scaleY(.55) scaleX(-1) rotate(-8deg)}
+.hw-kid-s1{left:26%}
+.hw-dev{position:absolute;right:9%;bottom:7%;height:84%;aspect-ratio:232/480}
+.hw-dev>img{width:100%;height:100%;display:block;filter:drop-shadow(0 10px 10px rgba(20,50,140,.18))}
+.hw-gauge{position:absolute;left:16%;right:16%;top:21.2%;height:2.4%;border-radius:9px;background:rgba(31,79,224,.16);overflow:hidden}
+.hw-gauge b{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,#3b8cff,#1f4fe0);transform-origin:0 50%;transform:scaleX(1)}
+.hw-spark{position:absolute;left:50%;top:12%;width:26%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,216,74,.95),rgba(255,216,74,0));opacity:.0}
+/* scene 2 */
+.hw-kid-s2{left:9%}
+.hw-opts{position:absolute;right:7%;top:8%;bottom:8%;width:44%;display:flex;flex-direction:column;justify-content:space-between}
+.hw-opt{position:relative;display:block;width:100%;aspect-ratio:206/128;border-radius:12%/19%;overflow:hidden;box-shadow:0 6px 14px rgba(20,50,140,.12)}
+.hw-opt img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hw-opt-2 img.off{filter:grayscale(1) brightness(1.12) contrast(.9);opacity:0}
+.hw-opt-2{transform:scale(1.04)}
+.hw-check{position:absolute;left:4%;top:7%;width:15%;aspect-ratio:1;border-radius:50%;background:#1f4fe0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/70% no-repeat;box-shadow:0 0 0 2px #fff}
+.hw-ring{position:absolute;left:-3%;right:-3%;height:calc((100% - 0px) / 3.3);top:34.5%;border-radius:14px;border:3px solid #1f4fe0;opacity:0;pointer-events:none}
+/* scene 3 */
+.hw-goal{position:absolute;left:12%;right:12%;top:8%;height:13%;display:flex;align-items:center;gap:3%}
+.hw-chip{position:relative;flex:none;width:26%;height:100%;border-radius:999px;background:#1f4fe0;color:#fff;font-weight:800;font-size:clamp(10px,3.1cqw,13px);display:grid;place-items:center}
+.hw-3{container-type:inline-size}
+.hw-chip em{grid-area:1/1;font-style:normal;white-space:nowrap}
+.hw-chip .a{opacity:0}
+.hw-track{position:relative;flex:1;height:42%;border-radius:999px;background:rgba(31,79,224,.14);overflow:hidden}
+.hw-track b{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,#ffd84a,#ffb21f);transform-origin:0 50%}
+.hw-star{position:absolute;right:-4%;top:50%;width:11%;aspect-ratio:1;translate:0 -50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.6l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z' fill='%23ffc928' stroke='%23f2a600' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.hw-k3{height:56%}
+.hw-k3-a{left:12.5%}.hw-k3-main{left:38%}.hw-k3-b{left:56.5%}.hw-k3-c{left:72.5%}
+@media (prefers-reduced-motion:no-preference){
+ .hw *{animation-duration:3s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+ .hw:not(.play) *{animation-play-state:paused}
+ /* 01: two stomps -> pads react -> gauge fills -> short hold -> smooth reset */
+ .hw-1 .hw-kid-s1{animation-name:hwStomp}
+ .hw-1 .hw-pad-a svg{animation-name:hwPadA}.hw-1 .hw-pad-b svg{animation-name:hwPadB}
+ .hw-1 .hw-pad-a i{animation-name:hwRingA}.hw-1 .hw-pad-b i{animation-name:hwRingB}
+ .hw-1 .hw-gauge b{animation-name:hwGauge;animation-timing-function:cubic-bezier(.3,.7,.3,1)}
+ .hw-1 .hw-spark{animation-name:hwSpark}
+ /* 02: options appear one by one, focus ring passes 1 -> 2, option 2 is chosen */
+ .hw-2 .hw-opt-1{animation-name:hwOpt1}.hw-2 .hw-opt-2{animation-name:hwOpt2}.hw-2 .hw-opt-3{animation-name:hwOpt3}
+ .hw-2 .hw-opt-2 img.off{animation-name:hwOff}.hw-2 .hw-opt-2 img.on{animation-name:hwOn}
+ .hw-2 .hw-check{animation-name:hwCheck}.hw-2 .hw-ring{animation-name:hwRing}
+ /* 03: one player alone fills a little; friends join; the shared goal completes */
+ .hw-3 .hw-k3-a{animation-name:hwJoinA}.hw-3 .hw-k3-b{animation-name:hwJoinB}.hw-3 .hw-k3-c{animation-name:hwJoinC}
+ .hw-3 .hw-k3-main{animation-name:hwMain}
+ .hw-3 .hw-track b{animation-name:hwTeam;animation-timing-function:linear}
+ .hw-3 .hw-star{animation-name:hwStar}
+ .hw-3 .hw-chip .a{animation-name:hwChipA}.hw-3 .hw-chip .b{animation-name:hwChipB}
+}
+@keyframes hwStomp{0%,6%,16%,26%,36%,100%{transform:none}10%,30%{transform:translateY(3%) scaleY(.985)}}
+@keyframes hwPadA{0%,8%,22%,100%{fill:#7fa6f5;transform:scaleY(.55) rotate(-8deg)}11%{fill:#1f4fe0;transform:scaleY(.62) scale(1.15) rotate(-8deg)}}
+@keyframes hwPadB{0%,28%,42%,100%{fill:#7fa6f5;transform:scaleY(.55) scaleX(-1) rotate(-8deg)}31%{fill:#1f4fe0;transform:scaleY(.62) scaleX(-1.15) scale(1.15) rotate(-8deg)}}
+@keyframes hwRingA{0%,9%{opacity:0;transform:scale(.4)}11%{opacity:.8;transform:scale(.6)}24%,100%{opacity:0;transform:scale(1.3)}}
+@keyframes hwRingB{0%,29%{opacity:0;transform:scale(.4)}31%{opacity:.8;transform:scale(.6)}44%,100%{opacity:0;transform:scale(1.3)}}
+@keyframes hwGauge{0%,11%{transform:scaleX(0)}20%,31%{transform:scaleX(.5)}40%,80%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
+@keyframes hwSpark{0%,38%{opacity:0;scale:.4}46%{opacity:1;scale:1.1}64%,100%{opacity:0;scale:1.4}}
+@keyframes hwOpt1{0%{opacity:0;transform:translateX(18%)}8%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateX(18%)}}
+@keyframes hwOpt2{0%,5%{opacity:0;transform:translateX(18%)}13%,46%{opacity:1;transform:none}54%,82%{opacity:1;transform:scale(1.04)}91%,100%{opacity:0;transform:translateX(18%)}}
+@keyframes hwOpt3{0%,10%{opacity:0;transform:translateX(18%)}18%,90%{opacity:1;transform:none}100%{opacity:0;transform:translateX(18%)}}
+@keyframes hwOff{0%,46%{opacity:1}54%,100%{opacity:0}}
+@keyframes hwOn{0%,46%{opacity:0}54%,100%{opacity:1}}
+@keyframes hwCheck{0%,50%{opacity:0;transform:scale(.3)}58%{opacity:1;transform:scale(1.15)}63%,84%{opacity:1;transform:none}90%,100%{opacity:0;transform:none}}
+@keyframes hwRing{0%,20%{opacity:0;top:0}24%,32%{opacity:1;top:0}40%,52%{opacity:1;top:34.5%}60%,100%{opacity:0;top:34.5%}}
+@keyframes hwJoinA{0%,30%{opacity:0;transform:translateX(-20%) scale(.96)}40%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateX(-20%) scale(.96)}}
+@keyframes hwJoinB{0%,34%{opacity:0;transform:translateX(20%) scale(.96)}44%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateX(20%) scale(.96)}}
+@keyframes hwJoinC{0%,38%{opacity:0;transform:translateX(24%) scale(.96)}48%,84%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateX(24%) scale(.96)}}
+@keyframes hwMain{0%,100%{transform:none}12%,22%{transform:translateY(-3%)}17%{transform:none}}
+@keyframes hwTeam{0%{transform:scaleX(0)}30%,40%{transform:scaleX(.22)}66%,84%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+@keyframes hwStar{0%,64%{opacity:.35;scale:.8}70%{opacity:1;scale:1.3}76%,84%{opacity:1;scale:1}96%,100%{opacity:.35;scale:.8}}
+@keyframes hwChipA{0%,34%{opacity:1}40%,90%{opacity:0}97%,100%{opacity:1}}
+@keyframes hwChipB{0%,34%{opacity:0}40%,90%{opacity:1}97%,100%{opacity:0}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2166,9 +2246,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
     <div class="wrap">
       <h3 class="ab-how-sub">이렇게 참여하고, 함께 즐겨요.</h3>
       <ul class="ab-how">
-        <li><img src="assets/step-1.png" alt="" width="440" height="270" loading="lazy"><span class="num">01</span><h3>움직임으로 조작해요.</h3><p>별도의 컨트롤러 없이 발을 구르고, 뛰고, 옆으로 움직이며 게임을 진행합니다.</p></li>
-        <li><img src="assets/step-2.png" alt="" width="410" height="270" loading="lazy"><span class="num">02</span><h3>게임에 맞춰 운동을 선택해요.</h3><p>게임마다 제시되는 운동 중 하나를 선택하고, 플레이 시간과 참여 인원을 설정할 수 있습니다.</p></li>
-        <li><img src="assets/step-3.png" alt="" width="440" height="280" loading="lazy"><span class="num">03</span><h3>혼자서도, 친구와도 즐겨요.</h3><p>개인전과 협동전을 통해 최대 다섯 명이 함께 게임에 참여할 수 있습니다.</p></li>
+        <li><div class="hw hw-1" aria-hidden="true"><span class="hw-floor"></span><span class="hw-proj"></span><span class="hw-pad hw-pad-a"><svg viewBox="0 0 40 60" aria-hidden="true"><ellipse cx="20" cy="38" rx="13" ry="19"/><circle cx="9" cy="12" r="4.6"/><circle cx="17" cy="7" r="4.2"/><circle cx="25" cy="7" r="3.8"/><circle cx="31" cy="11" r="3.3"/><circle cx="35" cy="17" r="2.8"/></svg><i></i></span><span class="hw-pad hw-pad-b"><svg viewBox="0 0 40 60" aria-hidden="true"><ellipse cx="20" cy="38" rx="13" ry="19"/><circle cx="9" cy="12" r="4.6"/><circle cx="17" cy="7" r="4.2"/><circle cx="25" cy="7" r="3.8"/><circle cx="31" cy="11" r="3.3"/><circle cx="35" cy="17" r="2.8"/></svg><i></i></span><img class="hw-kid hw-kid-s1" src="assets/kid-v2.webp" alt="" loading="lazy" decoding="async"><span class="hw-dev"><img src="assets/hw-device.webp" alt="" loading="lazy" decoding="async"><span class="hw-gauge"><b></b></span><span class="hw-spark"></span></span></div><span class="num">01</span><h3>움직임으로 조작해요.</h3><p>별도의 컨트롤러 없이 발을 구르고, 뛰고, 옆으로 움직이며 게임을 진행합니다.</p></li>
+        <li><div class="hw hw-2" aria-hidden="true"><span class="hw-floor"></span><img class="hw-kid hw-kid-s2" src="assets/kid-v4.webp" alt="" loading="lazy" decoding="async"><span class="hw-opts"><span class="hw-opt hw-opt-1"><img src="assets/hw-tile-1.webp" alt="" loading="lazy"></span><span class="hw-opt hw-opt-2"><img class="off" src="assets/hw-tile-2.webp" alt="" loading="lazy"><img class="on" src="assets/hw-tile-2.webp" alt="" loading="lazy"><i class="hw-check"></i></span><span class="hw-opt hw-opt-3"><img src="assets/hw-tile-3.webp" alt="" loading="lazy"></span><span class="hw-ring"></span></span></div><span class="num">02</span><h3>게임에 맞춰 운동을 선택해요.</h3><p>게임마다 제시되는 운동 중 하나를 선택하고, 플레이 시간과 참여 인원을 설정할 수 있습니다.</p></li>
+        <li><div class="hw hw-3" aria-hidden="true"><span class="hw-floor"></span><span class="hw-goal"><span class="hw-chip"><em class="a">1인 참여</em><em class="b">4인 협동</em></span><span class="hw-track"><b></b></span><span class="hw-star"></span></span><img class="hw-kid hw-k3 hw-k3-a" src="assets/kid-v1.webp" alt="" loading="lazy" decoding="async"><img class="hw-kid hw-k3 hw-k3-main" src="assets/kid-v3.webp" alt="" loading="lazy" decoding="async"><img class="hw-kid hw-k3 hw-k3-b" src="assets/kid-v4.webp" alt="" loading="lazy" decoding="async"><img class="hw-kid hw-k3 hw-k3-c" src="assets/kid-v2.webp" alt="" loading="lazy" decoding="async"></div><span class="num">03</span><h3>혼자서도, 친구와도 즐겨요.</h3><p>개인전과 협동전을 통해 최대 다섯 명이 함께 게임에 참여할 수 있습니다.</p></li>
       </ul>
     </div>
   </section>
@@ -3965,7 +4045,9 @@ function place(hero){const kid=hero.querySelector('.vd-kid');if(!kid)return;cons
  Object.assign(kid.style,{left:(x0-H.left)+'px',top:(y0-H.top)+'px',width:w+'px',height:h+'px'});hero.classList.add('kid-ok')}
 function all(){document.querySelectorAll('.page.vd:not([hidden]) .vd-hero').forEach(place)}
 let t;const run=()=>{clearTimeout(t);t=setTimeout(all,60)};
-addEventListener('resize',run);addEventListener('hashchange',()=>requestAnimationFrame(all));addEventListener('load',all);if(document.fonts)document.fonts.ready.then(all);all();})();</script>
+addEventListener('resize',run);addEventListener('hashchange',()=>requestAnimationFrame(all));addEventListener('load',all);if(document.fonts)document.fonts.ready.then(all);all();})();</script><script>(()=>{/* how-to scenes: play only while visible */
+const hs=document.querySelectorAll('.hw');if(!hs.length||!('IntersectionObserver' in window)){hs.forEach(h=>h.classList.add('play'));return}
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('play',e.isIntersecting)),{threshold:.2});hs.forEach(h=>io.observe(h));})();</script>
 
 
 
