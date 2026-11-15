@@ -2012,6 +2012,10 @@ html.vh .vd-hero .vd-kid{opacity:0;transform:translateY(48px) scale(.94);transfo
 html.vh .vd-hero.vh-in .vd-kid{animation:kidIn .95s cubic-bezier(.34,1.45,.64,1) .5s both,kidIdle 3.6s ease-in-out 1.6s infinite}
 @keyframes kidIn{0%{opacity:0;transform:translateY(48px) scale(.94)}60%{opacity:1}100%{opacity:1;transform:none}}
 @keyframes kidIdle{0%,100%{opacity:1;transform:none}50%{opacity:1;transform:translateY(-8px)}}
+/* cheer kind icons (image): same box as before; on the blue selected state they sit on a white disc so they stay visible */
+.pick-ico img{width:40px;height:40px;object-fit:contain;display:block}
+.pick-ico img{box-sizing:border-box;border-radius:50%;transition:background-color .2s,padding .2s}
+.pick:has(input:checked) .pick-ico img{background:#fff;padding:6px}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2837,9 +2841,9 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
       <form class="cheer-card" id="cheer-form" novalidate>
         <fieldset class="cheer-col">
           <legend><span class="no">01</span>어떤 응원을 보내고 싶나요?</legend>
-          <label class="pick"><input type="radio" name="cheer-kind" id="kind-cool" value="cool" checked><span class="pick-ico"><svg aria-hidden="true"><use href="#i-clap"/></svg></span><span>멋져요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
-          <label class="pick"><input type="radio" name="cheer-kind" id="kind-play" value="play"><span class="pick-ico"><svg aria-hidden="true"><use href="#i-game"/></svg></span><span>해보고 싶어요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
-          <label class="pick"><input type="radio" name="cheer-kind" id="kind-next" value="next"><span class="pick-ico"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><span>다음 이야기도 기대돼요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
+          <label class="pick"><input type="radio" name="cheer-kind" id="kind-cool" value="cool" checked><span class="pick-ico"><img src="assets/cheer-ico-clap.png" alt="" width="192" height="192"></span><span>멋져요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
+          <label class="pick"><input type="radio" name="cheer-kind" id="kind-play" value="play"><span class="pick-ico"><img src="assets/cheer-ico-game.png" alt="" width="192" height="192"></span><span>해보고 싶어요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
+          <label class="pick"><input type="radio" name="cheer-kind" id="kind-next" value="next"><span class="pick-ico"><img src="assets/cheer-ico-heart.png" alt="" width="192" height="192"></span><span>다음 이야기도 기대돼요!</span><span class="pick-check"><svg aria-hidden="true"><use href="#i-check"/></svg></span></label>
           <p class="hint">마음을 담아 하나를 골라주세요.</p>
         </fieldset>
         <div class="cheer-col">
