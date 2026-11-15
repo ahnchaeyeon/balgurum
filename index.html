@@ -2003,6 +2003,13 @@ html.vh .vd .vd-head>*:nth-child(2){--vi:1}html.vh .vd .vd-head>*:nth-child(3){-
 /* games hero back link: left edge on the logo line (header gutter), like the experience pages */
 .mg-hero .gp-back{max-width:none;width:fit-content;margin-left:calc(max(var(--edge),env(safe-area-inset-left,0px)) - 20px);margin-right:0}
 @media (max-width:760px){.mg-hero .gp-back{margin-left:calc(max(var(--edge),env(safe-area-inset-left,0px)) - 90px)}}
+/* experience hero kid: positioned by JS (beside the title on wide screens, beside the menu when stacked); behind the bottom wave */
+.vd-hero .vd-kid{position:absolute;display:none;object-fit:contain;object-position:50% 100%;pointer-events:none;user-select:none;filter:drop-shadow(0 18px 22px rgba(6,24,80,.28))}
+.vd-hero.kid-ok .vd-kid{display:block}
+html.vh .vd-hero .vd-kid{opacity:0;transform:translateY(48px) scale(.94);transform-origin:50% 100%}
+html.vh .vd-hero.vh-in .vd-kid{animation:kidIn .95s cubic-bezier(.34,1.45,.64,1) .5s both,kidIdle 3.6s ease-in-out 1.6s infinite}
+@keyframes kidIn{0%{opacity:0;transform:translateY(48px) scale(.94)}60%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes kidIdle{0%,100%{opacity:1;transform:none}50%{opacity:1;transform:translateY(-8px)}}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2217,6 +2224,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 01 ============ -->
 <div class="page vd" id="page-value-1" data-page="value-1" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
+    <img class="vd-kid" src="assets/kid-v1.webp" alt="" aria-hidden="true" decoding="async">
     <div class="vd-backrow"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a></div>
     <div class="wrap vd-hgrid">
       <div class="vd-left">
@@ -2254,6 +2262,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 02 ============ -->
 <div class="page vd" id="page-value-2" data-page="value-2" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
+    <img class="vd-kid" src="assets/kid-v2.webp" alt="" aria-hidden="true" decoding="async">
     <div class="vd-backrow"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a></div>
     <div class="wrap vd-hgrid">
       <div class="vd-left">
@@ -2291,6 +2300,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 03 ============ -->
 <div class="page vd" id="page-value-3" data-page="value-3" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
+    <img class="vd-kid" src="assets/kid-v3.webp" alt="" aria-hidden="true" decoding="async">
     <div class="vd-backrow"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a></div>
     <div class="wrap vd-hgrid">
       <div class="vd-left">
@@ -2331,6 +2341,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
 <!-- ============ VALUE 04 ============ -->
 <div class="page vd" id="page-value-4" data-page="value-4" style="--c:#1f4fe0;--soft:#e9efff;--d:#1338b0" hidden>
   <section class="vd-hero">
+    <img class="vd-kid" src="assets/kid-v4.webp" alt="" aria-hidden="true" decoding="async">
     <div class="vd-backrow"><a class="vd-back" href="#about" data-to="ab-values">← 네 가지 경험으로 돌아가기</a></div>
     <div class="wrap vd-hgrid">
       <div class="vd-left">
@@ -3899,10 +3910,10 @@ addEventListener('resize',run);addEventListener('hashchange',()=>setTimeout(fit,
 const root=document.documentElement;if(!root.classList.contains('vh'))return;
 let raf1=0,raf2=0;
 function play(){cancelAnimationFrame(raf1);cancelAnimationFrame(raf2);
- document.querySelectorAll('.vd .vd-head.vh-in').forEach(h=>h.classList.remove('vh-in'));   // stop any previous run
+ document.querySelectorAll('.vd .vd-head.vh-in,.vd .vd-hero.vh-in').forEach(h=>h.classList.remove('vh-in'));   // stop any previous run
  if(!/^#value-/.test(location.hash))return;
  /* wait two frames: the router has unhidden the page and scrolled to top, and that state has been painted */
- raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>{const h=document.querySelector('.page.vd:not([hidden]) .vd-head');if(h){void h.offsetWidth;h.classList.add('vh-in')}})})}
+ raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>{const h=document.querySelector('.page.vd:not([hidden]) .vd-head');if(h){void h.offsetWidth;h.classList.add('vh-in');const hero=h.closest('.vd-hero');if(hero)hero.classList.add('vh-in')}})})}
 addEventListener('hashchange',play);play();})();</script>
 <script>(()=>{const R=16/9;
 /* STEP rows share ONE column grid per page: image width --iw is computed once for the whole list
@@ -3926,7 +3937,20 @@ addEventListener('resize',run);addEventListener('orientationchange',run);addEven
 const set=b=>{const w=b.offsetWidth,h=b.offsetHeight,tw=Math.round(h*.42);
  b.style.setProperty('--tw',tw+'px');b.style.setProperty('--tl',Math.round(w-h*.38)+'px');b.style.setProperty('--tt',Math.round(h-tw*.95)+'px');
  b.style.setProperty('--gw',(w+tw)+'px');b.style.setProperty('--gh',(h+tw)+'px')};
-if('ResizeObserver' in window){const ro=new ResizeObserver(es=>es.forEach(e=>set(e.target)));bs.forEach(b=>ro.observe(b))}addEventListener('resize',()=>bs.forEach(set));bs.forEach(set);})();</script>
+if('ResizeObserver' in window){const ro=new ResizeObserver(es=>es.forEach(e=>set(e.target)));bs.forEach(b=>ro.observe(b))}addEventListener('resize',()=>bs.forEach(set));bs.forEach(set);})();</script><script>(()=>{/* place the experience-hero kid in the free space: right of the title text (2 columns) or right of the menu (stacked) */
+function place(hero){const kid=hero.querySelector('.vd-kid');if(!kid)return;const H=hero.getBoundingClientRect();if(!H.width)return;
+ const left=hero.querySelector('.vd-left').getBoundingClientRect(),head=hero.querySelector('.vd-head');const hr=head.getBoundingClientRect();
+ const edge=parseFloat(getComputedStyle(hero.querySelector('.vd-backrow')).paddingRight)||24;
+ let ink=0;head.querySelectorAll('*').forEach(e=>{if(!e.firstChild)return;const r=document.createRange();r.selectNodeContents(e);for(const q of r.getClientRects())ink=Math.max(ink,q.right)});
+ let x0,x1,y0,y1;const two=hr.top<left.bottom-4;
+ if(two){x0=ink+32;x1=H.right-edge;y1=H.bottom-26;const h=Math.min(H.height*.8,470);y0=y1-h}
+ else{x0=left.right+24;x1=H.right-edge;y0=left.top-8;y1=left.bottom+8}
+ const w=x1-x0,h=y1-y0;
+ if(w<(two?170:130)||h<160||innerWidth<600){hero.classList.remove('kid-ok');return}
+ Object.assign(kid.style,{left:(x0-H.left)+'px',top:(y0-H.top)+'px',width:w+'px',height:h+'px'});hero.classList.add('kid-ok')}
+function all(){document.querySelectorAll('.page.vd:not([hidden]) .vd-hero').forEach(place)}
+let t;const run=()=>{clearTimeout(t);t=setTimeout(all,60)};
+addEventListener('resize',run);addEventListener('hashchange',()=>requestAnimationFrame(all));addEventListener('load',all);if(document.fonts)document.fonts.ready.then(all);all();})();</script>
 
 
 
