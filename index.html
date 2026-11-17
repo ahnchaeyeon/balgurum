@@ -681,6 +681,9 @@ dialog.mdlg[open]{animation:mdlgIn .35s ease both}
 @keyframes mdlgIn{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
 .mdlg-stage{position:relative;width:100%;height:100%;display:grid;place-items:center}
 .mdlg-stage video{width:100%;height:100%;object-fit:contain;background:#000}
+.mdlg-stage iframe{width:min(100vw,calc((100vh - 120px) * 16 / 9));aspect-ratio:16/9;height:auto;border:0;background:#000;display:block}
+.mdlg-yt{position:absolute;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));translate:-50% 0;color:rgba(255,255,255,.8);font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.mdlg-yt:hover{color:#fff}
 .mdlg-empty{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:14px;color:#fff;text-align:center;background:rgba(0,0,0,.45)}
 .mdlg-empty svg{width:80px;height:80px;fill:#fff;opacity:.85}
 .mdlg-empty p{color:#fff;font-size:20px;font-weight:800}
@@ -3299,17 +3302,22 @@ window.BALGURUM_SUPABASE = {
   }
 
 
-  /* ---------- Key visual movie ---------- */
+  /* ---------- Key visual movie (YouTube) ---------- */
   const kvBtn=document.querySelector('[data-kv-movie]'), mdlg=document.getElementById('dlg-movie');
   if(kvBtn && mdlg){
-    const mv=mdlg.querySelector('[data-movie-video]'), empty=mdlg.querySelector('[data-movie-empty]');
+    const YT='4Mh9VYfqbIA';
+    const stage=mdlg.querySelector('.mdlg-stage'), mv=mdlg.querySelector('[data-movie-video]'), empty=mdlg.querySelector('[data-movie-empty]');
+    const link=document.createElement('a'); link.className='mdlg-yt'; link.href='https://youtu.be/'+YT; link.target='_blank'; link.rel='noopener'; link.textContent='YouTube에서 보기';
+    stage.append(link);
     kvBtn.addEventListener('click',()=>{
-      const src=(kvBtn.dataset.src||'').trim();
-      if(src){ if(mv.getAttribute('src')!==src) mv.src=src; mv.controls=true; empty.hidden=true; } else { mv.controls=false; empty.hidden=false; }
+      mv.hidden=true; empty.hidden=true;
+      let f=stage.querySelector('iframe');
+      if(!f){ f=document.createElement('iframe'); f.title='발구름 게임 영상'; f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen=true; f.referrerPolicy='strict-origin-when-cross-origin';
+        f.src='https://www.youtube-nocookie.com/embed/'+YT+'?autoplay=1&rel=0&playsinline=1&modestbranding=1'; stage.prepend(f); }
       if(mdlg.showModal) mdlg.showModal();
-      if(src) mv.play().catch(()=>{});
     });
-    mdlg.addEventListener('close',()=>{ mv.pause(); });
+    /* closing removes the player so the video stops */
+    mdlg.addEventListener('close',()=>{ const f=stage.querySelector('iframe'); if(f) f.remove(); mv.pause(); });
   }
 
   /* ---------- Game packs: endless auto-moving row ---------- */
