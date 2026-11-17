@@ -2122,6 +2122,38 @@ html.vh .vd-hero.vh-in .vd-kid{animation:kidIn .95s cubic-bezier(.34,1.45,.64,1)
 @keyframes hwStar{0%,46%{opacity:.35;scale:.8}51%{opacity:1;scale:1.3}56%,84%{opacity:1;scale:1}96%,100%{opacity:.35;scale:.8}}
 @keyframes hwChipA{0%,34%{opacity:1}40%,90%{opacity:0}97%,100%{opacity:1}}
 @keyframes hwChipB{0%,34%{opacity:0}40%,90%{opacity:1}97%,100%{opacity:0}}
+/* cheer board: per-card ⋯ menu, edit mode, confirm/password dialog */
+.wall-card{position:relative}
+.wall-card .k{margin-right:34px}
+.wall-card:has(.cm-menu){z-index:7}
+.wall-card .cm-more{position:absolute;top:10px;right:10px;width:30px;height:30px;border:0;border-radius:50%;background:transparent;color:var(--muted);font:800 18px/1 var(--f-latin,inherit);letter-spacing:1px;cursor:pointer;display:grid;place-items:center;padding:0 0 6px}
+.wall-card .cm-more:hover,.wall-card .cm-more[aria-expanded="true"]{background:var(--sky-100);color:var(--blue-deep)}
+.wall-card .cm-more:focus-visible{outline:2px solid #1f4fe0;outline-offset:2px}
+.wall-card .cm-menu{position:absolute;top:44px;right:10px;z-index:6;min-width:104px;padding:6px;border-radius:12px;background:#fff;box-shadow:0 10px 26px rgba(10,40,110,.22);display:grid;gap:2px}
+.wall-card .cm-menu button{border:0;background:none;text-align:left;font:700 14px/1.2 inherit;color:var(--ink);padding:9px 12px;border-radius:8px;cursor:pointer}
+.wall-card .cm-menu button:hover,.wall-card .cm-menu button:focus-visible{background:var(--sky-100);outline:none}
+.wall-card .cm-menu .del{color:#c62f2f}
+.wall-card.cm-editing{outline:3px solid #1f4fe0;outline-offset:2px}
+.cm-editbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:12px;background:var(--sky-100);color:var(--blue-deep);font-weight:700;font-size:14px}
+.cm-editbar[hidden]{display:none}
+.cm-editbar button{border:0;background:#fff;color:var(--blue-deep);font:700 13px/1 inherit;padding:8px 12px;border-radius:999px;cursor:pointer}
+.cm-dlg{border:0;padding:0;border-radius:20px;width:min(92vw,380px);box-shadow:0 24px 60px rgba(10,30,90,.35);color:var(--ink)}
+.cm-dlg::backdrop{background:rgba(8,22,60,.45)}
+.cm-dlg-in{display:grid;gap:12px;padding:24px 22px 20px}
+.cm-dlg h3{margin:0;font-size:19px;line-height:1.35;word-break:keep-all}
+.cm-dlg-d{margin:0;color:var(--muted);font-size:14px;line-height:1.5;word-break:keep-all}
+.cm-dlg-l{display:grid;gap:6px;font-size:13px;font-weight:700}
+.cm-dlg-l[hidden]{display:none}
+.cm-dlg-l input{font:inherit;font-size:15px;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);outline:none}
+.cm-dlg-l input:focus{border-color:#1f4fe0}
+.cm-dlg-e{margin:0;min-height:1.2em;color:#c62f2f;font-size:13px;font-weight:700}
+.cm-dlg-e:empty{display:none}
+.cm-dlg-b{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
+.cm-dlg-b button{border:0;border-radius:999px;padding:11px 18px;font:800 14px/1 inherit;cursor:pointer}
+.cm-no{background:var(--sky-100);color:var(--blue-deep)}
+.cm-ok{background:#1f4fe0;color:#fff}
+.cm-ok.danger{background:#d93636}
+.cm-ok[disabled]{opacity:.6;cursor:wait}
 /* Game detail dialog */
 dialog.gdlg{width:min(980px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
 .gd{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
@@ -2944,6 +2976,15 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         <h1>구매 대신, <em>응원</em> 한마디 어떠세요?</h1>
         <p>발구름은 팀 코끼리가 코드리치와 함께 만든 산학 연계 졸업 프로젝트입니다.<br>여러분의 응원이 발구름의 다음 발걸음에 힘이 됩니다.</p>
       </div>
+      <dialog class="cm-dlg" id="cheer-dlg" aria-labelledby="cheer-dlg-t">
+        <form method="dialog" class="cm-dlg-in" id="cheer-dlg-form" novalidate>
+          <h3 id="cheer-dlg-t">이 응원을 삭제할까요?</h3>
+          <p class="cm-dlg-d" id="cheer-dlg-d">보드 관리 비밀번호를 입력해 주세요.</p>
+          <label class="cm-dlg-l" id="cheer-dlg-pl"><span>보드 관리 비밀번호</span><input type="password" id="cheer-dlg-pw" autocomplete="current-password"></label>
+          <p class="cm-dlg-e" id="cheer-dlg-e" role="alert"></p>
+          <div class="cm-dlg-b"><button type="button" class="cm-no" id="cheer-dlg-no">취소</button><button type="submit" class="cm-ok" id="cheer-dlg-ok">삭제</button></div>
+        </form>
+      </dialog>
       <form class="cheer-card" id="cheer-form" novalidate>
         <fieldset class="cheer-col">
           <legend><span class="no">01</span>어떤 응원을 보내고 싶나요?</legend>
@@ -2960,6 +3001,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
           <textarea id="cheer-msg" maxlength="300" required placeholder="발구름에게 전하고 싶은 응원을 적어주세요."></textarea>
           <div class="count"><span id="cheer-count">0</span> / 300</div>
           <label class="check" for="cheer-public"><input type="checkbox" id="cheer-public"><span><b>내 응원을 다른 방문자에게도 공개할게요. (선택)</b><small>체크하지 않으면 제작팀만 볼 수 있어요.</small></span></label>
+          <div class="cm-editbar" id="cheer-editbar" hidden><span>남겨진 응원을 수정하고 있어요.</span><button type="button" id="cheer-edit-cancel">수정 취소</button></div>
           <button class="send" type="submit" id="cheer-send">응원 보내기</button>
           <p class="status" id="cheer-status" aria-live="polite">남겨주신 응원은 프로젝트 제작팀이 확인합니다.</p>
         </div>
@@ -3594,7 +3636,7 @@ window.BALGURUM_SUPABASE = {
   const defaultStatus = status.textContent;
   msg.addEventListener('input',()=>{ count.textContent = msg.value.length; msg.classList.remove('bad'); });
 
-  let db = null, me = null, canTeam = false, sending = false;
+  let db = null, me = null, canTeam = false, sending = false, sbMode = false, editing = null, boardPass = '';
   const pools = {wall:[], cheers:[]};
   const SB = window.BALGURUM_SUPABASE || {};
   const sbReady = ()=> /^https:\/\/[^/]+$/.test(String(SB.url||'').replace(/\/+$/,'')) && !!SB.anonKey;
@@ -3608,10 +3650,11 @@ window.BALGURUM_SUPABASE = {
   let sbLoaded = false;
   async function sbLoad(){
     try{
-      const r = await fetch(sbBase() + '?select=kind,name,msg,created_at&is_public=eq.true&order=created_at.desc&limit=60', { headers: sbHeaders() });
+      const r = await fetch(sbBase() + '?select=id,kind,name,msg,created_at&is_public=eq.true&order=created_at.desc&limit=60', { headers: sbHeaders() });
       if(!r.ok) throw new Error('supabase ' + r.status);
       const rows = await r.json();
-      pools.wall = (Array.isArray(rows)?rows:[]).map(x=>({ kind:x.kind, name:x.name||'', msg:x.msg, at:Date.parse(x.created_at)||0 }));
+      pools.wall = (Array.isArray(rows)?rows:[]).map(x=>({ id:x.id, kind:x.kind, name:x.name||'', msg:x.msg, at:Date.parse(x.created_at)||0 }));
+      if(document.querySelector('#wall-list .cm-menu')) return;   // keep an open ⋯ menu; it re-renders on the next refresh
       sbLoaded = true; wallNote.textContent = '공개로 남겨진 응원이 여기에 모여요.';
       renderWall();
     }catch(e){
@@ -3638,6 +3681,7 @@ window.BALGURUM_SUPABASE = {
     const d = document.createElement('span'); const dt = new Date(it.at||0);
     d.textContent = isNaN(dt) ? '' : (dt.getMonth()+1)+'월 '+dt.getDate()+'일';
     by.append(n,d); el.append(by);
+    if(sbMode && it.id!=null && !it.private) addMenu(el,it);
     return el;
   }
   function renderWall(){
@@ -3646,6 +3690,7 @@ window.BALGURUM_SUPABASE = {
     wallList.replaceChildren();
     if(!items.length){ const e=document.createElement('p'); e.className='wall-empty'; e.textContent='아직 공개된 응원이 없어요. 첫 번째 응원을 남겨주세요!'; wallList.append(e); return; }
     items.forEach((it,i)=>{ const c=card(it); c.style.animationDelay=Math.min(i,12)*0.05+'s'; wallList.append(c); });
+    if(typeof markEditing==='function') markEditing();
   }
   function flatten(snap){ const out=[]; snap.docs.forEach(d=>{ const v=d.data()||{}; (Array.isArray(v.items)?v.items:[]).forEach(x=>out.push(x)); }); return out; }
   function watch(coll){
@@ -3662,7 +3707,7 @@ window.BALGURUM_SUPABASE = {
     try{ db = window.claude && window.claude.use ? await window.claude.use('db') : null; }catch(e){ db = null; }
     let user = null;
     try{ user = window.claude && window.claude.use ? await window.claude.use('user') : null; }catch(e){ user = null; }
-    if(!db && sbReady()){ sbWatch(); return; }
+    if(!db && sbReady()){ sbMode = true; sbWatch(); return; }
     if(!db){
       wallList.replaceChildren(); const e=document.createElement('p'); e.className='wall-empty';
       e.textContent='지금은 응원 보드를 열 수 없어요. 응원 저장이 아직 설정되지 않았어요.'; wallList.append(e);
@@ -3688,6 +3733,101 @@ window.BALGURUM_SUPABASE = {
     }
   }
 
+  /* ---------- edit / delete (Supabase board): password is checked on the server by cheer_update / cheer_delete ---------- */
+  const editBar = document.getElementById('cheer-editbar');
+  const dlg = document.getElementById('cheer-dlg'), dlgForm = document.getElementById('cheer-dlg-form');
+  const dT = document.getElementById('cheer-dlg-t'), dD = document.getElementById('cheer-dlg-d'), dPL = document.getElementById('cheer-dlg-pl');
+  const dPW = document.getElementById('cheer-dlg-pw'), dE = document.getElementById('cheer-dlg-e'), dOK = document.getElementById('cheer-dlg-ok');
+  const ERR = { bad_password:'비밀번호가 맞지 않아요.', locked:'비밀번호를 여러 번 틀렸어요. 10분 뒤에 다시 시도해 주세요.', not_found:'이미 삭제된 응원이에요.', invalid:'응원 메시지를 1~300자로 적어 주세요.', not_set:'보드 관리 비밀번호가 아직 설정되지 않았어요.', network:'연결이 불안정해요. 잠시 후 다시 시도해 주세요.' };
+  async function rpc(fn, body){
+    let r; try{ r = await fetch(String(SB.url).replace(/\/+$/,'')+'/rest/v1/rpc/'+fn, { method:'POST', headers: sbHeaders(), body: JSON.stringify(body) }); }catch(e){ return {ok:false,error:'network'}; }
+    if(!r.ok) return {ok:false,error:'network'};
+    try{ return await r.json(); }catch(e){ return {ok:false,error:'network'}; }
+  }
+  let dlgAction = null, dlgBusy = false;
+  function openDlg(o){
+    dT.textContent = o.title; dD.textContent = o.text; dOK.textContent = o.ok; dOK.classList.toggle('danger', !!o.danger);
+    dE.textContent = ''; dPW.value = boardPass; dPL.hidden = false; dlgAction = o.run; dOK.disabled = false;
+    if(dlg.showModal){ try{ dlg.showModal(); }catch(e){ dlg.setAttribute('open',''); } } else dlg.setAttribute('open','');
+    setTimeout(()=>{ (boardPass ? dOK : dPW).focus(); }, 30);
+  }
+  function closeDlg(){ dlgAction = null; if(dlg.open){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); } }
+  document.getElementById('cheer-dlg-no').addEventListener('click', closeDlg);
+  dlg.addEventListener('cancel', e=>{ if(dlgBusy) e.preventDefault(); else dlgAction = null; });
+  dlgForm.addEventListener('submit', async e=>{
+    e.preventDefault(); if(dlgBusy || !dlgAction) return;
+    const pass = dPW.value; if(!pass){ dE.textContent = '비밀번호를 입력해 주세요.'; dPW.focus(); return; }
+    dlgBusy = true; dOK.disabled = true; dE.textContent = '';
+    const res = await dlgAction(pass);
+    dlgBusy = false; dOK.disabled = false;
+    if(res && res.ok){ boardPass = pass; closeDlg(); return; }
+    const code = (res && res.error) || 'network';
+    if(code==='bad_password' || code==='locked'){ boardPass = ''; dPW.select(); }
+    dE.textContent = ERR[code] || ERR.network;
+    if(code==='not_found'){ setTimeout(closeDlg, 1200); }
+  });
+
+  function closeMenus(except){ document.querySelectorAll('#wall-list .cm-menu').forEach(m=>{ if(m!==except){ m.previousElementSibling && m.previousElementSibling.setAttribute('aria-expanded','false'); m.remove(); } }); }
+  document.addEventListener('click', e=>{ if(!e.target.closest('.cm-menu,.cm-more')) closeMenus(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenus(); });
+  function addMenu(el, it){
+    const b = document.createElement('button'); b.type='button'; b.className='cm-more'; b.textContent='⋯';
+    b.setAttribute('aria-label','응원 관리'); b.setAttribute('aria-haspopup','menu'); b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', ()=>{
+      const open = el.querySelector('.cm-menu'); closeMenus(); if(open) return;
+      const m = document.createElement('div'); m.className='cm-menu'; m.setAttribute('role','menu');
+      const ed = document.createElement('button'); ed.type='button'; ed.textContent='수정'; ed.setAttribute('role','menuitem');
+      const dl = document.createElement('button'); dl.type='button'; dl.textContent='삭제'; dl.className='del'; dl.setAttribute('role','menuitem');
+      ed.addEventListener('click', ()=>{ closeMenus(); startEdit(it); });
+      dl.addEventListener('click', ()=>{ closeMenus(); askDelete(it); });
+      m.append(ed, dl); b.after(m); b.setAttribute('aria-expanded','true'); ed.focus();
+    });
+    el.dataset.id = it.id; el.prepend(b);
+  }
+  function markEditing(){ document.querySelectorAll('#wall-list .wall-card').forEach(c=>c.classList.toggle('cm-editing', !!editing && c.dataset.id==String(editing.id))); }
+  function startEdit(it){
+    editing = { id: it.id };
+    nameIn.value = it.name || '';
+    const r = form.querySelector('input[name="cheer-kind"][value="'+(KINDS[it.kind]?it.kind:'cool')+'"]'); if(r) r.checked = true;
+    msg.value = it.msg || ''; count.textContent = msg.value.length; msg.classList.remove('bad');
+    pub.checked = !it.private;
+    done.hidden = true; editBar.hidden = false; sendBtn.textContent = '수정 저장';
+    setStatus('내용을 고친 뒤 ‘수정 저장’을 눌러 주세요. 작성일은 그대로 남아요.');
+    markEditing();
+    form.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); setTimeout(()=>msg.focus({preventScroll:true}), 350);
+  }
+  function endEdit(clear){
+    editing = null; editBar.hidden = true; sendBtn.textContent = '응원 보내기'; markEditing();
+    if(clear){ msg.value=''; nameIn.value=''; count.textContent='0'; pub.checked=false; const r=form.querySelector('#kind-cool'); if(r) r.checked=true; }
+  }
+  document.getElementById('cheer-edit-cancel').addEventListener('click', ()=>{ endEdit(true); setStatus(defaultStatus); });
+  function saveEdit(kind, name, text, isPublic){
+    const id = editing.id;
+    openDlg({ title:'응원을 수정할까요?', text:'보드 관리 비밀번호를 입력하면 바로 저장돼요.', ok:'저장', run: async pass=>{
+      const res = await rpc('cheer_update', { p_id:id, p_pass:pass, p_kind:kind, p_name:name, p_msg:text, p_public:isPublic });
+      if(res && res.ok){
+        const row = res.row || {};
+        const i = pools.wall.findIndex(x=>x.id==id);
+        if(row.is_public){ const upd = { id, kind:row.kind, name:row.name||'', msg:row.msg, at:Date.parse(row.created_at)||(i>-1?pools.wall[i].at:0) }; if(i>-1) pools.wall[i]=upd; else pools.wall.push(upd); }
+        else if(i>-1) pools.wall.splice(i,1);
+        endEdit(true); renderWall();
+        setStatus(row.is_public ? '응원을 수정했어요.' : '응원을 수정했어요. 비공개로 바뀌어 보드에서 내려갔어요.');
+      }else if(res && res.error==='not_found'){ pools.wall = pools.wall.filter(x=>x.id!=id); endEdit(true); renderWall(); }
+      return res;
+    }});
+  }
+  function askDelete(it){
+    openDlg({ title:'이 응원을 삭제할까요?', text:'삭제한 응원은 되돌릴 수 없어요. 보드 관리 비밀번호를 입력해 주세요.', ok:'삭제', danger:true, run: async pass=>{
+      const res = await rpc('cheer_delete', { p_id:it.id, p_pass:pass });
+      if((res && res.ok) || (res && res.error==='not_found')){
+        pools.wall = pools.wall.filter(x=>x.id!=it.id);
+        if(editing && editing.id==it.id){ endEdit(true); }
+        renderWall(); if(res.ok) setStatus('응원을 삭제했어요.');
+      }
+      return res;
+    }});
+  }
+
   form.addEventListener('submit', async e=>{
     e.preventDefault();
     if(sending) return;
@@ -3696,6 +3836,7 @@ window.BALGURUM_SUPABASE = {
     const useClaude = !!(db && me);
     if(!useClaude && !sbReady()){ setStatus('지금은 응원을 보낼 수 없어요. 응원 저장이 아직 설정되지 않았어요.', true); return; }
     const kind = (form.querySelector('input[name="cheer-kind"]:checked')||{}).value || 'cool';
+    if(editing){ saveEdit(kind, nameIn.value.trim().slice(0,20), text.slice(0,300), pub.checked); return; }
     const item = { id: Date.now().toString(36)+Math.random().toString(36).slice(2,7), kind, name: nameIn.value.trim().slice(0,20), msg: text.slice(0,300), at: Date.now() };
     const coll = pub.checked ? 'wall' : 'cheers';
     sending = true; sendBtn.disabled = true; setStatus('응원을 보내는 중이에요…');
