@@ -2980,7 +2980,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         <form method="dialog" class="cm-dlg-in" id="cheer-dlg-form" novalidate>
           <h3 id="cheer-dlg-t">이 응원을 삭제할까요?</h3>
           <p class="cm-dlg-d" id="cheer-dlg-d">보드 관리 비밀번호를 입력해 주세요.</p>
-          <label class="cm-dlg-l" id="cheer-dlg-pl"><span>보드 관리 비밀번호</span><input type="password" id="cheer-dlg-pw" autocomplete="current-password"></label>
+          <label class="cm-dlg-l" id="cheer-dlg-pl"><span>보드 관리 비밀번호</span><input type="password" id="cheer-dlg-pw" autocomplete="off"></label>
           <p class="cm-dlg-e" id="cheer-dlg-e" role="alert"></p>
           <div class="cm-dlg-b"><button type="button" class="cm-no" id="cheer-dlg-no">취소</button><button type="submit" class="cm-ok" id="cheer-dlg-ok">삭제</button></div>
         </form>
@@ -3636,7 +3636,7 @@ window.BALGURUM_SUPABASE = {
   const defaultStatus = status.textContent;
   msg.addEventListener('input',()=>{ count.textContent = msg.value.length; msg.classList.remove('bad'); });
 
-  let db = null, me = null, canTeam = false, sending = false, sbMode = false, editing = null, boardPass = '';
+  let db = null, me = null, canTeam = false, sending = false, sbMode = false, editing = null;
   const pools = {wall:[], cheers:[]};
   const SB = window.BALGURUM_SUPABASE || {};
   const sbReady = ()=> /^https:\/\/[^/]+$/.test(String(SB.url||'').replace(/\/+$/,'')) && !!SB.anonKey;
@@ -3747,11 +3747,11 @@ window.BALGURUM_SUPABASE = {
   let dlgAction = null, dlgBusy = false;
   function openDlg(o){
     dT.textContent = o.title; dD.textContent = o.text; dOK.textContent = o.ok; dOK.classList.toggle('danger', !!o.danger);
-    dE.textContent = ''; dPW.value = boardPass; dPL.hidden = false; dlgAction = o.run; dOK.disabled = false;
+    dE.textContent = ''; dPW.value = ''; dPL.hidden = false; dlgAction = o.run; dOK.disabled = false;
     if(dlg.showModal){ try{ dlg.showModal(); }catch(e){ dlg.setAttribute('open',''); } } else dlg.setAttribute('open','');
-    setTimeout(()=>{ (boardPass ? dOK : dPW).focus(); }, 30);
+    setTimeout(()=>{ dPW.focus(); }, 30);
   }
-  function closeDlg(){ dlgAction = null; if(dlg.open){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); } }
+  function closeDlg(){ dlgAction = null; dPW.value = ''; if(dlg.open){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); } }
   document.getElementById('cheer-dlg-no').addEventListener('click', closeDlg);
   dlg.addEventListener('cancel', e=>{ if(dlgBusy) e.preventDefault(); else dlgAction = null; });
   dlgForm.addEventListener('submit', async e=>{
@@ -3760,9 +3760,9 @@ window.BALGURUM_SUPABASE = {
     dlgBusy = true; dOK.disabled = true; dE.textContent = '';
     const res = await dlgAction(pass);
     dlgBusy = false; dOK.disabled = false;
-    if(res && res.ok){ boardPass = pass; closeDlg(); return; }
+    if(res && res.ok){ dPW.value = ''; closeDlg(); return; }
     const code = (res && res.error) || 'network';
-    if(code==='bad_password' || code==='locked'){ boardPass = ''; dPW.select(); }
+    if(code==='bad_password' || code==='locked'){ dPW.select(); }
     dE.textContent = ERR[code] || ERR.network;
     if(code==='not_found'){ setTimeout(closeDlg, 1200); }
   });
