@@ -2996,7 +2996,7 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
         <div class="cheer-col">
           <h2><span class="no">02</span>발구름에게 한마디 남겨주세요.</h2>
           <label class="f" for="cheer-name">닉네임 <small>(선택)</small></label>
-          <input type="text" id="cheer-name" maxlength="20" autocomplete="nickname" placeholder="비워두면 ‘익명의 응원단’으로 남겨져요.">
+          <input type="text" id="cheer-name" maxlength="20" autocomplete="off" placeholder="비워두면 ‘익명의 응원단’으로 남겨져요.">
           <label class="f" for="cheer-msg">응원 메시지 <span aria-hidden="true">*</span></label>
           <textarea id="cheer-msg" maxlength="300" required placeholder="발구름에게 전하고 싶은 응원을 적어주세요."></textarea>
           <div class="count"><span id="cheer-count">0</span> / 300</div>
@@ -3010,7 +3010,6 @@ dialog.gdlg .close{position:absolute;top:12px;right:12px;z-index:3;width:44px;he
             <svg class="done-logo" aria-hidden="true"><use href="#logo"/></svg>
             <h2>응원이 도착했어요!</h2>
             <p id="cheer-done-msg">발구름이 한 걸음 더 힘을 얻었어요.</p>
-            <button class="btn ghost" type="button" id="cheer-again">한 번 더 응원하기</button>
           </div>
         </div>
       </form>
@@ -3636,7 +3635,7 @@ window.BALGURUM_SUPABASE = {
   const defaultStatus = status.textContent;
   msg.addEventListener('input',()=>{ count.textContent = msg.value.length; msg.classList.remove('bad'); });
 
-  let db = null, me = null, canTeam = false, sending = false, sbMode = false, editing = null;
+  let db = null, me = null, canTeam = false, sending = false, sbMode = false, editing = null, doneTimer = 0;
   const pools = {wall:[], cheers:[]};
   const SB = window.BALGURUM_SUPABASE || {};
   const sbReady = ()=> /^https:\/\/[^/]+$/.test(String(SB.url||'').replace(/\/+$/,'')) && !!SB.anonKey;
@@ -3852,12 +3851,13 @@ window.BALGURUM_SUPABASE = {
       }
       document.getElementById('cheer-done-msg').textContent = pub.checked ? '응원 보드에 함께 걸어둘게요.' : '제작팀에게 살짝 전해드릴게요.';
       done.hidden = false; burst();
-      msg.value=''; count.textContent='0'; setStatus(defaultStatus);
+      /* success only: show the done panel ~1.5s, then back to a fresh form (failures keep what was typed) */
+      endEdit(true); setStatus(defaultStatus);
+      clearTimeout(doneTimer); doneTimer = setTimeout(()=>{ done.hidden = true; }, 1500);
     }catch(err){
       setStatus('응원을 보내지 못했어요. 연결이 불안정하거나 응원을 남길 권한이 없어요. 잠시 후 다시 시도해 주세요.', true);
     }finally{ sending = false; sendBtn.disabled = false; }
   });
-  document.getElementById('cheer-again').addEventListener('click',()=>{ done.hidden = true; msg.focus(); });
 
 
   /* ---------- Keep covers flush under the header ---------- */
